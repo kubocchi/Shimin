@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>宮崎市民活動センター 管理者用画面</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<!-- fontawesome CSS -->
+<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="masthead">
+	<div class="header_logo">
+		<h1><a href="../index.html"><img src="../img/logo.png" class="img-fluid"></a></h1>
+	</div>
+	<nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav text-md-center nav-justified">
+				<li class="nav-item"> <a class="nav-link" href="../index.html"><span><i class="fas fa-home"></i></span> TOP</a></li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class="fas fa-dove"></i></span> 情報発信</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown01"> <a class="dropdown-item" href="1-1_01list.html">宮崎市民可動センターからのお知らせ</a> <a class="dropdown-item" href="1-2_01list.html">登録団体、行政等からのお知らせ</a> <a class="dropdown-item" href="1-3_01list.html">助成金情報</a> <a class="dropdown-item" href="1-4_01list.html">災害ボランティア情報</a> </div>
+				</li>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class="fas fa-file"></i></span> ファイル公開</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown02"> <a class="dropdown-item" href="#">各種様式</a> <a class="dropdown-item" href="#">事業報告</a> <a class="dropdown-item" href="#">夢交差点</a> <a class="dropdown-item" href="#">かわら版</a> </div>
+				</li>
+				<li class="nav-item"> <a class="nav-link" href="#"><span><i class="fas fa-feather"></i></span> 団体情報登録</a> </li>
+				<li class="nav-item"> <a class="nav-link" href="#"><span><i class="fas fa-power-off"></i></span> ログアウト</a> </li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"> <span class="navbar-text" style=" color:#FFF; font-weight:bold;">loginuser name</span> </li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<div class="container">
+	<h4><span><i class="fas fa-dove"></i></span> 災害ボランティア情報 登録画面</h4>
+	<hr>
+	<div class="row mt-4">
+		<div class="col-lg-12">
+			<div class="bs-component">
+				<form action="" method="post">
+					<fieldset>
+						<div class="form-group">
+							<label class="col-form-label" for="subject">【件名】（必須）</label>
+							<input class="form-control" placeholder="件名" id="subject" type="text" required>
+						</div>
+						<div class="form-group"> 【掲載開始日】（必須）
+							<div class="form-check">
+								<input name="publish_type" value="0" checked="" onclick="" type="radio" required>
+								承認後すぐに掲載<br>
+								<input name="publish_type" value="1" onclick="" type="radio">
+								<select name="publish_year" onchange="">
+									<option value="2018" selected="">2018</option>
+									<option value="2019">2019</option>
+								</select>
+								年
+								<select name="publish_month" onchange="">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6" selected="">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								月
+								<select name="publish_day" onchange="">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5" selected="">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+								</select>
+								日に自動掲載
+							</div>
+						</div>
+						<div class="form-group"> 【掲載終了日】（必須）
+							<div class="form-check">
+								<input name="limit_type" value="0" checked="" onclick="" type="radio" required>
+								手動で消去<br>
+								<input name="limit_type" value="1" onclick="" type="radio">
+								<select name="limit_year" onchange="">
+									<option value="2018" selected="">2018</option>
+									<option value="2019">2019</option>
+								</select>
+								年
+								<select name="limit_month" onchange="">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6" selected="">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								月
+								<select name="limit_day" onchange="">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6" selected="">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+								</select>
+								日に自動消去
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contents">【掲載内容】</label>
+							<textarea class="form-control" id="contents" rows="3"></textarea>
+						</div>
+						<div class="form-group"> 【リンク(URL)の添付】<br>
+							<label class="col-form-label" for="linkname">リンク名称</label>
+							<input class="form-control" placeholder="リンク名称" id="linkname" type="text">
+							<label class="col-form-label" for="linkurl">URL</label>
+							<input class="form-control" placeholder="リンクURL" id="linkurl" type="text">
+						</div>
+						<div class="form-group">
+							<label for="inputFile">【添付ファイル】</label>
+							<input class="form-control-file" id="inputFile" aria-describedby="fileHelp" type="file">
+						</div>
+						<!--						
+						<fieldset class="form-group">
+							<legend>Checkboxes</legend>
+							<div class="form-check">
+								<label class="form-check-label">
+									<input class="form-check-input" value="" checked="" type="checkbox">
+									Option one is this and that—be sure to include why it's great </label>
+							</div>
+						</fieldset>-->
+						<button type="button" class="btn btn-outline-primary" onclick="history.back()">戻る</button>
+						<button type="submit" class="btn btn-outline-primary">確認に進む</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- /container --> 
+
+<!-- Site footer -->
+<footer class="footer fixed-bottom">
+	<address>
+	Copyright © Miyazaki NPO Center All Rights Reserved.
+	</address>
+</footer>
+
+<!-- Bootstrap core JavaScript
+    ================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+@import url(https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css);@import url(https://use.fontawesome.com/releases/v5.0.13/css/all.css);@charset "UTF-8";
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background: white;
+  color: #06c;
+}
+
+/* ログイン画面 */
+
+h2 {
+  text-align: center;
+  *zoom: 1;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.signin {
+  display: block;
+  position: relative;
+  width: 280px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(27, 137, 231, 0.6);
+  border-radius: 5px;
+  -webkit-box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.2), inset -1px -1px 0 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.2), inset -1px -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.signin .avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 15px auto;
+  border: 5px solid #fff;
+  border-radius: 100%;
+  -webkit-pointer-events: none;
+  -moz-pointer-events: none;
+  pointer-events: none;
+}
+
+.signin .avatar:before {
+  content: "\F345";
+  text-align: center;
+  font-family: Ionicons;
+  display: block;
+  height: 100%;
+  line-height: 100px;
+  font-size: 5em;
+}
+
+.signin .inputrow {
+  position: relative;
+}
+
+.signin .inputrow label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+}
+
+.signin .inputrow label:before {
+  color: #007fcf;
+  opacity: 0.4;
+  -webkit-transition: opacity 300ms 0 ease;
+  transition: opacity 300ms 0 ease;
+}
+
+.signin input[type="text"],
+.signin input[type="password"] {
+  padding: 10px 12px 10px 32px;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: #fff;
+  color: #333;
+  font-size: 1em;
+  font-weight: 300;
+  outline: none;
+  border-radius: 5px;
+  -webkit-transition: border-color 300ms 0 ease;
+  transition: border-color 300ms 0 ease;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.signin input[type="text"]:focus + label:before,
+.signin input[type="password"]:focus + label:before {
+  opacity: 1;
+}
+
+.signin input[type="submit"] {
+  font-weight: bold;
+  -webkit-appearance: none;
+  height: 40px;
+  padding: 10px 40px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  color: #1e6eb2;
+  border: 0px;
+  float: right;
+  margin: 0;
+  outline: none;
+  border-radius: 5px;
+}
+
+.signin input[type="submit"]:hover {
+  opacity: 0.8;
+}
+
+.signin input[type="submit"]:active {
+  background-color: #0e538e;
+  color: #ffffff;
+}
+
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  *zoom: 1;
+}
+
+/* ログイン画面ここまで */
+
+/* ログイン後以降 */
+
+.container {
+  padding-bottom: 10rem;
+  max-width: 1100px;
+}
+
+.header_logo {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1140px;
+}
+
+.navbar {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#1b89e7), to(#65aeed));
+  background-image: linear-gradient(to bottom, #1b89e7 0%, #65aeed 100%);
+  border: 1px solid #1b89e7;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+  }
+
+  .navbar-nav .nav-item {
+    -ms-flex: 1 0 auto;
+    -webkit-box-flex: 1;
+    flex: 1 0 auto;
+    padding-right: 15px;
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-collapse {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container .row {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+hr {
+  border-top-color: #3b99ea;
+}
+
+.footer {
+  background-color: #1C89E7;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #285c8a;
+}
+
+address {
+  text-align: center;
+  color: #FFF;
+}
+
+/* ボタン全体長文改行*/
+
+.btn {
+  white-space: normal;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1C89E7;
+  border-color: #007bff;
+}
+
+/* トップページメインエリアボタン見出しとメニューボタン */
+
+.topmidashi {
+  background-color: #06C;
+  color: #FFF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.topmenu {
+  text-align: left;
+  min-height: 70px;
+  margin-top: 10px;
+}
+
