@@ -17,10 +17,13 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav text-md-center nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">
-                                    <span>
-                                        <i class="fas fa-home"></i>
-                                    </span> TOP</a>
+                                 <router-link :to="{ name: 'dashboard' }">
+                                    <a class="nav-link">  
+                                        <span>
+                                            <i class="fas fa-home"></i>
+                                        </span> TOP
+                                    </a>
+                                 </router-link> 
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
@@ -29,7 +32,9 @@
                                         <i class="fas fa-dove"></i>
                                     </span> 情報発信</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                    <a class="dropdown-item" href="pages/1-1_01list.html">宮崎市民可動センターからのお知らせ</a>
+                                    <router-link :to="{ name: 'activeCenterList' }">
+                                        <a class="dropdown-item">宮崎市民可動センターからのお知らせ</a>
+                                    </router-link> 
                                     <a class="dropdown-item" href="pages/1-2_01list.html">登録団体、行政等からのお知らせ</a>
                                     <a class="dropdown-item" href="pages/1-3_01list.html">助成金情報</a>
                                     <a class="dropdown-item" href="pages/1-4_01list.html">災害ボランティア情報</a>
@@ -70,8 +75,9 @@
                 </nav>
             </div>
 
-            <!-- <router-view></router-view> -->
-
+            <div class="container">
+                <router-view></router-view>
+            </div>
             <!-- /container --> 
 
             <!-- Site footer -->

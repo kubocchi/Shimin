@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <h4>管理者メニュー</h4>
         <hr>
         <div class="row mt-4">
