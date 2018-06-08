@@ -76,6 +76,8 @@
                                 </div>
                             </div>
                             <div class="form-group"> 【掲載終了日】（必須）
+                                <vue-editor v-model="content"></vue-editor>
+                                <date-picker v-model="time2" range :shortcuts="shortcuts"></date-picker>
                                 <div class="form-check">
                                     <input name="limit_type" value="0" checked="" onclick="" type="radio" required> 手動で消去
                                     <br>
@@ -139,6 +141,7 @@
                             <div class="form-group">
                                 <label for="contents">【掲載内容】</label>
                                 <textarea class="form-control" id="contents" rows="3" required></textarea>
+                                <!-- <editor v-model="content"></editor> -->
                             </div>
                             <div class="form-group"> 【リンク(URL)の添付】
                                 <br>
@@ -169,3 +172,37 @@
         </div>
     </div>
 </template>
+
+
+<script>
+import DatePicker from "vue2-datepicker";
+import { VueEditor } from 'vue2-editor'
+
+export default {
+  components: { DatePicker, VueEditor },
+  data() {
+    return {
+      time1: "",
+      time2: "",
+        lang: {
+        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
+        placeholder: {
+            date: 'Select Date',
+            dateRange: 'Select Date Range'
+        }
+        },
+      shortcuts: [
+        {
+          text: "Today",
+          start: new Date(),
+          end: new Date()
+        }
+      ],
+      content: '<h1>Some initial content</h1>'  
+     
+    };
+  }
+};
+</script>

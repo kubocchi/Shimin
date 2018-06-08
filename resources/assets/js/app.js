@@ -36,6 +36,12 @@ import Dashboard from './views/Dashboard'
 import ActiveCenterForm from './views/activeCenter/Form'
 import ActiveCenterList from './views/activeCenter/List'
 
+import Editor from '@tinymce/tinymce-vue';
+import VueRangedatePicker from 'vue-rangedate-picker'
+
+Vue.use(VueRangedatePicker)
+
+Vue.use(Editor)
 
 const router = new VueRouter({
     mode: 'history',
