@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <router-link :to="{ name: 'activeCenterForm' }">
-                                <button class="btn btn-primary btn-lg btn-block">新規登録</button>
+                                <button class="btn btn-primary btn-lg btn-active center">新規登録</button>
                             </router-link> 
                         </div>
                     </div>
@@ -48,39 +48,28 @@
                                 <th scope="col">削除</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>CAPおとなワークショップ</td>
-                                <td>xxxx/xx/xx</td>
+                            <tr v-for="(activeCenter,index) in activeCenters" v-bind:key="activeCenter.id">
+                                <th scope="row">{{index + 1}}</th>
+                                <td>{{ activeCenter.title }}</td>
+                                <td>{{ activeCenter.start_date }}</td>
                                 <td>
-                                    <a class="btn btn-outline-primary btn-block" href="#" role="button">複製</a>
+                                    <router-link :to="{ name: 'activeCenterForm', params: { id: activeCenter }}">
+                                        <a class="btn btn-outline-primary btn-active center" role="button">複製</a>
+                                    </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-success btn-block" href="#" role="button">変更</a>
+                                    <a class="btn btn-outline-success btn-active center" href="#" role="button">変更</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" href="#" role="button">削除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>発達障がいのある方や、コミュニケーションに困り感のある方のための就職応援講座</td>
-                                <td>xxxx/xx/xx</td>
-                                <td>
-                                    <a class="btn btn-outline-primary btn-block" href="#" role="button">複製</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success btn-block" href="#" role="button">変更</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-danger btn-block" href="#" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-active center" @click="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation shikatsu">
+                <!-- <nav aria-label="Page navigation shikatsu">
                     <ul class="pagination justify-content-end">
                         <li class="page-item">
                             <a class="page-link" href="#">前へ</a>
@@ -98,8 +87,84 @@
                             <a class="page-link" href="#">次へ</a>
                         </li>
                     </ul>
-                </nav>
+                </nav> -->
+                 <ul class="pagination justify-content-end">
+                    <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
+                        <a class="page-link" href="#" @click="fetchActiveCenter(pagination.prev_page_url)">前へ</a>
+                    </li>
+
+                    <li class="page-item disabled">
+                        <a class="page-link text-dark" href="#">ページ {{ pagination.current_page }} の {{ pagination.last_page }}</a>
+                    </li>
+
+                    <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
+                        <a class="page-link" href="#" @click="fetchActiveCenter(pagination.next_page_url)">次へ</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        name: "company",
+        data() {
+            return {
+                selectedActiveCenter: "",
+                activeCenters: [],
+                activeCenter: {
+                    id: "",
+                    name: "",
+                    comments:"",
+                    update_by: "1"
+                },
+                id: "",
+                pagination: {},
+                edit: false
+            };
+        },
+
+        created() {
+            this.fetchActiveCenter();
+        },
+
+        methods: {
+            fetchActiveCenter(page_url) {
+                let vm = this;
+                page_url = page_url || "/api/active-centers";
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res => {
+                    this.activeCenters = res.data;
+                    console.log(this.activeCenters);
+                    vm.makePagination(res.meta, res.links);
+                })
+                .catch(err => console.log(err)); 
+            },
+            makePagination(meta, links) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: links.next,
+                    prev_page_url: links.prev
+                };
+
+                this.pagination = pagination;
+            },
+            deleteActiveCenter(id) {
+                if (confirm("Are You Sure?")) {
+                    fetch(`api/active-center/${id}`, {
+                        method: "delete"
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert("active center Removed");
+                        this.fetchActiveCenter();
+                    })
+                    .catch(err => console.log(err));
+                }
+            }
+        }
+    };
+</script>

@@ -8,161 +8,31 @@
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
-                    <form action="" method="post">
+                    <form @submit.prevent="addActiveCenter">
                         <fieldset>
                             <div class="form-group">
-                                <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" placeholder="件名" id="subject" type="text" required>
+                                <label class="col-form-label" for="subject">【件名】（必須）</label> 
+                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" type="text" required>
                             </div>
-                            <div class="form-group"> 【掲載開始日】（必須）
-                                <div class="form-check">
-                                    <input name="publish_type" value="0" checked="" onclick="" type="radio" required> 承認後すぐに掲載
-                                    <br>
-                                    <input name="publish_type" value="1" onclick="" type="radio">
-                                    <select name="publish_year" onchange="">
-                                        <option value="2018" selected="">2018</option>
-                                        <option value="2019">2019</option>
-                                    </select>
-                                    年
-                                    <select name="publish_month" onchange="">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6" selected="">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                    </select>
-                                    月
-                                    <select name="publish_day" onchange="">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5" selected="">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                    </select>
-                                    日に自動掲載
-                                </div>
-                            </div>
-                            <div class="form-group"> 【掲載終了日】（必須）
-                                <vue-editor v-model="content"></vue-editor>
-                                <date-picker v-model="time2" range :shortcuts="shortcuts"></date-picker>
-                                <div class="form-check">
-                                    <input name="limit_type" value="0" checked="" onclick="" type="radio" required> 手動で消去
-                                    <br>
-                                    <input name="limit_type" value="1" onclick="" type="radio">
-                                    <select name="limit_year" onchange="">
-                                        <option value="2018" selected="">2018</option>
-                                        <option value="2019">2019</option>
-                                    </select>
-                                    年
-                                    <select name="limit_month" onchange="">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6" selected="">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                    </select>
-                                    月
-                                    <select name="limit_day" onchange="">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6" selected="">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                    </select>
-                                    日に自動消去
+                            <div class="form-group"> 
+                                <label class="col-form-label" for="txtDate">【掲載開日】（必須）</label>
+                                <div class="row">
+                                    <date-picker v-model="dateRange" range :shortcuts="shortcuts" :lang= "ja" ></date-picker>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="contents">【掲載内容】</label>
-                                <textarea class="form-control" id="contents" rows="3" required></textarea>
-                                <!-- <editor v-model="content"></editor> -->
-                            </div>
-                            <div class="form-group"> 【リンク(URL)の添付】
-                                <br>
-                                <label class="col-form-label" for="linkname">リンク名称</label>
-                                <input class="form-control" placeholder="リンク名称" id="linkname" type="text">
-                                <label class="col-form-label" for="linkurl">URL</label>
-                                <input class="form-control" placeholder="リンクURL" id="linkurl" type="text">
+                                <label class="col-form-label" for="description">【掲載内容】</label>
+                                <!-- <vue-editor v-model="activeCenter.content" id="description" required></vue-editor> -->
+                                <wysiwyg v-model="activeCenter.content" />
                             </div>
                             <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
                                 <input class="form-control-file" id="inputFile" aria-describedby="fileHelp" type="file">
                             </div>
-                            <!--						
-						<fieldset class="form-group">
-							<legend>Checkboxes</legend>
-							<div class="form-check">
-								<label class="form-check-label">
-									<input class="form-check-input" value="" checked="" type="checkbox">
-									Option one is this and that—be sure to include why it's great </label>
-							</div>
-						</fieldset>-->
+                            【非アクティブ化する】
+                            <div class="row">
+                                <toggle-button   v-model="activeCenter.dea" :value="false" :color="color" :sync="true" :labels="true"/> 
+                            </div>  
                             <button type="button" class="btn btn-outline-primary" onclick="history.back()">戻る</button>
                             <button type="submit" class="btn btn-outline-primary">確認に進む</button>
                         </fieldset>
@@ -175,34 +45,151 @@
 
 
 <script>
-import DatePicker from "vue2-datepicker";
-import { VueEditor } from 'vue2-editor'
+    import DatePicker from "vue2-datepicker"
+    import { VueEditor } from 'vue2-editor'
+    
 
-export default {
-  components: { DatePicker, VueEditor },
-  data() {
-    return {
-      time1: "",
-      time2: "",
-        lang: {
-        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        pickers: ['next 7 days', 'next 30 days', 'previous 7 days', 'previous 30 days'],
-        placeholder: {
-            date: 'Select Date',
-            dateRange: 'Select Date Range'
-        }
+    export default {
+        components: { DatePicker, VueEditor },
+        name: "company",
+        data() {
+            return {
+                activeCenters: [],
+                dateRange: [],
+                activeCenter: {
+                    id: "",
+                    title: "",
+                    start_date: !!this.dateRange ?  this.dateRange[0]: "",
+                    end_date: !!this.dateRange ?  this.dateRange[1]: "",
+                    content: "",
+                    file: "4245",
+                    deactivate: 0,
+                    created_by: 1,
+                    updated_by: 1
+                },
+                id: "", 
+                pagination: {},
+                edit: false,
+                ja: {
+                    days: ['太陽', '月', '火', '水', '木', '金', '土'],
+                    months: ['一月 ', '二月 ', '三月', '四月 ', '五月', '六月', '七月 ', '八月', '九月', '十月', '十一月', '十二月'],
+                    pickers: ['次の7日間', '次の30日間', '前の7日間', '前の30日間'],
+                    placeholder: {
+                        date: '日付を選択',
+                        dateRange: '期間を選択'
+                    }
+                },
+                shortcuts: [
+                    {
+                        text: "今日",
+                        start: new Date(),
+                        end: new Date()
+                    }
+                ],
+                dateFormat: 'yyyy/MM/dd',
+                color : '#1C89E7'
+            };
         },
-      shortcuts: [
-        {
-          text: "Today",
-          start: new Date(),
-          end: new Date()
+
+        created() {
+            if (this.$route.params.id != undefined)
+                this.editActiveCenter(this.$route.params.id)
+        },
+
+        methods: {
+            fetchActiveCenters(page_url) {
+                let vm = this
+                page_url = page_url || "/api/active-centers"
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res => {
+                    this.activeCenters = res.data
+                    console.log(this.activeCenters)
+                    vm.makePagination(res.meta, res.links)
+                })
+                .catch(err => console.log(err))
+            },
+            makePagination(meta, links) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: links.next,
+                    prev_page_url: links.prev
+                }
+
+                this.pagination = pagination
+            },
+            deleteActiveCenter(id) {
+                if (confirm("Are You Sure?")) {
+                    fetch(`api/active-center/${id}`, {
+                        method: "delete"
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert("activeCenter Removed")
+                        this.fetchactiveCenters();
+                    })
+                    .catch(err => console.log(err))
+                }
+            },
+            addActiveCenter() {
+                this.activeCenter.start_date = !!this.dateRange ?  this.dateRange[0]: ""
+                this.activeCenter.end_date = !!this.dateRange ?  this.dateRange[1]: ""
+
+                if (this.edit === false) {
+                    console.log(this.activeCenter)
+                    // Add
+                    fetch("api/active-center", {
+                        method: "post",
+                        body: JSON.stringify(this.activeCenter),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.activeCenter.title = ""
+                        this.activeCenter.start_date = ""
+                        this.activeCenter.end_date = ""
+                        this.activeCenter.content = ""
+                        this.activeCenter.file = ""
+                        this.activeCenter.created_by = ""
+                        this.activeCenter.updated_by = ""
+                        
+                        alert("Active Center Added")
+                        this.$router.push({
+                            name: 'activeCenterList'
+                        })
+                    })
+                    .catch(err => console.log(err))
+                } else {
+                    // Update
+                    fetch("api/active-center", {
+                        method: "put",
+                        body: JSON.stringify(this.activeCenter),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        this.activeCenter.name = ""
+
+                        alert("Active Center Updated")
+                        this.$router.push({
+                            name: 'activeCenterList'
+                        });
+                    })
+                    .catch(err => console.log(err))
+                }
+            },
+            editActiveCenter(activeCenter) {
+                this.edit = true
+                this.activeCenter.id = activeCenter.id
+                this.activeCenter.name = activeCenter.name
+                this.activeCenter.comments = activeCenter.comments
+                this.activeCenter.update_by = block.update_by
+            }
         }
-      ],
-      content: '<h1>Some initial content</h1>'  
-     
     };
-  }
-};
 </script>

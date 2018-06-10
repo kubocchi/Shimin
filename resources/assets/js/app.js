@@ -32,36 +32,25 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Dashboard from './views/Dashboard'
-import ActiveCenterForm from './views/activeCenter/Form'
-import ActiveCenterList from './views/activeCenter/List'
 
-import Editor from '@tinymce/tinymce-vue';
-import VueRangedatePicker from 'vue-rangedate-picker'
 
-Vue.use(VueRangedatePicker)
 
-Vue.use(Editor)
+import ToggleButton from 'vue-js-toggle-button'
+Vue.use(ToggleButton)
+
+import wysiwyg from "vue-wysiwyg"
+Vue.use(wysiwyg, {
+    image: {
+        uploadURL: "/api/active-center/images/upload",
+        dropzoneOptions: {}
+    },
+})
+
+import routeCollection from './router/index'
 
 const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/',
-            name: 'dashboard',
-            component: Dashboard
-        },
-        {
-            path: '/active-center/form',
-            name: 'activeCenterForm',
-            component: ActiveCenterForm,
-        },
-        {
-            path: '/active-center/list',
-            name: 'activeCenterList',
-            component: ActiveCenterList,
-        },
-    ],
+    mode: 'hash', 
+    routes: routeCollection
 });
 
 const app = new Vue({
