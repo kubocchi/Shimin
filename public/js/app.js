@@ -55746,10 +55746,14 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.activeCenters, function(activeCenter) {
+              _vm._l(_vm.activeCenters, function(activeCenter, rowNumber) {
                 return _c("tr", { key: activeCenter.id }, [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.rowCount + 1))
+                    _vm._v(
+                      _vm._s(
+                        (_vm.pagination.current_page - 1) * 10 + rowNumber + 1
+                      )
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(activeCenter.title))]),

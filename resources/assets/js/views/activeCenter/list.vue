@@ -55,8 +55,8 @@
                         
                         <tbody>
                             
-                            <tr v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
-                                <th scope="row">{{rowCount + 1}}</th>
+                            <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
+                                <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ activeCenter.title }}</td>
                                 <td>{{ activeCenter.start_date }}</td>
                                 <td>

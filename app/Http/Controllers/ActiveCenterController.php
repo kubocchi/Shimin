@@ -18,31 +18,32 @@ class ActiveCenterController extends Controller
         // Get ActiveCenters
         $activeCenters;
         $type = $request->input('type');
+        $search = $request->input('search');
         switch ($type) 
         {
             # All type
             case '0':
-                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
-                            ->orderBy('created_at', 'desc')->paginate(15);
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
+                            ->orderBy('created_at', 'desc')->paginate(10);
                 break;
             # Running type
             case '1':
-                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
                             ->whereDate('start_date', '<=', date("Y-m-d"))
                             ->whereDate('end_date', '>=', date("Y-m-d"))
-                            ->orderBy('created_at', 'desc')->paginate(15);
+                            ->orderBy('created_at', 'desc')->paginate(10);
                 break;
             # Future type
             case '2':
-                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
                     ->whereDate('start_date', '>', date("Y-m-d"))
-                    ->orderBy('created_at', 'desc')->paginate(15);
+                    ->orderBy('created_at', 'desc')->paginate(10);
                 break;
             # Previous type
             case '3':
-                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
                     ->whereDate('end_date', '<', date("Y-m-d"))
-                    ->orderBy('created_at', 'desc')->paginate(15);
+                    ->orderBy('created_at', 'desc')->paginate(10);
                 break;
         }
 
@@ -59,7 +60,7 @@ class ActiveCenterController extends Controller
     {
         $activeCenter = $request->isMethod('put') ? ActiveCenter::findOrFail($request->id) : new ActiveCenter;
 
-       $activeCenter->title = $request->input('title');
+        $activeCenter->title = $request->input('title');
         $activeCenter->start_date = $request->input('start_date');
         $activeCenter->end_date = $request->input('end_date');
         $activeCenter->content = $request->input('content');
