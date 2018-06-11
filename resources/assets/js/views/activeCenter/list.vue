@@ -18,18 +18,18 @@
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-2 mb-4">
-                        <select class="form-control" id="attribute_shikatsu">
-                            <option>すべて</option>
-                            <option>公開中</option>
-                            <option>登録作業中</option>
-                            <option>終了</option>
+                        <select v-model="params.type" v-on:change="onTypeChanged" class="form-control" id="attribute_shikatsu">
+                            <option value="0">すべて</option>
+                            <option value="1">公開中</option>
+                            <option value="2">登録作業中</option>
+                            <option value="3">終了</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4 offset-sm-6">
                         <div class="input-group">
-                            <input type="text" class="form-control">
+                            <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" type="submit">
+                                <button class="btn btn-outline-primary"  @click="fetchActiveCenter()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
@@ -74,25 +74,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <nav aria-label="Page navigation shikatsu">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item">
-                            <a class="page-link" href="#">前へ</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">次へ</a>
-                        </li>
-                    </ul>
-                </nav> -->
                  <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <button class="page-link" href="#" @click="fetchActiveCenter(pagination.prev_page_url)">前へ</button>
@@ -177,6 +158,10 @@
                             }
                         ]
                     }
+                },
+                params:{
+                    search: "",
+                    type:0
                 }
             };
         },
@@ -189,14 +174,21 @@
             fetchActiveCenter(page_url) {
                 let vm = this;
                 page_url = page_url || "/api/active-centers";
-                fetch(page_url)
+
+                fetch(page_url, {
+                    method: "post",
+                    body: JSON.stringify(this.params),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                })
                 .then(res => res.json())
                 .then(res => {
                     this.activeCenters = res.data;
                     console.log(this.activeCenters);
                     vm.makePagination(res.meta, res.links);
                 })
-                .catch(err => console.log(err)); 
+                .catch(err => console.log(err))
             },
             makePagination(meta, links) {
                 let pagination = {
@@ -223,16 +215,20 @@
             },
             searchActiveCenter(page_url) {
                 let vm = this;
-                page_url = page_url || "/api/active-centers";
+                page_url = page_url || "/api/active-centers"
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res => {
                     this.activeCenters = res.data;
                     console.log(this.activeCenters);
-                    vm.makePagination(res.meta, res.links);
+                    vm.makePagination(res.meta, res.links)
                 })
                 .catch(err => console.log(err)); 
             },
+            onTypeChanged: function(e) {
+                this.params.type = event.srcElement.value
+                this.fetchActiveCenter()
+            }
         }
     };
 </script>

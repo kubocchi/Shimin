@@ -55483,25 +55483,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -55543,6 +55524,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         text: 'Bear'
                     }]
                 }
+            },
+            params: {
+                search: "",
+                type: 0
             }
         };
     },
@@ -55557,7 +55542,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var vm = this;
             page_url = page_url || "/api/active-centers";
-            fetch(page_url).then(function (res) {
+
+            fetch(page_url, {
+                method: "post",
+                body: JSON.stringify(this.params),
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(function (res) {
                 return res.json();
             }).then(function (res) {
                 _this.activeCenters = res.data;
@@ -55607,6 +55599,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (err) {
                 return console.log(err);
             });
+        },
+
+        onTypeChanged: function onTypeChanged(e) {
+            this.params.type = event.srcElement.value;
+            this.fetchActiveCenter();
         }
     }
 });
@@ -55651,11 +55648,101 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "row mt-4" }, [
+          _c("div", { staticClass: "form-group col-md-2 mb-4" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.params.type,
+                    expression: "params.type"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "attribute_shikatsu" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.params,
+                        "type",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    _vm.onTypeChanged
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [_vm._v("すべて")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("公開中")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v("登録作業中")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [_vm._v("終了")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-4 offset-sm-6" }, [
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.params.search,
+                    expression: "params.search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.params.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.params, "search", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "input-group-btn" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-primary",
+                    on: {
+                      click: function($event) {
+                        _vm.fetchActiveCenter()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-search" })]
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "row col-lg-12 table-responsive" }, [
           _c("table", { staticClass: "table table-sm" }, [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -55698,7 +55785,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(3, true),
+                  _vm._m(2, true),
                   _vm._v(" "),
                   _c("td", [
                     _c(
@@ -55795,45 +55882,6 @@ var staticRenderFns = [
     return _c("h4", [
       _c("span", [_c("i", { staticClass: "fas fa-dove" })]),
       _vm._v(" 宮崎市民活動センターからのお知らせ 情報一覧画面")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-4" }, [
-      _c("div", { staticClass: "form-group col-md-2 mb-4" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { id: "attribute_shikatsu" } },
-          [
-            _c("option", [_vm._v("すべて")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("公開中")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("登録作業中")]),
-            _vm._v(" "),
-            _c("option", [_vm._v("終了")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-4 offset-sm-6" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } }),
-          _vm._v(" "),
-          _c("span", { staticClass: "input-group-btn" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: { type: "submit" }
-              },
-              [_c("i", { staticClass: "fas fa-search" })]
-            )
-          ])
-        ])
-      ])
     ])
   },
   function() {

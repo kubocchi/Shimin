@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 #active-center routes
 // List active-center
-Route::get('active-centers', 'ActiveCenterController@index');
+Route::post('active-centers', 'ActiveCenterController@index');
 // List single active-center
 Route::get('active-center/{id}', 'ActiveCenterController@show');
 // Create new active-center

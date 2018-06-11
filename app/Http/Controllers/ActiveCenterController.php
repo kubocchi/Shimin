@@ -13,10 +13,38 @@ class ActiveCenterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // Get ActiveCenters
-        $activeCenters = ActiveCenter::orderBy('created_at', 'desc')->paginate(15);
+        $activeCenters;
+        $type = $request->input('type');
+        switch ($type) 
+        {
+            # All type
+            case '0':
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                            ->orderBy('created_at', 'desc')->paginate(15);
+                break;
+            # Running type
+            case '1':
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                            ->whereDate('start_date', '<=', date("Y-m-d"))
+                            ->whereDate('end_date', '>=', date("Y-m-d"))
+                            ->orderBy('created_at', 'desc')->paginate(15);
+                break;
+            # Future type
+            case '2':
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                    ->whereDate('start_date', '>', date("Y-m-d"))
+                    ->orderBy('created_at', 'desc')->paginate(15);
+                break;
+            # Previous type
+            case '3':
+                $activeCenters = ActiveCenter::Where('title', 'like', '%' . $request->input('search') . '%')
+                    ->whereDate('end_date', '<', date("Y-m-d"))
+                    ->orderBy('created_at', 'desc')->paginate(15);
+                break;
+        }
 
         // Return collection of ActiveCenters as a resource
         return ActiveCenterResource::collection($activeCenters);
