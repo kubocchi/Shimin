@@ -19,11 +19,13 @@
 		"laravel-mix": "^2.0",
 		"lodash": "^4.17.4",
 		"popper.js": "^1.12",
-		"vue": "^2.5.7"
+		"vue": "^2.5.7",
+		"vuetable-2": "^1.7.5"
 	},
 	"dependencies": {
 		"vue-js-toggle-button": "^1.2.3",
 		"vue-router": "^3.0.1",
+		"vue-tables-2": "^1.4.56",
 		"vue-wysiwyg": "^1.7.2",
 		"vue2-datepicker": "^1.9.8",
 		"vue2-editor": "^2.4.4"

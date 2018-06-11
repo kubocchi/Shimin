@@ -37,6 +37,10 @@
                     </div>
                 </div>
                 <div class="row col-lg-12 table-responsive">
+                    <!-- <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table> -->
+                    <!-- <v-client-table :data="tableData" :columns="['id', 'name' ,'age', 'edit']" :options="options">
+                        <a class="btn btn-outline-success btn-active center" href="#" role="button">変更</a>
+                    </v-client-table> -->
                     <table class="table table-sm">
                         <thead>
                             <tr class="table-primary">
@@ -50,8 +54,9 @@
                         </thead>
                         
                         <tbody>
-                            <tr v-for="(activeCenter,index) in activeCenters" v-bind:key="activeCenter.id">
-                                <th scope="row">{{index + 1}}</th>
+                            
+                            <tr v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
+                                <th scope="row">{{rowCount + 1}}</th>
                                 <td>{{ activeCenter.title }}</td>
                                 <td>{{ activeCenter.start_date }}</td>
                                 <td>
@@ -90,15 +95,15 @@
                 </nav> -->
                  <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <a class="page-link" href="#" @click="fetchActiveCenter(pagination.prev_page_url)">前へ</a>
+                        <button class="page-link" href="#" @click="fetchActiveCenter(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <a class="page-link text-dark" href="#">ページ {{ pagination.current_page }} の {{ pagination.last_page }}</a>
+                        <button class="page-link text-dark" href="#">ページ {{ pagination.current_page }} の {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <a class="page-link" href="#" @click="fetchActiveCenter(pagination.next_page_url)">次へ</a>
+                        <button class="page-link" href="#" @click="fetchActiveCenter(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -107,6 +112,7 @@
 </template>
 
 <script>
+
     export default {
         name: "company",
         data() {
@@ -121,7 +127,57 @@
                 },
                 id: "",
                 pagination: {},
-                edit: false
+                edit: false,
+                rowCount : 1,
+                columns: ['id', 'name', 'age'],
+                tableData: [
+                    { id: 1, name: "John", age: "20" },
+                    { id: 2, name: "Jane", age: "24" },
+                    { id: 3, name: "Susan", age: "16" },
+                    { id: 4, name: "Chris", age: "55" },
+                    { id: 5, name: "Dan", age: "40334" },
+                    { id: 1, name: "John", age: "20" },
+                    { id: 2, name: "Jane", age: "24" },
+                    { id: 3, name: "Suwewsan", age: "16" },
+                    { id: 4, name: "Chris", age: "553434" },
+                    { id: 5, name: "Dan", age: "40" },
+                    { id: 1, name: "Jowewhn", age: "20" },
+                    { id: 2, name: "Jane", age: "24" },
+                    { id: 3, name: "Susan", age: "16" },
+                    { id: 4, name: "Chris", age: "55" },
+                    { id: 5, name: "Dan", age: "40" },
+                    { id: 1, name: "John", age: "20" },
+                    { id: 2, name: "wewe", age: "24" },
+                    { id: 3, name: "Susan", age: "16" },
+                    { id: 4, name: "Chris", age: "55" },
+                    { id: 5, name: "Dan", age: "40" }
+                ],
+                options: {
+                    templates: {
+                        erase: 'delete'
+                    },
+                    filterByColumn: true,
+                    listColumns: {
+                        animal: [{
+                                id: 1,
+                                text: 'Dog'
+                            },
+                            {
+                                id: 2,
+                                text: 'Cat',
+                                hide:true
+                            },
+                            {
+                                id: 3,
+                                text: 'Tiger'
+                            },
+                            {
+                                id: 4,
+                                text: 'Bear'
+                            }
+                        ]
+                    }
+                }
             };
         },
 
@@ -164,7 +220,19 @@
                     })
                     .catch(err => console.log(err));
                 }
-            }
+            },
+            searchActiveCenter(page_url) {
+                let vm = this;
+                page_url = page_url || "/api/active-centers";
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res => {
+                    this.activeCenters = res.data;
+                    console.log(this.activeCenters);
+                    vm.makePagination(res.meta, res.links);
+                })
+                .catch(err => console.log(err)); 
+            },
         }
     };
 </script>

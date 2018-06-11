@@ -80,17 +80,17 @@
         <!-- /container -->
 
         <!-- Site footer -->
-        <!-- <footer class="footer fixed-bottom">
-                <address>
-                    Copyright © Miyazaki NPO Center All Rights Reserved.
-                </address>
-            </footer> -->
-
-        <footer class="footer">
+        <footer class="footer fixed-bottom">
             <address>
                 Copyright © Miyazaki NPO Center All Rights Reserved.
             </address>
         </footer>
+
+        <!-- <footer class="footer">
+            <address>
+                Copyright © Miyazaki NPO Center All Rights Reserved.
+            </address>
+        </footer> -->
     </div>
 </template>
 
