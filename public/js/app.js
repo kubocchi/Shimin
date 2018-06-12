@@ -55206,14 +55206,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         if (this.$route.params.id != undefined) this.editActiveCenter(this.$route.params.id);
-
-        this.$swal('Hello Vue world!!!');
     },
 
 
     methods: {
         addActiveCenter: function addActiveCenter() {
             var _this = this;
+
+            var validation = [];
+            if (this.activeCenter.title.trim() === '') {
+                validation.push('件名');
+            }
+            if (this.activeCenter.content.trim() === '') {
+                validation.push('掲載開日');
+            }
+
+            if (validation.length) {
+                this.$swal({
+                    title: '次のフィールドは空ではありません!',
+                    text: validation.join('\n'),
+                    animation: false,
+                    customClass: 'animated tada',
+                    confirmButtonText: 'よし',
+                    width: '800px'
+                });
+                return;
+            }
 
             var self = this;
             console.log(this.activeCenter);
@@ -56746,8 +56764,7 @@ var render = function() {
                       attrs: {
                         placeholder: "件名",
                         id: "subject",
-                        type: "text",
-                        required: ""
+                        type: "text"
                       },
                       domProps: { value: _vm.activeCenter.title },
                       on: {
@@ -56808,6 +56825,7 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c("wysiwyg", {
+                        attrs: { required: "" },
                         model: {
                           value: _vm.activeCenter.content,
                           callback: function($$v) {
@@ -57146,18 +57164,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteActiveCenter: function deleteActiveCenter(id) {
             var _this2 = this;
 
-            if (confirm("Are You Sure?")) {
-                fetch("api/active-center/" + id, {
-                    method: "delete"
-                }).then(function (res) {
-                    return res.json();
-                }).then(function (data) {
-                    alert("active center Removed");
-                    _this2.fetchActiveCenter();
-                }).catch(function (err) {
-                    return console.log(err);
-                });
-            }
+            this.$swal({
+                title: '本気ですか',
+                text: "これを元に戻すことはできません!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'はい、削除してください!',
+                cancelButtonText: 'キャンセル'
+            }).then(function (result) {
+                if (result.value) {
+                    fetch("api/active-center/" + id, {
+                        method: "delete"
+                    }).then(function (res) {
+                        return res.json();
+                    }).then(function (data) {
+                        _this2.$swal('削除された!', '選択したデータが削除されました', 'success');
+                        _this2.fetchActiveCenter();
+                    }).catch(function (err) {
+                        return console.log(err);
+                    });
+                } else {
+                    _this2.$swal('キャンセルされました', 'データは安全です :)', 'error');
+                }
+            });
+
+            // if (confirm("Are You Sure?")) {
+            //     fetch(`api/active-center/${id}`, {
+            //         method: "delete"
+            //     })
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         alert("active center Removed");
+            //         this.fetchActiveCenter();
+            //     })
+            //     .catch(err => console.log(err));
+            // }
         },
         searchActiveCenter: function searchActiveCenter(page_url) {
             var _this3 = this;

@@ -12,7 +12,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" type="text" required>
+                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" type="text">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label" for="txtDate">【掲載開日】（必須）</label>    
@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="description">【掲載内容】</label>
                                 <!-- <vue-editor v-model="activeCenter.content" id="description" required></vue-editor> -->
-                                <wysiwyg v-model="activeCenter.content" />
+                                <wysiwyg v-model="activeCenter.content" required/>
                             </div>
                             <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
@@ -97,12 +97,32 @@
         created() {
             if (this.$route.params.id != undefined)
                 this.editActiveCenter(this.$route.params.id)
-
-            this.$swal('Hello Vue world!!!');
         },
 
         methods: {
             addActiveCenter() {
+                let validation = []
+                if(this.activeCenter.title.trim() === ''){
+                    validation.push('件名')
+                   
+                }
+                if(this.activeCenter.content.trim() === ''){
+                    validation.push('掲載開日')
+                }
+
+                if(validation.length){
+                     this.$swal({
+                        title: '次のフィールドは空ではありません!',
+                        text: validation.join('\n'),
+                        animation: false,
+                        customClass: 'animated tada',
+                        confirmButtonText : 'よし',
+                        width: '800px'
+                    })
+                    return
+                }
+
+
                 let self = this
                 console.log(this.activeCenter)
                 this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""

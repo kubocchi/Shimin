@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
@@ -12,7 +12,7 @@
                         <div class="col-md-2">
                             <router-link :to="{ name: 'activeCenterForm' }">
                                 <button class="btn btn-primary btn-lg btn-active center">新規登録</button>
-                            </router-link> 
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -29,10 +29,10 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                               <button class="btn btn-outline-primary" @click="fetchActiveCenter()">
+                                <button class="btn btn-outline-primary" @click="fetchActiveCenter()">
                                     <i class="fas fa-search"></i>
                                 </button>
-                            </span> 　
+                            </span>
                             <span class="input-group-btn">
                                 <button class="btn btn-outline-primary" @click="clearSearch()">
                                     <i class="fas fa-times"></i>
@@ -53,17 +53,17 @@
                                 <th scope="col">削除</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
                             <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ activeCenter.title }}</td>
                                 <td>{{ activeCenter.start_date }}</td>
                                 <td>
-                                   <button class="btn btn-outline-primary btn-active center" role="button">複製</button>
+                                    <button class="btn btn-outline-primary btn-active center" role="button">複製</button>
                                 </td>
                                 <td>
-                                     <router-link :to="{ name: 'activeCenterForm', params: { id: activeCenter }}">
+                                    <router-link :to="{ name: 'activeCenterForm', params: { id: activeCenter }}">
                                         <button class="btn btn-outline-success btn-active center" role="button">変更</button>
                                     </router-link>
                                 </td>
@@ -74,7 +74,7 @@
                         </tbody>
                     </table>
                 </div>
-                 <ul class="pagination justify-content-end">
+                <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <button class="page-link" href="#" @click="fetchActiveCenter(pagination.prev_page_url)">前へ</button>
                     </li>
@@ -103,13 +103,13 @@
                 activeCenter: {
                     id: "",
                     name: "",
-                    comments:"",
+                    comments: "",
                     update_by: "1"
                 },
                 id: "",
                 pagination: {},
                 edit: false,
-                rowCount : 1,
+                rowCount: 1,
                 columns: ['id', 'name', 'age'],
                 tableData: [
                     { id: 1, name: "John", age: "20" },
@@ -140,28 +140,28 @@
                     filterByColumn: true,
                     listColumns: {
                         animal: [{
-                                id: 1,
-                                text: 'Dog'
-                            },
-                            {
-                                id: 2,
-                                text: 'Cat',
-                                hide:true
-                            },
-                            {
-                                id: 3,
-                                text: 'Tiger'
-                            },
-                            {
-                                id: 4,
-                                text: 'Bear'
-                            }
+                            id: 1,
+                            text: 'Dog'
+                        },
+                        {
+                            id: 2,
+                            text: 'Cat',
+                            hide: true
+                        },
+                        {
+                            id: 3,
+                            text: 'Tiger'
+                        },
+                        {
+                            id: 4,
+                            text: 'Bear'
+                        }
                         ]
                     }
                 },
-                params:{
+                params: {
                     search: "",
-                    type:0
+                    type: 0
                 }
             };
         },
@@ -182,13 +182,13 @@
                         "content-type": "application/json"
                     }
                 })
-                .then(res => res.json())
-                .then(res => {
-                    this.activeCenters = res.data;
-                    console.log(this.activeCenters);
-                    vm.makePagination(res.meta, res.links);
-                })
-                .catch(err => console.log(err))
+                    .then(res => res.json())
+                    .then(res => {
+                        this.activeCenters = res.data;
+                        console.log(this.activeCenters);
+                        vm.makePagination(res.meta, res.links);
+                    })
+                    .catch(err => console.log(err))
             },
             makePagination(meta, links) {
                 let pagination = {
@@ -201,31 +201,66 @@
                 this.pagination = pagination;
             },
             deleteActiveCenter(id) {
-                if (confirm("Are You Sure?")) {
-                    fetch(`api/active-center/${id}`, {
-                        method: "delete"
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        alert("active center Removed");
-                        this.fetchActiveCenter();
-                    })
-                    .catch(err => console.log(err));
-                }
+
+                this.$swal({
+                    title: '本気ですか',
+                    text: "これを元に戻すことはできません!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'はい、削除してください!',
+                    cancelButtonText: 'キャンセル'
+                }).then((result) => {
+                    if (result.value) {
+                        fetch(`api/active-center/${id}`, {
+                            method: "delete"
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            this.$swal(
+                                '削除された!',
+                                '選択したデータが削除されました',
+                                'success'
+                            )
+                            this.fetchActiveCenter();
+                        })
+                        .catch(err => console.log(err));
+                    }
+                    else {
+                        this.$swal(
+                            'キャンセルされました',
+                            'データは安全です :)',
+                            'error'
+                        )
+                    }
+                })
+
+                // if (confirm("Are You Sure?")) {
+                //     fetch(`api/active-center/${id}`, {
+                //         method: "delete"
+                //     })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         alert("active center Removed");
+                //         this.fetchActiveCenter();
+                //     })
+                //     .catch(err => console.log(err));
+                // }
             },
             searchActiveCenter(page_url) {
                 let vm = this;
                 page_url = page_url || "/api/active-centers"
                 fetch(page_url)
-                .then(res => res.json())
-                .then(res => {
-                    this.activeCenters = res.data;
-                    console.log(this.activeCenters);
-                    vm.makePagination(res.meta, res.links)
-                })
-                .catch(err => console.log(err)); 
+                    .then(res => res.json())
+                    .then(res => {
+                        this.activeCenters = res.data;
+                        console.log(this.activeCenters);
+                        vm.makePagination(res.meta, res.links)
+                    })
+                    .catch(err => console.log(err));
             },
-            onTypeChanged: function(e) {
+            onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
                 this.fetchActiveCenter()
             },
