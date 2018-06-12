@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 /**
@@ -14,30 +13,16 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-// import Vue from 'vue'
-// import App from './components/App'
-// import VueRouter from 'vue-router'
-
-// Vue.use(VueRouter)
-
-// const app = new Vue({
-//     el: '#app',
-//     render: h => h(App)
-// });
-
 
 import Vue from 'vue'
 import App from './components/App'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
 
 
-
-
+// Toggle Button
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
 
+// Editor
 import wysiwyg from "vue-wysiwyg"
 Vue.use(wysiwyg, {
     image: {
@@ -46,16 +31,7 @@ Vue.use(wysiwyg, {
     },
 })
 
-import routeCollection from './router/index'
-
-
-const router = new VueRouter({
-    mode: 'hash', 
-    routes: routeCollection
-});
-
-
-
+// Datatable
 import {ServerTable, ClientTable, Event} from 'vue-tables-2';
 Vue.use(ClientTable);
 Vue.component('delete', {
@@ -66,6 +42,19 @@ Vue.component('delete', {
             let id = this.data.id; // delete the item
         }
     }
+});
+
+// Sweet alert
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);
+
+// Routes
+import routeCollection from './router/index'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+const router = new VueRouter({
+    mode: 'hash', 
+    routes: routeCollection
 });
 
 const app = new Vue({

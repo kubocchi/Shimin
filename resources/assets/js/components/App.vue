@@ -75,7 +75,9 @@
         </div>
 
         <div class="container">
-            <router-view></router-view>
+            <transition name="fade" >
+                <router-view></router-view>
+            </transition>
         </div>
         <!-- /container -->
 
@@ -93,18 +95,3 @@
         </footer> -->
     </div>
 </template>
-
-
-
-<script>
-    export default
-        {
-            mounted() {
-                console.log('Component mounted.')
-            },
-            components:
-                {
-
-                }
-        }
-</script>

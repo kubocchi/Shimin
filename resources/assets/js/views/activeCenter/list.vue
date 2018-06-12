@@ -29,18 +29,19 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary"  @click="fetchActiveCenter()">
+                               <button class="btn btn-outline-primary" @click="fetchActiveCenter()">
                                     <i class="fas fa-search"></i>
+                                </button>
+                            </span> 　
+                            <span class="input-group-btn">
+                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                    <i class="fas fa-times"></i>
                                 </button>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="row col-lg-12 table-responsive">
-                    <!-- <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table> -->
-                    <!-- <v-client-table :data="tableData" :columns="['id', 'name' ,'age', 'edit']" :options="options">
-                        <a class="btn btn-outline-success btn-active center" href="#" role="button">変更</a>
-                    </v-client-table> -->
                     <table class="table table-sm">
                         <thead>
                             <tr class="table-primary">
@@ -54,18 +55,17 @@
                         </thead>
                         
                         <tbody>
-                            
                             <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ activeCenter.title }}</td>
                                 <td>{{ activeCenter.start_date }}</td>
                                 <td>
-                                    <router-link :to="{ name: 'activeCenterForm', params: { id: activeCenter }}">
-                                        <a class="btn btn-outline-primary btn-active center" role="button">複製</a>
-                                    </router-link>
+                                   <button class="btn btn-outline-primary btn-active center" role="button">複製</button>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-success btn-active center" href="#" role="button">変更</a>
+                                     <router-link :to="{ name: 'activeCenterForm', params: { id: activeCenter }}">
+                                        <button class="btn btn-outline-success btn-active center" role="button">変更</button>
+                                    </router-link>
                                 </td>
                                 <td>
                                     <a class="btn btn-outline-danger btn-active center" @click="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
@@ -227,6 +227,10 @@
             },
             onTypeChanged: function(e) {
                 this.params.type = event.srcElement.value
+                this.fetchActiveCenter()
+            },
+            clearSearch() {
+                this.params.search = ""
                 this.fetchActiveCenter()
             }
         }

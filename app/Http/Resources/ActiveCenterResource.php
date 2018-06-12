@@ -24,9 +24,9 @@ class ActiveCenterResource extends JsonResource
             'content' => $this->content,
             'file' => $this->file,
             'end_date' => $this->end_date,
-            'deactive'=>$this->deactive,
+            'deactivate'=>$this->deactivate,
             'created_by' => $this->created_by,
-            'update_by' => $this->update_by
+            'updated_by' => $this->updated_by
         ];
     }
     public function with($request) {

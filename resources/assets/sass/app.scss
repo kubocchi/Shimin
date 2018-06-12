@@ -14,7 +14,9 @@
 // }
 
 //@import './themes/msikatsu_admin/css/bootstrap.min';
+
 @import url("https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css");
 @import './themes/msikatsu_admin/css/style';
 @import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css");
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
+@import "~vue-datepicker-local/dist/vue-datepicker-local";
