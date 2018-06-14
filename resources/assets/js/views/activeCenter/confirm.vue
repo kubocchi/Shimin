@@ -1,80 +1,62 @@
 <template>
-    <div>
-        <h4>
-            <span>
-                <i class="fas fa-dove"></i>
-            </span> 宮崎市民活動センターからのお知らせ 情報登録画面</h4>
-        <hr>
-        <div class="row mt-4">
-            <div class="col-lg-12">
-                <div class="bs-component">
-                    <form @submit.prevent="submitClicked">
-                        <fieldset>
-                            <div class="form-group">
-                                <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtDate">【掲載開日】（必須）</label>    
-                                <div class="row">
-                                    <vue-datepicker-local  v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="description">【掲載内容】</label>
-                                <!-- <vue-editor v-model="activeCenter.content" id="description" required></vue-editor> -->
-                                <wysiwyg v-model="activeCenter.content" required/>
-                            </div>
-                            【非アクティブ化する】
-                            <div class="row">
-                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="true" />
-                            </div>
-                             <div class="form-group">
-                                <label for="inputFile">【添付ファイル】</label>
-                                <!-- <input class="form-control-file" id="inputFile" aria-describedby="fileHelp" type="file"> -->
-                                <div class="file-upload">
-                                    <div class="form-group">
-                                        <input type="file" multiple="multiple" id="attachments" @change="uploadFieldChange">
-                                        <div class="form-group files">
-                                            <div class="attachment-holder animated fadeIn" v-cloak v-for="(attachment, index) in attachments"> 
-                                                <div class="form-group">
-                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</span> 
-                                                    <button class="btn btn-outline-danger" @click.prevent="removeAttachment(attachment)">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <router-link :to="{ name: 'activeCenterList' }">
-                                <button class="btn btn-outline-primary">戻る</button>
-                            </router-link> 
-                            <button type="submit" class="btn btn-outline-primary">確認に進む</button>
-                    </fieldset>
-                </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div >
+		<h4>
+			<span>
+				<i class="fas fa-dove"></i>
+			</span> 宮崎市民活動センターからのお知らせ 登録確認画面</h4>
+		<hr>
+		<div class="row mt-4">
+			<div class="col-lg-12">
+				<div class="bs-component">
+					<div>
+						<form action="" method="post">
+							<p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
+							<div>
+								<div>
+									<label>【件名】</label>
+									<p>{{activeCenter.title}}</p>
+								</div>
+								<div>
+									<label>【掲載開始日】</label>
+									<p>{{activeCenter.start_date}}</p>
+								</div>
+								<div>
+									<label>【掲載終了日】</label>
+									<p>{{activeCenter.end_date}}</p>
+								</div>
+								<div>
+									<label>【掲載内容】</label>
+									<p v-html="activeCenter.content"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+                                         <router-link :to="{ name: 'activeCenterForm' }">
+                                            <button class="btn btn-outline-primary btn-block">戻る</button>
+                                        </router-link> 
+										<div class="col-md-4 mb-3 offset-md-4">
+											<button type="button" class="btn btn-outline-primary btn-block" onclick="history.back()">戻る</button>
+										</div>
+										<div class="col-md-4">
+											<button type="submit" class="btn btn-outline-primary btn-block">登録</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
-
 <script>
-    import { VueEditor } from 'vue2-editor'
-    import VueDatepickerLocal from 'vue-datepicker-local'
-    import moment from 'moment'
-
-
     export default {
-        components: { VueEditor, VueDatepickerLocal },
         name: "company",
         data() {
             return {
-                activeCenters: [],
-                dateRange: [],
                 activeCenter: {
                     id: "",
                     title: "",
@@ -86,42 +68,12 @@
                     created_by: 1,
                     updated_by: 1
                 },
-                id: "",
-                pagination: {},
-                edit: false,
-                dateFormat: 'YYYY-MM-DD',
-                color: '#1C89E7',
-                time: new Date(),
-                range: [new Date(), new Date()],
-                emptyTime: '',
-                emptyRange: [],
-                local: {
-                    dow: 0, // Sunday is the first day of the week
-                    hourTip: 'Select Hour', // tip of select hour
-                    minuteTip: 'Select Minute', // tip of select minute
-                    secondTip: 'Select Second', // tip of select second
-                    yearSuffix: '', // suffix of head year
-                    monthsHead: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'), // months of head
-                    months: '一_二_三_四_五_六_七_八_九_十_十一_十二'.split('_'), // months of panel
-                    weeks: '日_月_火_水_木_金_土'.split('_'), // weeks,
-                    cancelTip: 'cancel',
-                    submitTip: 'confirm'
-                },
-                // You can store all your files here
-                attachments: [],
-                attachment_labels: [], // List of old uploaded files coming from the server
-                categories: [],
-                // Each file will need to be sent as FormData element
-                uploadedData: new FormData(),
-                percentCompleted: 0,
-                tempRemovedFileIds: [],
-                currentAddedFileIs: []
             };
         },
 
         created() {
             if (this.$route.params.model)
-                this.editActiveCenter(this.$route.params.model)
+                this.activeCenter = this.$route.params.model
         },
 
         methods: {
@@ -130,6 +82,8 @@
 
                 let self = this
                 console.log(this.activeCenter)
+                this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
+                this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
 
                 if (this.edit === false) {
                     // Add
@@ -378,20 +332,15 @@
                 if (!this.validate()) 
                     return
 
-                // if(this.tempRemovedFileIds.length){
-                //     this.tempRemovedFileIds.forEach(id => {
-                //         this.removeServerAttachment(id)
-                //         this.currentAddedFileIs.filter(item => item !== id)
-                //     })
-                // }
+                if(this.tempRemovedFileIds.length){
+                    this.tempRemovedFileIds.forEach(id => {
+                        this.removeServerAttachment(id)
+                        this.currentAddedFileIs.filter(item => item !== id)
+                    })
+                }
 
-                // if(this.attachments.length)
-                //     this.addAttachment()
-
-                this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
-
-                this.$router.push({ name: 'activeCenterConfirm', params: { model: this.activeCenter } })
+                if(this.attachments.length)
+                    this.addAttachment()
             }
         }
     };

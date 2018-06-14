@@ -1,6 +1,7 @@
 import Dashboard from '../views/Dashboard'
 import ActiveCenterForm from '../views/activeCenter/Form'
 import ActiveCenterList from '../views/activeCenter/List'
+import ActiveCenterConfirm from '../views/activeCenter/confirm'
 
 const routes = [
     {
@@ -25,6 +26,11 @@ const routes = [
                 path: 'list',
                 name: 'activeCenterList',
                 component: ActiveCenterList
+            },
+            {
+                path: 'confirm',
+                name: 'activeCenterConfirm',
+                component: ActiveCenterConfirm
             }
         ]
     }

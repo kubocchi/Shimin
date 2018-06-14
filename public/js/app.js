@@ -80329,6 +80329,9 @@ exports.push([module.i, "@keyframes spinAround{0%{transform:rotate(0deg)}to{tran
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_activeCenter_Form___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__views_activeCenter_Form__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_activeCenter_List__ = __webpack_require__(400);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_activeCenter_List___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__views_activeCenter_List__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_activeCenter_confirm__ = __webpack_require__(407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_activeCenter_confirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__views_activeCenter_confirm__);
+
 
 
 
@@ -80354,6 +80357,10 @@ var routes = [{
         path: 'list',
         name: 'activeCenterList',
         component: __WEBPACK_IMPORTED_MODULE_2__views_activeCenter_List___default.a
+    }, {
+        path: 'confirm',
+        name: 'activeCenterConfirm',
+        component: __WEBPACK_IMPORTED_MODULE_3__views_activeCenter_confirm___default.a
     }]
 }];
 
@@ -80767,7 +80774,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         };
     },
     created: function created() {
-        if (this.$route.params.id != undefined) this.editActiveCenter(this.$route.params.id);
+        if (this.$route.params.model) this.editActiveCenter(this.$route.params.model);
     },
 
 
@@ -80777,8 +80784,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             var self = this;
             console.log(this.activeCenter);
-            this.activeCenter.start_date = !!this.range ? __WEBPACK_IMPORTED_MODULE_2_moment___default()(String(this.range[0])).format("YYYY-MM-DD") : "";
-            this.activeCenter.end_date = !!this.range ? __WEBPACK_IMPORTED_MODULE_2_moment___default()(String(this.range[1])).format("YYYY-MM-DD") : "";
 
             if (this.edit === false) {
                 // Add
@@ -81010,20 +81015,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.attachments.splice(this.attachments.indexOf(attachment), 1);
         this.getAttachmentSize();
     }), _defineProperty(_methods, 'submitClicked', function submitClicked() {
-        var _this3 = this;
-
         if (!this.validate()) return;
 
-        if (this.tempRemovedFileIds.length) {
-            this.tempRemovedFileIds.forEach(function (id) {
-                _this3.removeServerAttachment(id);
-                _this3.currentAddedFileIs.filter(function (item) {
-                    return item !== id;
-                });
-            });
-        }
+        // if(this.tempRemovedFileIds.length){
+        //     this.tempRemovedFileIds.forEach(id => {
+        //         this.removeServerAttachment(id)
+        //         this.currentAddedFileIs.filter(item => item !== id)
+        //     })
+        // }
 
-        if (this.attachments.length) this.addAttachment();
+        // if(this.attachments.length)
+        //     this.addAttachment()
+
+        this.activeCenter.start_date = !!this.range ? __WEBPACK_IMPORTED_MODULE_2_moment___default()(String(this.range[0])).format("YYYY-MM-DD") : "";
+        this.activeCenter.end_date = !!this.range ? __WEBPACK_IMPORTED_MODULE_2_moment___default()(String(this.range[1])).format("YYYY-MM-DD") : "";
+
+        this.$router.push({ name: 'activeCenterConfirm', params: { model: this.activeCenter } });
     }), _methods)
 });
 
@@ -83466,7 +83473,7 @@ var render = function() {
                             attrs: {
                               to: {
                                 name: "activeCenterForm",
-                                params: { id: activeCenter }
+                                params: { model: activeCenter }
                               }
                             }
                           },
@@ -86266,6 +86273,535 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 405 */,
+/* 406 */,
+/* 407 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(408)
+/* template */
+var __vue_template__ = __webpack_require__(409)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\views\\activeCenter\\confirm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4f5c40cc", Component.options)
+  } else {
+    hotAPI.reload("data-v-4f5c40cc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 408 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "company",
+    data: function data() {
+        return {
+            activeCenter: {
+                id: "",
+                title: "",
+                start_date: !!this.range ? this.dateRange[0] : "",
+                end_date: !!this.range ? this.dateRange[1] : "",
+                content: "",
+                file: "",
+                deactivate: false,
+                created_by: 1,
+                updated_by: 1
+            }
+        };
+    },
+    created: function created() {
+        if (this.$route.params.model) this.activeCenter = this.$route.params.model;
+    },
+
+
+    methods: (_methods = {
+        addActiveCenter: function addActiveCenter() {
+            this.activeCenter.file = this.currentAddedFileIs.join(',');
+
+            var self = this;
+            console.log(this.activeCenter);
+            this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : "";
+            this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : "";
+
+            if (this.edit === false) {
+                // Add
+                fetch("api/active-center", {
+                    method: "post",
+                    body: JSON.stringify(this.activeCenter),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (data) {
+                    self.$swal({
+                        title: "成功!",
+                        text: "活動センターが追加されました!",
+                        type: "success",
+                        confirmButtonText: 'よし'
+                    }).then(function () {
+                        self.$router.push({
+                            name: 'activeCenterList'
+                        });
+                    });
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            } else {
+
+                // Update
+                fetch("api/active-center", {
+                    method: "put",
+                    body: JSON.stringify(this.activeCenter),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (data) {
+                    self.$swal({
+                        title: "成功!",
+                        text: "活動センターが追加されました!",
+                        type: "success",
+                        confirmButtonText: 'よし'
+                    }).then(function () {
+                        self.$router.push({
+                            name: 'activeCenterList'
+                        });
+                    });
+                }).catch(function (err) {
+                    return console.log(err);
+                });
+            }
+        },
+        editActiveCenter: function editActiveCenter(activeCenter) {
+            console.log(activeCenter);
+            this.pullAttachments(activeCenter);
+            this.edit = true;
+            this.activeCenter.id = activeCenter.id;
+            this.activeCenter.title = activeCenter.title;
+            this.activeCenter.start_date = activeCenter.start_date;
+            this.activeCenter.end_date = activeCenter.end_date;
+            this.activeCenter.content = activeCenter.content;
+            this.activeCenter.file = activeCenter.file;
+            this.activeCenter.deactivate = !!activeCenter.deactivate == 1 ? true : false;
+            this.activeCenter.created_by = activeCenter.created_by;
+            this.activeCenter.updated_by = activeCenter.updated_by;
+
+            // For Files
+            this.currentAddedFileIs = activeCenter.file.split(',');
+        },
+        selectCategory: function selectCategory(attachment, category_id) {
+            attachment.category_id = category_id;
+            console.log(attachment);
+            this.$forceUpdate();
+        },
+        getAttachmentSize: function getAttachmentSize() {
+            var _this = this;
+
+            this.upload_size = 0; // Reset to beginningƒ
+            this.attachments.map(function (item) {
+                _this.upload_size += parseInt(item.size);
+            });
+            this.upload_size = Number(this.upload_size.toFixed(1));
+            this.$forceUpdate();
+        },
+        prepareFields: function prepareFields() {
+            for (var i = this.attachments.length - 1; i >= 0; i--) {
+                console.log(this.attachments[i].category_id);
+                this.uploadedData.append("attachments[][0]", this.attachments[i]);
+                this.uploadedData.append("attachments[][1]", this.attachments[i].category_id);
+            }
+
+            for (var i = this.attachment_labels.length - 1; i >= 0; i--) {
+                this.uploadedData.append("attachment_labels[]", JSON.stringify(this.attachment_labels[i]));
+            }
+        },
+        removeAttachment: function removeAttachment(attachment) {
+            console.log(attachment);
+
+            if (attachment.id) this.tempRemovedFileIds.push(attachment.id);
+            //this.removeServerAttachment(attachment.id)
+            //var hasApple = this.activeCenter.file.indexOf('apple') != -1;
+
+            this.attachments.splice(this.attachments.indexOf(attachment), 1);
+            this.getAttachmentSize();
+        },
+
+
+        // This function will be called every time you add a file
+        uploadFieldChange: function uploadFieldChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return;
+
+            for (var i = files.length - 1; i >= 0; i--) {
+                this.attachments.push(files[i]);
+            }
+
+            // Reset the form to avoid copying these files multiple times into this.attachments
+            document.getElementById("attachments").value = [];
+            console.log(attachments);
+        },
+        validate: function validate() {
+            var validation = [];
+            if (this.activeCenter.title.trim() === '') {
+                validation.push('件名');
+            }
+            if (this.activeCenter.content.trim() === '') {
+                validation.push('掲載開日');
+            }
+
+            if (validation.length) {
+                this.$swal({
+                    title: '次のフィールドは空ではありません!',
+                    text: validation.join('\n'),
+                    animation: false,
+                    customClass: 'animated tada',
+                    confirmButtonText: 'よし',
+                    width: '800px'
+                });
+                return false;
+            }
+            return true;
+        },
+        addAttachment: function addAttachment() {
+            this.prepareFields();
+
+            var config = {
+                headers: { 'Content-Type': 'multipart/form-data' },
+                onUploadProgress: function (progressEvent) {
+                    this.percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
+                    console.log(this.percentCompleted);
+                    this.$forceUpdate();
+                }.bind(this)
+            };
+
+            //Make HTTP request to store announcement
+            var loader = this.$loading.show();
+            axios.post('/api/attachments/store', this.uploadedData, config).then(function (response) {
+                console.log(response);
+                if (response.data.success) {
+                    console.log('Successfull upload');
+                    this.currentAddedFileIs.push(response.data.data);
+                    this.resetData();
+                    this.addActiveCenter();
+                    loader.hide();
+                } else {
+                    console.log('Unsuccessful Upload');
+                }
+            }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+            .catch(function (error) {
+                console.log('Attachment catch', error);
+            });
+            console.log(attachments);
+        },
+
+
+        // We want to clear the FormData object on every upload so we can re-calculate new files again.
+        // Keep in mind that we can delete files as well so in the future we will need to keep track of that as well
+        resetData: function resetData() {
+            this.uploadedData = new FormData(); // Reset it completely
+            this.attachments = [];
+        },
+        removeServerAttachment: function removeServerAttachment(attachment_id) {
+            var data = {
+                params: {
+                    attachment_id: attachment_id
+                }
+            };
+
+            // Make HTTP request to store announcement
+            axios.delete('/api/attachments/', data).then(function (response) {
+                console.log(response);
+                if (response.data.success) {
+                    this.getAttachmentSize();
+                } else {
+                    console.log(response.data.errors);
+                }
+            }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        pullAttachments: function pullAttachments(activeCenter) {
+            // Make HTTP request to store announcement
+            axios.get("api/asset/attachments/" + activeCenter.file).then(function (response) {
+                console.log(response);
+                if (response.data.success) {
+                    this.attachments = response.data.data;
+                    console.log('Attachments: ', this.attachments);
+                    this.getAttachmentSize();
+                } else {
+                    console.log(response.data.errors);
+                }
+            }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, _defineProperty(_methods, "getAttachmentSize", function getAttachmentSize() {
+        var _this2 = this;
+
+        this.upload_size = 0; // Reset to beginningƒ
+        this.attachments.map(function (item) {
+            _this2.upload_size += parseInt(item.size);
+        });
+        this.upload_size = Number(this.upload_size.toFixed(1));
+        this.$forceUpdate();
+    }), _defineProperty(_methods, "removeAttachments", function removeAttachments(attachment) {
+        //this.removeServerAttachment(attachment.id);
+        this.attachments.splice(this.attachments.indexOf(attachment), 1);
+        this.getAttachmentSize();
+    }), _defineProperty(_methods, "submitClicked", function submitClicked() {
+        var _this3 = this;
+
+        if (!this.validate()) return;
+
+        if (this.tempRemovedFileIds.length) {
+            this.tempRemovedFileIds.forEach(function (id) {
+                _this3.removeServerAttachment(id);
+                _this3.currentAddedFileIs.filter(function (item) {
+                    return item !== id;
+                });
+            });
+        }
+
+        if (this.attachments.length) this.addAttachment();
+    }), _methods)
+});
+
+/***/ }),
+/* 409 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", { staticClass: "bs-component" }, [
+          _c("div", [
+            _c("form", { attrs: { action: "", method: "post" } }, [
+              _c("p", [
+                _vm._v(
+                  "登録内容を確認し問題がなければ登録ボタンを押してください。"
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c("div", [
+                  _c("label", [_vm._v("【件名】")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.activeCenter.title))])
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("【掲載開始日】")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.activeCenter.start_date))])
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("【掲載終了日】")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.activeCenter.end_date))])
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("label", [_vm._v("【掲載内容】")]),
+                  _vm._v(" "),
+                  _c("p", {
+                    domProps: { innerHTML: _vm._s(_vm.activeCenter.content) }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: { name: "activeCenterForm" } } },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-primary btn-block"
+                            },
+                            [_vm._v("戻る")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", [
+      _c("span", [_c("i", { staticClass: "fas fa-dove" })]),
+      _vm._v(" 宮崎市民活動センターからのお知らせ 登録確認画面")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4 mb-3 offset-md-4" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary btn-block",
+          attrs: { type: "button", onclick: "history.back()" }
+        },
+        [_vm._v("戻る")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary btn-block",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("登録")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4f5c40cc", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

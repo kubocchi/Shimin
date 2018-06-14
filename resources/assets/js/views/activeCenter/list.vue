@@ -64,7 +64,7 @@
                                     <button class="btn btn-outline-primary btn-active center" role="button">複製</button>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'activeCenterForm', params: { id: activeCenter }}">
+                                    <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter }}">
                                         <button class="btn btn-outline-success btn-active center" role="button">変更</button>
                                     </router-link>
                                 </td>
