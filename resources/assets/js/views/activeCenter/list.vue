@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Spinner name="pulse" color="#2E92E8"/>
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
@@ -89,11 +90,11 @@
                 </ul>
             </div>
         </div>
+       
     </div>
 </template>
 
 <script>
-
     export default {
         name: "company",
         data() {
@@ -172,6 +173,7 @@
 
         methods: {
             fetchActiveCenter(page_url) {
+                let loader = this.$loading.show();
                 let vm = this;
                 page_url = page_url || "/api/active-centers";
 
@@ -187,6 +189,7 @@
                         this.activeCenters = res.data;
                         console.log(this.activeCenters);
                         vm.makePagination(res.meta, res.links);
+                        loader.hide()
                     })
                     .catch(err => console.log(err))
             },

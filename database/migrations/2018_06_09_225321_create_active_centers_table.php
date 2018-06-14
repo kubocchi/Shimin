@@ -19,7 +19,7 @@ class CreateActiveCentersTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->longText('content');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->boolean('deactivate');
             $table->integer('created_by');
             $table->integer('updated_by');

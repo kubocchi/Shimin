@@ -30,3 +30,7 @@ Route::put('active-center', 'ActiveCenterController@store');
 Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
 
 Route::post('active-center/images/upload', 'ActiveCenterController@postImageUpload');
+
+Route::post('/attachments/store', 'ActiveCenterController@storeAttachments')->name('store-attachments');
+Route::get('asset/attachments/{ids}', 'ActiveCenterController@pullAttachments')->name('pull-attachments');
+Route::delete('/attachments/', 'ActiveCenterController@deleteAttachment')->name('delete-attachment');

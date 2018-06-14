@@ -48,6 +48,16 @@ Vue.component('delete', {
 import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);
 
+import Spinner from 'vue-spinkit'
+Vue.component('Spinner', Spinner)
+
+
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.min.css';
+// Init plugin
+Vue.use(Loading);
+
 // Routes
 import routeCollection from './router/index'
 import VueRouter from 'vue-router'
