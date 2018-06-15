@@ -32,9 +32,9 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="row">
-                                         <router-link :to="{ name: 'activeCenterForm' }">
+                                         <!-- <router-link :to="{ name: 'activeCenterForm' }">
                                             <button class="btn btn-outline-primary btn-block">戻る</button>
-                                        </router-link> 
+                                        </router-link>  -->
 										<div class="col-md-4 mb-3 offset-md-4">
 											<button type="button" class="btn btn-outline-primary btn-block" onclick="history.back()">戻る</button>
 										</div>

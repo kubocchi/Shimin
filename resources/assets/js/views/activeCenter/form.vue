@@ -5,6 +5,7 @@
                 <i class="fas fa-dove"></i>
             </span> 宮崎市民活動センターからのお知らせ 情報登録画面</h4>
         <hr>
+        
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
@@ -12,7 +13,8 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" type="text">
+                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
+                                <span class="is-danger">{{ errors.first('title') }}</span>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label" for="txtDate">【掲載開日】（必須）</label>    
@@ -22,12 +24,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label" for="description">【掲載内容】</label>
-                                <!-- <vue-editor v-model="activeCenter.content" id="description" required></vue-editor> -->
-                                <wysiwyg v-model="activeCenter.content" required/>
+                                <wysiwyg v-model="activeCenter.content"  v-validate="'required'" name="content" data-vv-as="掲載開日" type="text"/>
+                                <span class="is-danger">{{ errors.first('content') }}</span>
                             </div>
                             【非アクティブ化する】
                             <div class="row">
-                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="true" />
+                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: '真実', unchecked: '偽'}" />
                             </div>
                              <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
@@ -35,13 +37,14 @@
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <input type="file" multiple="multiple" id="attachments" @change="uploadFieldChange">
+                                        <hr>
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-for="(attachment, index) in attachments"> 
                                                 <div class="form-group">
-                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</span> 
-                                                    <button class="btn btn-outline-danger" @click.prevent="removeAttachment(attachment)">
+                                                    <button class="btn btn-outline-danger btn-sm" @click.prevent="removeAttachment(attachment)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
+                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</span> 
                                                 </div>
                                             </div>
                                         </div>
@@ -52,7 +55,92 @@
                             <router-link :to="{ name: 'activeCenterList' }">
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link> 
-                            <button type="submit" class="btn btn-outline-primary">確認に進む</button>
+                            <!-- <button type="submit" class="btn btn-outline-primary">確認に進む</button> -->
+
+
+                             <button type="button" class="btn btn-primary" @click="confirm">
+                                確認に進む
+                            </button>   
+
+                            <!-- The Modal -->
+                            <div class="modal" id="confirmationModal">
+                                <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        <span>
+                                            <i class="fas fa-dove"></i>
+                                        </span> 宮崎市民活動センターからのお知らせ 登録確認画面
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div class="row mt-4">
+                                            <div class="col-lg-12">
+                                                <div class="bs-component">
+                                                    <div>
+                                                        <form action="" method="post">
+                                                            <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
+                                                            <div>
+                                                                <div>
+                                                                    <label>【件名】</label>
+                                                                    <p>{{activeCenter.title}}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <label>【掲載開始日】</label>
+                                                                    <p>{{activeCenter.start_date}}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <label>【掲載終了日】</label>
+                                                                    <p>{{activeCenter.end_date}}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <label>【掲載内容】</label>
+                                                                    <p v-html="activeCenter.content"></p>
+                                                                </div>
+
+                                                                <div>
+                                                                    <label>【掲載内容】</label>
+                                                                    <div class="form-group files">
+                                                                        <div class="attachment-holder animated fadeIn" v-cloak v-for="(attachment, index) in attachments"> 
+                                                                            <ul class="form-group">
+                                                                                <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</li> 
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">登録</button>
+                                        <button type="button" class="btn btn-outline-primary" @click="submitClicked" >戻る</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <!--Progress Modal -->
+                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </fieldset>
                 </form>
                 </div>
@@ -115,8 +203,14 @@
                 uploadedData: new FormData(),
                 percentCompleted: 0,
                 tempRemovedFileIds: [],
-                currentAddedFileIs: []
+                currentAddedFileIs: [],
+                width:'0%'
             };
+        },
+        computed: {
+            computedWidth: function () {
+                return this.width;
+            }
         },
 
         created() {
@@ -133,6 +227,7 @@
 
                 if (this.edit === false) {
                     // Add
+                    let loader = this.$loading.show()
                     fetch("api/active-center", {
                         method: "post",
                         body: JSON.stringify(this.activeCenter),
@@ -142,6 +237,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
+                        loader.hide()
                         self.$swal({
                             title: "成功!",
                             text: "活動センターが追加されました!",
@@ -158,6 +254,7 @@
                 } else {
 
                     // Update
+                    let loader = this.$loading.show()
                     fetch("api/active-center", {
                         method: "put",
                         body: JSON.stringify(this.activeCenter),
@@ -167,6 +264,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
+                        loader.hide()
                         self.$swal({
                             title: "成功!",
                             text: "活動センターが追加されました!",
@@ -197,7 +295,8 @@
                 this.activeCenter.updated_by = activeCenter.updated_by
 
                 // For Files
-                this.currentAddedFileIs = activeCenter.file.split(',')
+                if(activeCenter.file)
+                    this.currentAddedFileIs = activeCenter.file.split(',')
             },
             
             selectCategory(attachment, category_id) {
@@ -223,16 +322,12 @@
                 for (var i = this.attachment_labels.length - 1; i >= 0; i--) {
                     this.uploadedData.append("attachment_labels[]", JSON.stringify(this.attachment_labels[i]));
                 }
-
             },
 
             removeAttachment(attachment) {
                 console.log(attachment)
-
                 if(attachment.id)
                     this.tempRemovedFileIds.push(attachment.id)
-                    //this.removeServerAttachment(attachment.id)
-                //var hasApple = this.activeCenter.file.indexOf('apple') != -1;
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
@@ -284,13 +379,14 @@
                     headers: { 'Content-Type': 'multipart/form-data' } ,
                     onUploadProgress: function(progressEvent) {
                         this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                        console.log(this.percentCompleted);
+                        console.log(this.percentCompleted)
+                        this.width = this.percentCompleted + '%'
                         this.$forceUpdate();
                     }.bind(this)
                 };
 
                 //Make HTTP request to store announcement
-                let loader = this.$loading.show()
+                $("#progressModal").modal({ backdrop: 'static' }, 'show');
                 axios.post('/api/attachments/store', this.uploadedData, config)
                 .then(function (response) {
                     console.log(response);
@@ -299,7 +395,7 @@
                         this.currentAddedFileIs.push(response.data.data)
                         this.resetData()
                         this.addActiveCenter()
-                        loader.hide()
+                         $("#progressModal").modal('hide');
                     } else {
                         console.log('Unsuccessful Upload')
                     }
@@ -369,29 +465,38 @@
             },
 
             removeAttachments(attachment) {
-                //this.removeServerAttachment(attachment.id);
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
             },
 
             submitClicked(){
-                if (!this.validate()) 
-                    return
+                $("#confirmationModal").modal('hide');
+                if(this.tempRemovedFileIds.length){
+                    this.tempRemovedFileIds.forEach(id => {
+                        this.removeServerAttachment(id)
+                        this.currentAddedFileIs.filter(item => item !== id)
+                    })
+                }
 
-                // if(this.tempRemovedFileIds.length){
-                //     this.tempRemovedFileIds.forEach(id => {
-                //         this.removeServerAttachment(id)
-                //         this.currentAddedFileIs.filter(item => item !== id)
-                //     })
-                // }
+                if(this.attachments.length)
+                    this.addAttachment()
+                else
+                    this.addActiveCenter()
+            },
+            confirm(){
+                // if (!this.validate()) 
+                //     return
 
-                // if(this.attachments.length)
-                //     this.addAttachment()
-
-                this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
-
-                this.$router.push({ name: 'activeCenterConfirm', params: { model: this.activeCenter } })
+                this.$validator.validate().then(result => {
+                    if (!result) {
+                        console.log('true')
+                    }
+                    else{
+                        this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
+                        this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        $("#confirmationModal").modal('show');
+                    }
+                });
             }
         }
     };

@@ -220,3 +220,7 @@ address {
   .fade-enter, .fade-leave-active {
 	opacity: 0
   }
+
+  .is-danger{
+	color: red;
+  }

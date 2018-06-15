@@ -51,12 +51,17 @@ Vue.use(VueSweetalert2);
 import Spinner from 'vue-spinkit'
 Vue.component('Spinner', Spinner)
 
-
 import Loading from 'vue-loading-overlay';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.min.css';
 // Init plugin
 Vue.use(Loading);
+
+import ja from 'vee-validate/dist/locale/ja'
+import VeeValidate, { Validator } from 'vee-validate';
+
+Validator.localize('ja', ja);
+Vue.use(VeeValidate);
 
 // Routes
 import routeCollection from './router/index'

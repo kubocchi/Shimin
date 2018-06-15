@@ -741,6 +741,10 @@ address {
   opacity: 0;
 }
 
+.is-danger {
+  color: red;
+}
+
 /*!
  * vue-datetime-local.js v1.0.14
  * (c) 2017-2018 weifeiyue
