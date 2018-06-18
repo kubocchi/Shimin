@@ -160,41 +160,12 @@
                             <h2>センターからのお知らせ</h2>
                         </div>
                         <div class="news_contents">
-                            <dl>
-                                <dt>2018/XX/XX</dt>
+                            <dl  v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
+                                <dt>{{activeCenter.start_date}}</dt>
                                 <dd>
-                                    <a href="#">
-                                        <span class="new"></span>宮崎市民活動センターの会議コーナー　最新予約状況</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">《重要》 臨時休館（5月22日（火））のお知らせ</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">かわら版5月号に関して～訂正とお詫び～</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">［重要なお知らせ］平成30年度の当センターの休館予定日について</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">5月15日（火）第2回資金づくり講座「クラウドファンディング」を開催いたします。</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">あなたの団体をPRしませんか？</a>
+                                    <router-link :to="{ name: '#', params: { model: activeCenter }}">
+                                        <span class="new"></span>{{activeCenter.title}}
+                                    </router-link>
                                 </dd>
                             </dl>
                         </div>
@@ -654,14 +625,26 @@
         name: "disaster",
         data() {
             return {
-
+                activeCenters: [],
             }
         },
 
         created() {
+            this.fetchActiveCenter()
         },
 
         methods: {
+            fetchActiveCenter(page_url) {
+                let vm = this;
+                page_url = page_url || "/api/active-centers"
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res => {
+                    this.activeCenters = res.data
+                    console.log(this.activeCenters)
+                })
+                .catch(err => console.log(err))
+            },
         }
     };
 </script>

@@ -45440,8 +45440,8 @@ module.exports = __webpack_require__(436);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Frontend__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Frontend___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Frontend__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_App__ = __webpack_require__(439);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_App__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_popper_js__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_js_toggle_button__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_js_toggle_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_js_toggle_button__);
@@ -45478,9 +45478,9 @@ window.Vue = __webpack_require__(5);
  */
 
 
-//import App from './components/App'
 
-//import $ from 'jquery'
+//import App from './components/Frontend'
+
 /*************************START FRONTEND**************************/
 
 __webpack_require__(220);
@@ -45552,7 +45552,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_13_vue_router__["a" /* default */]({
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     render: function render(h) {
-        return h(__WEBPACK_IMPORTED_MODULE_1__components_Frontend___default.a);
+        return h(__WEBPACK_IMPORTED_MODULE_1__components_App___default.a);
     },
     router: router
 });
@@ -67789,2135 +67789,30 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(8)))
 
 /***/ }),
-/* 196 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(197)
-/* template */
-var __vue_template__ = __webpack_require__(198)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Frontend.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b27948ee", Component.options)
-  } else {
-    hotAPI.reload("data-v-b27948ee", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 197 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-//import slider from '../sass/frontend/js/jquery.sliderPro'
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: "disaster",
-    data: function data() {
-        return {};
-    },
-    created: function created() {},
-
-
-    methods: {}
-});
-
-/***/ }),
-/* 198 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { attrs: { id: "header" } }, [
-        _c("div", { staticClass: "container clearfix" }, [
-          _c("div", { staticClass: "head_left" }, [
-            _c("h1", [
-              _c(
-                "a",
-                { staticClass: "clearfix", attrs: { href: "index.html" } },
-                [
-                  _c("p", { staticClass: "logo" }, [
-                    _c("img", {
-                      attrs: {
-                        src: __webpack_require__(199),
-                        alt: "宮崎市民活動センター"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "s_text" }, [
-                    _vm._v(
-                      "私たちは宮崎市民の市民活動・ボランティアを支援します。"
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "l_text" })
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "head_right" }, [
-            _c("ul", { staticClass: "clearfix" }, [
-              _c("li", [_vm._v("開館時間 9:00 ～ 22:00")]),
-              _vm._v(" "),
-              _c("li", [_vm._v("0985-20-8777")]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("お問合せ")])
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("アクセス")])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "eyecatch" } }, [
-        _c("div", { staticClass: "eyecatch clearfix" }, [
-          _c("p", { staticClass: "illust bg l_01" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(200)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust bg l_02" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(201)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust bg l_03" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(202)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust bg r_01" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(203)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust bg r_02" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(204)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust bg r_03" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(205)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust on l" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(206)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "illust on r" }, [
-            _c("img", {
-              attrs: {
-                src: __webpack_require__(207)
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "slider-pro", attrs: { id: "slider-main" } },
-            [
-              _c("div", { staticClass: "sp-slides" }, [
-                _c("div", { staticClass: "sp-slide" }, [
-                  _c("img", {
-                    staticClass: "sp-image",
-                    attrs: {
-                      src: __webpack_require__(208)
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "sp-slide" }, [
-                  _c("img", {
-                    staticClass: "sp-image",
-                    attrs: {
-                      src: __webpack_require__(209)
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "sp-slide" }, [
-                  _c("img", {
-                    staticClass: "sp-image",
-                    attrs: {
-                      src: __webpack_require__(210)
-                    }
-                  })
-                ])
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "home", attrs: { id: "global_nav" } }, [
-        _c("div", { staticClass: "navbar navbar-expand-lg" }, [
-          _c("button", {
-            staticClass: "navbar-toggler collapsed",
-            attrs: {
-              type: "button",
-              "data-toggle": "collapse",
-              "data-target": "#navbarSupportedContent",
-              "aria-controls": "navbarSupportedContent",
-              "aria-expanded": "false",
-              "aria-label": "Toggle navigation"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "nav",
-            {
-              staticClass: "global_nav collapse navbar-collapse",
-              attrs: { id: "navbarSupportedContent" }
-            },
-            [
-              _c("ul", { staticClass: "clearfix" }, [
-                _c("li", { staticClass: "open" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("span", { staticClass: "i" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "t" }, [_vm._v("HOME")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { staticClass: "toggle" }, [
-                    _c("span", { staticClass: "i" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "t" }, [_vm._v("センター案内")])
-                  ]),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "submenu" }, [
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("市民活動センターとは")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("施設のご案内")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [_vm._v("各種書式")])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { staticClass: "toggle" }, [
-                    _c("span", { staticClass: "i" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "t" }, [_vm._v("市民活動団体")])
-                  ]),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "submenu" }, [
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("市民活動団体とは")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("登録について")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("団体を探したい")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { staticClass: "toggle" }, [
-                    _c("span", { staticClass: "i" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "t" }, [_vm._v("ボランティア")])
-                  ]),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "submenu" }, [
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("ボランティアとは")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("ボランティアをしたい")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v(
-                          "ボランティアを\n                                    "
-                        ),
-                        _c("br"),
-                        _vm._v("募集したい")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("span", { staticClass: "i" }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "t" }, [_vm._v("Q & A")])
-                  ])
-                ])
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "contents_wrap" } }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { attrs: { id: "main_wrap" } }, [
-            _c("div", { attrs: { id: "news" } }, [
-              _c("div", { staticClass: "h2" }, [
-                _c("h2", [_vm._v("センターからのお知らせ")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "news_contents" }, [
-                _c("dl", [
-                  _c("dt", [_vm._v("2018/XX/XX")]),
-                  _vm._v(" "),
-                  _c("dd", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("span", { staticClass: "new" }),
-                      _vm._v("宮崎市民活動センターの会議コーナー　最新予約状況")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("dl", [
-                  _c("dt", [_vm._v("2018/XX/XX")]),
-                  _vm._v(" "),
-                  _c("dd", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("《重要》 臨時休館（5月22日（火））のお知らせ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("dl", [
-                  _c("dt", [_vm._v("2018/XX/XX")]),
-                  _vm._v(" "),
-                  _c("dd", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("かわら版5月号に関して～訂正とお詫び～")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("dl", [
-                  _c("dt", [_vm._v("2018/XX/XX")]),
-                  _vm._v(" "),
-                  _c("dd", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(
-                        "［重要なお知らせ］平成30年度の当センターの休館予定日について"
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("dl", [
-                  _c("dt", [_vm._v("2018/XX/XX")]),
-                  _vm._v(" "),
-                  _c("dd", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(
-                        "5月15日（火）第2回資金づくり講座「クラウドファンディング」を開催いたします。"
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("dl", [
-                  _c("dt", [_vm._v("2018/XX/XX")]),
-                  _vm._v(" "),
-                  _c("dd", [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("あなたの団体をPRしませんか？")
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "btn_blue" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("一覧へ")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { attrs: { id: "topic" } }, [
-              _c("div", { staticClass: "h2" }, [
-                _c("h2", [_vm._v("ボランティア募集・イベント情報")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "topic-contents" }, [
-                _c(
-                  "ul",
-                  {
-                    staticClass: "nav nav-tabs topic_tabs",
-                    attrs: { id: "myTab", role: "tablist" }
-                  },
-                  [
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "active",
-                          attrs: {
-                            id: "all-tab",
-                            "data-toggle": "tab",
-                            href: "#all",
-                            role: "tab",
-                            "aria-controls": "home",
-                            "aria-selected": "true"
-                          }
-                        },
-                        [_vm._v("全 て")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            id: "volunteer-tab",
-                            "data-toggle": "tab",
-                            href: "#volunteer",
-                            role: "tab",
-                            "aria-controls": "volunteer",
-                            "aria-selected": "true"
-                          }
-                        },
-                        [_vm._v("ボランティア募集")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            id: "event-tab",
-                            "data-toggle": "tab",
-                            href: "#event",
-                            role: "tab",
-                            "aria-controls": "event",
-                            "aria-selected": "true"
-                          }
-                        },
-                        [_vm._v("イベント情報")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            id: "member-tab",
-                            "data-toggle": "tab",
-                            href: "#member",
-                            role: "tab",
-                            "aria-controls": "member",
-                            "aria-selected": "true"
-                          }
-                        },
-                        [_vm._v("会員募集")]
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "tab-content topic-list",
-                    attrs: { id: "myTabContent" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade show clearfix active",
-                        attrs: {
-                          id: "all",
-                          role: "tabpanel",
-                          "aria-labelledby": "all-tab"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/17(月)~8/26(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _c("span", { staticClass: "new" }),
-                              _vm._v("ボランティア養成講座")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("5/20(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v(
-                                "昭和の歌謡曲レコードコンサート『昭和30年代の歌声』"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("第10回　青島鬼の洗濯岩アクアスロン")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("田植え体験")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("宮崎市民活動センター")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("大淀地域まちづくり推進協議会")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade clearfix",
-                        attrs: {
-                          id: "volunteer",
-                          role: "tabpanel",
-                          "aria-labelledby": "volunteer-tab"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("第10回　青島鬼の洗濯岩アクアスロン")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("田植え体験")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("第10回　青島鬼の洗濯岩アクアスロン")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("田植え体験")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("第10回　青島鬼の洗濯岩アクアスロン")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item volunteer" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("田植え体験")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade clearfix",
-                        attrs: {
-                          id: "event",
-                          role: "tabpanel",
-                          "aria-labelledby": "event-tab"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/17(月)~8/26(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("ボランティア養成講座")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("5/20(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v(
-                                "昭和の歌謡曲レコードコンサート『昭和30年代の歌声』"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/17(月)~8/26(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("ボランティア養成講座")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("5/20(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v(
-                                "昭和の歌謡曲レコードコンサート『昭和30年代の歌声』"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/17(月)~8/26(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("ボランティア養成講座")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item event" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("5/20(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v(
-                                "昭和の歌謡曲レコードコンサート『昭和30年代の歌声』"
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "tab-pane fade clearfix",
-                        attrs: {
-                          id: "member",
-                          role: "tabpanel",
-                          "aria-labelledby": "member-tab"
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("宮崎市民活動センター")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("大淀地域まちづくり推進協議会")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("宮崎市民活動センター")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("大淀地域まちづくり推進協議会")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("宮崎市民活動センター")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "item member" }, [
-                          _c("a", { attrs: { href: "#" } }, [
-                            _c("p", { staticClass: "day" }, [
-                              _vm._v("6/24(日)")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "title" }, [
-                              _vm._v("大淀地域まちづくり推進協議会")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", { staticClass: "detail" }, [_vm._v("詳細")])
-                          ])
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "btn_blue" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("一覧へ")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "link_blue" }, [
-                _c("p", [
-                  _c("a", { staticClass: "hatena", attrs: { href: "" } }, [
-                    _vm._v("ボランティアを募集するには？")
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "sidebar" }, [
-            _c("div", { staticClass: "erea_brown" }, [
-              _c("div", { staticClass: "btn_big" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(211),
-                      alt: "団体をさがす"
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "btn_big" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(212),
-                      alt: "地域街づくり情報"
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("ul", { staticClass: "btn_book clearfix" }, [
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      attrs: {
-                        src: __webpack_require__(213),
-                        alt: "夢交差点"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v("最新号：\n                                    "),
-                      _c("br"),
-                      _vm._v("Vol.65(H29.1月発行)")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      attrs: {
-                        src: __webpack_require__(214),
-                        alt: "かわら版"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v("最新号：\n                                    "),
-                      _c("br"),
-                      _vm._v("平成29年5月1日発行")
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("ul", { staticClass: "mini_menu" }, [
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("事業報告")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("各種書式")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [_vm._v("助成金情報")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("災害ボランティア情報")
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "erea_fb" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "fb-page",
-                  attrs: {
-                    "data-href": "https://www.facebook.com/miyazakiNPOcenter/",
-                    "data-tabs": "timeline",
-                    "data-width": "330",
-                    "data-height": "320",
-                    "data-small-header": "true",
-                    "data-adapt-container-width": "true",
-                    "data-hide-cover": "false",
-                    "data-show-facepile": "true"
-                  }
-                },
-                [
-                  _c(
-                    "blockquote",
-                    {
-                      staticClass: "fb-xfbml-parse-ignore",
-                      attrs: {
-                        cite: "https://www.facebook.com/miyazakiNPOcenter/"
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: "https://www.facebook.com/miyazakiNPOcenter/"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "宮崎市民活動センター(特定非営利活動法人 N P Oみやざき）"
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "btn_fb" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "https://www.facebook.com/miyazakiNPOcenter/",
-                      target: "_blank"
-                    }
-                  },
-                  [_vm._v("Facebook")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "btn_admin" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("管理者ログイン")])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "banner" } }, [
-        _c("div", { staticClass: "container" }, [
-          _c("ul", { staticClass: "banner" }, [
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "http://www.city.miyazaki.miyazaki.jp/",
-                    target: "_blank"
-                  }
-                },
-                [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(215),
-                      alt: "宮崎市"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: { href: "http://www.my-shakyo.jp/", target: "_blank" }
-                },
-                [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(216),
-                      alt: "宮崎市社会福祉協議会"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: { href: "http://www.jnpoc.ne.jp/", target: "_blank" }
-                },
-                [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(217),
-                      alt: "日本NPOセンター"
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "http://npo.pref.miyazaki.lg.jp/",
-                    target: "_blank"
-                  }
-                },
-                [
-                  _c("img", {
-                    attrs: {
-                      src: __webpack_require__(218),
-                      alt: "宮崎県NPOポータルサイト"
-                    }
-                  })
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "bg-wave" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "btn_toppage" }, [
-              _c("a", {
-                staticClass: "linkInThePage",
-                attrs: { href: "#header" }
-              })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "footer" } }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "sitemap clearfix" }, [
-            _c("dl", { staticClass: "links" }, [
-              _c("dt", [_vm._v("センター案内")]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("市民活動団体センターとは")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("施設のご案内")])
-              ]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("各種書式")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("dl", { staticClass: "links" }, [
-              _c("dt", [_vm._v("市民活動団体")]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("市民活動団体とは")])
-              ]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("登録について")])
-              ]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("団体を探したい")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("dl", { staticClass: "links" }, [
-              _c("dt", [_vm._v("ボランティア")]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("ボランティアとは")])
-              ]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("ボランティアをしたい")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dd", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("ボランティアを募集したい")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dt", [_c("a", { attrs: { href: "#" } }, [_vm._v("Q&A")])])
-            ]),
-            _vm._v(" "),
-            _c("dl", { staticClass: "links" }, [
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("センターからのお知らせ")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("ボランティア募集・イベント情報")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("地域まちづくり情報")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("夢交差点")])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("かわら版")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("dl", { staticClass: "links" }, [
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("事業報告")])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("助成金情報")])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [
-                  _vm._v("災害ボランティア情報")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("dt", [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("管理者ログイン")])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "clearfix", attrs: { id: "center_info" } }, [
-            _c("div", { staticClass: "left" }, [
-              _c("p", { staticClass: "logo" }, [
-                _c("img", {
-                  attrs: {
-                    src: __webpack_require__(219),
-                    alt: "宮崎市民活動センター"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "l" }, [_vm._v("宮崎市民活動センター")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "s" }, [_vm._v("開館時間 9:00 ～ 22:00")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "right" }, [
-              _c("p", [
-                _vm._v("〒880-0001\n                        "),
-                _c("br"),
-                _vm._v(" 宮崎市橘通西1丁目1番2号　宮崎市民プラザ3階")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v("TEL：(0985) 20-8777\n                        "),
-                _c("br"),
-                _vm._v(" FAX：(0985) 20-8411")
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v("E-mail：info@miyazaki-npocenter.jp")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "foot_nav" }, [
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("利用規約")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("免責事項")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("お問合せ")])])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "footer_address" }, [
-          _c("address", [
-            _vm._v("Copyright(C)Miyazaki NPO Center All Rights Reserved.")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "fb-root" } })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b27948ee", module.exports)
-  }
-}
-
-/***/ }),
-/* 199 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/h1_logo.png?ff8bac77b97173a932ad10ef40991606";
-
-/***/ }),
-/* 200 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/bg_cloud_l01.png?1e81a8d98682374a8abd1727cc67bf40";
-
-/***/ }),
-/* 201 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/bg_cloud_l02.png?fd9bfcf70360905a5f90a142159bcc58";
-
-/***/ }),
-/* 202 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/bg_cloud_l03.png?6af862edfd5e3d62c86fb57d6d8dd1c8";
-
-/***/ }),
-/* 203 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/bg_cloud_r01.png?275b37f809bf6f5855bd4791bb69db88";
-
-/***/ }),
-/* 204 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/bg_cloud_r02.png?b95d45b4738d517bcef357918ca7a67f";
-
-/***/ }),
-/* 205 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/bg_cloud_r03.png?be35ce0246edc5cf450eb55abd8a222e";
-
-/***/ }),
-/* 206 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/illust_top_l.png?d15d383f337c4addad025d773a66a969";
-
-/***/ }),
-/* 207 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/illust_top_r.png?af5e331967a7901bc85629f96086c648";
-
-/***/ }),
-/* 208 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/mainslide_01.png?a03b11797916e23721fabd0afb341e1b";
-
-/***/ }),
-/* 209 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/mainslide_02.png?40d79ed07d813f314d795d94f8fe1773";
-
-/***/ }),
-/* 210 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/mainslide_03.png?2d81fe44e6e639edee32e34978b50d4c";
-
-/***/ }),
-/* 211 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/btn_searchgroup.png?55552faa8c7cecd5e6ffdbea8633f002";
-
-/***/ }),
-/* 212 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/btn_machidukuri.png?7749b914de23f15fcf81839644cb246c";
-
-/***/ }),
-/* 213 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/btn_book_yumeko.png?52a3711bb9d8e957d8c090c01fe4af5d";
-
-/***/ }),
-/* 214 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/btn_book_kawara.png?3ccf4ee8e583ae9764973db73ebd349a";
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/banner_mycity.png?310d561ae4e95aa5e7ba846600d54a6d";
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/banner_myshakyo.png?c621e990ac0224ff72a2b7510ca36525";
-
-/***/ }),
-/* 217 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/banner_jnpoc.png?1b3421312eb4ba636287bcdd574ec57f";
-
-/***/ }),
-/* 218 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/banner_mynpo.png?9a9d5ddc00d121f0d115d811bb91fe8e";
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/logo_foot.png?1ab321a7ad2c55ba5105f69c4f0ace23";
-
-/***/ }),
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
 /* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -102946,8 +100841,7 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass:
-                                "btn btn-outline-success btn-active center",
+                              staticClass: "btn btn-outline-success btn-block",
                               attrs: { role: "button" }
                             },
                             [_vm._v("変更")]
@@ -102962,7 +100856,7 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        staticClass: "btn btn-outline-danger btn-active center",
+                        staticClass: "btn btn-outline-danger btn-block",
                         attrs: { role: "button" },
                         on: {
                           click: function($event) {
@@ -103061,17 +100955,33 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "table-primary" }, [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("No.")]),
+        _c("th", { staticClass: "col-xs-1", attrs: { scope: "col" } }, [
+          _vm._v("No.")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("件名")]),
+        _c("th", { staticClass: "col-xs-3 wide_s", attrs: { scope: "col" } }, [
+          _vm._v("件名")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("更新日")]),
+        _c("th", { staticClass: "col-xs-2 wide_d", attrs: { scope: "col" } }, [
+          _vm._v("更新日")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("複製")]),
+        _c("th", { staticClass: "col-xs-2", attrs: { align: "center" } }, [
+          _vm._v("複製")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("変更")]),
+        _c(
+          "th",
+          { staticClass: "col-xs-2", attrs: { align: "center", scope: "col" } },
+          [_vm._v("変更")]
+        ),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("削除")])
+        _c(
+          "th",
+          { staticClass: "col-xs-2", attrs: { align: "center", scope: "col" } },
+          [_vm._v("削除")]
+        )
       ])
     ])
   },
@@ -103083,7 +100993,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-outline-primary btn-active center",
+          staticClass: "btn btn-outline-primary btn-block",
           attrs: { role: "button" }
         },
         [_vm._v("複製")]
@@ -107421,6 +105331,360 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 437 */,
+/* 438 */,
+/* 439 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(440)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\App.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-117390fa", Component.options)
+  } else {
+    hotAPI.reload("data-v-117390fa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 440 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "masthead" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "nav",
+        {
+          staticClass:
+            "navbar navbar-expand-md navbar-light bg-light rounded mb-3"
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarCollapse" }
+            },
+            [
+              _c(
+                "ul",
+                { staticClass: "navbar-nav text-md-center nav-justified" },
+                [
+                  _c(
+                    "li",
+                    { staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { attrs: { to: { name: "dashboard" } } },
+                        [
+                          _c("a", { staticClass: "nav-link" }, [
+                            _c("span", [
+                              _c("i", { staticClass: "fas fa-home" })
+                            ]),
+                            _vm._v(" TOP\n                            ")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item dropdown" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu",
+                        attrs: { "aria-labelledby": "dropdown01" }
+                      },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { name: "activeCenterList" } } },
+                          [
+                            _c("button", { staticClass: "dropdown-item" }, [
+                              _vm._v("宮崎市民可動センターからのお知らせ")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "pages/1-2_01list.html" }
+                          },
+                          [_vm._v("登録団体、行政等からのお知らせ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "pages/1-3_01list.html" }
+                          },
+                          [_vm._v("助成金情報")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          { attrs: { to: { name: "disasterList" } } },
+                          [
+                            _c("button", { staticClass: "dropdown-item" }, [
+                              _vm._v("災害ボランティア情報")
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(6)
+            ]
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container" },
+      [_c("transition", { attrs: { name: "fade" } }, [_c("router-view")], 1)],
+      1
+    ),
+    _vm._v(" "),
+    _vm._m(7)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "header_logo" }, [
+      _c("h1", [
+        _c("a", { attrs: { href: "index.html" } }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: {
+              src: __webpack_require__(441)
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarCollapse",
+          "aria-controls": "navbarCollapse",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link dropdown-toggle",
+        attrs: {
+          href: "http://example.com",
+          id: "dropdown01",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("span", [_c("i", { staticClass: "fas fa-dove" })]),
+        _vm._v(" 情報発信")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item dropdown" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link dropdown-toggle",
+          attrs: {
+            href: "http://example.com",
+            id: "dropdown02",
+            "data-toggle": "dropdown",
+            "aria-haspopup": "true",
+            "aria-expanded": "false"
+          }
+        },
+        [
+          _c("span", [_c("i", { staticClass: "fas fa-file" })]),
+          _vm._v(" ファイル公開")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "dropdown-menu",
+          attrs: { "aria-labelledby": "dropdown02" }
+        },
+        [
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("各種様式")
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("事業報告")
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("夢交差点")
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("かわら版")
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("span", [_c("i", { staticClass: "fas fa-feather" })]),
+        _vm._v(" 団体情報登録")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+        _c("span", [_c("i", { staticClass: "fas fa-power-off" })]),
+        _vm._v(" ログアウト")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+      _c("li", { staticClass: "nav-item" }, [
+        _c(
+          "span",
+          {
+            staticClass: "navbar-text",
+            staticStyle: { color: "#FFF", "font-weight": "bold" }
+          },
+          [_vm._v("loginuser name")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "footer fixed-bottom" }, [
+      _c("address", [
+        _vm._v(
+          "\n            Copyright © Miyazaki NPO Center All Rights Reserved.\n        "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-117390fa", module.exports)
+  }
+}
+
+/***/ }),
+/* 441 */
+/***/ (function(module, exports) {
+
+module.exports = "/images/logo.png?806659202243975a07ee77335c1f5a4d";
 
 /***/ })
 /******/ ]);

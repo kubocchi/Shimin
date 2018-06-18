@@ -15,11 +15,10 @@ window.Vue = require('vue');
  */
 
 import Vue from 'vue'
-//import App from './components/App'
-import App from './components/Frontend'
-//import $ from 'jquery'
-/*************************START FRONTEND**************************/
+import App from './components/App'
+//import App from './components/Frontend'
 
+/*************************START FRONTEND**************************/
 
 require('./external/bootstrap')
 require('./external/jquery.sliderPro')

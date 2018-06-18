@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 #active-center routes
 // List active-center
-Route::post('active-centers', 'ActiveCenterController@index');
+Route::get('active-centers', 'ActiveCenterController@index');
 // List single active-center
 Route::get('active-center/{id}', 'ActiveCenterController@show');
 // Create new active-center
@@ -28,6 +28,8 @@ Route::post('active-center', 'ActiveCenterController@store');
 Route::put('active-center', 'ActiveCenterController@store');
 // Delete active-center
 Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
+// List single active-center
+Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
 
 # Attachment routes
 // Editor Image Upload

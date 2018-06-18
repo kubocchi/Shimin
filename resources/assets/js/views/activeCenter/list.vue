@@ -46,12 +46,12 @@
                     <table class="table table-sm">
                         <thead>
                             <tr class="table-primary">
-                                <th scope="col">No.</th>
-                                <th scope="col">件名</th>
-                                <th scope="col">更新日</th>
-                                <th scope="col">複製</th>
-                                <th scope="col">変更</th>
-                                <th scope="col">削除</th>
+                                <th class="col-xs-1" scope="col">No.</th>
+								<th class="col-xs-3 wide_s" scope="col">件名</th>
+								<th class="col-xs-2 wide_d" scope="col">更新日</th>
+								<th  class="col-xs-2" align="center">複製</th>
+								<th align="center" class="col-xs-2" scope="col">変更</th>
+								<th align="center" class="col-xs-2" scope="col">削除</th>
                             </tr>
                         </thead>
 
@@ -61,15 +61,15 @@
                                 <td>{{ activeCenter.title }}</td>
                                 <td>{{ activeCenter.start_date }}</td>
                                 <td>
-                                    <button class="btn btn-outline-primary btn-active center" role="button">複製</button>
+                                    <button class="btn btn-outline-primary btn-block" role="button">複製</button>
                                 </td>
                                 <td>
                                     <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter }}">
-                                        <button class="btn btn-outline-success btn-active center" role="button">変更</button>
+                                        <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-active center" @click="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>

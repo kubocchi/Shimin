@@ -4,13 +4,14 @@
 	padding: 0px;
 }
 body {
-	background: rgb(255,255,255);
+	background: rgb(255, 255, 255);
 	color: #06c;
 }
+
 /* ログイン画面 */
 h2 {
 	text-align: center;
- *zoom: 1;
+	*zoom: 1;
 	font-weight: bold;
 	margin-bottom: 5px;
 }
@@ -20,13 +21,13 @@ h2 {
 	width: 280px;
 	margin: 50px auto;
 	padding: 20px;
-	background-color: rgba(27,137,231,0.6);
+	background-color: rgba(27, 137, 231, 0.6);
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	-webkit-box-shadow: inset 1px 1px 0 0 rgba(255,255,255,0.2), inset -1px -1px 0 0 rgba(0,0,0,0.2);
-	-moz-box-shadow: inset 1px 1px 0 0 rgba(255,255,255,0.2), inset -1px -1px 0 0 rgba(0,0,0,0.2);
-	box-shadow: inset 1px 1px 0 0 rgba(255,255,255,0.2), inset -1px -1px 0 0 rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.2), inset -1px -1px 0 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.2), inset -1px -1px 0 0 rgba(0, 0, 0, 0.2);
+	box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.2), inset -1px -1px 0 0 rgba(0, 0, 0, 0.2);
 }
 .signin .avatar {
 	width: 100px;
@@ -69,7 +70,7 @@ h2 {
 	display: block;
 	width: 100%;
 	margin-bottom: 15px;
-	border: 1px solid rgba(255,255,255,0.5);
+	border: 1px solid rgba(255, 255, 255, 0.5);
 	background-color: #fff;
 	color: #333;
 	font-size: 1em;
@@ -85,7 +86,7 @@ h2 {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-.signin input[type="text"]:focus + label:before, .signin input[type="password"]:focus + label:before {
+.signin input[type="text"]:focus+label:before, .signin input[type="password"]:focus+label:before {
 	opacity: 1;
 }
 .signin input[type="submit"] {
@@ -120,7 +121,7 @@ h2 {
 	clear: both;
 }
 .cf {
- *zoom: 1;
+	*zoom: 1;
 }
 /* ログイン画面ここまで */
 
@@ -138,27 +139,27 @@ h2 {
 	background-image: linear-gradient(to bottom, #1b89e7 0%, #65aeed 100%);
 	border: 1px solid #1b89e7;
 }
- @media (min-width: 768px) {
-.navbar-nav {
-	display: -ms-flexbox;
-	display: -webkit-box;
-	display: flex;
-}
-.navbar-nav .nav-item {
-	-ms-flex: 1 0 auto;
-	-webkit-box-flex: 1;
-	flex: 1 0 auto;
-	padding-right: 15px;
-}
+@media (min-width: 768px) {
+	.navbar-nav {
+		display: -ms-flexbox;
+		display: -webkit-box;
+		display: flex;
+	}
+	.navbar-nav .nav-item {
+		-ms-flex: 1 0 auto;
+		-webkit-box-flex: 1;
+		flex: 1 0 auto;
+		padding-right: 15px;
+	}
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-/* Remove the padding we set earlier */
-.masthead, .marketing, .footer {
-	padding-right: 0;
-	padding-left: 0;
-}
+	/* Remove the padding we set earlier */
+	.masthead, .marketing, .footer {
+		padding-right: 0;
+		padding-left: 0;
+	}
 }
 .navbar-light .navbar-nav .nav-link {
 	color: rgb(255, 255, 255);
@@ -185,6 +186,7 @@ address {
 	text-align: center;
 	color: #FFF;
 }
+
 /* ボタン全体長文改行*/
 .btn {
 	white-space: normal;
@@ -194,6 +196,7 @@ address {
 	background-color: #1C89E7;
 	border-color: #007bff;
 }
+
 /* トップページメインエリアボタン見出しとメニューボタン */
 .topmidashi {
 	background-color: #06C;
@@ -207,6 +210,60 @@ address {
 	min-height: 70px;
 	margin-top: 10px;
 }
+
+
+/* tableここから */
+table.list_table {
+	table-layout: fixed;
+	width: 100%;
+}
+table.list_table td {
+	word-break: break-all;
+}
+.wide_s {
+	width: 50%;
+}
+
+/* 768px */
+@media screen and (max-width: 768px) {
+	table.list_table {
+		table-layout: auto;
+		width: 100%;
+	}
+	.wide_s {
+		min-width: 200px;
+	}
+	.wide_d {
+		min-width: 100px;
+	}
+}
+/* 480px */
+@media screen and (max-width: 480px) {
+	table.list_table {
+		table-layout: auto;
+		width: 100%;
+	}
+	.wide_s {
+		min-width: 200px;
+	}
+	.wide_d {
+		min-width: 100px;
+	}
+}
+/* 320px */
+@media screen and (max-width: 320px) {
+	table.list_table {
+		table-layout: auto;
+		width: 100%;
+	}
+	.wide_s {
+		min-width: 200px;
+	}
+	.wide_d {
+		min-width: 100px;
+	}
+}
+/* tableここまで */
 
 .fade-enter-active, .fade-leave-active {
 	transition-property: opacity;
