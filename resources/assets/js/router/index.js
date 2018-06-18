@@ -1,7 +1,12 @@
 import Dashboard from '../views/Dashboard'
+
+// Active center Routes
 import ActiveCenterForm from '../views/activeCenter/Form'
 import ActiveCenterList from '../views/activeCenter/List'
-import ActiveCenterConfirm from '../views/activeCenter/confirm'
+
+// Disaster Routes
+import DisasterForm from '../views/disaster/Form'
+import DisasterList from '../views/disaster/List'
 
 const routes = [
     {
@@ -26,11 +31,26 @@ const routes = [
                 path: 'list',
                 name: 'activeCenterList',
                 component: ActiveCenterList
+            }
+        ]
+    },
+    {
+        path: '/disaster',
+        redirect: '/disaster/list',
+        name: 'disasterList',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'form',
+                name: 'disasterForm',
+                component: DisasterForm
             },
             {
-                path: 'confirm',
-                name: 'activeCenterConfirm',
-                component: ActiveCenterConfirm
+                path: 'list',
+                name: 'disasterList',
+                component: DisasterList
             }
         ]
     }

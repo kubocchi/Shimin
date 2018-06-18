@@ -29,8 +29,27 @@ Route::put('active-center', 'ActiveCenterController@store');
 // Delete active-center
 Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
 
-Route::post('active-center/images/upload', 'ActiveCenterController@postImageUpload');
+# Attachment routes
+// Editor Image Upload
+Route::post('active-center/images/upload', 'AttachmentController@postImageUpload');
+// Upload attachments
+Route::post('/attachments/store', 'AttachmentController@storeAttachments');
+// Get attachments
+Route::get('asset/attachments/{ids}', 'AttachmentController@pullAttachments');
+// Delete attachments
+Route::delete('/attachments/', 'AttachmentController@deleteAttachment');
 
-Route::post('/attachments/store', 'ActiveCenterController@storeAttachments')->name('store-attachments');
-Route::get('asset/attachments/{ids}', 'ActiveCenterController@pullAttachments')->name('pull-attachments');
-Route::delete('/attachments/', 'ActiveCenterController@deleteAttachment')->name('delete-attachment');
+# Disaster routes
+// List Disaster
+Route::post('disasters', 'DisasterController@index');
+// List single Disaster
+Route::get('disaster/{id}', 'DisasterController@show');
+// Create new Disaster
+Route::post('disaster', 'DisasterController@store');
+// Update Disaster
+Route::put('disaster', 'DisasterController@store');
+// Delete Disaster
+Route::delete('disaster/{id}', 'DisasterController@destroy');
+
+
+

@@ -88133,13 +88133,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             percentCompleted: 0,
             tempRemovedFileIds: [],
             currentAddedFileIs: [],
-            width: '0%'
+            widthInPercentage: '0%'
         };
     },
 
     computed: {
         computedWidth: function computedWidth() {
-            return this.width;
+            return this.widthInPercentage;
         }
     },
 
@@ -88305,7 +88305,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 onUploadProgress: function (progressEvent) {
                     this.percentCompleted = Math.round(progressEvent.loaded * 100 / progressEvent.total);
                     console.log(this.percentCompleted);
-                    this.width = this.percentCompleted + '%';
+                    this.widthInPercentage = this.percentCompleted + '%';
                     this.$forceUpdate();
                 }.bind(this)
             };
@@ -90233,7 +90233,7 @@ var render = function() {
                         ],
                         attrs: {
                           name: "content",
-                          "data-vv-as": "掲載開日",
+                          "data-vv-as": "掲載内容",
                           type: "text"
                         },
                         model: {
@@ -90298,10 +90298,11 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "form-group files" },
-                          _vm._l(_vm.attachments, function(attachment, index) {
+                          _vm._l(_vm.attachments, function(attachment) {
                             return _c(
                               "div",
                               {
+                                key: attachment.id,
                                 staticClass: "attachment-holder animated fadeIn"
                               },
                               [
@@ -90464,12 +90465,12 @@ var render = function() {
                                                 staticClass: "form-group files"
                                               },
                                               _vm._l(_vm.attachments, function(
-                                                attachment,
-                                                index
+                                                attachment
                                               ) {
                                                 return _c(
                                                   "div",
                                                   {
+                                                    key: attachment.id,
                                                     staticClass:
                                                       "attachment-holder animated fadeIn"
                                                   },
@@ -90574,7 +90575,9 @@ var render = function() {
                                 _c("div", {
                                   staticClass:
                                     "progress-bar progress-bar-striped progress-bar-animated",
-                                  style: { width: _vm.computedWidth },
+                                  style: {
+                                    widthInPercentage: _vm.computedWidth
+                                  },
                                   attrs: {
                                     role: "progressbar",
                                     "aria-valuenow": "0",

@@ -864,7 +864,7 @@ address {
 }
 
 .datepicker-range {
-  min-width: 220px !important;
+  min-width: 325px;
 }
 
 .datepicker-range .datepicker-popup {
