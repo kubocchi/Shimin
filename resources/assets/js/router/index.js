@@ -10,47 +10,54 @@ import DisasterList from '../views/disaster/List'
 
 const routes = [
     {
-        path: '/',
-        name: 'dashboard',
-        component: Dashboard
-    },
-    {
-        path: '/active-center',
-        redirect: '/active-center/list',
-        name: 'activeCenterList',
+        path: '/admin',
+        redirect: '/admin/dashboard',
         component: {
             render(c) { return c('router-view'); }
         },
         children: [
             {
-                path: 'form',
-                name: 'activeCenterForm',
-                component: ActiveCenterForm
+                path: '/admin/dashboard',
+                name: 'dashboard',
+                component: Dashboard
             },
             {
-                path: 'list',
-                name: 'activeCenterList',
-                component: ActiveCenterList
-            }
-        ]
-    },
-    {
-        path: '/disaster',
-        redirect: '/disaster/list',
-        name: 'disasterList',
-        component: {
-            render(c) { return c('router-view'); }
-        },
-        children: [
-            {
-                path: 'form',
-                name: 'disasterForm',
-                component: DisasterForm
+                path: '/admin/active-center',
+                redirect: '/active-center/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'activeCenterForm',
+                        component: ActiveCenterForm
+                    },
+                    {
+                        path: 'list',
+                        name: 'activeCenterList',
+                        component: ActiveCenterList
+                    }
+                ]
             },
             {
-                path: 'list',
-                name: 'disasterList',
-                component: DisasterList
+                path: '/admin/disaster',
+                redirect: '/disaster/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'disasterForm',
+                        component: DisasterForm
+                    },
+                    {
+                        path: 'list',
+                        name: 'disasterList',
+                        component: DisasterList
+                    }
+                ]
             }
         ]
     }
