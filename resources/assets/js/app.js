@@ -15,9 +15,23 @@ window.Vue = require('vue');
  */
 
 import Vue from 'vue'
-import App from './components/App'
+//import App from './components/App'
+import App from './components/Frontend'
+//import $ from 'jquery'
+/*************************START FRONTEND**************************/
 
 
+require('./external/bootstrap')
+require('./external/jquery.sliderPro')
+require('./external/script')
+import PopperJs from 'popper.js'
+//Vue.use(PopperJs)
+window.jQuery = require('jquery')
+
+/*************************END FRONTEND**************************/
+
+
+/*************************START BACKEND**************************/
 // Toggle Button
 import ToggleButton from 'vue-js-toggle-button'
 Vue.use(ToggleButton)
@@ -62,6 +76,8 @@ import VeeValidate, { Validator } from 'vee-validate';
 
 Validator.localize('ja', ja);
 Vue.use(VeeValidate);
+
+/***********************END BACKEND***********************/
 
 // Routes
 import routeCollection from './router/index'

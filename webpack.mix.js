@@ -16,6 +16,6 @@ mix.browserSync({
 })
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
-   
-mix.options({ processCssUrls: false })
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .copy('resources/assets/sass/themes/frontend/images', 'public/images')
+    .options({ processCssUrls: false });
