@@ -1,203 +1,21 @@
 <template>
-    <div>
-        <div id="header">
-            <div class="container clearfix">
-                <div class="head_left">
-                    <h1>
-                        <a href="index.html" class="clearfix">
-                            <p class="logo">
-                                <img src="images/h1_logo.png" alt="宮崎市民活動センター">
-                            </p>
-                            <p class="s_text">私たちは宮崎市民の市民活動・ボランティアを支援します。</p>
-                            <p class="l_text"></p>
-                        </a>
-                    </h1>
-                </div>
-                <div class="head_right">
-                    <ul class="clearfix">
-                        <li>開館時間 9:00 ～ 22:00</li>
-                        <li>0985-20-8777</li>
-                        <li>
-                            <a href="#">お問合せ</a>
-                        </li>
-                        <li>
-                            <a href="#">アクセス</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- eyecatch -->
-        <div id="eyecatch">
-            <div class="eyecatch clearfix">
-                <p class="illust bg l_01">
-                    <img src="images/bg_cloud_l01.png">
-                </p>
-                <p class="illust bg l_02">
-                    <img src="images/bg_cloud_l02.png">
-                </p>
-                <p class="illust bg l_03">
-                    <img src="images/bg_cloud_l03.png">
-                </p>
-                <p class="illust bg r_01">
-                    <img src="images/bg_cloud_r01.png">
-                </p>
-                <p class="illust bg r_02">
-                    <img src="images/bg_cloud_r02.png">
-                </p>
-                <p class="illust bg r_03">
-                    <img src="images/bg_cloud_r03.png">
-                </p>
-                <p class="illust on l">
-                    <img src="images/illust_top_l.png">
-                </p>
-                <p class="illust on r">
-                    <img src="images/illust_top_r.png">
-                </p>
-                <div class="slider-pro" id="slider-main">
-                    <div class="sp-slides">
-                        <!-- main slide-->
-                        <div class="sp-slide">
-                            <img class="sp-image" src="images/mainslide_01.png" />
-                        </div>
-                        <div class="sp-slide">
-                            <img class="sp-image" src="images/mainslide_02.png" />
-                        </div>
-                        <div class="sp-slide">
-                            <img class="sp-image" src="images/mainslide_03.png" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- nav -->
-
-        <div id="global_nav" class="home">
-            <div class="navbar navbar-expand-lg">
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"></button>
-                <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="clearfix">
-                        <li class="open">
-                            <a href="#">
-                                <span class="i"></span>
-                                <span class="t">HOME</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="toggle">
-                                <span class="i"></span>
-                                <span class="t">センター案内</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">市民活動センターとは</a>
-                                </li>
-                                <li>
-                                    <a href="#">施設のご案内</a>
-                                </li>
-                                <li>
-                                    <a href="#">各種書式</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="toggle">
-                                <span class="i"></span>
-                                <span class="t">市民活動団体</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">市民活動団体とは</a>
-                                </li>
-                                <li>
-                                    <a href="#">登録について</a>
-                                </li>
-                                <li>
-                                    <a href="#">団体を探したい</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="toggle">
-                                <span class="i"></span>
-                                <span class="t">ボランティア</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">ボランティアとは</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアをしたい</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアを
-                                        <br>募集したい</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="i"></span>
-                                <span class="t">Q & A</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-
-        <!-- contents -->
-        <div id="contents_wrap">
-
+     <!-- contents -->
+        <div>
             <div class="container">
-
                 <!-- main wrap -->
                 <div id="main_wrap">
-
                     <!-- shimin news -->
                     <div id="news">
                         <div class="h2">
                             <h2>センターからのお知らせ</h2>
                         </div>
                         <div class="news_contents">
-                            <dl>
-                                <dt>2018/XX/XX</dt>
+                            <dl  v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
+                                <dt>{{activeCenter.start_date}}</dt>
                                 <dd>
-                                    <a href="#">
-                                        <span class="new"></span>宮崎市民活動センターの会議コーナー　最新予約状況</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">《重要》 臨時休館（5月22日（火））のお知らせ</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">かわら版5月号に関して～訂正とお詫び～</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">［重要なお知らせ］平成30年度の当センターの休館予定日について</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">5月15日（火）第2回資金づくり講座「クラウドファンディング」を開催いたします。</a>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>2018/XX/XX</dt>
-                                <dd>
-                                    <a href="#">あなたの団体をPRしませんか？</a>
+                                    <router-link :to="{ name: '#', params: { model: activeCenter }}">
+                                        <span class="new"></span>{{activeCenter.title}}
+                                    </router-link>
                                 </dd>
                             </dl>
                         </div>
@@ -429,27 +247,27 @@
                         <!-- 団体を探す -->
                         <div class="btn_big">
                             <a href="#">
-                                <img src="images/btn_searchgroup.png" alt="団体をさがす">
+                                <img src="../../../sass/themes/frontend/images/btn_searchgroup.png" alt="団体をさがす">
                             </a>
                         </div>
                         <!-- 地域まちづくり情報 -->
                         <div class="btn_big">
                             <a href="#">
-                                <img src="images/btn_machidukuri.png" alt="地域街づくり情報">
+                                <img src="../../../sass/themes/frontend/images/btn_machidukuri.png" alt="地域街づくり情報">
                             </a>
                         </div>
                         <!-- 広報誌 -->
                         <ul class="btn_book clearfix">
                             <li>
                                 <a href="#">
-                                    <img src="images/btn_book_yumeko.png" alt="夢交差点">
+                                    <img src="../../../sass/themes/frontend/images/btn_book_yumeko.png" alt="夢交差点">
                                     <p>最新号：
                                         <br>Vol.65(H29.1月発行)</p>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="images/btn_book_kawara.png" alt="かわら版">
+                                    <img src="../../../sass/themes/frontend/images/btn_book_kawara.png" alt="かわら版">
                                     <p>最新号：
                                         <br>平成29年5月1日発行</p>
                                 </a>
@@ -491,180 +309,33 @@
                 </div>
             </div>
         </div>
-
-        <!-- banner -->
-
-        <div id="banner">
-            <div class="container">
-                <ul class="banner">
-                    <li>
-                        <a href="http://www.city.miyazaki.miyazaki.jp/" target="_blank">
-                            <img src="images/banner_mycity.png" alt="宮崎市">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.my-shakyo.jp/" target="_blank">
-                            <img src="images/banner_myshakyo.png" alt="宮崎市社会福祉協議会">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.jnpoc.ne.jp/" target="_blank">
-                            <img src="images/banner_jnpoc.png" alt="日本NPOセンター">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://npo.pref.miyazaki.lg.jp/" target="_blank">
-                            <img src="images/banner_mynpo.png" alt="宮崎県NPOポータルサイト">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bg-wave">
-                <div class="container">
-                    <div class="btn_toppage">
-                        <a href="#header" class="linkInThePage"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- footer -->
-
-        <div id="footer">
-            <div class="container">
-
-                <!-- sitemap -->
-                <div class="sitemap clearfix">
-                    <dl class="links">
-                        <dt>センター案内</dt>
-                        <dd>
-                            <a href="#">市民活動団体センターとは</a>
-                        </dd>
-                        <dd>
-                            <a href="#">施設のご案内</a>
-                        </dd>
-                        <dd>
-                            <a href="#">各種書式</a>
-                        </dd>
-                    </dl>
-                    <dl class="links">
-                        <dt>市民活動団体</dt>
-                        <dd>
-                            <a href="#">市民活動団体とは</a>
-                        </dd>
-                        <dd>
-                            <a href="#">登録について</a>
-                        </dd>
-                        <dd>
-                            <a href="#">団体を探したい</a>
-                        </dd>
-                    </dl>
-                    <dl class="links">
-                        <dt>ボランティア</dt>
-                        <dd>
-                            <a href="#">ボランティアとは</a>
-                        </dd>
-                        <dd>
-                            <a href="#">ボランティアをしたい</a>
-                        </dd>
-                        <dd>
-                            <a href="#">ボランティアを募集したい</a>
-                        </dd>
-                        <dt>
-                            <a href="#">Q&A</a>
-                        </dt>
-                    </dl>
-                    <dl class="links">
-                        <dt>
-                            <a href="#">センターからのお知らせ</a>
-                        </dt>
-                        <dt>
-                            <a href="#">ボランティア募集・イベント情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">地域まちづくり情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">夢交差点</a>
-                        </dt>
-                        <dt>
-                            <a href="#">かわら版</a>
-                        </dt>
-                    </dl>
-                    <dl class="links">
-                        <dt>
-                            <a href="#">事業報告</a>
-                        </dt>
-                        <dt>
-                            <a href="#">助成金情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">災害ボランティア情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">管理者ログイン</a>
-                        </dt>
-                    </dl>
-                </div>
-
-                <!-- center-info -->
-                <div id="center_info" class="clearfix">
-                    <div class="left">
-                        <p class="logo">
-                            <img src="images/logo_foot.png" alt="宮崎市民活動センター">
-                        </p>
-                        <p class="l">宮崎市民活動センター</p>
-                        <p class="s">開館時間 9:00 ～ 22:00</p>
-                    </div>
-                    <div class="right">
-                        <p>〒880-0001
-                            <br> 宮崎市橘通西1丁目1番2号　宮崎市民プラザ3階</p>
-                        <p>TEL：(0985) 20-8777
-                            <br> FAX：(0985) 20-8411</p>
-                        <p>E-mail：info@miyazaki-npocenter.jp</p>
-                    </div>
-                </div>
-
-                <!-- nav -->
-                <ul class="foot_nav">
-                    <li>
-                        <a href="#">利用規約</a>
-                    </li>
-                    <li>
-                        <a href="#">免責事項</a>
-                    </li>
-                    <li>
-                        <a href="#">お問合せ</a>
-                    </li>
-                </ul>
-
-            </div>
-
-            <!-- address -->
-            <div class="footer_address">
-                <address>Copyright(C)Miyazaki NPO Center All Rights Reserved.</address>
-            </div>
-        </div>
-
-        <!-- Facebook プラグイン -->
-        <div id="fb-root"></div>
-    </div>
 </template>
 
 <script>
-    import slider from '../assets/sass/frontend/js/jquery.sliderPro.js'
     export default {
-        name: "disaster",
+        name: "home",
         data() {
             return {
-
+                activeCenters: [],
             }
         },
 
         created() {
+            this.fetchActiveCenter()
         },
 
         methods: {
+            fetchActiveCenter(page_url) {
+                let vm = this;
+                page_url = page_url || "/api/active-centers"
+                fetch(page_url)
+                .then(res => res.json())
+                .then(res => {
+                    this.activeCenters = res.data
+                    console.log(this.activeCenters)
+                })
+                .catch(err => console.log(err))
+            },
         }
     };
 </script>

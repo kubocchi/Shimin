@@ -5,7 +5,7 @@
             <div class="header_logo">
                 <h1>
                     <a href="index.html">
-                        <img src="../../sass/themes/msikatsu_admin/img/logo.png" class="img-fluid">
+                        <img src="../../../sass/themes/msikatsu_admin/img/logo.png" class="img-fluid">
                     </a>
                 </h1>
             </div>

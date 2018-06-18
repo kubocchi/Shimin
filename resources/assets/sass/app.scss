@@ -17,15 +17,14 @@
 
 // Backend
 @import url("https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css");
-@import './themes/msikatsu_admin/css/style';
+// @import './themes/msikatsu_admin/css/style';
 @import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css");
-@import "~vue-wysiwyg/dist/vueWysiwyg.css";
 @import "~vue-datepicker-local/dist/vue-datepicker-local";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css");
 
 
 // Frontend
-// @import './themes/frontend/css/bootstrap';
-// @import './themes/frontend/css/slider-pro';
-// @import './themes/frontend/css/common';
-// @import './themes/frontend/css/index';
+//@import './themes/frontend/css/bootstrap';
+@import './themes/frontend/css/slider-pro';
+@import './themes/frontend/css/common';
+@import './themes/frontend/css/index';

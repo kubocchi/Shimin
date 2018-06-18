@@ -1,5 +1,7 @@
-import Dashboard from '../views/Dashboard'
 
+
+/***********************Admin-Panel-Components***********************/
+import Dashboard from '../views/Dashboard'
 // Active center Routes
 import ActiveCenterForm from '../views/activeCenter/Form'
 import ActiveCenterList from '../views/activeCenter/List'
@@ -7,7 +9,12 @@ import ActiveCenterList from '../views/activeCenter/List'
 // Disaster Routes
 import DisasterForm from '../views/disaster/Form'
 import DisasterList from '../views/disaster/List'
+/***********************Admin-Panel-Components***********************/
 
+
+/***********************Website-Components***********************/
+import Home from '../views/website/home'
+/***********************Website-Components***********************/
 const routes = [
     {
         path: '/admin',
@@ -19,7 +26,8 @@ const routes = [
             {
                 path: '/admin/dashboard',
                 name: 'dashboard',
-                component: Dashboard
+                component: Dashboard,
+                meta: 'admin'
             },
             {
                 path: '/admin/active-center',
@@ -31,12 +39,14 @@ const routes = [
                     {
                         path: 'form',
                         name: 'activeCenterForm',
-                        component: ActiveCenterForm
+                        component: ActiveCenterForm,
+                        meta: 'admin'
                     },
                     {
                         path: 'list',
                         name: 'activeCenterList',
-                        component: ActiveCenterList
+                        component: ActiveCenterList,
+                        meta: 'admin'
                     }
                 ]
             },
@@ -50,16 +60,23 @@ const routes = [
                     {
                         path: 'form',
                         name: 'disasterForm',
-                        component: DisasterForm
+                        component: DisasterForm,
+                        meta: 'admin'
                     },
                     {
                         path: 'list',
                         name: 'disasterList',
-                        component: DisasterList
+                        component: DisasterList,
+                        meta: 'admin'
                     }
                 ]
             }
         ]
+    },
+    {
+        path: '/',
+        name: 'home',
+        component: Home,
     }
 ];
 
