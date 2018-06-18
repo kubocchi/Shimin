@@ -13,7 +13,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
+                                <input class="form-control" v-model="disaster.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
                                 <span class="is-danger">{{ errors.first('title') }}</span>
                             </div>
                             <div class="form-group">
@@ -24,12 +24,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label" for="description">【掲載内容】</label>
-                                <wysiwyg v-model="activeCenter.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
+                                <wysiwyg v-model="disaster.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
                                 <span class="is-danger">{{ errors.first('content') }}</span>
                             </div>
                             【非アクティブ化する】
                             <div class="row">
-                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: '真実', unchecked: '偽'}" />
+                                <toggle-button v-model="disaster.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: '真実', unchecked: '偽'}" />
                             </div>
                              <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <router-link :to="{ name: 'activeCenterList' }">
+                            <router-link :to="{ name: 'disasterList' }">
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link> 
                             <!-- <button type="submit" class="btn btn-outline-primary">確認に進む</button> -->
@@ -87,19 +87,19 @@
                                                             <div>
                                                                 <div>
                                                                     <label>【件名】</label>
-                                                                    <p>{{activeCenter.title}}</p>
+                                                                    <p>{{disaster.title}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【掲載開始日】</label>
-                                                                    <p>{{activeCenter.start_date}}</p>
+                                                                    <p>{{disaster.start_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【掲載終了日】</label>
-                                                                    <p>{{activeCenter.end_date}}</p>
+                                                                    <p>{{disaster.end_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【掲載内容】</label>
-                                                                    <p v-html="activeCenter.content"></p>
+                                                                    <p v-html="disaster.content"></p>
                                                                 </div>
 
                                                                 <div>
@@ -161,9 +161,9 @@
         name: "company",
         data() {
             return {
-                activeCenters: [],
+                disasters: [],
                 dateRange: [],
-                activeCenter: {
+                disaster: {
                     id: "",
                     title: "",
                     start_date: !!this.range ? this.dateRange[0] : "",
@@ -215,22 +215,22 @@
 
         created() {
             if (this.$route.params.model)
-                this.editActiveCenter(this.$route.params.model)
+                this.editdisaster(this.$route.params.model)
         },
 
         methods: {
-            addActiveCenter() {
-                this.activeCenter.file = this.currentAddedFileIs.join(',')
+            adddisaster() {
+                this.disaster.file = this.currentAddedFileIs.join(',')
 
                 let self = this
-                console.log(this.activeCenter)
+                console.log(this.disaster)
 
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/active-center", {
+                    fetch("api/disaster", {
                         method: "post",
-                        body: JSON.stringify(this.activeCenter),
+                        body: JSON.stringify(this.disaster),
                         headers: {
                             "content-type": "application/json"
                         }
@@ -246,7 +246,7 @@
                         })
                         .then(function() {
                             self.$router.push({
-                                name: 'activeCenterList'
+                                name: 'disasterList'
                             })
                         });
                     })
@@ -255,9 +255,9 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/active-center", {
+                    fetch("api/disaster", {
                         method: "put",
-                        body: JSON.stringify(this.activeCenter),
+                        body: JSON.stringify(this.disaster),
                         headers: {
                             "content-type": "application/json"
                         }
@@ -273,30 +273,30 @@
                         })
                         .then(function() {
                             self.$router.push({
-                                name: 'activeCenterList'
+                                name: 'disasterList'
                             })
                         });
                     })
                     .catch(err => console.log(err))
                 }
             },
-            editActiveCenter(activeCenter) {
-                console.log(activeCenter)
-                this.pullAttachments(activeCenter);
+            editdisaster(disaster) {
+                console.log(disaster)
+                this.pullAttachments(disaster);
                 this.edit = true
-                this.activeCenter.id = activeCenter.id
-                this.activeCenter.title = activeCenter.title
-                this.activeCenter.start_date = activeCenter.start_date
-                this.activeCenter.end_date = activeCenter.end_date
-                this.activeCenter.content = activeCenter.content
-                this.activeCenter.file = activeCenter.file
-                this.activeCenter.deactivate = !! activeCenter.deactivate==1 ? true:false
-                this.activeCenter.created_by = activeCenter.created_by
-                this.activeCenter.updated_by = activeCenter.updated_by
+                this.disaster.id = disaster.id
+                this.disaster.title = disaster.title
+                this.disaster.start_date = disaster.start_date
+                this.disaster.end_date = disaster.end_date
+                this.disaster.content = disaster.content
+                this.disaster.file = disaster.file
+                this.disaster.deactivate = !! disaster.deactivate==1 ? true:false
+                this.disaster.created_by = disaster.created_by
+                this.disaster.updated_by = disaster.updated_by
 
                 // For Files
-                if(activeCenter.file)
-                    this.currentAddedFileIs = activeCenter.file.split(',')
+                if(disaster.file)
+                    this.currentAddedFileIs = disaster.file.split(',')
             },
             
             selectCategory(attachment, category_id) {
@@ -350,11 +350,11 @@
 
             validate() {
                 let validation = []
-                if(this.activeCenter.title.trim() === ''){
+                if(this.disaster.title.trim() === ''){
                     validation.push('件名')
                    
                 }
-                if(this.activeCenter.content.trim() === ''){
+                if(this.disaster.content.trim() === ''){
                     validation.push('掲載開日')
                 }
 
@@ -394,7 +394,7 @@
                         console.log('Successfull upload')
                         this.currentAddedFileIs.push(response.data.data)
                         this.resetData()
-                        this.addActiveCenter()
+                        this.adddisaster()
                          $("#progressModal").modal('hide')
                     } else {
                         console.log('Unsuccessful Upload')
@@ -438,9 +438,9 @@
                 });
             },
 
-            pullAttachments(activeCenter) {
+            pullAttachments(disaster) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${activeCenter.file}`).then(function (response) {
+                axios.get(`api/asset/attachments/${disaster.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
@@ -481,7 +481,7 @@
                 if(this.attachments.length)
                     this.addAttachment()
                 else
-                    this.addActiveCenter()
+                    this.adddisaster()
             },
             confirm(){
                 // if (!this.validate()) 
@@ -492,8 +492,8 @@
                         console.log('true')
                     }
                     else{
-                        this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                        this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        this.disaster.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
+                        this.disaster.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
                         $("#confirmationModal").modal('show')
                     }
                 });

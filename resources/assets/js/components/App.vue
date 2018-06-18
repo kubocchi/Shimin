@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- <style lang="scss"> @import './assets/styles/main.scss'; </style> -->
         <div class="masthead">
             <div class="header_logo">
                 <h1>
@@ -32,11 +33,13 @@
                                 </span> 情報発信</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                                 <router-link :to="{ name: 'activeCenterList' }">
-                                    <a class="dropdown-item">宮崎市民可動センターからのお知らせ</a>
+                                    <button class="dropdown-item">宮崎市民可動センターからのお知らせ</button>
                                 </router-link>
                                 <a class="dropdown-item" href="pages/1-2_01list.html">登録団体、行政等からのお知らせ</a>
                                 <a class="dropdown-item" href="pages/1-3_01list.html">助成金情報</a>
-                                <a class="dropdown-item" href="pages/1-4_01list.html">災害ボランティア情報</a>
+                                <router-link :to="{ name: 'disasterList' }">
+                                    <button class="dropdown-item">災害ボランティア情報</button>
+                                </router-link>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

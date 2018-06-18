@@ -47,7 +47,7 @@ class DisasterController extends Controller
         }
 
         // Return collection of Disasters as a resource
-        return DisasterResource::collection($Disasters);
+        return DisasterResource::collection($disasters);
     }
     /**
      * Store a newly created resource in storage.
