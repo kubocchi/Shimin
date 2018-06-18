@@ -68677,31 +68677,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
-        this.fetchActiveCenter()
-
-        // window.fbAsyncInit = function() {
-        //     FB.init({
-        //         appId      : '1111111111',
-        //         xfbml      : true,
-        //         version    : 'v2.7'
-        //     });
-
-        //     //This function should be here, inside window.fbAsyncInit
-        //     FB.getLoginStatus(function(response) {
-        //         console.log(response);
-        //     });
-        // };
-
-        (function (d, s, id) {
-            var js,
-                fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);js.id = id;
-            js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.0';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        this.fetchActiveCenter();
     },
 
 
@@ -107309,6 +107285,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.fetchActiveCenter();
+        this.loadFacebookPlugin();
     },
 
 
@@ -107326,6 +107303,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (err) {
                 return console.log(err);
             });
+        },
+        loadFacebookPlugin: function loadFacebookPlugin() {
+            (function (d, s, id) {
+                var js,
+                    fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);js.id = id;
+                js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.0';
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'facebook-jssdk');
         }
     }
 });
@@ -107365,7 +107354,7 @@ var render = function() {
                         _c("span", { staticClass: "new" }),
                         _vm._v(
                           _vm._s(activeCenter.title) +
-                            "\n                               "
+                            "\n                            "
                         )
                       ]
                     )
@@ -107902,7 +107891,7 @@ var staticRenderFns = [
               }),
               _vm._v(" "),
               _c("p", [
-                _vm._v("最新号：\n                                   "),
+                _vm._v("最新号：\n                                "),
                 _c("br"),
                 _vm._v("Vol.65(H29.1月発行)")
               ])
@@ -107919,7 +107908,7 @@ var staticRenderFns = [
               }),
               _vm._v(" "),
               _c("p", [
-                _vm._v("最新号：\n                                   "),
+                _vm._v("最新号：\n                                "),
                 _c("br"),
                 _vm._v("平成29年5月1日発行")
               ])
