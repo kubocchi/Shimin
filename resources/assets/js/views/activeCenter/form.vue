@@ -81,7 +81,7 @@
                                         <div class="row mt-4">
                                             <div class="col-lg-12">
                                                 <div class="bs-component">
-                                                    <div>
+                                                    <div style="overflow:hidden;">
                                                         <form action="" method="post">
                                                             <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
                                                             <div>
@@ -97,9 +97,9 @@
                                                                     <label>【掲載終了日】</label>
                                                                     <p>{{activeCenter.end_date}}</p>
                                                                 </div>
-                                                                <div>
+                                                                <div class="wrapper">
                                                                     <label>【掲載内容】</label>
-                                                                    <p v-html="activeCenter.content"></p>
+                                                                    <p class="main" v-html="activeCenter.content"></p>
                                                                 </div>
 
                                                                 <div>

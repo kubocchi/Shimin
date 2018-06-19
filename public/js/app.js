@@ -101320,132 +101320,147 @@ var render = function() {
                             _c("div", { staticClass: "row mt-4" }, [
                               _c("div", { staticClass: "col-lg-12" }, [
                                 _c("div", { staticClass: "bs-component" }, [
-                                  _c("div", [
-                                    _c(
-                                      "form",
-                                      { attrs: { action: "", method: "post" } },
-                                      [
-                                        _c("p", [
-                                          _vm._v(
-                                            "登録内容を確認し問題がなければ登録ボタンを押してください。"
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", [
-                                          _c("div", [
-                                            _c("label", [_vm._v("【件名】")]),
-                                            _vm._v(" "),
-                                            _c("p", [
-                                              _vm._v(
-                                                _vm._s(_vm.activeCenter.title)
-                                              )
-                                            ])
+                                  _c(
+                                    "div",
+                                    { staticStyle: { overflow: "hidden" } },
+                                    [
+                                      _c(
+                                        "form",
+                                        {
+                                          attrs: { action: "", method: "post" }
+                                        },
+                                        [
+                                          _c("p", [
+                                            _vm._v(
+                                              "登録内容を確認し問題がなければ登録ボタンを押してください。"
+                                            )
                                           ]),
                                           _vm._v(" "),
                                           _c("div", [
-                                            _c("label", [
-                                              _vm._v("【掲載開始日】")
+                                            _c("div", [
+                                              _c("label", [_vm._v("【件名】")]),
+                                              _vm._v(" "),
+                                              _c("p", [
+                                                _vm._v(
+                                                  _vm._s(_vm.activeCenter.title)
+                                                )
+                                              ])
                                             ]),
                                             _vm._v(" "),
-                                            _c("p", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.activeCenter.start_date
+                                            _c("div", [
+                                              _c("label", [
+                                                _vm._v("【掲載開始日】")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("p", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.activeCenter.start_date
+                                                  )
                                                 )
-                                              )
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("div", [
-                                            _c("label", [
-                                              _vm._v("【掲載終了日】")
+                                              ])
                                             ]),
                                             _vm._v(" "),
-                                            _c("p", [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.activeCenter.end_date
+                                            _c("div", [
+                                              _c("label", [
+                                                _vm._v("【掲載終了日】")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("p", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.activeCenter.end_date
+                                                  )
                                                 )
-                                              )
-                                            ])
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("div", [
-                                            _c("label", [
-                                              _vm._v("【掲載内容】")
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("p", {
-                                              domProps: {
-                                                innerHTML: _vm._s(
-                                                  _vm.activeCenter.content
-                                                )
-                                              }
-                                            })
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("div", [
-                                            _c("label", [
-                                              _vm._v("【掲載内容】")
+                                              ])
                                             ]),
                                             _vm._v(" "),
                                             _c(
                                               "div",
-                                              {
-                                                staticClass: "form-group files"
-                                              },
-                                              _vm._l(_vm.attachments, function(
-                                                attachment
-                                              ) {
-                                                return _c(
-                                                  "div",
-                                                  {
-                                                    key: attachment.id,
-                                                    staticClass:
-                                                      "attachment-holder animated fadeIn"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "ul",
+                                              { staticClass: "wrapper" },
+                                              [
+                                                _c("label", [
+                                                  _vm._v("【掲載内容】")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("p", {
+                                                  staticClass: "main",
+                                                  domProps: {
+                                                    innerHTML: _vm._s(
+                                                      _vm.activeCenter.content
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("div", [
+                                              _c("label", [
+                                                _vm._v("【掲載内容】")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "form-group files"
+                                                },
+                                                _vm._l(
+                                                  _vm.attachments,
+                                                  function(attachment) {
+                                                    return _c(
+                                                      "div",
                                                       {
+                                                        key: attachment.id,
                                                         staticClass:
-                                                          "form-group"
+                                                          "attachment-holder animated fadeIn"
                                                       },
                                                       [
                                                         _c(
-                                                          "li",
+                                                          "ul",
                                                           {
                                                             staticClass:
-                                                              "label label-primary"
+                                                              "form-group"
                                                           },
                                                           [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                attachment.name +
-                                                                  " (" +
-                                                                  Number(
-                                                                    (
-                                                                      attachment.size /
-                                                                      1024 /
-                                                                      1024
-                                                                    ).toFixed(1)
-                                                                  ) +
-                                                                  "MB)"
-                                                              )
+                                                            _c(
+                                                              "li",
+                                                              {
+                                                                staticClass:
+                                                                  "label label-primary"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    attachment.name +
+                                                                      " (" +
+                                                                      Number(
+                                                                        (
+                                                                          attachment.size /
+                                                                          1024 /
+                                                                          1024
+                                                                        ).toFixed(
+                                                                          1
+                                                                        )
+                                                                      ) +
+                                                                      "MB)"
+                                                                  )
+                                                                )
+                                                              ]
                                                             )
                                                           ]
                                                         )
                                                       ]
                                                     )
-                                                  ]
+                                                  }
                                                 )
-                                              })
-                                            )
+                                              )
+                                            ])
                                           ])
-                                        ])
-                                      ]
-                                    )
-                                  ])
+                                        ]
+                                      )
+                                    ]
+                                  )
                                 ])
                               ])
                             ])
@@ -105841,40 +105856,44 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "detail_body" }, [
-          _c("div", { staticClass: "information" }, [
-            _c("p", {
-              staticClass: "text_moredetail",
-              domProps: { innerHTML: _vm._s(_vm.activeCenter.content) }
-            }),
-            _vm._v(" "),
-            _c("dl", { staticClass: "file" }, [
-              _c("dt", [_vm._v("添付ファイル")]),
+          _c(
+            "div",
+            { staticClass: "information", staticStyle: { overflow: "hidden" } },
+            [
+              _c("p", {
+                staticClass: "text_moredetail",
+                domProps: { innerHTML: _vm._s(_vm.activeCenter.content) }
+              }),
               _vm._v(" "),
-              _c(
-                "dd",
-                _vm._l(_vm.attachments, function(attachment) {
-                  return _c("div", { key: attachment.id }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("span", { staticClass: "label label-primary" }, [
-                        _vm._v(
-                          _vm._s(
-                            attachment.name +
-                              " (" +
-                              Number(
-                                (attachment.size / 1024 / 1024).toFixed(1)
-                              ) +
-                              "MB)"
+              _c("dl", { staticClass: "file" }, [
+                _c("dt", [_vm._v("添付ファイル")]),
+                _vm._v(" "),
+                _c(
+                  "dd",
+                  _vm._l(_vm.attachments, function(attachment) {
+                    return _c("div", { key: attachment.id }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("span", { staticClass: "label label-primary" }, [
+                          _vm._v(
+                            _vm._s(
+                              attachment.name +
+                                " (" +
+                                Number(
+                                  (attachment.size / 1024 / 1024).toFixed(1)
+                                ) +
+                                "MB)"
+                            )
                           )
-                        )
+                        ])
                       ])
                     ])
-                  ])
-                })
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(3)
-          ])
+                  })
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ]
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -108879,6 +108898,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchActiveCenter: function fetchActiveCenter(page_url) {
             var _this = this;
 
+            var loader = this.$loading.show();
             var vm = this;
             page_url = page_url || "/api/active-centers";
             fetch(page_url).then(function (res) {
@@ -108887,6 +108907,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.activeCenters = res.data;
                 console.log(_this.activeCenters);
                 vm.makePagination(res.meta, res.links);
+                loader.hide();
             }).catch(function (err) {
                 return console.log(err);
             });
@@ -109116,12 +109137,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         pullAttachments: function pullAttachments(activeCenter) {
             // Make HTTP request to store announcement
+            var loader = this.$loading.show();
             axios.get("api/asset/attachments/" + activeCenter.file).then(function (response) {
                 console.log(response);
                 if (response.data.success) {
                     this.attachments = response.data.data;
                     console.log('Attachments: ', this.attachments);
                     this.getAttachmentSize();
+                    loader.hide();
                 } else {
                     console.log(response.data.errors);
                 }

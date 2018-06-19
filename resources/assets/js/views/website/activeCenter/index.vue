@@ -159,6 +159,7 @@
 
         methods: {
             fetchActiveCenter(page_url) {
+                let loader = this.$loading.show();
                 let vm = this;
                 page_url = page_url || "/api/active-centers"
                 fetch(page_url)
@@ -167,6 +168,7 @@
                         this.activeCenters = res.data
                         console.log(this.activeCenters)
                         vm.makePagination(res.meta, res.links);
+                        loader.hide()
                     })
                     .catch(err => console.log(err))
             },
