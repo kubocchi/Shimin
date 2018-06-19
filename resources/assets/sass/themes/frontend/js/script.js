@@ -1,15 +1,5 @@
 //slider pro
-$(document).ready(function(){
-    $( '#slider-main' ).sliderPro({
-    width: 1040 ,
-    height: 470 ,
-    arrows: true, //矢印の有無
-    buttons: true, //ページャーの有無
-    autoplay: true, //自動再生
-	slideDistance:0,//スライド同士の距離
-	visibleSize: '100%' //サイドの画像
-    });
-});
+
 
 //smooth scroll
 $(function() {

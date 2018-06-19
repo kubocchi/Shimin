@@ -83,6 +83,9 @@ import routeCollection from './router/index'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 const router = new VueRouter({
+    scrollBehavior() {
+        return { x: 0, y: 0 };
+    },
     mode: 'hash', 
     routes: routeCollection
 });

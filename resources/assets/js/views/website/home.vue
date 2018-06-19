@@ -447,10 +447,12 @@
         created() {
             this.fetchActiveCenter()
             this.loadFacebookPlugin()
+            this.loadSlider()
         },
 
         methods: {
             fetchActiveCenter(page_url) {
+                let loader = this.$loading.show();
                 let vm = this;
                 page_url = page_url || "/api/active-centers"
                 fetch(page_url)
@@ -458,6 +460,7 @@
                     .then(res => {
                         this.activeCenters = res.data
                         console.log(this.activeCenters)
+                        loader.hide()
                     })
                     .catch(err => console.log(err))
             },
@@ -469,6 +472,19 @@
                     js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.0';
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
+            },
+            loadSlider(){
+                $(document).ready(function(){
+                    $( '#slider-main' ).sliderPro({
+                    width: 1040 ,
+                    height: 470 ,
+                    arrows: true, //矢印の有無
+                    buttons: true, //ページャーの有無
+                    autoplay: true, //自動再生
+                    slideDistance:0,//スライド同士の距離
+                    visibleSize: '100%' //サイドの画像
+                    });
+                });
             }
         }
     };

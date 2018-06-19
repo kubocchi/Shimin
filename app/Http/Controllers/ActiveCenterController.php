@@ -19,7 +19,7 @@ class ActiveCenterController extends Controller
     public function index()
     {
         // Get ActiveCenters
-        $activeCenters = ActiveCenter::orderBy('created_at', 'desc')->paginate(6);
+        $activeCenters = ActiveCenter::orderBy('created_at', 'desc')->paginate(10);
 
         // Return collection of ActiveCenters as a resource
         return ActiveCenterResource::collection($activeCenters);
