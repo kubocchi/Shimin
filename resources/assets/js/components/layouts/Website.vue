@@ -1,5 +1,7 @@
 <template>
     <div>
+        <!-- favicon -->
+	    <link rel="shortcut icon" href="../../../sass/themes/frontend/images/favicon.ico">
         <div id="header">
             <div class="container clearfix">
                 <div class="head_left">
@@ -28,133 +30,12 @@
             </div>
         </div>
 
-        <!-- eyecatch -->
-        <div id="eyecatch">
-            <div class="eyecatch clearfix">
-                <p class="illust bg l_01">
-                    <img src="../../../sass/themes/frontend/images/bg_cloud_l01.png">
-                </p>
-                <p class="illust bg l_02">
-                    <img src="../../../sass/themes/frontend/images/bg_cloud_l02.png">
-                </p>
-                <p class="illust bg l_03">
-                    <img src="../../../sass/themes/frontend/images/bg_cloud_l03.png">
-                </p>
-                <p class="illust bg r_01">
-                    <img src="../../../sass/themes/frontend/images/bg_cloud_r01.png">
-                </p>
-                <p class="illust bg r_02">
-                    <img src="../../../sass/themes/frontend/images/bg_cloud_r02.png">
-                </p>
-                <p class="illust bg r_03">
-                    <img src="../../../sass/themes/frontend/images/bg_cloud_r03.png">
-                </p>
-                <p class="illust on l">
-                    <img src="../../../sass/themes/frontend/images/illust_top_l.png">
-                </p>
-                <p class="illust on r">
-                    <img src="../../../sass/themes/frontend/images/illust_top_r.png">
-                </p>
-                <div class="slider-pro" id="slider-main">
-                    <div class="sp-slides">
-                        <!-- main slide-->
-                        <div class="sp-slide">
-                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_01.png" />
-                        </div>
-                        <div class="sp-slide">
-                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_02.png" />
-                        </div>
-                        <div class="sp-slide">
-                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_03.png" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- nav -->
-
-        <div id="global_nav" class="home">
-            <div class="navbar navbar-expand-lg">
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"></button>
-                <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="clearfix">
-                        <li class="open">
-                            <a href="#">
-                                <span class="i"></span>
-                                <span class="t">HOME</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="toggle">
-                                <span class="i"></span>
-                                <span class="t">センター案内</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">市民活動センターとは</a>
-                                </li>
-                                <li>
-                                    <a href="#">施設のご案内</a>
-                                </li>
-                                <li>
-                                    <a href="#">各種書式</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="toggle">
-                                <span class="i"></span>
-                                <span class="t">市民活動団体</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">市民活動団体とは</a>
-                                </li>
-                                <li>
-                                    <a href="#">登録について</a>
-                                </li>
-                                <li>
-                                    <a href="#">団体を探したい</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="toggle">
-                                <span class="i"></span>
-                                <span class="t">ボランティア</span>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#">ボランティアとは</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアをしたい</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアを
-                                        <br>募集したい</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="i"></span>
-                                <span class="t">Q & A</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        
 
         <!-- contents -->
-        <div id="contents_wrap">
-            <transition name="fade" >
-                <router-view></router-view>
-            </transition>
-        </div>
+        <transition name="fade" >
+            <router-view></router-view>
+        </transition>
 
         <!-- banner -->
 
@@ -314,23 +195,6 @@
         <div id="fb-root"></div>
     </div>
 </template>
-
-
-
-<script>
-    export default {
-        name: "disaster",
-        data() {
-            return {
-                activeCenters: [],
-            }
-        },
-
-        created() {
-            this.fetchActiveCenter()
-        },
-
-        methods: {
-        }
-    }
-</script>
+<style>
+    @import '../../../sass/themes/frontend/css/common.css';
+</style>

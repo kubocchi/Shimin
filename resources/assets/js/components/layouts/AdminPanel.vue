@@ -98,3 +98,6 @@
         </footer> -->
     </div>
 </template>
+<style>
+    @import '../../../sass/themes/msikatsu_admin/css/style.css';
+</style>

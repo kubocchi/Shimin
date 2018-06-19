@@ -1,5 +1,6 @@
 <template>
     <div>
+        <title>宮崎市民活動センター</title>
         <div v-if="isAdmin">
             <admin-panel></admin-panel>
         </div>
@@ -9,6 +10,7 @@
         </div>
     </div>
 </template>
+
 
 <script>
     export default {

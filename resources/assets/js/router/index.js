@@ -14,6 +14,10 @@ import DisasterList from '../views/disaster/List'
 
 /***********************Website-Components***********************/
 import Home from '../views/website/home'
+
+// Active Center
+import WebsiteActiveCenterIndex from '../views/website/activeCenter/index'
+import WebsiteActiveCenterDetail from '../views/website/activeCenter/detail'
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -77,7 +81,27 @@ const routes = [
         path: '/',
         name: 'home',
         component: Home,
-    }
+        meta: 'home'
+    },
+    {
+        path: '/active-center',
+        redirect: '/active-center/index',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'index',
+                name: 'websiteActiveCenterIndex',
+                component: WebsiteActiveCenterIndex
+            },
+            {
+                path: 'detail',
+                name: 'websiteActiveCenterDetail',
+                component: WebsiteActiveCenterDetail
+            }
+        ]
+    },
 ];
 
 export default routes
