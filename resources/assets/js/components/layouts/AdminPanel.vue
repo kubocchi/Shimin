@@ -36,7 +36,9 @@
                                     <button class="dropdown-item">宮崎市民可動センターからのお知らせ</button>
                                 </router-link>
                                 <a class="dropdown-item" href="pages/1-2_01list.html">登録団体、行政等からのお知らせ</a>
-                                <a class="dropdown-item" href="pages/1-3_01list.html">助成金情報</a>
+                                 <router-link :to="{ name: 'subsidyList' }">
+                                    <button class="dropdown-item">助成金情報</button>
+                                </router-link>
                                 <router-link :to="{ name: 'disasterList' }">
                                     <button class="dropdown-item">災害ボランティア情報</button>
                                 </router-link>

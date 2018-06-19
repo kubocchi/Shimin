@@ -593,7 +593,7 @@
 }
 
 .datepicker-range {
-  min-width: 325px;
+  min-width: 220px !important;
 }
 
 .datepicker-range .datepicker-popup {

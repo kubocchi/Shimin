@@ -49,9 +49,9 @@
                                 <th class="col-xs-1" scope="col">No.</th>
 								<th class="col-xs-3 wide_s" scope="col">件名</th>
 								<th class="col-xs-2 wide_d" scope="col">更新日</th>
-								<th  class="col-xs-2" align="center">複製</th>
-								<th align="center" class="col-xs-2" scope="col">変更</th>
-								<th align="center" class="col-xs-2" scope="col">削除</th>
+								<th class="col-xs-2" align="center">複製</th>
+								<th class="col-xs-2" scope="col">変更</th>
+								<th class="col-xs-2" scope="col">削除</th>
                             </tr>
                         </thead>
 

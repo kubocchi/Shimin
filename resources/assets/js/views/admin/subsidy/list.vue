@@ -11,7 +11,7 @@
                 <div class="bs-component">
                     <div class="row">
                         <div class="col-md-2">
-                            <router-link :to="{ name: 'disasterForm' }">
+                            <router-link :to="{ name: 'subsidyForm' }">
                                 <button class="btn btn-primary btn-lg btn-active center">新規登録</button>
                             </router-link>
                         </div>
@@ -30,7 +30,7 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchDisaster()">
+                                <button class="btn btn-outline-primary" @click="fetchSubsidy()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
@@ -56,20 +56,20 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="(disaster, rowNumber) in disasters" v-bind:key="disaster.id">
+                            <tr v-for="(subsidy, rowNumber) in subsidies" v-bind:key="subsidy.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ disaster.title }}</td>
-                                <td>{{ disaster.start_date }}</td>
+                                <td>{{ subsidy.title }}</td>
+                                <td>{{ subsidy.start_date }}</td>
                                 <td>
                                     <button class="btn btn-outline-primary btn-block" role="button">複製</button>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'disasterForm', params: { model: disaster }}">
+                                    <router-link :to="{ name: 'subsidyForm', params: { model: subsidy }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteDisaster(disaster.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteSubsity(subsidy.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -77,7 +77,7 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchDisaster(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#" @click="fetchSubsidy(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
@@ -85,7 +85,7 @@
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchDisaster(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#" @click="fetchSubsidy(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -96,12 +96,11 @@
 
 <script>
     export default {
-        name: "disaster",
+        name: "subsidy",
         data() {
             return {
-                selecteddisaster: "",
-                disasters: [],
-                disaster: {
+                subsidies: [],
+                subsidy: {
                     id: "",
                     name: "",
                     comments: "",
@@ -119,14 +118,15 @@
         },
 
         created() {
-            this.fetchDisaster();
+            this.fetchSubsidy();
         },
 
         methods: {
-            fetchDisaster(page_url) {
+            fetchSubsidy(page_url) {
+                console.log('check')
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || "/api/disasters";
+                page_url = page_url || "/api/subsidies";
 
                 fetch(page_url, {
                     method: "post",
@@ -137,8 +137,8 @@
                 })
                     .then(res => res.json())
                     .then(res => {
-                        this.disasters = res.data;
-                        console.log(this.disasters);
+                        this.subsidies = res.data;
+                        console.log(this.subsidies);
                         vm.makePagination(res.meta, res.links);
                         loader.hide()
                     })
@@ -153,7 +153,7 @@
                 };
                 this.pagination = pagination;
             },
-            deleteDisaster(id) {
+            deleteSubsity(id) {
                 this.$swal({
                     title: '本気ですか',
                     text: "これを元に戻すことはできません!",
@@ -166,7 +166,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let loader = this.$loading.show()
-                        fetch(`api/disaster/${id}`, {
+                        fetch(`api/subsidy/${id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())
@@ -178,7 +178,7 @@
                                 type: "success",
                                 confirmButtonText: "よし",
                             })
-                            this.fetchDisaster();
+                            this.fetchSubsidy();
                         })
                         .catch(err => console.log(err));
                     }
@@ -195,11 +195,11 @@
             },
             onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
-                this.fetchDisaster()
+                this.fetchSubsidy()
             },
             clearSearch() {
                 this.params.search = ""
-                this.fetchDisaster()
+                this.fetchSubsidy()
             }
         }
     };

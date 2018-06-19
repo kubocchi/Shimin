@@ -64,6 +64,8 @@ Route::post('subsidy', 'SubsidyController@store');
 Route::put('subsidy', 'SubsidyController@store');
 // Delete Subsidy
 Route::delete('subsidy/{id}', 'SubsidyController@destroy');
+// List single active-center
+Route::post('subsidies', 'SubsidyController@getSubsidyData');
 
 
 

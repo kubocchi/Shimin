@@ -9,6 +9,10 @@ import ActiveCenterList from '../views/activeCenter/List'
 // Disaster Routes
 import DisasterForm from '../views/disaster/Form'
 import DisasterList from '../views/disaster/List'
+
+// Subsidy Routes
+import SubsidyForm from '../views/admin/subsidy/Form'
+import SubsidyList from '../views/admin/subsidy/List'
 /***********************Admin-Panel-Components***********************/
 
 
@@ -71,6 +75,27 @@ const routes = [
                         path: 'list',
                         name: 'disasterList',
                         component: DisasterList,
+                        meta: 'admin'
+                    }
+                ]
+            },
+            {
+                path: '/admin/subsidy',
+                redirect: '/admin/subsidy/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'subsidyForm',
+                        component: SubsidyForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'subsidyList',
+                        component: SubsidyList,
                         meta: 'admin'
                     }
                 ]
