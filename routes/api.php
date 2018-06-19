@@ -53,5 +53,17 @@ Route::put('disaster', 'DisasterController@store');
 // Delete Disaster
 Route::delete('disaster/{id}', 'DisasterController@destroy');
 
+# Subsidy routes
+// List Subsidy
+Route::get('subsidies', 'SubsidyController@index');
+// List single Subsidy
+Route::get('subsidy/{id}', 'SubsidyController@show');
+// Create new Subsidy
+Route::post('subsidy', 'SubsidyController@store');
+// Update Subsidy
+Route::put('subsidy', 'SubsidyController@store');
+// Delete Subsidy
+Route::delete('subsidy/{id}', 'SubsidyController@destroy');
+
 
 
