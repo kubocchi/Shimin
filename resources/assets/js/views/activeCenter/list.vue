@@ -83,7 +83,7 @@
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">ページ {{ pagination.current_page }} の {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
@@ -211,13 +211,13 @@
             // Deleting the selected data
             deleteActiveCenter(id) {
                 this.$swal({
-                    title: '本気ですか',
-                    text: "これを元に戻すことはできません!",
+                    title: 'このデータを削除しますか？',
+                    text: "削除したデータは元に戻すことができません!",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'はい、削除してください!',
+                    confirmButtonText: 'OK',
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
@@ -228,7 +228,7 @@
                         .then(res => res.json())
                         .then(data => {
                             this.$swal(
-                                '削除された!',
+                                '削除しました!',
                                 '選択したデータが削除されました',
                                 'success'
                             )
@@ -239,8 +239,8 @@
                     }
                     else {
                         this.$swal(
-                            'キャンセルされました',
-                            'データは安全です :)',
+                            'キャンセルしました',
+                            'データは削除されていません',
                             'error'
                         )
                     }

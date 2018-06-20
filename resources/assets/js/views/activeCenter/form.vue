@@ -27,17 +27,25 @@
                                 <wysiwyg v-model="activeCenter.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
                                 <span class="is-danger">{{ errors.first('content') }}</span>
                             </div>
-                            【非アクティブ化する】
+                            【サイトに公開する】
                             <div class="row">
-                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: '真実', unchecked: '偽'}" />
+                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: 'はい', unchecked: '偽'}" />
                             </div>
                              <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
-                                <!-- <input class="form-control-file" id="inputFile" aria-describedby="fileHelp" type="file"> -->
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <input type="file" multiple="multiple" id="attachments" @change="uploadFieldChange">
-                                        <hr>
+                                        <!-- <label class="hand-cursor">
+                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange">
+                                            <span class="fa fa-file"></span>
+                                            <span class="btn btn-primary">ブラウズ</span>
+                                        </label> -->
+
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
+                                             <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange">
+                                            ブラウズ
+                                        </label>
+                                        
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
                                                 <div class="form-group">
@@ -102,7 +110,7 @@
                                                                 </div>
 
                                                                 <div>
-                                                                    <label>【掲載内容】</label>
+                                                                    <label>【添付ファイル】</label>
                                                                     <div class="form-group files">
                                                                         <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
                                                                             <ul class="form-group">
@@ -121,8 +129,8 @@
                                     
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">登録</button>
-                                        <button type="button" class="btn btn-outline-primary" @click="submitClicked" >戻る</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                        <button type="button" class="btn btn-outline-primary" @click="submitClicked" >登録</button>
                                     </div>
                                 </div>
                                 </div>
@@ -212,7 +220,7 @@
             if (this.$route.params.model)
                 this.fillFormWithRecievedModel(this.$route.params.model)
             
-            if(this.$route.params.edit)
+            if(this.$route.params.requestType === 'edit')
                 this.edit = true
         },
 
@@ -238,10 +246,10 @@
                     .then(data => {
                         loader.hide()
                         self.$swal({
-                            title: "成功!",
-                            text: "活動センターが追加されました!",
+                            title: "登録完了!",
+                            text: "登録が完了しました!",
                             type: "success",
-                            confirmButtonText : 'よし'
+                            confirmButtonText : 'OK'
                         })
                         .then(function() {
                             self.$router.push({
@@ -282,7 +290,6 @@
 
             // Edit new, sends model to API
             fillFormWithRecievedModel(activeCenter) {
-                console.log(activeCenter)
                 this.pullAttachments(activeCenter);
 
                 this.range[0] = new Date(activeCenter.start_date)

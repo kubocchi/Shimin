@@ -99155,6 +99155,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -99217,7 +99225,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(this.$route.params);
         if (this.$route.params.model) this.fillFormWithRecievedModel(this.$route.params.model);
 
-        if (this.$route.params.edit) this.edit = true;
+        if (this.$route.params.requestType === 'edit') this.edit = true;
     },
 
 
@@ -99243,10 +99251,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }).then(function (data) {
                     loader.hide();
                     self.$swal({
-                        title: "成功!",
-                        text: "活動センターが追加されました!",
+                        title: "登録完了!",
+                        text: "登録が完了しました!",
                         type: "success",
-                        confirmButtonText: 'よし'
+                        confirmButtonText: 'OK'
                     }).then(function () {
                         self.$router.push({
                             name: 'activeCenterList'
@@ -99288,7 +99296,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // Edit new, sends model to API
         fillFormWithRecievedModel: function fillFormWithRecievedModel(activeCenter) {
-            console.log(activeCenter);
             this.pullAttachments(activeCenter);
 
             this.range[0] = new Date(activeCenter.start_date);
@@ -101259,7 +101266,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(
-                    "\n                        【非アクティブ化する】\n                        "
+                    "\n                        【サイトに公開する】\n                        "
                   ),
                   _c(
                     "div",
@@ -101270,7 +101277,7 @@ var render = function() {
                           value: false,
                           color: _vm.color,
                           sync: true,
-                          labels: { checked: "真実", unchecked: "偽" }
+                          labels: { checked: "はい", unchecked: "偽" }
                         },
                         model: {
                           value: _vm.activeCenter.deactivate,
@@ -101291,16 +101298,27 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "file-upload" }, [
                       _c("div", { staticClass: "form-group" }, [
-                        _c("input", {
-                          attrs: {
-                            type: "file",
-                            multiple: "multiple",
-                            id: "attachments"
+                        _c(
+                          "label",
+                          {
+                            staticClass: "btn btn-outline-primary btn-sm",
+                            attrs: { for: "attachments" }
                           },
-                          on: { change: _vm.uploadFieldChange }
-                        }),
-                        _vm._v(" "),
-                        _c("hr"),
+                          [
+                            _c("input", {
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                type: "file",
+                                multiple: "multiple",
+                                id: "attachments"
+                              },
+                              on: { change: _vm.uploadFieldChange }
+                            }),
+                            _vm._v(
+                              "\n                                        ブラウズ\n                                    "
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -101473,7 +101491,7 @@ var render = function() {
                                             _vm._v(" "),
                                             _c("div", [
                                               _c("label", [
-                                                _vm._v("【掲載内容】")
+                                                _vm._v("【添付ファイル】")
                                               ]),
                                               _vm._v(" "),
                                               _c(
@@ -101553,7 +101571,7 @@ var render = function() {
                                   "data-dismiss": "modal"
                                 }
                               },
-                              [_vm._v("登録")]
+                              [_vm._v("戻る")]
                             ),
                             _vm._v(" "),
                             _c(
@@ -101563,7 +101581,7 @@ var render = function() {
                                 attrs: { type: "button" },
                                 on: { click: _vm.submitClicked }
                               },
-                              [_vm._v("戻る")]
+                              [_vm._v("登録")]
                             )
                           ])
                         ])
@@ -101912,13 +101930,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             this.$swal({
-                title: '本気ですか',
-                text: "これを元に戻すことはできません!",
+                title: 'このデータを削除しますか？',
+                text: "削除したデータは元に戻すことができません!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'はい、削除してください!',
+                confirmButtonText: 'OK',
                 cancelButtonText: 'キャンセル'
             }).then(function (result) {
                 if (result.value) {
@@ -101928,14 +101946,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }).then(function (res) {
                         return res.json();
                     }).then(function (data) {
-                        _this2.$swal('削除された!', '選択したデータが削除されました', 'success');
+                        _this2.$swal('削除しました!', '選択したデータが削除されました', 'success');
                         loader.hide();
                         _this2.fetchActiveCenter();
                     }).catch(function (err) {
                         return console.log(err);
                     });
                 } else {
-                    _this2.$swal('キャンセルされました', 'データは安全です :)', 'error');
+                    _this2.$swal('キャンセルしました', 'データは削除されていません', 'error');
                 }
             });
         },
@@ -102235,9 +102253,8 @@ var render = function() {
               { staticClass: "page-link text-dark", attrs: { href: "#" } },
               [
                 _vm._v(
-                  "ページ " +
-                    _vm._s(_vm.pagination.current_page) +
-                    " の " +
+                  _vm._s(_vm.pagination.current_page) +
+                    " / " +
                     _vm._s(_vm.pagination.last_page)
                 )
               ]

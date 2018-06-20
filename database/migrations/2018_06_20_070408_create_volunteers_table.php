@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class CreateVolunteersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,24 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('volunteers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('subject');
             $table->integer('activity_category');
             $table->boolean('children');
-            $table->date('event_date');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('organizer')->nullable();
+            $table->string('sponsor')->nullable();
             $table->string('file')->nullable();
+            $table->string('activity_date')->nullable();
             $table->string('deadline')->nullable();
             $table->string('venue')->nullable();
             $table->string('capacity')->nullable();
-            $table->string('target')->nullable();
-            $table->string('how_to_apply')->nullable();
+            $table->string('number_of_perople')->nullable();
+            $table->string('orientation')->nullable();
             $table->string('cost')->nullable();
-            $table->longText('detail')->nullable();
+            $table->string('subscription')->nullable();
+            $table->longText('content')->nullable();
             $table->string('url')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('deactivate');
@@ -46,6 +47,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('volunteers');
     }
 }
