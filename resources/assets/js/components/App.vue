@@ -27,6 +27,7 @@
             meta: function () {
                 return this.$store.state.pageMetaStore
             }
+            
         },
         mounted() {
            
@@ -35,7 +36,9 @@
             'admin-panel': require('./layouts/AdminPanel'),
             'website': require('./layouts/Website')
         },
-        created: function () {
+        created() {
+            //window.location.reload(true)
+            //this.$router.go(this.$router.currentRoute)
         }
     }
 </script>

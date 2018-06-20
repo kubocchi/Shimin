@@ -61,10 +61,12 @@
                                 <td>{{ activeCenter.title }}</td>
                                 <td>{{ activeCenter.start_date }}</td>
                                 <td>
-                                    <button class="btn btn-outline-primary btn-block" role="button">複製</button>
+                                    <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
+                                        <button class="btn btn-outline-primary btn-block" role="button">複製</button>
+                                    </router-link>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter }}">
+                                    <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
@@ -96,7 +98,6 @@
 
 <script>
     export default {
-        name: "company",
         data() {
             return {
                 selectedActiveCenter: "",
@@ -172,6 +173,7 @@
         },
 
         methods: {
+            // Pulling data from API, its a post request with search-term, type
             fetchActiveCenter(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
@@ -193,6 +195,8 @@
                     })
                     .catch(err => console.log(err))
             },
+
+            // Paginating the table data
             makePagination(meta, links) {
                 let pagination = {
                     current_page: meta.current_page,
@@ -203,8 +207,9 @@
 
                 this.pagination = pagination;
             },
-            deleteActiveCenter(id) {
 
+            // Deleting the selected data
+            deleteActiveCenter(id) {
                 this.$swal({
                     title: '本気ですか',
                     text: "これを元に戻すことはできません!",
@@ -216,6 +221,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
+                        let loader = this.$loading.show();
                         fetch(`api/active-center/${id}`, {
                             method: "delete"
                         })
@@ -226,9 +232,10 @@
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            this.fetchActiveCenter();
+                            loader.hide()
+                            this.fetchActiveCenter()
                         })
-                        .catch(err => console.log(err));
+                        .catch(err => console.log(err))
                     }
                     else {
                         this.$swal(
@@ -238,35 +245,15 @@
                         )
                     }
                 })
+            },
 
-                // if (confirm("Are You Sure?")) {
-                //     fetch(`api/active-center/${id}`, {
-                //         method: "delete"
-                //     })
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         alert("active center Removed");
-                //         this.fetchActiveCenter();
-                //     })
-                //     .catch(err => console.log(err));
-                // }
-            },
-            searchActiveCenter(page_url) {
-                let vm = this;
-                page_url = page_url || "/api/active-centers"
-                fetch(page_url)
-                    .then(res => res.json())
-                    .then(res => {
-                        this.activeCenters = res.data;
-                        console.log(this.activeCenters);
-                        vm.makePagination(res.meta, res.links)
-                    })
-                    .catch(err => console.log(err));
-            },
+            // Loads table data on changing 
             onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
                 this.fetchActiveCenter()
             },
+
+            // Clearing the user typed search term
             clearSearch() {
                 this.params.search = ""
                 this.fetchActiveCenter()

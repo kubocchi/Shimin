@@ -55,14 +55,13 @@
                             <router-link :to="{ name: 'activeCenterList' }">
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link> 
-                            <!-- <button type="submit" class="btn btn-outline-primary">確認に進む</button> -->
 
 
-                             <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click="confirm">
                                 確認に進む
                             </button>   
 
-                            <!-- The Modal -->
+                            <!-- Confirmation Modal -->
                             <div class="modal" id="confirmationModal">
                                 <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -135,7 +134,8 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" v-bind:style="{ widthInPercentage: computedWidth }"></div>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" 
+                                                aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -151,23 +151,18 @@
 
 
 <script>
-    import { VueEditor } from 'vue2-editor'
     import VueDatepickerLocal from 'vue-datepicker-local'
     import moment from 'moment'
 
-
     export default {
-        components: { VueEditor, VueDatepickerLocal },
-        name: "company",
+        components: { VueDatepickerLocal },
         data() {
             return {
-                activeCenters: [],
-                dateRange: [],
                 activeCenter: {
                     id: "",
                     title: "",
-                    start_date: !!this.range ? this.dateRange[0] : "",
-                    end_date: !!this.range ? this.dateRange[1] : "",
+                    start_date: "",
+                    end_date: "",
                     content: "",
                     file: "",
                     deactivate: false,
@@ -178,7 +173,7 @@
                 pagination: {},
                 edit: false,
                 dateFormat: 'YYYY-MM-DD',
-                color: '#1C89E7',
+                color: '#DC3545',
                 time: new Date(),
                 range: [new Date(), new Date()],
                 emptyTime: '',
@@ -198,27 +193,31 @@
                 // You can store all your files here
                 attachments: [],
                 attachment_labels: [], // List of old uploaded files coming from the server
-                categories: [],
                 // Each file will need to be sent as FormData element
                 uploadedData: new FormData(),
                 percentCompleted: 0,
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
-                widthInPercentage:'0%'
+                width:'0%'
             };
         },
         computed: {
             computedWidth: function () {
-                return this.widthInPercentage;
+                return this.width;
             }
         },
 
         created() {
+            console.log(this.$route.params)
             if (this.$route.params.model)
-                this.editActiveCenter(this.$route.params.model)
+                this.fillFormWithRecievedModel(this.$route.params.model)
+            
+            if(this.$route.params.edit)
+                this.edit = true
         },
 
         methods: {
+            // Add new, sends model to API
             addActiveCenter() {
                 this.activeCenter.file = this.currentAddedFileIs.join(',')
 
@@ -280,17 +279,22 @@
                     .catch(err => console.log(err))
                 }
             },
-            editActiveCenter(activeCenter) {
+
+            // Edit new, sends model to API
+            fillFormWithRecievedModel(activeCenter) {
                 console.log(activeCenter)
                 this.pullAttachments(activeCenter);
-                this.edit = true
+
+                this.range[0] = new Date(activeCenter.start_date)
+                this.range[1] = new Date(activeCenter.end_date)
+                
                 this.activeCenter.id = activeCenter.id
                 this.activeCenter.title = activeCenter.title
                 this.activeCenter.start_date = activeCenter.start_date
                 this.activeCenter.end_date = activeCenter.end_date
                 this.activeCenter.content = activeCenter.content
                 this.activeCenter.file = activeCenter.file
-                this.activeCenter.deactivate = !! activeCenter.deactivate==1 ? true:false
+                this.activeCenter.deactivate = !! activeCenter.deactivate == 1 ? true:false
                 this.activeCenter.created_by = activeCenter.created_by
                 this.activeCenter.updated_by = activeCenter.updated_by
 
@@ -298,13 +302,8 @@
                 if(activeCenter.file)
                     this.currentAddedFileIs = activeCenter.file.split(',')
             },
-            
-            selectCategory(attachment, category_id) {
-                attachment.category_id = category_id;
-                console.log(attachment);
-                this.$forceUpdate();
-            },
 
+            // Analyzing attachmet file size
             getAttachmentSize() {
                 this.upload_size = 0; // Reset to beginningƒ
                 this.attachments.map((item) => { this.upload_size += parseInt(item.size); });
@@ -312,6 +311,7 @@
                 this.$forceUpdate();
             },
 
+            // Preparing files 
             prepareFields() {
                 for (var i = this.attachments.length - 1; i >= 0; i--) {
                     console.log(this.attachments[i].category_id);
@@ -324,6 +324,7 @@
                 }
             },
 
+            // Removing attachment on button click
             removeAttachment(attachment) {
                 console.log(attachment)
                 if(attachment.id)
@@ -348,30 +349,7 @@
                 console.log(attachments);
             },
 
-            validate() {
-                let validation = []
-                if(this.activeCenter.title.trim() === ''){
-                    validation.push('件名')
-                   
-                }
-                if(this.activeCenter.content.trim() === ''){
-                    validation.push('掲載開日')
-                }
-
-                if(validation.length){
-                     this.$swal({
-                        title: '次のフィールドは空ではありません!',
-                        text: validation.join('\n'),
-                        animation: false,
-                        customClass: 'animated tada',
-                        confirmButtonText : 'よし',
-                        width: '800px'
-                    })
-                    return false
-                }
-                return true;
-            },
-
+            // Adding attachment, Sends request to Attachment API
             addAttachment() {
                 this.prepareFields()
 
@@ -380,7 +358,7 @@
                     onUploadProgress: function(progressEvent) {
                         this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total )
                         console.log(this.percentCompleted)
-                        this.widthInPercentage = this.percentCompleted + '%'
+                        this.width = this.percentCompleted + '%'
                         this.$forceUpdate()
                     }.bind(this)
                 };
@@ -414,6 +392,7 @@
                 this.attachments = [];
             },
 
+            // Removing attachment form database and server, sends file id to attachment remove API
             removeServerAttachment(attachment_id){
                 let data = {
                     params: 
@@ -438,6 +417,7 @@
                 });
             },
 
+            // Pull required attachmets
             pullAttachments(activeCenter) {
                 // Make HTTP request to store announcement
                 axios.get(`api/asset/attachments/${activeCenter.file}`).then(function (response) {
@@ -457,18 +437,7 @@
 
             },
 
-            getAttachmentSize() {
-                this.upload_size = 0; // Reset to beginningƒ
-                this.attachments.map((item) => { this.upload_size += parseInt(item.size) })
-                this.upload_size = Number((this.upload_size).toFixed(1))
-                this.$forceUpdate();
-            },
-
-            removeAttachments(attachment) {
-                this.attachments.splice(this.attachments.indexOf(attachment), 1)
-                this.getAttachmentSize();
-            },
-
+            // Final submisison clicked for form data
             submitClicked(){
                 $("#confirmationModal").modal('hide')
                 if(this.tempRemovedFileIds.length){
@@ -483,10 +452,9 @@
                 else
                     this.addActiveCenter()
             },
-            confirm(){
-                // if (!this.validate()) 
-                //     return
 
+            // Checking for validation and reconfirm opening modal
+            confirm(){
                 this.$validator.validate().then(result => {
                     if (!result) {
                         console.log('true')

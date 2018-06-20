@@ -103,3 +103,21 @@
 <style>
     @import '../../../sass/themes/msikatsu_admin/css/style.css';
 </style>
+
+
+<script>
+    export default {
+        name: "company",
+        data() {
+            return {
+            }
+        },
+
+        created() {
+            
+        },
+
+        methods: {
+        }
+    };
+</script>
