@@ -3,7 +3,7 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span> 助成金情報 登録画面</h4>
+            </span>災害ボランティア情報 登録画面</h4>
         <hr>
         
         <div class="row mt-4">
@@ -13,7 +13,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="subsidy.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
+                                <input class="form-control" v-model="disaster.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
                                 <span class="is-danger">{{ errors.first('title') }}</span>
                             </div>
                             <div class="form-group">
@@ -24,12 +24,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label" for="description">【掲載内容】</label>
-                                <wysiwyg v-model="subsidy.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
+                                <wysiwyg v-model="disaster.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
                                 <span class="is-danger">{{ errors.first('content') }}</span>
                             </div>
                             【サイトに公開する】
                             <div class="row">
-                                <toggle-button v-model="subsidy.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: 'はい', unchecked: 'いいえ'}" />
+                                <toggle-button v-model="disaster.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: 'はい', unchecked: 'いいえ'}" />
                             </div>
                              <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            <router-link :to="{ name: 'subsidyList' }">
+                            <router-link :to="{ name: 'disasterList' }">
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link> 
 
@@ -72,7 +72,7 @@
                                     <h4 class="modal-title">
                                         <span>
                                             <i class="fas fa-dove"></i>
-                                        </span>宮崎市民活動センターからのお知らせ 登録確認画面
+                                        </span>災害ボランティア情報 登録確認画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -88,19 +88,19 @@
                                                             <div>
                                                                 <div>
                                                                     <label>【件名】</label>
-                                                                    <p>{{subsidy.title}}</p>
+                                                                    <p>{{disaster.title}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【掲載開始日】</label>
-                                                                    <p>{{subsidy.start_date}}</p>
+                                                                    <p>{{disaster.start_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【掲載終了日】</label>
-                                                                    <p>{{subsidy.end_date}}</p>
+                                                                    <p>{{disaster.end_date}}</p>
                                                                 </div>
                                                                 <div class="wrapper">
                                                                     <label>【掲載内容】</label>
-                                                                    <p class="main" v-html="subsidy.content"></p>
+                                                                    <p class="main" v-html="disaster.content"></p>
                                                                 </div>
 
                                                                 <div>
@@ -160,7 +160,7 @@
         components: { VueDatepickerLocal },
         data() {
             return {
-                subsidy: {
+                disaster: {
                     id: "",
                     title: "",
                     start_date: "",
@@ -171,8 +171,6 @@
                     created_by: 1,
                     updated_by: 1
                 },
-                id: "",
-                pagination: {},
                 edit: false,
                 dateFormat: 'YYYY-MM-DD',
                 color: '#DC3545',
@@ -220,18 +218,18 @@
 
         methods: {
             // Add new, sends model to API
-            addsubsidy() {
-                this.subsidy.file = this.currentAddedFileIs.join(',')
+            addDisaster() {
+                this.disaster.file = this.currentAddedFileIs.join(',')
 
                 let self = this
-                console.log(this.subsidy)
+                console.log(this.disaster)
 
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/subsidy", {
+                    fetch("api/disaster", {
                         method: "post",
-                        body: JSON.stringify(this.subsidy),
+                        body: JSON.stringify(this.disaster),
                         headers: {
                             "content-type": "application/json"
                         }
@@ -247,7 +245,7 @@
                         })
                         .then(function() {
                             self.$router.push({
-                                name: 'subsidyList'
+                                name: 'disasterList'
                             })
                         });
                     })
@@ -256,9 +254,9 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/subsidy", {
+                    fetch("api/disaster", {
                         method: "put",
-                        body: JSON.stringify(this.subsidy),
+                        body: JSON.stringify(this.disaster),
                         headers: {
                             "content-type": "application/json"
                         }
@@ -274,7 +272,7 @@
                         })
                         .then(function() {
                             self.$router.push({
-                                name: 'subsidyList'
+                                name: 'disasterList'
                             })
                         });
                     })
@@ -283,25 +281,25 @@
             },
 
             // Edit new, sends model to API
-            fillFormWithRecievedModel(subsidy) {
-                this.pullAttachments(subsidy);
+            fillFormWithRecievedModel(disaster) {
+                this.pullAttachments(disaster);
 
-                this.range[0] = new Date(subsidy.start_date)
-                this.range[1] = new Date(subsidy.end_date)
+                this.range[0] = new Date(disaster.start_date)
+                this.range[1] = new Date(disaster.end_date)
                 
-                this.subsidy.id = subsidy.id
-                this.subsidy.title = subsidy.title
-                this.subsidy.start_date = subsidy.start_date
-                this.subsidy.end_date = subsidy.end_date
-                this.subsidy.content = subsidy.content
-                this.subsidy.file = subsidy.file
-                this.subsidy.deactivate = !! subsidy.deactivate == 1 ? true:false
-                this.subsidy.created_by = subsidy.created_by
-                this.subsidy.updated_by = subsidy.updated_by
+                this.disaster.id = disaster.id
+                this.disaster.title = disaster.title
+                this.disaster.start_date = disaster.start_date
+                this.disaster.end_date = disaster.end_date
+                this.disaster.content = disaster.content
+                this.disaster.file = disaster.file
+                this.disaster.deactivate = !! disaster.deactivate == 1 ? true:false
+                this.disaster.created_by = disaster.created_by
+                this.disaster.updated_by = disaster.updated_by
 
                 // For Files
-                if(subsidy.file)
-                    this.currentAddedFileIs = subsidy.file.split(',')
+                if(disaster.file)
+                    this.currentAddedFileIs = disaster.file.split(',')
             },
 
             // Analyzing attachmet file size
@@ -373,7 +371,7 @@
                         console.log('Successfull upload')
                         this.currentAddedFileIs.push(response.data.data)
                         this.resetData()
-                        this.addsubsidy()
+                        this.addDisaster()
                          $("#progressModal").modal('hide')
                     } else {
                         console.log('Unsuccessful Upload')
@@ -419,9 +417,9 @@
             },
 
             // Pull required attachmets
-            pullAttachments(subsidy) {
+            pullAttachments(disaster) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${subsidy.file}`).then(function (response) {
+                axios.get(`api/asset/attachments/${disaster.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
@@ -451,7 +449,7 @@
                 if(this.attachments.length)
                     this.addAttachment()
                 else
-                    this.addsubsidy()
+                    this.addDisaster()
             },
 
             // Checking for validation and reconfirm opening modal
@@ -461,8 +459,8 @@
                         console.log('true')
                     }
                     else{
-                        this.subsidy.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                        this.subsidy.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        this.disaster.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
+                        this.disaster.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
                         $("#confirmationModal").modal('show')
                     }
                 });

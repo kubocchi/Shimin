@@ -3,12 +3,12 @@
 /***********************Admin-Panel-Components***********************/
 import Dashboard from '../views/Dashboard'
 // Active center Routes
-import ActiveCenterForm from '../views/activeCenter/Form'
-import ActiveCenterList from '../views/activeCenter/List'
+import ActiveCenterForm from '../views/admin/activeCenter/Form'
+import ActiveCenterList from '../views/admin/activeCenter/List'
 
 // Disaster Routes
-import DisasterForm from '../views/disaster/Form'
-import DisasterList from '../views/disaster/List'
+import DisasterForm from '../views/admin/disaster/Form'
+import DisasterList from '../views/admin/disaster/List'
 
 // Subsidy Routes
 import SubsidyForm from '../views/admin/subsidy/Form'
