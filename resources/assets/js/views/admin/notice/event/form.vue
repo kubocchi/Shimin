@@ -23,8 +23,11 @@
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-4">
                                     <label for="active_category">【活動カテゴリ】</label>
-                                    <multiselect v-model="event.activity_category" return="value" :options="options" placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する"
-                                        selectedLabel="選ばれた" label="name" track-by="name" v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"></multiselect>
+                                    <multiselect v-model="event.activity_category" :options="categories.map(category => category.id)" 
+                                        :custom-label="category => categories.find(x => x.id == category).name"
+                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する"
+                                        selectedLabel="選ばれた"  track-by="id" label="name" 
+                                        v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"></multiselect>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-4">
@@ -44,7 +47,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【子供の参加】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="event.children" :value="true" :color="color" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="event.children" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
                                     />
                                 </div>
                             </div>
@@ -112,6 +115,14 @@
                             <div class="col-lg-12 form-group">
                                 <label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
                                 <textarea v-model="event.phone" class="form-control" id="contact" required="" rows="3"></textarea>
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <label class="col-form-label">【サイトに公開する】</label>
+                                <div class="form-group row">
+                                    <toggle-button v-model="event.deactivate" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    />
+                                </div>
                             </div>
 
                             <router-link :to="{ name: 'noticeList' }">
@@ -290,7 +301,8 @@
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
-                color: "#0066CC",
+                switchColorDeactivate: "#DC3545",
+                switchColorOther: "#0066CC",
                 eventDate: new Date(),
                 range: [new Date(), new Date()],
                 emptyTime: "",
@@ -318,28 +330,28 @@
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
                 width: "0%",
-                options: [
-                    { value: "100", name: "保健・医療・福祉" },
-                    { value: "200", name: "社会教育" },
-                    { value: "300", name: "まちづくり" },
-                    { value: "400", name: "文化・芸術・スポーツ" },
-                    { value: "500", name: "環境保全" },
-                    { value: "600", name: "災害救助" },
-                    { value: "700", name: "地域安全" },
-                    { value: "800", name: "人権・平和" },
-                    { value: "900", name: "国際協力" },
-                    { value: "1000", name: "男女共同参画社会" },
-                    { value: "1100", name: "子どもの健全育成" },
-                    { value: "1200", name: "NPO活動支援" },
-                    { value: "1300", name: "情報化社会" },
-                    { value: "1400", name: "科学技術" },
-                    { value: "1500", name: "経済活性" },
-                    { value: "1600", name: "職業能力・雇用" },
-                    { value: "1700", name: "消費者保護" },
-                    { value: "1800", name: "観光" },
-                    { value: "1900", name: "農村漁村" },
-                    { value: "2000", name: "条例に基づく活動" },
-                    { value: "2100", name: "その他" }
+                categories: [
+                    { id: "100", name: "保健・医療・福祉" },
+                    { id: "200", name: "社会教育" },
+                    { id: "300", name: "まちづくり" },
+                    { id: "400", name: "文化・芸術・スポーツ" },
+                    { id: "500", name: "環境保全" },
+                    { id: "600", name: "災害救助" },
+                    { id: "700", name: "地域安全" },
+                    { id: "800", name: "人権・平和" },
+                    { id: "900", name: "国際協力" },
+                    { id: "1000", name: "男女共同参画社会" },
+                    { id: "1100", name: "子どもの健全育成" },
+                    { id: "1200", name: "NPO活動支援" },
+                    { id: "1300", name: "情報化社会" },
+                    { id: "1400", name: "科学技術" },
+                    { id: "1500", name: "経済活性" },
+                    { id: "1600", name: "職業能力・雇用" },
+                    { id: "1700", name: "消費者保護" },
+                    { id: "1800", name: "観光" },
+                    { id: "1900", name: "農村漁村" },
+                    { id: "2000", name: "条例に基づく活動" },
+                    { id: "2100", name: "その他" }
                 ],
             };
         },
@@ -387,7 +399,7 @@
                                 })
                                 .then(function () {
                                     self.$router.push({
-                                        name: "eventList"
+                                        name: "noticeList"
                                     });
                                 });
                         })
@@ -410,11 +422,11 @@
                                     title: "成功!",
                                     text: "活動センターが追加されました!",
                                     type: "success",
-                                    confirmButtonText: "よし"
+                                    confirmButtonText: "OK"
                                 })
                                 .then(function () {
                                     self.$router.push({
-                                        name: "eventList"
+                                        name: "noticeList"
                                     });
                                 });
                         })
@@ -629,6 +641,7 @@
                             confirmButtonText: "OK"
                         });
                     } else {
+                        this.event.event_date = moment(String(this.eventDate)).format("YYYY-MM-DD");
                         this.event.start_date = !!this.range
                             ? moment(String(this.range[0])).format("YYYY-MM-DD")
                             : "";
