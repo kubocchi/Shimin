@@ -5,7 +5,7 @@
                 <i class="fas fa-dove"></i>
             </span>災害ボランティア情報 登録画面</h4>
         <hr>
-        
+
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
@@ -13,40 +13,42 @@
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="disaster.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
+                                <input class="form-control" v-model="disaster.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名"
+                                    type="text">
                                 <span class="is-danger">{{ errors.first('title') }}</span>
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label" for="txtDate">【掲載開始日】（必須）</label>    
+                                <label class="col-form-label" for="txtDate">【掲載開始日】（必須）</label>
                                 <div class="row">
-                                    <vue-datepicker-local  v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                    <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label" for="description">【掲載内容】</label>
-                                <wysiwyg v-model="disaster.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
+                                <wysiwyg v-model="disaster.content" v-validate="'required'" name="content" data-vv-as="掲載内容" type="text" />
                                 <span class="is-danger">{{ errors.first('content') }}</span>
                             </div>
                             【サイトに公開する】
                             <div class="row">
-                                <toggle-button v-model="disaster.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: 'はい', unchecked: 'いいえ'}" />
+                                <toggle-button v-model="disaster.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: 'はい', unchecked: 'いいえ'}"
+                                />
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                             <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange">
-                                            参照
+                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
                                         </label>
-                                        
+
                                         <div class="form-group files">
-                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
+                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                                 <div class="form-group">
                                                     <button class="btn btn-outline-danger btn-sm" @click.prevent="removeAttachment(attachment)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
-                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</span> 
+                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1))
+                                                        + 'MB)'}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -56,77 +58,77 @@
 
                             <router-link :to="{ name: 'disasterList' }">
                                 <button class="btn btn-outline-primary">戻る</button>
-                            </router-link> 
-
+                            </router-link>
 
                             <button type="button" class="btn btn-primary" @click="confirm">
                                 確認に進む
-                            </button>   
+                            </button>
 
                             <!-- Confirmation Modal -->
                             <div class="modal" id="confirmationModal">
                                 <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                    <h4 class="modal-title">
-                                        <span>
-                                            <i class="fas fa-dove"></i>
-                                        </span>災害ボランティア情報 登録確認画面
-                                    </h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <div class="row mt-4">
-                                            <div class="col-lg-12">
-                                                <div class="bs-component">
-                                                    <div style="overflow:hidden;">
-                                                        <form action="" method="post">
-                                                            <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
-                                                            <div>
-                                                                <div>
-                                                                    <label>【件名】</label>
-                                                                    <p>{{disaster.title}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【掲載開始日】</label>
-                                                                    <p>{{disaster.start_date}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【掲載終了日】</label>
-                                                                    <p>{{disaster.end_date}}</p>
-                                                                </div>
-                                                                <div class="wrapper">
-                                                                    <label>【掲載内容】</label>
-                                                                    <p class="main" v-html="disaster.content"></p>
-                                                                </div>
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">
+                                                <span>
+                                                    <i class="fas fa-dove"></i>
+                                                </span>災害ボランティア情報 登録確認画面
+                                            </h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
 
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <div class="row mt-4">
+                                                <div class="col-lg-12">
+                                                    <div class="bs-component">
+                                                        <div style="overflow:hidden;">
+                                                            <form action="" method="post">
+                                                                <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
                                                                 <div>
-                                                                    <label>【添付ファイル】</label>
-                                                                    <div class="form-group files">
-                                                                        <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
-                                                                            <ul class="form-group">
-                                                                                <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</li> 
-                                                                            </ul>
+                                                                    <div>
+                                                                        <label>【件名】</label>
+                                                                        <p>{{disaster.title}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【掲載開始日】</label>
+                                                                        <p>{{disaster.start_date}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【掲載終了日】</label>
+                                                                        <p>{{disaster.end_date}}</p>
+                                                                    </div>
+                                                                    <div class="wrapper">
+                                                                        <label>【掲載内容】</label>
+                                                                        <p class="main" v-html="disaster.content"></p>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <label>【添付ファイル】</label>
+                                                                        <div class="form-group files">
+                                                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                                <ul class="form-group">
+                                                                                    <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                        / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                                </ul>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                        </div>
                                     </div>
-                                    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                        <button type="button" class="btn btn-outline-primary" @click="submitClicked" >登録</button>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
 
@@ -136,15 +138,15 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" 
-                                                aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                    aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
@@ -198,7 +200,7 @@
                 percentCompleted: 0,
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
-                width:'0%'
+                width: '0%'
             };
         },
         computed: {
@@ -211,8 +213,8 @@
             console.log(this.$route.params)
             if (this.$route.params.model)
                 this.fillFormWithRecievedModel(this.$route.params.model)
-            
-            if(this.$route.params.requestType === 'edit')
+
+            if (this.$route.params.requestType === 'edit')
                 this.edit = true
         },
 
@@ -234,22 +236,22 @@
                             "content-type": "application/json"
                         }
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        loader.hide()
-                        self.$swal({
-                            title: "登録完了!",
-                            text: "登録が完了しました!",
-                            type: "success",
-                            confirmButtonText : 'OK'
-                        })
-                        .then(function() {
-                            self.$router.push({
-                                name: 'disasterList'
+                        .then(res => res.json())
+                        .then(data => {
+                            loader.hide()
+                            self.$swal({
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
+                                type: "success",
+                                confirmButtonText: 'OK'
                             })
-                        });
-                    })
-                    .catch(err => console.log(err))
+                                .then(function () {
+                                    self.$router.push({
+                                        name: 'disasterList'
+                                    })
+                                });
+                        })
+                        .catch(err => console.log(err))
                 } else {
 
                     // Update
@@ -261,22 +263,22 @@
                             "content-type": "application/json"
                         }
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        loader.hide()
-                        self.$swal({
-                            title: "成功!",
-                            text: "活動センターが追加されました!",
-                            type: "success",
-                            confirmButtonText : 'よし'
-                        })
-                        .then(function() {
-                            self.$router.push({
-                                name: 'disasterList'
+                        .then(res => res.json())
+                        .then(data => {
+                            loader.hide()
+                            self.$swal({
+                                title: "成功!",
+                                text: "活動センターが追加されました!",
+                                type: "success",
+                                confirmButtonText: 'よし'
                             })
-                        });
-                    })
-                    .catch(err => console.log(err))
+                                .then(function () {
+                                    self.$router.push({
+                                        name: 'disasterList'
+                                    })
+                                });
+                        })
+                        .catch(err => console.log(err))
                 }
             },
 
@@ -286,19 +288,19 @@
 
                 this.range[0] = new Date(disaster.start_date)
                 this.range[1] = new Date(disaster.end_date)
-                
+
                 this.disaster.id = disaster.id
                 this.disaster.title = disaster.title
                 this.disaster.start_date = disaster.start_date
                 this.disaster.end_date = disaster.end_date
                 this.disaster.content = disaster.content
                 this.disaster.file = disaster.file
-                this.disaster.deactivate = !! disaster.deactivate == 1 ? true:false
+                this.disaster.deactivate = !!disaster.deactivate == 1 ? true : false
                 this.disaster.created_by = disaster.created_by
                 this.disaster.updated_by = disaster.updated_by
 
                 // For Files
-                if(disaster.file)
+                if (disaster.file)
                     this.currentAddedFileIs = disaster.file.split(',')
             },
 
@@ -326,7 +328,7 @@
             // Removing attachment on button click
             removeAttachment(attachment) {
                 console.log(attachment)
-                if(attachment.id)
+                if (attachment.id)
                     this.tempRemovedFileIds.push(attachment.id)
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
@@ -353,9 +355,9 @@
                 this.prepareFields()
 
                 var config = {
-                    headers: { 'Content-Type': 'multipart/form-data' } ,
-                    onUploadProgress: function(progressEvent) {
-                        this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total )
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    onUploadProgress: function (progressEvent) {
+                        this.percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
                         console.log(this.percentCompleted)
                         this.width = this.percentCompleted + '%'
                         this.$forceUpdate()
@@ -365,22 +367,22 @@
                 //Make HTTP request to store announcement
                 $("#progressModal").modal({ backdrop: 'static' }, 'show');
                 axios.post('/api/attachments/store', this.uploadedData, config)
-                .then(function (response) {
-                    console.log(response);
-                    if (response.data.success) {
-                        console.log('Successfull upload')
-                        this.currentAddedFileIs.push(response.data.data)
-                        this.resetData()
-                        this.addDisaster()
-                         $("#progressModal").modal('hide')
-                    } else {
-                        console.log('Unsuccessful Upload')
+                    .then(function (response) {
+                        console.log(response);
+                        if (response.data.success) {
+                            console.log('Successfull upload')
+                            this.currentAddedFileIs.push(response.data.data)
+                            this.resetData()
+                            this.addDisaster()
+                            $("#progressModal").modal('hide')
+                        } else {
+                            console.log('Unsuccessful Upload')
+                        }
                     }
-                }
-                .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(function (error) {
-                    console.log('Attachment catch', error)
-                });
+                        .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                    .catch(function (error) {
+                        console.log('Attachment catch', error)
+                    });
                 console.log(attachments)
             },
 
@@ -392,9 +394,9 @@
             },
 
             // Removing attachment form database and server, sends file id to attachment remove API
-            removeServerAttachment(attachment_id){
+            removeServerAttachment(attachment_id) {
                 let data = {
-                    params: 
+                    params:
                     {
                         attachment_id: attachment_id
                     }
@@ -402,18 +404,18 @@
 
                 // Make HTTP request to store announcement
                 axios.delete('/api/attachments/', data)
-                .then(function (response) {
-                    console.log(response)
-                    if (response.data.success) {
-                        this.getAttachmentSize()
-                    } else {
-                        console.log(response.data.errors)
-                    }
-                    
-                }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(function (response) {
+                        console.log(response)
+                        if (response.data.success) {
+                            this.getAttachmentSize()
+                        } else {
+                            console.log(response.data.errors)
+                        }
+
+                    }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             },
 
             // Pull required attachmets
@@ -428,37 +430,37 @@
                     } else {
                         console.log(response.data.errors)
                     }
-                    
+
                 }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
             },
 
             // Final submisison clicked for form data
-            submitClicked(){
+            submitClicked() {
                 $("#confirmationModal").modal('hide')
-                if(this.tempRemovedFileIds.length){
+                if (this.tempRemovedFileIds.length) {
                     this.tempRemovedFileIds.forEach(id => {
                         this.removeServerAttachment(id)
                         this.currentAddedFileIs.filter(item => item !== id)
                     })
                 }
 
-                if(this.attachments.length)
+                if (this.attachments.length)
                     this.addAttachment()
                 else
                     this.addDisaster()
             },
 
             // Checking for validation and reconfirm opening modal
-            confirm(){
+            confirm() {
                 this.$validator.validate().then(result => {
                     if (!result) {
                         console.log('true')
                     }
-                    else{
+                    else {
                         this.disaster.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
                         this.disaster.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
                         $("#confirmationModal").modal('show')

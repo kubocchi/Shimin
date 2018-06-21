@@ -4,19 +4,25 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span> 宮崎市民活動センターからのお知らせ 情報一覧画面</h4>
+            </span>登録団体、行政などからのお知らせ 一覧画面</h4>
         <hr>
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <router-link :to="{ name: 'disasterForm' }">
-                                <button class="btn btn-primary btn-lg btn-active center">新規登録</button>
+					<div class="row">
+						<div class="col-md-4 mb-3">
+                            <router-link :to="{ name: 'noticeEventForm' }">
+                                <button class="btn btn-primary btn-lg btn-block">イベント登録</button>
                             </router-link>
-                        </div>
-                    </div>
-                </div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="btn btn-primary btn-lg btn-block" href="1-2_02signup_v.html" role="button">ボランティア情報登録</a>
+						</div>
+						<div class="col-md-4">
+							<a class="btn btn-primary btn-lg btn-block" href="1-2_02signup_m.html" role="button">会員募集登録</a>
+						</div>
+					</div>
+				</div>
                 <div class="row mt-4">
                     <div class="form-group col-md-2 mb-4">
                         <select v-model="params.type" v-on:change="onTypeChanged" class="form-control" id="attribute_shikatsu">
@@ -26,7 +32,23 @@
                             <option value="3">終了</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4 offset-sm-6">
+                    <div class="form-group col-md-3 mb-4">
+                        <select class="form-control" id="attribute_dantai">
+                            <option>
+                                すべて
+                            </option>
+                            <option>
+                                イベント
+                            </option>
+                            <option>
+                                ボランテイア情報
+                            </option>
+                            <option>
+                                会員募集
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4 offset-sm-3">
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
@@ -61,10 +83,12 @@
                                 <td>{{ disaster.title }}</td>
                                 <td>{{ disaster.start_date }}</td>
                                 <td>
-                                    <button class="btn btn-outline-primary btn-block" role="button">複製</button>
+                                    <router-link :to="{ name: 'disasterForm', params: { model: disaster, requestType: 'copy' }}">
+                                        <button class="btn btn-outline-primary btn-block" role="button">複製</button>
+                                    </router-link>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'disasterForm', params: { model: disaster }}">
+                                    <router-link :to="{ name: 'disasterForm', params: { model: disaster, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
@@ -81,7 +105,7 @@
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">ページ {{ pagination.current_page }} の {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
@@ -96,21 +120,11 @@
 
 <script>
     export default {
-        name: "disaster",
         data() {
             return {
-                selecteddisaster: "",
                 disasters: [],
-                disaster: {
-                    id: "",
-                    name: "",
-                    comments: "",
-                    update_by: "1"
-                },
-                id: "",
                 pagination: {},
                 edit: false,
-                rowCount: 1,
                 params: {
                     search: "",
                     type: 0
@@ -123,6 +137,7 @@
         },
 
         methods: {
+            // Pulling data from API, its a post request with search-term, type
             fetchDisaster(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
@@ -144,6 +159,8 @@
                     })
                     .catch(err => console.log(err))
             },
+
+            // Paginating the table data
             makePagination(meta, links) {
                 let pagination = {
                     current_page: meta.current_page,
@@ -151,52 +168,56 @@
                     next_page_url: links.next,
                     prev_page_url: links.prev
                 };
+
                 this.pagination = pagination;
             },
+
+            // Deleting the selected data
             deleteDisaster(id) {
                 this.$swal({
-                    title: '本気ですか',
-                    text: "これを元に戻すことはできません!",
+                    title: 'このデータを削除しますか？',
+                    text: "削除したデータは元に戻すことができません!",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'はい、削除してください!',
+                    confirmButtonText: 'OK',
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show()
+                        let loader = this.$loading.show();
                         fetch(`api/disaster/${id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())
                         .then(data => {
+                            this.$swal(
+                                '削除しました!',
+                                '選択したデータが削除されました',
+                                'success'
+                            )
                             loader.hide()
-                            this.$swal({
-                                title: "削除された!",
-                                text: "選択したデータが削除されました",
-                                type: "success",
-                                confirmButtonText: "よし",
-                            })
-                            this.fetchDisaster();
+                            this.fetchDisaster()
                         })
-                        .catch(err => console.log(err));
+                        .catch(err => console.log(err))
                     }
                     else {
-                        this.$swal({
-                                title: 'キャンセルされました',
-                                text: 'データは安全です :)',
-                                type: 'error',
-                                confirmButtonText: "よし",
-                            }
+                        this.$swal(
+                            'キャンセルしました',
+                            'データは削除されていません',
+                            'error'
                         )
                     }
                 })
             },
+
+            // Loads table data on changing 
             onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
                 this.fetchDisaster()
             },
+
+            // Clearing the user typed search term
             clearSearch() {
                 this.params.search = ""
                 this.fetchDisaster()

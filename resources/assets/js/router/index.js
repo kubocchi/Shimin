@@ -2,17 +2,24 @@
 
 /***********************Admin-Panel-Components***********************/
 import Dashboard from '../views/Dashboard'
-// Active center Routes
+// 1.1 Active center Routes
 import ActiveCenterForm from '../views/admin/activeCenter/Form'
 import ActiveCenterList from '../views/admin/activeCenter/List'
 
-// Disaster Routes
+// 1.2 Notice Routes
+import NoticeEventForm from '../views/admin/notice/event/form'
+import NoticeVolunteerForm from '../views/admin/notice/volunteer/form'
+import NoticeList from '../views/admin/notice/list'
+
+// 1.3 Subsidy Routes
+import SubsidyForm from '../views/admin/subsidy/Form'
+import SubsidyList from '../views/admin/subsidy/List'
+
+// 1.4 Disaster Routes
 import DisasterForm from '../views/admin/disaster/Form'
 import DisasterList from '../views/admin/disaster/List'
 
-// Subsidy Routes
-import SubsidyForm from '../views/admin/subsidy/Form'
-import SubsidyList from '../views/admin/subsidy/List'
+
 /***********************Admin-Panel-Components***********************/
 
 
@@ -59,22 +66,28 @@ const routes = [
                 ]
             },
             {
-                path: '/admin/disaster',
-                redirect: '/disaster/list',
+                path: '/admin/notice',
+                redirect: '/notice/list',
                 component: {
                     render(c) { return c('router-view'); }
                 },
                 children: [
                     {
-                        path: 'form',
-                        name: 'disasterForm',
-                        component: DisasterForm,
+                        path: 'event/form',
+                        name: 'noticeEventForm',
+                        component: NoticeEventForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'volunteer/form',
+                        name: 'noticeVolunteerForm',
+                        component: NoticeVolunteerForm,
                         meta: 'admin'
                     },
                     {
                         path: 'list',
-                        name: 'disasterList',
-                        component: DisasterList,
+                        name: 'noticeList',
+                        component: NoticeList,
                         meta: 'admin'
                     }
                 ]
@@ -96,6 +109,27 @@ const routes = [
                         path: 'list',
                         name: 'subsidyList',
                         component: SubsidyList,
+                        meta: 'admin'
+                    }
+                ]
+            },
+            {
+                path: '/admin/disaster',
+                redirect: '/disaster/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'disasterForm',
+                        component: DisasterForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'disasterList',
+                        component: DisasterList,
                         meta: 'admin'
                     }
                 ]

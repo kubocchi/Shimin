@@ -75,6 +75,11 @@ import VeeValidate, { Validator } from 'vee-validate';
 Validator.localize('ja', ja);
 Vue.use(VeeValidate);
 
+// Vue-select
+import vSelect from 'vue-select'
+Vue.component('v-select', vSelect)
+
+
 /***********************END BACKEND***********************/
 
 // Routes

@@ -35,7 +35,9 @@
                                 <router-link :to="{ name: 'activeCenterList' }">
                                     <button class="dropdown-item">宮崎市民可動センターからのお知らせ</button>
                                 </router-link>
-                                <a class="dropdown-item" href="pages/1-2_01list.html">登録団体、行政等からのお知らせ</a>
+                                 <router-link :to="{ name: 'noticeList' }">
+                                    <button class="dropdown-item">登録団体、行政等からのお知らせ</button>
+                                </router-link>
                                  <router-link :to="{ name: 'subsidyList' }">
                                     <button class="dropdown-item">助成金情報</button>
                                 </router-link>
