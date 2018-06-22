@@ -20,6 +20,7 @@ class MembershipResource extends JsonResource
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'file' => $this->file,
+            'is_payment' => $this->is_payment,
             'content' => $this->content,
             'amount' => $this->amount,
             'payment_type' => $this->payment_type,

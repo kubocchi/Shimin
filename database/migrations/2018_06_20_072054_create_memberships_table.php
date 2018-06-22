@@ -19,11 +19,12 @@ class CreateMembershipsTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('file')->nullable();
-            $table->longText('content');
-            $table->decimal('amount', 8, 0);
-            $table->boolean('payment_type');
-            $table->string('linkname');
-            $table->longText('contact');
+            $table->longText('content')->nullable();
+            $table->boolean('is_payment')->nullable();
+            $table->decimal('amount', 8, 0)->nullable();
+            $table->boolean('payment_type')->nullable();
+            $table->string('linkname')->nullable();
+            $table->longText('contact')->nullable();
             $table->boolean('deactivate');
             $table->integer('created_by');
             $table->integer('updated_by');

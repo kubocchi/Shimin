@@ -53,12 +53,12 @@
 							
                             <div class="form-group  col-lg-12">
 								<label for="contents">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
-								<textarea class="form-control" id="contents" required="" rows="3"></textarea>
+								<textarea v-model="membership.content" class="form-control" id="contents" required="" rows="3"></textarea>
 							</div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【会費】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="membership.membership_fee"  @change="onChange" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: '有', unchecked: '無' }"
+                                    <toggle-button v-model="membership.is_payment"  @change="onChange" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: '有', unchecked: '無' }"
                                     />
                                 </div>
                                 <div class="col-lg-12  form-group" :disabled="isDisabled">
@@ -77,11 +77,11 @@
 							<div class="form-group  col-lg-12">
 								【関連URL】
 								<br>
-								<input class="form-control" id="linkname" type="text">
+								<input v-model="membership.linkname" class="form-control" id="linkname" type="text">
 							</div>
 							<div class="form-group  col-lg-12">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
-								<textarea class="form-control" id="contact" required="" rows="3"></textarea>
+                                <wysiwyg v-model="membership.contact"  name="content" data-vv-as="掲載内容" type="text" />
 							</div>
 
                             <div class="col-lg-12 form-group">
@@ -125,35 +125,19 @@
                                                                 <div>
                                                                     <div>
                                                                         <label>【件名】</label>
-                                                                        <p>{{membership.subject}}</p>
+                                                                        <p>{{membership.organizer}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【フォーマット】</label>
-                                                                        <p>イベント</p>
+                                                                        <p>会員募集</p>
                                                                     </div>
-                                                                    <div>
-                                                                        <label>【活動カテゴリ】</label>
-                                                                        <p>{{membership.activity_category}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【子供の参加】</label>
-                                                                        <p>{{!!membership.children === true? 'はい' : 'いいえ'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【開催日】</label>
-                                                                        <p>{{membership.membership_date}}</p>
-                                                                    </div>
-                                                                    <div>
+                                                                     <div>
                                                                         <label>【掲載開始日】</label>
                                                                         <p>{{membership.start_date}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【掲載終了日】</label>
                                                                         <p>{{membership.end_date}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【主催】</label>
-                                                                        <p>{{membership.organizer}}</p>
                                                                     </div>
                                                                     <div>
                                                                        <label>【イメージ画像】</label>
@@ -167,40 +151,21 @@
                                                                         </div>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【締切日】</label>
-                                                                        <p>{{membership.deadline}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会場】</label>
-                                                                        <p>{{membership.venue}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【定員】</label>
-                                                                        <p>{{membership.capacity}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【対象者】</label>
-                                                                        <p>{{membership.target}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【申込方法】</label>
-                                                                        <p>{{membership.how_to_apply}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【費用】</label>
-                                                                        <p>{{membership.cost}}</p>
-                                                                    </div>
-                                                                    <div>
                                                                         <label>【内容詳細】</label>
-                                                                        <p>{{membership.detail}}</p>
+                                                                        <p>{{membership.content}}</p>
                                                                     </div>
+                                                                    <div>
+                                                                        <label>【会費】</label>
+                                                                        <p>{{!!membership.is_payment === true? 'はい' : 'いいえ'}}</p>
+                                                                    </div>
+                                                                    
                                                                     <div>
                                                                         <label>【関連URL】</label>
-                                                                        <p>{{membership.url}}</p>
+                                                                        <p>{{membership.linkname}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【問い合わせ先】</label>
-                                                                        <p  v-html="membership.phone"></p>
+                                                                        <p  v-html="membership.contact"></p>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -256,12 +221,13 @@
                     start_date: "",
                     end_date: "",
                     file: "",
-                    contents: "",
+                    content: "",
+                    is_payment: "",
                     amount: "",
                     payment_type: "",
                     linkname: "",
                     contact: "",
-                    deactivate: "",
+                    deactivate: false,
                     created_by: 1,
                     updated_by: 1,
                 },

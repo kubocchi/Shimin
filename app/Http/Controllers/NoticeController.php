@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Volunteer;
+use App\Membership;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Resources\NoticeResource;
 use Illuminate\Pagination\Paginator;
@@ -21,7 +22,8 @@ class NoticeController extends Controller
         // Get ActiveCenters
         $events = Event::select('id', 'subject')->get();
         $volunteers = Volunteer::select('id', 'subject')->get();
-        $mergedData = $events->merge($volunteers)->sortByDesc('id');
+        $memberships = Membership::select('id', 'organizer')->get();
+        $mergedData = $events->merge($volunteers)->merge($memberships)->sortByDesc('id');
 
         // $events = Event::select('id', 'subject')->get()->toArray();
         // $volunteers = Volunteer::select('id', 'subject')->get()->toArray();

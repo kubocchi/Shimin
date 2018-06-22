@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Membership;
+use App\Http\Resources\MembershipResource;
 class MembershipController extends Controller
 {
     /**
@@ -34,6 +35,7 @@ class MembershipController extends Controller
         $membership->end_date= $request->input('end_date');
         $membership->file= $request->input('file');
         $membership->content= $request->input('content');
+        $membership->is_payment= $request->input('is_payment');
         $membership->amount= $request->input('amount');
         $membership->payment_type= $request->input('payment_type');
         $membership->linkname= $request->input('linkname');
