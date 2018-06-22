@@ -21,7 +21,9 @@
                             </router-link>
 						</div>
 						<div class="col-md-4">
-							<a class="btn btn-primary btn-lg btn-block" href="1-2_02signup_m.html" role="button">会員募集登録</a>
+                            <router-link :to="{ name: 'noticeMembershipForm' }">
+                                <button class="btn btn-primary btn-lg btn-block">会員募集登録</button>
+                            </router-link>
 						</div>
 					</div>
 				</div>
@@ -54,7 +56,7 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchDisaster()">
+                                <button class="btn btn-outline-primary" @click="fetchNotice()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
@@ -80,22 +82,22 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="(disaster, rowNumber) in disasters" v-bind:key="disaster.id">
+                            <tr v-for="(notice, rowNumber) in notices" v-bind:key="notice.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ disaster.title }}</td>
-                                <td>{{ disaster.start_date }}</td>
+                                <td>{{ notice.subject }}</td>
+                                <td>{{ notice.id }}</td>
                                 <td>
-                                    <router-link :to="{ name: 'disasterForm', params: { model: disaster, requestType: 'copy' }}">
+                                    <router-link :to="{ name: 'noticeForm', params: { model: notice, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>
                                     </router-link>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'disasterForm', params: { model: disaster, requestType: 'edit' }}">
+                                    <router-link :to="{ name: 'noticeForm', params: { model: notice, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteDisaster(disaster.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteNotice(notice.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -103,7 +105,7 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchDisaster(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#" @click="fetchNotice(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
@@ -111,7 +113,7 @@
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchDisaster(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#" @click="fetchNotice(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -124,7 +126,7 @@
     export default {
         data() {
             return {
-                disasters: [],
+                notices: [],
                 pagination: {},
                 edit: false,
                 params: {
@@ -135,28 +137,22 @@
         },
 
         created() {
-            this.fetchDisaster();
+            this.fetchNotice();
         },
 
         methods: {
             // Pulling data from API, its a post request with search-term, type
-            fetchDisaster(page_url) {
+            fetchNotice(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || "/api/disasters";
+                page_url = page_url || "/api/notices";
 
-                fetch(page_url, {
-                    method: "post",
-                    body: JSON.stringify(this.params),
-                    headers: {
-                        "content-type": "application/json"
-                    }
-                })
+                fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
-                        this.disasters = res.data;
-                        console.log(this.disasters);
-                        vm.makePagination(res.meta, res.links);
+                        this.notices = res.data;
+                        console.log(res.data);
+                        //vm.makePagination(res.meta, res.links);
                         loader.hide()
                     })
                     .catch(err => console.log(err))
@@ -175,7 +171,7 @@
             },
 
             // Deleting the selected data
-            deleteDisaster(id) {
+            deleteNotice(id) {
                 this.$swal({
                     title: 'このデータを削除しますか？',
                     text: "削除したデータは元に戻すことができません!",
@@ -188,7 +184,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let loader = this.$loading.show();
-                        fetch(`api/disaster/${id}`, {
+                        fetch(`api/notice/${id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())
@@ -199,7 +195,7 @@
                                 'success'
                             )
                             loader.hide()
-                            this.fetchDisaster()
+                            this.fetchNotice()
                         })
                         .catch(err => console.log(err))
                     }
@@ -216,13 +212,13 @@
             // Loads table data on changing 
             onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
-                this.fetchDisaster()
+                this.fetchNotice()
             },
 
             // Clearing the user typed search term
             clearSearch() {
                 this.params.search = ""
-                this.fetchDisaster()
+                this.fetchNotice()
             }
         }
     };

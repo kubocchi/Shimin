@@ -23,15 +23,13 @@
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-4">
                                     <label for="active_category">【活動カテゴリ】</label>
-                                    <multiselect v-model="event.activity_category" :options="categories.map(category => category.id)" 
-                                        :custom-label="category => categories.find(x => x.id == category).name"
-                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する"
-                                        selectedLabel="選ばれた"  track-by="id" label="name" 
+                                    <multiselect v-model="acitvityCategorySelected" :options="categories" @select="onSelect"  track-by="id" label="name" 
+                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
                                         v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"></multiselect>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-4">
-                                    <label class="col-form-label">【掲載開始日】（必須）</label>
+                                    <label class="col-form-label">【開催日】（必須）</label>
                                     <div class="row">
                                         <vue-datepicker-local v-model="eventDate" :local="local" :format="dateFormat"></vue-datepicker-local>
                                     </div>
@@ -47,7 +45,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【子供の参加】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="event.children" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="event.children" :width="60" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
                                     />
                                 </div>
                             </div>
@@ -62,7 +60,7 @@
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                            <input type="file" multiple="multiple" accept="image/*" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
                                         </label>
 
                                         <div class="form-group files">
@@ -114,13 +112,14 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
-                                <textarea v-model="event.phone" class="form-control" id="contact" required="" rows="3"></textarea>
+                                <!-- <textarea v-model="event.phone" class="form-control" id="contact" required="" rows="3"></textarea> -->
+                                <wysiwyg v-model="event.phone"  name="content" data-vv-as="掲載内容" type="text" />
                             </div>
 
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="event.deactivate" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="event.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
                                     />
                                 </div>
                             </div>
@@ -162,7 +161,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【フォーマット】</label>
-                                                                        <p>{{event.activity_category}}</p>
+                                                                        <p>イベント</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動カテゴリ】</label>
@@ -170,7 +169,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【子供の参加】</label>
-                                                                        <p>{{event.children}}</p>
+                                                                        <p>{{!!event.children === true? 'はい' : 'いいえ'}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【開催日】</label>
@@ -233,7 +232,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【問い合わせ先】</label>
-                                                                        <p>{{event.phone}}Link</p>
+                                                                        <p  v-html="event.phone"></p>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -360,6 +359,7 @@
                     { id: "2000", name: "条例に基づく活動" },
                     { id: "2100", name: "その他" }
                 ],
+                acitvityCategorySelected: ""
             };
         },
         computed: {
@@ -658,6 +658,12 @@
                         $("#confirmationModal").modal("show");
                     }
                 });
+            },
+            onSelect(selectedOption, id) {
+                if(selectedOption){
+                    this.event.activity_category = selectedOption.id
+                    console.log(selectedOption.id)
+                }
             }
         }
     };

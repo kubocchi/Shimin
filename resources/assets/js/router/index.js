@@ -9,6 +9,7 @@ import ActiveCenterList from '../views/admin/activeCenter/List'
 // 1.2 Notice Routes
 import NoticeEventForm from '../views/admin/notice/event/form'
 import NoticeVolunteerForm from '../views/admin/notice/volunteer/form'
+import NoticeMembershipForm from '../views/admin/notice/membership/form'
 import NoticeList from '../views/admin/notice/list'
 
 // 1.3 Subsidy Routes
@@ -82,6 +83,12 @@ const routes = [
                         path: 'volunteer/form',
                         name: 'noticeVolunteerForm',
                         component: NoticeVolunteerForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'membership/form',
+                        name: 'noticeMembershipForm',
+                        component: NoticeMembershipForm,
                         meta: 'admin'
                     },
                     {

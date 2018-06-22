@@ -3,7 +3,7 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span>ボランティア 情報登録画面</h4>
+            </span>会員募集 情報登録画面</h4>
         <hr>
 
         <div class="row">
@@ -12,56 +12,34 @@
                     <form action="" method="post">
                         <fieldset>
                             <div class="form-group col-lg-12">
-                                <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input v-model="volunteer.subject" class="form-control" id="subject" type="text" v-validate="'required'" name="subject" data-vv-as="件名">
-                                <span class="is-danger">{{ errors.first('subject') }}</span>
-                            </div>
-                            <div class="col-lg-12">
-                                <label>【フォーマット】</label>
-                                <p>ボランティア</p>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-12 col-lg-6">
-                                    <label for="active_category">【活動カテゴリ】</label>
-                                   <multiselect v-model="acitvityCategorySelected" :options="categories" @select="onSelect"
-                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する"
-                                        selectedLabel="選ばれた"  track-by="id" label="name" 
-                                        v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"></multiselect>
-                                    <span class="is-danger">{{ errors.first('activity_category') }}</span>
-                                </div>
-                                <div class="form-group col-sm-12 col-lg-6">
-                                    <label class="col-form-label">【掲載開始日】（必須）</label>
-                                    <div class="row">
-                                        <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label">【子供の参加】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="volunteer.children" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label" for="sponsor">【主催】</label>
-                                <input v-model="volunteer.organizer" class="form-control" id="sponsor" type="text" v-validate="'required'" name="organizer" data-vv-as="主催">
+								<label class="col-form-label" for="organizer">【団体名】（必須）</label>
+								<input v-model="membership.organizer" class="form-control" id="organizer" type="text" v-validate="'required'" name="subject" data-vv-as="件名">
                                 <span class="is-danger">{{ errors.first('organizer') }}</span>
-                            </div>
+							</div>
+							<div  class="form-group col-lg-12">
+								<label>【フォーマット】</label>
+								<p>会員募集</p>
+							</div>
+							
                             <div class="col-lg-12 form-group">
-                                <label for="inputFile">【添付ファイル】</label>
+                                <label class="col-form-label">【掲載開始日】（必須）</label>
+                                <div class="row">
+                                    <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 form-group">
+                                <label for="inputFile">【イメージ画像】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                            <input type="file" multiple="multiple" accept="image/*" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
                                         </label>
 
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                                 <div class="form-group">
-                                                    <button class="btn btn-outline-danger btn-sm" @click.prvolunteer="removeAttachment(attachment)">
+                                                    <button class="btn btn-outline-danger btn-sm" @click.prevent="removeAttachment(attachment)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
                                                     <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1))
@@ -72,53 +50,44 @@
                                     </div>
                                 </div>
                             </div>
+							
+                            <div class="form-group  col-lg-12">
+								<label for="contents">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
+								<textarea class="form-control" id="contents" required="" rows="3"></textarea>
+							</div>
                             <div class="col-lg-12 form-group">
-								<label class="col-form-label" for="activity_date">【活動日時】例）常時募集、毎週○曜、○月○日～○月○日、など。</label>
-								<input v-model="volunteer.activity_date" class="form-control" id="activity_date" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label class="col-form-label" for="deadline">【締切日】例）先着順、締切日、など。</label>
-								<input v-model="volunteer.deadline" class="form-control" id="deadline" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label class="col-form-label" for="activity_location">【活動場所】例）○○公園、○○会館○階、主に○川の川原、など。</label>
-								<input v-model="volunteer.activity_location" class="form-control" id="activity_location" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label class="col-form-label" for="number_of_people">【募集人数】</label>
-								<input v-model="volunteer.number_of_people" class="form-control" id="number_of_people" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label class="col-form-label" for="orientation">【オリエンテーションの有無】</label>
-								<input v-model="volunteer.orientation" class="form-control" id="orientation" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label class="col-form-label" for="cost">【費用負担】例）集合場所から活動場所への交通費、お弁当、行事保険代○円、など。</label>
-								<input v-model="volunteer.cost" class="form-control" id="cost" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label class="col-form-label" for="subscription">【申込方法】例）事前に電話、当日来場可、等の申込方法。</label>
-								<input v-model="volunteer.subscription" class="form-control" id="subscription" type="text">
-							</div>
-							<div class="col-lg-12 form-group">
-								<label for="content">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
-								<textarea v-model="volunteer.content" class="form-control" id="content" required="" rows="3"></textarea>
-							</div>
-							<div class="col-lg-12 form-group">
+                                <label class="col-form-label">【会費】</label>
+                                <div class="form-group row">
+                                    <toggle-button v-model="membership.membership_fee"  @change="onChange" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: '有', unchecked: '無' }"
+                                    />
+                                </div>
+                                <div class="col-lg-12  form-group" :disabled="isDisabled">
+                                    <div class="form-group form-inline text-right">
+                                        <label class="col-form-label" for="dues_price">
+                                        </label>
+                                        <input class="form-control " v-model="membership.membership_fee"  id="dues_price" type="number">円
+                                    </div>
+                                    <div class="row">
+                                        <toggle-button v-model="membership.payment_type" :value="true" :disabled='false' 
+                                        :color="{checked: switchColorOther, unchecked: switchColorOther}" :sync="true" :labels="{ checked: '月', unchecked: '年' }"/>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+							<div class="form-group  col-lg-12">
 								【関連URL】
 								<br>
-								<input v-model="volunteer.linkname" class="form-control" id="linkname" type="text">
+								<input class="form-control" id="linkname" type="text">
 							</div>
-							<div class=" col-lg-12 form-group">
+							<div class="form-group  col-lg-12">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
-								<!-- <textarea v-model="volunteer.contact" class="form-control" id="contact" required="" rows="3"></textarea> -->
-                                <wysiwyg v-model="volunteer.contact"  name="content" data-vv-as="掲載内容" type="text" />
+								<textarea class="form-control" id="contact" required="" rows="3"></textarea>
 							</div>
 
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="volunteer.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="membership.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
                                     />
                                 </div>
                             </div>
@@ -140,7 +109,7 @@
                                             <h4 class="modal-title">
                                                 <span>
                                                     <i class="fas fa-dove"></i>
-                                                </span>ボランティア情報 登録確認画面
+                                                </span>イベント情報 登録確認画面
                                             </h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
@@ -156,34 +125,38 @@
                                                                 <div>
                                                                     <div>
                                                                         <label>【件名】</label>
-                                                                        <p>{{volunteer.subject}}</p>
+                                                                        <p>{{membership.subject}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【フォーマット】</label>
-                                                                        <p>ボランティア</p>
+                                                                        <p>イベント</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動カテゴリ】</label>
-                                                                        <p>{{volunteer.subject}}</p>
+                                                                        <p>{{membership.activity_category}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【子供の参加】</label>
-                                                                        <p>{{volunteer.children}}</p>
+                                                                        <p>{{!!membership.children === true? 'はい' : 'いいえ'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【開催日】</label>
+                                                                        <p>{{membership.membership_date}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【掲載開始日】</label>
-                                                                        <p>{{volunteer.start_date}}</p>
+                                                                        <p>{{membership.start_date}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【掲載終了日】</label>
-                                                                        <p>{{volunteer.end_date}}</p>
+                                                                        <p>{{membership.end_date}}</p>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【募集団体】</label>
-                                                                        <p>{{volunteer.sponsor}}</p>
+                                                                        <label>【主催】</label>
+                                                                        <p>{{membership.organizer}}</p>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【イメージ画像】</label>
+                                                                       <label>【イメージ画像】</label>
                                                                         <div class="form-group files">
                                                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                                                                 <ul class="form-group">
@@ -194,44 +167,40 @@
                                                                         </div>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【活動日時】</label>
-                                                                        <p>{{volunteer.activity_date}}</p>
-                                                                    </div>
-                                                                    <div>
                                                                         <label>【締切日】</label>
-                                                                        <p>{{volunteer.deadline}}</p>
+                                                                        <p>{{membership.deadline}}</p>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【活動場所】</label>
-                                                                        <p>{{volunteer.activity_location}}</p>
+                                                                        <label>【会場】</label>
+                                                                        <p>{{membership.venue}}</p>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【募集人数】</label>
-                                                                        <p>{{volunteer.number_of_people}}</p>
+                                                                        <label>【定員】</label>
+                                                                        <p>{{membership.capacity}}</p>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【オリエンテーションの有無】</label>
-                                                                        <p>{{volunteer.orientation}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【費用負担】</label>
-                                                                        <p>{{volunteer.cost}}</p>
+                                                                        <label>【対象者】</label>
+                                                                        <p>{{membership.target}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【申込方法】</label>
-                                                                        <p>{{volunteer.subscription}}</p>
+                                                                        <p>{{membership.how_to_apply}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【費用】</label>
+                                                                        <p>{{membership.cost}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【内容詳細】</label>
-                                                                        <p>{{volunteer.content}}</p>
+                                                                        <p>{{membership.detail}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【関連URL】</label>
-                                                                        <p>{{volunteer.linkname}}</p>
+                                                                        <p>{{membership.url}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【問い合わせ先】</label>
-                                                                        <p v-html="volunteer.contact"></p>
+                                                                        <p  v-html="membership.phone"></p>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -281,34 +250,26 @@
         components: { VueDatepickerLocal, Multiselect },
         data() {
             return {
-                volunteer: {
+                membership: {
                     id: "",
-                    subject: "",
-                    activity_category: "",
-                    children: true,
+                    organizer: "",
                     start_date: "",
                     end_date: "",
-                    sponsor: "",
                     file: "",
-                    activity_date: "",
-                    deadline: "",
-                    activity_location: "",
-                    number_of_people: "",
-                    orientation: "",
-                    cost: "",
-                    subscription: "",
-                    content: "",
+                    contents: "",
+                    amount: "",
+                    payment_type: "",
                     linkname: "",
                     contact: "",
-                    deactivate: false,
+                    deactivate: "",
                     created_by: 1,
-                    updated_by: 1
+                    updated_by: 1,
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
                 switchColorDeactivate: "#DC3545",
                 switchColorOther: "#0066CC",
-                volunteerDate: new Date(),
+                membershipDate: new Date(),
                 range: [new Date(), new Date()],
                 emptyTime: "",
                 emptyRange: [],
@@ -358,7 +319,8 @@
                     { id: "2000", name: "条例に基づく活動" },
                     { id: "2100", name: "その他" }
                 ],
-                acitvityCategorySelected: ""
+                acitvityCategorySelected: "",
+                isDisabled: true
             };
         },
         computed: {
@@ -377,18 +339,18 @@
 
         methods: {
             // Add new, sends model to API
-            addVolunteer() {
-                this.volunteer.file = this.currentAddedFileIs.join(",");
+            addMembership() {
+                this.membership.file = this.currentAddedFileIs.join(",");
 
                 let self = this;
-                console.log(this.volunteer);
+                console.log(this.membership);
 
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show();
-                    fetch("api/volunteer", {
+                    fetch("api/membership", {
                         method: "post",
-                        body: JSON.stringify(this.volunteer),
+                        body: JSON.stringify(this.membership),
                         headers: {
                             "content-type": "application/json"
                         }
@@ -413,9 +375,9 @@
                 } else {
                     // Update
                     let loader = this.$loading.show();
-                    fetch("api/volunteer", {
+                    fetch("api/membership", {
                         method: "put",
-                        body: JSON.stringify(this.volunteer),
+                        body: JSON.stringify(this.membership),
                         headers: {
                             "content-type": "application/json"
                         }
@@ -441,35 +403,35 @@
             },
 
             // Edit new, sends model to API
-            fillFormWithRecievedModel(volunteer) {
-                this.pullAttachments(volunteer);
+            fillFormWithRecievedModel(membership) {
+                this.pullAttachments(membership);
 
-                this.range[0] = new Date(volunteer.start_date);
-                this.range[1] = new Date(volunteer.end_date);
+                this.range[0] = new Date(membership.start_date);
+                this.range[1] = new Date(membership.end_date);
 
-                this.volunteer.subject = volunteer.subject;
-                this.volunteer.activity_category = volunteer.activity_category;
-                this.volunteer.children = volunteer.children;
-                this.volunteer.volunteer_date = volunteer.volunteer_date;
-                this.volunteer.start_date = volunteer.start_date;
-                this.volunteer.end_date = volunteer.end_date;
-                this.volunteer.organizer = volunteer.organizer;
-                this.volunteer.file = volunteer.file;
-                this.volunteer.deadline = volunteer.deadline;
-                this.volunteer.venue = volunteer.venue;
-                this.volunteer.capacity = volunteer.capacity;
-                this.volunteer.target = volunteer.target;
-                this.volunteer.how_to_apply = volunteer.how_to_apply;
-                this.volunteer.cost = volunteer.cost;
-                this.volunteer.detail = volunteer.detail;
-                this.volunteer.url = volunteer.url;
-                this.volunteer.phone = volunteer.phone;
-                this.volunteer.deactivate = !!volunteer.deactivate == 1 ? true : false;
-                this.volunteer.created_by = volunteer.created_by;
-                this.volunteer.updated_by = volunteer.updated_by;
+                this.membership.subject = membership.subject;
+                this.membership.activity_category = membership.activity_category;
+                this.membership.children = membership.children;
+                this.membership.membership_date = membership.membership_date;
+                this.membership.start_date = membership.start_date;
+                this.membership.end_date = membership.end_date;
+                this.membership.organizer = membership.organizer;
+                this.membership.file = membership.file;
+                this.membership.deadline = membership.deadline;
+                this.membership.venue = membership.venue;
+                this.membership.capacity = membership.capacity;
+                this.membership.target = membership.target;
+                this.membership.how_to_apply = membership.how_to_apply;
+                this.membership.cost = membership.cost;
+                this.membership.detail = membership.detail;
+                this.membership.url = membership.url;
+                this.membership.phone = membership.phone;
+                this.membership.deactivate = !!membership.deactivate == 1 ? true : false;
+                this.membership.created_by = membership.created_by;
+                this.membership.updated_by = membership.updated_by;
 
                 // For Files
-                if (volunteer.file) this.currentAddedFileIs = volunteer.file.split(",");
+                if (membership.file) this.currentAddedFileIs = membership.file.split(",");
             },
 
             // Analyzing attachmet file size
@@ -530,9 +492,9 @@
 
                 var config = {
                     headers: { "Content-Type": "multipart/form-data" },
-                    onUploadProgress: function (progressvolunteer) {
+                    onUploadProgress: function (progressmembership) {
                         this.percentCompleted = Math.round(
-                            progressvolunteer.loaded * 100 / progressvolunteer.total
+                            progressmembership.loaded * 100 / progressmembership.total
                         );
                         console.log(this.percentCompleted);
                         this.width = this.percentCompleted + "%";
@@ -551,7 +513,7 @@
                                 console.log("Successfull upload");
                                 this.currentAddedFileIs.push(response.data.data);
                                 this.resetData();
-                                this.addVolunteer();
+                                this.addMembership();
                                 $("#progressModal").modal("hide");
                             } else {
                                 console.log("Unsuccessful Upload");
@@ -598,10 +560,10 @@
             },
 
             // Pull required attachmets
-            pullAttachments(volunteer) {
+            pullAttachments(membership) {
                 // Make HTTP request to store announcement
                 axios
-                    .get(`api/asset/attachments/${volunteer.file}`)
+                    .get(`api/asset/attachments/${membership.file}`)
                     .then(
                         function (response) {
                             console.log(response);
@@ -630,7 +592,7 @@
                 }
 
                 if (this.attachments.length) this.addAttachment();
-                else this.addVolunteer();
+                else this.addMembership();
             },
 
             // Checking for validation and reconfirm opening modal
@@ -647,11 +609,11 @@
                             confirmButtonText: "OK"
                         });
                     } else {
-                        this.volunteer.volunteer_date = moment(String(this.volunteerDate)).format("YYYY-MM-DD");
-                        this.volunteer.start_date = !!this.range
+                        this.membership.membership_date = moment(String(this.membershipDate)).format("YYYY-MM-DD");
+                        this.membership.start_date = !!this.range
                             ? moment(String(this.range[0])).format("YYYY-MM-DD")
                             : "";
-                        this.volunteer.end_date = !!this.range
+                        this.membership.end_date = !!this.range
                             ? moment(String(this.range[1])).format("YYYY-MM-DD")
                             : "";
                         $("#confirmationModal").modal("show");
@@ -660,9 +622,13 @@
             },
             onSelect(selectedOption, id) {
                 if(selectedOption){
-                    this.volunteer.activity_category = selectedOption.id
+                    this.membership.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                 }
+            },
+            onChange(value, srcmembership){
+                //console.log(value)
+                isDisabled = value
             }
         }
     };
