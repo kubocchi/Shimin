@@ -16,7 +16,9 @@
                             </router-link>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="btn btn-primary btn-lg btn-block" href="1-2_02signup_v.html" role="button">ボランティア情報登録</a>
+                            <router-link :to="{ name: 'noticeVolunteerForm' }">
+                                <button class="btn btn-primary btn-lg btn-block">ボランティア情報登録</button>
+                            </router-link>
 						</div>
 						<div class="col-md-4">
 							<a class="btn btn-primary btn-lg btn-block" href="1-2_02signup_m.html" role="button">会員募集登録</a>

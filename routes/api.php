@@ -41,7 +41,35 @@ Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
 // List single active-center
 Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
 
-# 1.2 Subsidy routes
+# 1.2.1 Event routes
+// List event
+Route::get('events', 'EventController@index');
+// List single event
+Route::get('event/{id}', 'EventController@show');
+// Create new event
+Route::post('event', 'EventController@store');
+// Update event
+Route::put('event', 'EventController@store');
+// Delete event
+Route::delete('event/{id}', 'EventController@destroy');
+// List with parameters
+Route::post('events', 'EventController@getEventData');
+
+# 1.2.2 Volunteer routes
+// List volunteer
+Route::get('volunteers', 'VolunteerController@index');
+// List single volunteer
+Route::get('volunteer/{id}', 'VolunteerController@show');
+// Create new volunteer
+Route::post('volunteer', 'VolunteerController@store');
+// Update volunteer
+Route::put('volunteer', 'VolunteerController@store');
+// Delete volunteer
+Route::delete('volunteer/{id}', 'VolunteerController@destroy');
+// List volunteer with parameters
+Route::post('volunteers', 'volunteerController@getEventData');
+
+# 1.3 Subsidy routes
 // List Subsidy
 Route::get('subsidies', 'SubsidyController@index');
 // List single Subsidy
@@ -68,19 +96,7 @@ Route::put('disaster', 'DisasterController@store');
 Route::delete('disaster/{id}', 'DisasterController@destroy');
 
 
-# 2.1 Event routes
-// List event
-Route::get('events', 'EventController@index');
-// List single event
-Route::get('event/{id}', 'EventController@show');
-// Create new event
-Route::post('event', 'EventController@store');
-// Update event
-Route::put('event', 'EventController@store');
-// Delete event
-Route::delete('event/{id}', 'EventController@destroy');
-// List single active-center
-Route::post('events', 'EventController@getEventData');
+
 
 
 

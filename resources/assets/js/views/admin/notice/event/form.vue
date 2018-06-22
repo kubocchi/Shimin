@@ -189,8 +189,15 @@
                                                                         <p>{{event.organizer}}</p>
                                                                     </div>
                                                                     <div>
-                                                                        <label>【イメージ画像】</label>
-                                                                        <p>{{event.title}}</p>
+                                                                       <label>【イメージ画像】</label>
+                                                                        <div class="form-group files">
+                                                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                                <ul class="form-group">
+                                                                                    <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                        / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <div>
                                                                         <label>【締切日】</label>
