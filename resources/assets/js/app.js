@@ -79,6 +79,10 @@ Vue.use(VeeValidate);
 import vSelect from 'vue-select'
 Vue.component('v-select', vSelect)
 
+// Pretty Checkbox
+import PrettyCheckbox from 'pretty-checkbox-vue';
+Vue.use(PrettyCheckbox);
+
 
 /***********************END BACKEND***********************/
 

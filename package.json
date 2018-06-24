@@ -24,6 +24,7 @@
 	},
 	"dependencies": {
 		"moment": "^2.22.2",
+		"pretty-checkbox-vue": "^1.1.8",
 		"vee-validate": "^2.1.0-beta.1",
 		"vue-datepicker-local": "^1.0.14",
 		"vue-js-toggle-button": "^1.2.3",

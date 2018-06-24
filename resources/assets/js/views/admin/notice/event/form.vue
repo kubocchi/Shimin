@@ -275,7 +275,6 @@
 
 <script>
     import VueDatepickerLocal from "vue-datepicker-local";
-    import moment from "moment";
     import Multiselect from "vue-multiselect";
 
     export default {
@@ -543,8 +542,7 @@
 
                 //Make HTTP request to store announcement
                 $("#progressModal").modal({ backdrop: "static" }, "show");
-                axios
-                    .post("/api/attachments/store", this.uploadedData, config)
+                axios.post("/api/attachments/store", this.uploadedData, config)
                     .then(
                         function (response) {
                             console.log(response);
@@ -559,8 +557,22 @@
                             }
                         }.bind(this)
                     ) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log("Attachment catch", error);
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            if(error.response.status === 413){
+                                $("#progressModal").modal("hide");
+                                 this.$swal({
+                                    title: "警告!",
+                                    text: "必須フィールドに記入してください",
+                                    type: "warning",
+                                    animation: false,
+                                    customClass: "animated tada",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+                                
+                        }
                     });
                 console.log(attachments);
             },
@@ -648,12 +660,12 @@
                             confirmButtonText: "OK"
                         });
                     } else {
-                        this.event.event_date = moment(String(this.eventDate)).format("YYYY-MM-DD");
+                        this.event.event_date = this.eventDate.toISOString().slice(0,10)
                         this.event.start_date = !!this.range
-                            ? moment(String(this.range[0])).format("YYYY-MM-DD")
+                            ? this.range[0].toISOString().slice(0,10)
                             : "";
                         this.event.end_date = !!this.range
-                            ? moment(String(this.range[1])).format("YYYY-MM-DD")
+                            ? this.range[1].toISOString().slice(0,10)
                             : "";
                         $("#confirmationModal").modal("show");
                     }

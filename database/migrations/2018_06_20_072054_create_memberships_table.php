@@ -21,8 +21,8 @@ class CreateMembershipsTable extends Migration
             $table->string('file')->nullable();
             $table->longText('content')->nullable();
             $table->boolean('is_payment')->nullable();
-            $table->decimal('amount', 8, 0)->nullable();
-            $table->boolean('payment_type')->nullable();
+            $table->decimal('amount', 8, 2)->nullable();
+            $table->string('payment_type')->nullable();
             $table->string('linkname')->nullable();
             $table->longText('contact')->nullable();
             $table->boolean('deactivate');

@@ -55,24 +55,34 @@
 								<label for="contents">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
 								<textarea v-model="membership.content" class="form-control" id="contents" required="" rows="3"></textarea>
 							</div>
+                            
+                            
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【会費】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="membership.is_payment"  @change="onChange" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: '有', unchecked: '無' }"
-                                    />
+                                <div class="col-lg-12 form-group">
+                                    <div class="form-group row">
+                                        <p-radio class="p-default p-curve" v-model="membership.is_payment" value="0" color="primary-o" checked>無</p-radio>
+                                    </div>
+                                    <div class="form-group row">
+                                        <p-radio class="p-default p-curve" v-model="membership.is_payment" value="1" color="primary-o">有</p-radio>
+                                    </div>
                                 </div>
-                                <div class="col-lg-12  form-group" :disabled="isDisabled">
+                            </div>
+                             <div class="col-lg-12  form-group" >
+                                <div class="form-inline">
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="dues_price">
                                         </label>
-                                        <input class="form-control " v-model="membership.membership_fee"  id="dues_price" type="number">円
+                                        <input class="form-control " v-model="membership.membership_fee" :disabled="membership.is_payment == '0' ? true : false"  id="dues_price" type="text"  v-validate="'decimal'" name="membership_fee" data-vv-as="会費">&nbsp; 円  &nbsp; &nbsp;
+                                      
                                     </div>
-                                    <div class="row">
-                                        <toggle-button v-model="membership.payment_type" :value="true" :disabled='false' 
-                                        :color="{checked: switchColorOther, unchecked: switchColorOther}" :sync="true" :labels="{ checked: '月', unchecked: '年' }"/>
+                                    <div class="form-check">
+                                        <p-radio class="p-icon p-curve p-jelly" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" name="" value="月" color="primary-o" checked>月</p-radio>
+                                        <p-radio class="p-icon p-curve p-jelly" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" value="年" color="primary-o">年</p-radio>
                                     </div>
+                                    
                                 </div>
-                                 
+                                  <span class="is-danger">{{ errors.first('membership_fee') }}</span>
                             </div>
 							<div class="form-group  col-lg-12">
 								【関連URL】
@@ -156,7 +166,10 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【会費】</label>
-                                                                        <p>{{!!membership.is_payment === true? 'はい' : 'いいえ'}}</p>
+                                                                        <p>{{membership.is_payment === "0"? '無' : '有'}}</p>
+                                                                    </div>
+                                                                     <div v-if="membership.is_payment === '1'   ">
+                                                                        <p>{{membership.membership_fee}}円 &nbsp; {{membership.payment_type}}</p>
                                                                     </div>
                                                                     
                                                                     <div>
@@ -222,9 +235,9 @@
                     end_date: "",
                     file: "",
                     content: "",
-                    is_payment: "",
+                    is_payment: "0",
                     amount: "",
-                    payment_type: "",
+                    payment_type: "月",
                     linkname: "",
                     contact: "",
                     deactivate: false,
@@ -575,7 +588,7 @@
                             confirmButtonText: "OK"
                         });
                     } else {
-                        this.membership.membership_date = moment(String(this.membershipDate)).format("YYYY-MM-DD");
+                        
                         this.membership.start_date = !!this.range
                             ? moment(String(this.range[0])).format("YYYY-MM-DD")
                             : "";
