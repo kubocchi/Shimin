@@ -115,8 +115,40 @@ Route::put('disaster', 'DisasterController@store');
 // Delete Disaster
 Route::delete('disaster/{id}', 'DisasterController@destroy');
 
+# 2.2 Business-report routes
+// List business-report
+Route::post('business-reports', 'BusinessReportController@index');
+// List single business-report
+Route::get('business-report/{id}', 'BusinessReportController@show');
+// Create new business-report
+Route::post('business-report', 'BusinessReportController@store');
+// Update business-report
+Route::put('business-report', 'BusinessReportController@store');
+// Delete business-report
+Route::delete('business-report/{id}', 'BusinessReportController@destroy');
 
+# 2.3 Dream routes
+// List dream
+Route::get('dreams', 'DreamController@index');
+// List single dream
+Route::get('dream/{id}', 'DreamController@show');
+// Create new dream
+Route::post('dream', 'DreamController@store');
+// Update dream
+Route::put('dream', 'DreamController@store');
+// Delete dream
+Route::delete('dream/{id}', 'DreamController@destroy');
 
-
+# 2.4 Kawarabi routes
+// List kawarabi
+Route::get('kawarabis', 'KawarabiController@index');
+// List single kawarabi
+Route::get('kawarabi/{id}', 'KawarabiController@show');
+// Create new kawarabi
+Route::post('kawarabi', 'KawarabiController@store');
+// Update kawarabi
+Route::put('kawarabi', 'KawarabiController@store');
+// Delete kawarabi
+Route::delete('kawarabi/{id}', 'KawarabiController@destroy');
 
 

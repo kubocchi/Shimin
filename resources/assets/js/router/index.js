@@ -21,6 +21,23 @@ import DisasterForm from '../views/admin/disaster/Form'
 import DisasterList from '../views/admin/disaster/List'
 
 
+// 2.4 Kawarabi Routes
+import KawarabiForm from '../views/admin/file/kawarabi/form'
+import KawarabiList from '../views/admin/file/kawarabi/list'
+
+// 2.1 Various Routes
+import VariousForm from '../views/admin/file/various/form'
+import VariousList from '../views/admin/file/various/list'
+
+// 2.1 Various Routes
+import DreamForm from '../views/admin/file/dream/form'
+import DreamList from '../views/admin/file/dream/list'
+
+// .4 Various Routes
+import BusinessReportForm from '../views/admin/file/businessReport/form'
+import BusinessReportList from '../views/admin/file/businessReport/list'
+
+
 /***********************Admin-Panel-Components***********************/
 
 
@@ -140,7 +157,91 @@ const routes = [
                         meta: 'admin'
                     }
                 ]
-            }
+            }, 
+            {
+                path: '/admin/file/various',
+                redirect: 'various/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'variousForm',
+                        component: VariousForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'variousList',
+                        component: VariousList,
+                        meta: 'admin'
+                    }
+                ]
+            },
+            {
+                path: '/admin/file/businessReport',
+                redirect: 'file/businessReport/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'businessReportForm',
+                        component: BusinessReportForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'businessReportList',
+                        component: BusinessReportList,
+                        meta: 'admin'
+                    }
+                ]
+            },
+            {
+                path: '/admin/file/dream',
+                redirect: 'file/dream/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'dreamForm',
+                        component: DreamForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'dreamList',
+                        component: DreamList,
+                        meta: 'admin'
+                    }
+                ]
+            },
+            {
+                path: '/admin/file/kawarabi',
+                redirect: 'file/kawarabi/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'kawarabiForm',
+                        component: KawarabiForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'kawarabiList',
+                        component: KawarabiList,
+                        meta: 'admin'
+                    }
+                ]
+            },
         ]
     },
     {

@@ -53,10 +53,18 @@
                                     <i class="fas fa-file"></i>
                                 </span> ファイル公開</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown02">
-                                <a class="dropdown-item" href="#">各種様式</a>
-                                <a class="dropdown-item" href="#">事業報告</a>
-                                <a class="dropdown-item" href="#">夢交差点</a>
-                                <a class="dropdown-item" href="#">かわら版</a>
+                                <router-link :to="{ name: 'variousList' }">
+                                    <button class="dropdown-item">各種様式</button>
+                                </router-link>
+                                <router-link :to="{ name: 'businessReportList' }">
+                                    <button class="dropdown-item">事業報告</button>
+                                </router-link>
+                                <router-link :to="{ name: 'dreamList' }">
+                                    <button class="dropdown-item">夢交差点</button>
+                                </router-link>
+                                <router-link :to="{ name: 'kawarabiList' }">
+                                    <button class="dropdown-item">かわら版</button>
+                                </router-link>
                             </div>
                         </li>
                         <li class="nav-item">
