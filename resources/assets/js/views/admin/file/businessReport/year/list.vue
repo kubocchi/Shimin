@@ -3,52 +3,29 @@
         <!-- <Spinner name="pulse" color="#2E92E8"/> -->
         <h4>
             <span>
-                <i class="fas fa-file"></i>
-            </span>事業報告 一覧画面</h4>
+                <i class="fas fa-dove"></i>
+            </span>災害ボランティア情報 一覧画面</h4>
         <hr>
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
                     <div class="row">
-                        <div class="col-md-2 mb-4">
-                            <router-link :to="{ name: 'businessReportForm' }">
-                                <button class="btn btn-primary btn-lg btn-block">新規登録</button>
-                            </router-link>
-                        </div>
-                        <div class="col-md-2 offset-md-6  mb-4">
-                            <router-link :to="{ name: 'yearList' }">
-                                <button class="btn btn-primary btn-lg btn-block">年度登録</button>
-                            </router-link>
-                        </div>
-                        <div class="col-md-2  mb-4">
-                            <router-link :to="{ name: 'businessList' }">
-                                <button class="btn btn-primary btn-lg btn-block">事業登録</button>
+                        <div class="col-md-2">
+                            <router-link :to="{ name: 'yearForm' }">
+                                <button class="btn btn-primary btn-lg btn-active center">新規登録</button>
                             </router-link>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-2 mb-4">
-                       <select class="form-control" id="attribute_shikatsu">
-							<option>
-								すべて
-							</option>
-							<option>
-								グループA
-							</option>
-							<option>
-								グループB
-							</option>
-							<option>
-								グループC
-							</option>
-						</select>
+                       
                     </div>
                     <div class="form-group col-md-4 offset-sm-6">
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchBusinessReport()">
+                                <button class="btn btn-outline-primary" @click="fetchYear()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
@@ -66,7 +43,7 @@
                             <tr class="table-primary">
                                 <th class="col-xs-1" scope="col">No.</th>
 								<th class="col-xs-3 wide_s" scope="col">件名</th>
-								<th class="col-xs-2 wide_d" scope="col">更新日</th>
+								<th class="col-xs-2 wide_d" scope="col">状態</th>
 								<th class="col-xs-2" align="center">複製</th>
 								<th class="col-xs-2" scope="col">変更</th>
 								<th class="col-xs-2" scope="col">削除</th>
@@ -74,22 +51,29 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="(businessReport, rowNumber) in businessReports" v-bind:key="businessReport.id">
+                            <tr v-for="(year, rowNumber) in years" v-bind:key="year.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ businessReport.subject }}</td>
-                                <td>{{ businessReport.created_at }}</td>
+                                <td>{{ year.year }}</td>
                                 <td>
-                                    <router-link :to="{ name: 'businessReportForm', params: { model: businessReport, requestType: 'copy' }}">
+                                    <span v-if="year.deactivate == '0'">
+                                        <i class='fas fa-check'></i>
+                                    </span>
+                                    <span v-else>
+                                        <i class='fas fa-times'></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <router-link :to="{ name: 'yearForm', params: { model: year, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>
                                     </router-link>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'businessReportForm', params: { model: businessReport, requestType: 'edit' }}">
+                                    <router-link :to="{ name: 'yearForm', params: { model: year, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deletebusinessReport(businessReport.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteYear(year.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -97,7 +81,7 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchBusinessReport(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#" @click="fetchYear(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
@@ -105,11 +89,12 @@
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchBusinessReport(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#" @click="fetchYear(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
         </div>
+       
     </div>
 </template>
 
@@ -117,7 +102,7 @@
     export default {
         data() {
             return {
-                businessReports: [],
+                years: [],
                 pagination: {},
                 edit: false,
                 params: {
@@ -128,15 +113,15 @@
         },
 
         created() {
-            this.fetchBusinessReport();
+            this.fetchYear();
         },
 
         methods: {
             // Pulling data from API, its a post request with search-term, type
-            fetchBusinessReport(page_url) {
+            fetchYear(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || "/api/business-reports";
+                page_url = page_url || "/api/years";
 
                 fetch(page_url, {
                     method: "post",
@@ -147,8 +132,8 @@
                 })
                     .then(res => res.json())
                     .then(res => {
-                        this.businessReports = res.data;
-                        console.log(this.businessReports);
+                        this.years = res.data;
+                        console.log(this.years);
                         vm.makePagination(res.meta, res.links);
                         loader.hide()
                     })
@@ -168,7 +153,7 @@
             },
 
             // Deleting the selected data
-            deletebusinessReport(id) {
+            deleteYear(id) {
                 this.$swal({
                     title: 'このデータを削除しますか？',
                     text: "削除したデータは元に戻すことができません!",
@@ -181,7 +166,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let loader = this.$loading.show();
-                        fetch(`api/business-report/${id}`, {
+                        fetch(`api/year/${id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())
@@ -192,7 +177,7 @@
                                 'success'
                             )
                             loader.hide()
-                            this.fetchBusinessReport()
+                            this.fetchYear()
                         })
                         .catch(err => console.log(err))
                     }
@@ -209,13 +194,13 @@
             // Loads table data on changing 
             onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
-                this.fetchBusinessReport()
+                this.fetchYear()
             },
 
             // Clearing the user typed search term
             clearSearch() {
                 this.params.search = ""
-                this.fetchBusinessReport()
+                this.fetchYear()
             }
         }
     };

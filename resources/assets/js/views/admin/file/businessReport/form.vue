@@ -24,7 +24,7 @@
                                    <label class="col-form-label" for="subject">【事業名】（必須）</label>
                                     <multiselect v-model="businessSelected" :options="businesses" @select="onSelectBusiness"  track-by="id" label="name" 
                                         placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
-                                        v-validate="'required'" name="business" data-vv-as="事業名"></multiselect>
+                                        v-validate="'required'" name="name" data-vv-as="事業名"></multiselect>
                                     <span class="is-danger">{{ errors.first('business') }}</span>
                                 </div>
                             </div>
@@ -202,18 +202,10 @@
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
                 width:'0%',
-                years: [
-                    { id: "1", name: "2017" },
-                    { id: "2", name: "2018" },
-                    { id: "3", name: "2019" }
-                ],
-                businesses: [
-                    { id: "1", name: "2017" },
-                    { id: "2", name: "2018" },
-                    { id: "3", name: "2019" }
-                ],
                 businessSelected:"",
-                yearSelected:""
+                yearSelected:"",
+                years: [],
+                businesses: []
             };
         },
         computed: {
@@ -229,6 +221,9 @@
             
             if(this.$route.params.requestType === 'edit')
                 this.edit = true
+
+            this.fetchYear()
+            
         },
 
         methods: {
@@ -480,6 +475,7 @@
                 if(selectedOption){
                     this.businessReport.year = selectedOption.id
                     console.log(selectedOption.id)
+                    this.fetchBusiness()
                 }
             },
             onSelectBusiness(selectedOption, id) {
@@ -487,7 +483,35 @@
                     this.businessReport.business_name = selectedOption.id
                     console.log(selectedOption.id)
                 }
-            }
+            },
+            fetchYear(page_url) {
+                let loader = this.$loading.show();
+                let vm = this;
+                page_url = page_url || "/api/years";
+
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.years = res.data;
+                        console.log(this.years);
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
+            fetchBusiness(page_url, year_id) {
+                let loader = this.$loading.show();
+                let vm = this;
+                page_url = page_url || `/api/business/${year_id}`;
+
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.businesses = res.data;
+                        console.log(this.businesses);
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
         }
     };
 </script>

@@ -158,3 +158,31 @@ Route::delete('kawarabi/{id}', 'KawarabiController@destroy');
 Route::post('kawarabis', 'KawarabiController@getKawarabiData');
 
 
+# 2.4 Year routes
+// List year
+Route::get('years', 'YearController@index');
+// List single year
+Route::get('year/{id}', 'YearController@show');
+// Create new year
+Route::post('year', 'YearController@store');
+// Update year
+Route::put('year', 'YearController@store');
+// Delete year
+Route::delete('year/{id}', 'YearController@destroy');
+// List membership with parameters
+Route::post('years', 'YearController@getYearData');
+
+
+# 2.4 Business routes
+// List business
+Route::get('businesses', 'BusinessController@index');
+// List single business
+Route::get('business/{id}', 'BusinessController@show');
+// Create new business
+Route::post('business', 'BusinessController@store');
+// Update business
+Route::put('business', 'BusinessController@store');
+// Delete business
+Route::delete('business/{id}', 'BusinessController@destroy');
+// List membership with parameters
+Route::post('businesses', 'BusinessController@getBusinessData');

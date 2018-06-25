@@ -37,6 +37,12 @@ import DreamList from '../views/admin/file/dream/list'
 import BusinessReportForm from '../views/admin/file/businessReport/form'
 import BusinessReportList from '../views/admin/file/businessReport/list'
 
+import YearForm from '../views/admin/file/businessReport/year/form'
+import YearList from '../views/admin/file/businessReport/year/list'
+
+import BusinessForm from '../views/admin/file/businessReport/business/form'
+import BusinessList from '../views/admin/file/businessReport/business/list'
+
 
 /***********************Admin-Panel-Components***********************/
 
@@ -197,6 +203,50 @@ const routes = [
                         name: 'businessReportList',
                         component: BusinessReportList,
                         meta: 'admin'
+                    },
+                    {
+                        path: '/admin/file/business-report/year',
+                        redirect: 'file/business-report/list',
+                        component: {
+                            render(c) { return c('router-view'); }
+                        },
+                        children: [
+                            {
+                                path: 'form',
+                                name: 'yearForm',
+                                component: YearForm,
+                                meta: 'admin'
+                            },
+                            {
+                                path: 'list',
+                                name: 'yearList',
+                                component: YearList,
+                                meta: 'admin'
+                            }
+                            
+                        ]
+                    },
+                    {
+                        path: '/admin/file/business-report/business',
+                        redirect: 'file/business-report/list',
+                        component: {
+                            render(c) { return c('router-view'); }
+                        },
+                        children: [
+                            {
+                                path: 'form',
+                                name: 'businessForm',
+                                component: BusinessForm,
+                                meta: 'admin'
+                            },
+                            {
+                                path: 'list',
+                                name: 'businessList',
+                                component: BusinessList,
+                                meta: 'admin'
+                            }
+                            
+                        ]
                     }
                 ]
             },
