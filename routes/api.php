@@ -186,3 +186,5 @@ Route::put('business', 'BusinessController@store');
 Route::delete('business/{id}', 'BusinessController@destroy');
 // List membership with parameters
 Route::post('businesses', 'BusinessController@getBusinessData');
+// List single business
+Route::get('business/year/{id}', 'BusinessController@yearWiseBusiness');

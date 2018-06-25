@@ -106,4 +106,19 @@ class BusinessController extends Controller
          // Return collection of Businesss as a resource
          return BusinessResource::collection($businesses);
     }
+
+    /**
+     * Display the Year wise Business.
+     *$
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function yearWiseBusiness($id)
+    {
+        // Get BusinessReports
+        $businesses = Business::Where('year_id', $id)->get();
+
+        // Return single BusinessReports as a resource
+        return BusinessResource::collection($businesses);
+    }
 }

@@ -17,8 +17,9 @@ class BusinessReportResource extends JsonResource
         return [
             'id' => $this->id,
             'year' => $this->year,
-            'business_name' => $this->business_name,
+            'business' => $this->business,
             'detail' => $this->detail,
+            'file' => $this->file,
             'deactivate'=>$this->deactivate,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by

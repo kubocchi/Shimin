@@ -13,18 +13,40 @@
                         <fieldset>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-6">
-                                    <label class="col-form-label" for="subject">【年度】（必須）</label>
-                                    <multiselect v-model="yearSelected" :options="years" @select="onSelectYear"  track-by="id" label="name" :value="{ id: '1', name: '2017' }"
-                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
-                                        v-validate="'required'" name="year" data-vv-as="年度"></multiselect>
+                                   <label class="col-form-label" for="subject">【事業名】（必須）</label>
+                                    <multiselect 
+                                        v-model="selectedYear" 
+                                        :options="years" 
+                                        @select="onSelectYear"  
+                                        track-by="id" 
+                                        label="year" 
+                                        placeholder="選んでください" 
+                                        selectLabel="クリックして選択する" 
+                                        deselectLabel="クリックして選択を解除する" 
+                                        selectedLabel="選ばれた" 
+                                        v-validate="'required'" 
+                                        name="year" 
+                                        data-vv-as="事業名">
+                                    </multiselect>
                                     <span class="is-danger">{{ errors.first('year') }}</span>
                                 </div>
                                 
                                 <div class="form-group col-sm-12 col-lg-6">
                                    <label class="col-form-label" for="subject">【事業名】（必須）</label>
-                                    <multiselect v-model="businessSelected" :options="businesses" @select="onSelectBusiness"  track-by="id" label="name" 
-                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
-                                        v-validate="'required'" name="name" data-vv-as="事業名"></multiselect>
+                                    <multiselect 
+                                        v-model="selectedBusiness" 
+                                        :options="businesses" 
+                                        @select="onSelectBusiness"  
+                                        track-by="id" 
+                                        label="name" 
+                                        placeholder="選んでください" 
+                                        selectLabel="クリックして選択する" 
+                                        deselectLabel="クリックして選択を解除する" 
+                                        selectedLabel="選ばれた" 
+                                        v-validate="'required'" 
+                                        name="business" 
+                                        data-vv-as="事業名">
+                                    </multiselect>
                                     <span class="is-danger">{{ errors.first('business') }}</span>
                                 </div>
                             </div>
@@ -99,7 +121,11 @@
                                                             <div>
                                                                 <div>
                                                                     <label>【件名】</label>
-                                                                    <p>{{businessReport.subject}}</p>
+                                                                    <p>{{selectedYear? selectedYear.year: ''}}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <label>【説明】</label>
+                                                                    <p>{{selectedBusiness? selectedBusiness.name : ''}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【説明】</label>
@@ -164,10 +190,11 @@
         data() {
             return {
                 businessReport: {
-                    id: "",
-                    year: "",
-                    business_name: "",
-                    file: "",
+                    id: null,
+                    year_id: null,
+                    business_id: null,
+                    detail: null,
+                    file: null,
                     deactivate: false,
                     created_by: 1,
                     updated_by: 1
@@ -175,6 +202,7 @@
                 id: "",
                 pagination: {},
                 edit: false,
+                copy: false,
                 dateFormat: 'YYYY-MM-DD',
                 switchColorDeactivate: '#DC3545',
                 time: new Date(),
@@ -202,8 +230,8 @@
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
                 width:'0%',
-                businessSelected:"",
-                yearSelected:"",
+                selectedBusiness:null,
+                selectedYear:null,
                 years: [],
                 businesses: []
             };
@@ -221,6 +249,8 @@
             
             if(this.$route.params.requestType === 'edit')
                 this.edit = true
+            else if(this.$route.params.requestType === 'copy')
+                this.copy = true
 
             this.fetchYear()
             
@@ -278,7 +308,7 @@
                             title: "成功!",
                             text: "活動センターが追加されました!",
                             type: "success",
-                            confirmButtonText : 'よし'
+                            confirmButtonText : 'OK'
                         })
                         .then(function() {
                             self.$router.push({
@@ -295,8 +325,8 @@
                 this.pullAttachments(businessReport);
 
                 this.businessReport.id = businessReport.id
-                this.businessReport.year = businessReport.year
-                this.businessReport.business_name = businessReport.business_name
+                this.businessReport.year_id = businessReport.year.id
+                this.businessReport.business_id = businessReport.business.id
                 this.businessReport.detail = businessReport.detail
                 this.businessReport.file = businessReport.file
                 this.businessReport.deactivate = !! businessReport.deactivate == 1 ? true:false
@@ -321,7 +351,6 @@
                 for (var i = this.attachments.length - 1; i >= 0; i--) {
                     console.log(this.attachments[i].category_id);
                     this.uploadedData.append("attachments[][0]", this.attachments[i]);
-                    this.uploadedData.append("attachments[][1]", this.attachments[i].category_id);
                 }
 
                 for (var i = this.attachment_labels.length - 1; i >= 0; i--) {
@@ -384,9 +413,23 @@
                     }
                 }
                 .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(function (error) {
-                    console.log('Attachment catch', error)
-                });
+                .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            if(error.response.status === 413){
+                                $("#progressModal").modal("hide");
+                                 this.$swal({
+                                    title: "警告!",
+                                    text: "必須フィールドに記入してください",
+                                    type: "warning",
+                                    animation: false,
+                                    customClass: "animated tada",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+                                
+                        }
+                    });
                 console.log(attachments)
             },
 
@@ -439,7 +482,6 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-
             },
 
             // Final submisison clicked for form data
@@ -473,15 +515,17 @@
             },
             onSelectYear(selectedOption, id) {
                 if(selectedOption){
-                    this.businessReport.year = selectedOption.id
+                    this.businessReport.year_id = selectedOption.id
                     console.log(selectedOption.id)
+                    this.selectedBusiness = null
                     this.fetchBusiness()
                 }
             },
             onSelectBusiness(selectedOption, id) {
                 if(selectedOption){
-                    this.businessReport.business_name = selectedOption.id
+                    this.businessReport.business_id = selectedOption.id
                     console.log(selectedOption.id)
+                    // /console.log(this.years.find(x => x.id === this.businessReport.year_id))
                 }
             },
             fetchYear(page_url) {
@@ -492,21 +536,29 @@
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
-                        this.years = res.data;
-                        console.log(this.years);
+                        this.years = res.data
+                        if(this.edit || this.copy){
+                            this.selectedYear = this.years.find(x => x.id === this.businessReport.year_id)
+                            this.fetchBusiness()
+                        }
+                        console.log(this.years)
                         loader.hide()
                     })
                     .catch(err => console.log(err))
             },
-            fetchBusiness(page_url, year_id) {
+            fetchBusiness(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || `/api/business/${year_id}`;
+                page_url = page_url || `/api/business/year/${this.businessReport.year_id}`;
 
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
                         this.businesses = res.data;
+                        if(this.edit || this.copy){
+                            this.selectedBusiness = this.businesses.find(x => x.id === this.businessReport.business_id)
+                        }
+                        
                         console.log(this.businesses);
                         loader.hide()
                     })

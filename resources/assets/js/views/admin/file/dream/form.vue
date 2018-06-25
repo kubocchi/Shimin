@@ -256,7 +256,7 @@
                             title: "成功!",
                             text: "活動センターが追加されました!",
                             type: "success",
-                            confirmButtonText : 'よし'
+                            confirmButtonText : 'OK'
                         })
                         .then(function() {
                             self.$router.push({

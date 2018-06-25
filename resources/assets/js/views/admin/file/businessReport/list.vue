@@ -28,23 +28,23 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="form-group col-md-2 mb-4">
-                       <select class="form-control" id="attribute_shikatsu">
-							<option>
-								すべて
-							</option>
-							<option>
-								グループA
-							</option>
-							<option>
-								グループB
-							</option>
-							<option>
-								グループC
-							</option>
-						</select>
+                    <div class="form-group col-md-3 mb-4">
+                         <multiselect 
+                            v-model="selectedYear" 
+                            :options="years" 
+                            @select="onSelectYear"  
+                            track-by="id" 
+                            label="year" 
+                            placeholder="選んでください" 
+                            selectLabel="クリックして選択する" 
+                            deselectLabel="クリックして選択を解除する" 
+                            selectedLabel="選ばれた" 
+                            v-validate="'required'" 
+                            name="year" 
+                            data-vv-as="事業名">
+                        </multiselect>
                     </div>
-                    <div class="form-group col-md-4 offset-sm-6">
+                    <div class="form-group col-md-4 offset-sm-5">
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
@@ -76,8 +76,8 @@
                         <tbody>
                             <tr v-for="(businessReport, rowNumber) in businessReports" v-bind:key="businessReport.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ businessReport.subject }}</td>
-                                <td>{{ businessReport.created_at }}</td>
+                                <td>{{ businessReport.year.year }}</td>
+                                <td>{{ businessReport.business.name }}</td>
                                 <td>
                                     <router-link :to="{ name: 'businessReportForm', params: { model: businessReport, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>
@@ -89,7 +89,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deletebusinessReport(businessReport.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteBusinessReport(businessReport.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -114,7 +114,9 @@
 </template>
 
 <script>
+ import Multiselect from "vue-multiselect"
     export default {
+        components: { Multiselect},
         data() {
             return {
                 businessReports: [],
@@ -122,13 +124,16 @@
                 edit: false,
                 params: {
                     search: "",
-                    type: 0
-                }
+                    year: null
+                },
+                years: [],
+                selectedYear: null
             };
         },
 
         created() {
-            this.fetchBusinessReport();
+            this.fetchBusinessReport()
+            this.fetchYear()
         },
 
         methods: {
@@ -168,7 +173,7 @@
             },
 
             // Deleting the selected data
-            deletebusinessReport(id) {
+            deleteBusinessReport(id) {
                 this.$swal({
                     title: 'このデータを削除しますか？',
                     text: "削除したデータは元に戻すことができません!",
@@ -216,7 +221,32 @@
             clearSearch() {
                 this.params.search = ""
                 this.fetchBusinessReport()
-            }
+            },
+             // Pulling data from API, its a post request with search-term, type
+            fetchYear(page_url) {
+                let loader = this.$loading.show();
+                let vm = this;
+                page_url = page_url || "/api/years";
+
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.years = res.data;
+                        console.log(this.years);
+                        let fakeOption = {'id' : null, 'year': 'すべて'}
+                        this.years.unshift(fakeOption)
+                        this.selectedYear = fakeOption
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
+            onSelectYear(selectedOption, id) {
+                if(selectedOption){
+                    console.log(selectedOption.id)
+                    this.params.year = selectedOption.id
+                    this.fetchBusinessReport()
+                }
+            },
         }
     };
 </script>

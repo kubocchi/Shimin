@@ -15,8 +15,8 @@ class CreateBusinessReportsTable extends Migration
     {
         Schema::create('business_reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('year');
-            $table->integer('business_name');
+            $table->integer('year_id');
+            $table->integer('business_id');
             $table->longtext('detail');
             $table->string('file');
             $table->boolean('deactivate');

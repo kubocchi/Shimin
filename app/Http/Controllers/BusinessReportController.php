@@ -15,7 +15,7 @@ class BusinessReportController extends Controller
     public function index()
     {
         // Get BusinessReports
-        $businessReports = BusinessReport::orderBy('created_at', 'desc')->Where('deactivate', 0)->paginate(10);
+        $businessReports = BusinessReport::With('year')->With('business')->orderBy('created_at', 'desc')->Where('deactivate', 0)->paginate(10);
 
         // Return collection of BusinessReports as a resource
         return BusinessReportResource::collection($businessReports);
@@ -30,8 +30,8 @@ class BusinessReportController extends Controller
     {
         $businessReport = $request->isMethod('put') ? BusinessReport::findOrFail($request->id) : new BusinessReport;
 
-        $businessReport->year= $request->input('year');
-        $businessReport->business_name= $request->input('business_name');
+        $businessReport->year_id= $request->input('year_id');
+        $businessReport->business_id= $request->input('business_id');
         $businessReport->detail= $request->input('detail');
         $businessReport->file= $request->input('file');
         $businessReport->deactivate= $request->input('deactivate');
@@ -81,8 +81,20 @@ class BusinessReportController extends Controller
     {
          // Get Kawarabis
          $search = $request->input('search');
-         $kawarabis = BusinessReport::Where('year', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate(10);
- 
+         $yearId = $request->input('year');
+         $kawarabis;
+         
+         $kawarabis = BusinessReport::join('businesses', 'business_reports.business_id', '=', 'businesses.id')
+                            ->With('year')
+                            ->With('business')
+                            ->where('businesses.name', 'like', '%' . $search . '%')
+                            ->where(function($query) use ($yearId)  {
+                                if(isset($yearId)) {
+                                    $query->where('business_reports.year_id', $yearId);
+                                }
+                             })
+                            ->paginate(10);
+         
          // Return collection of Kawarabis as a resource
          return BusinessReportResource::collection($kawarabis);
     }

@@ -13,7 +13,7 @@
                         <fieldset>
                             <div class="form-group col-lg-12">
                                 <label class="col-form-label" for="subject">【年度】（必須）</label>
-                                <multiselect v-model="yearSelected" :options="years" @select="onSelectYear"  track-by="id" label="year" :value="{ id: '1', name: '2017' }"
+                                <multiselect v-model="yearSelected" :options="years" @select="onSelectYear"  track-by="id" label="year" 
                                     placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
                                     v-validate="'required'" name="year" data-vv-as="年度"></multiselect>
                                 <span class="is-danger">{{ errors.first('year') }}</span>
@@ -228,7 +228,7 @@
                             title: "成功!",
                             text: "活動センターが追加されました!",
                             type: "success",
-                            confirmButtonText : 'よし'
+                            confirmButtonText : 'OK'
                         })
                         .then(function() {
                             self.$router.push({
