@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\BusinessReport;
+use App\Http\Resources\BusinessReportResource;
 class BusinessReportController extends Controller
 {
     /**
@@ -32,6 +33,7 @@ class BusinessReportController extends Controller
         $businessReport->year= $request->input('year');
         $businessReport->business_name= $request->input('business_name');
         $businessReport->detail= $request->input('detail');
+        $businessReport->file= $request->input('file');
         $businessReport->deactivate= $request->input('deactivate');
         $businessReport->created_by= $request->input('created_by');
         $businessReport->updated_by= $request->input('updated_by');
@@ -67,5 +69,21 @@ class BusinessReportController extends Controller
         if($businessReport->delete()) {
             return new BusinessReportResource($businessReport);
         }    
+    }
+
+    /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getBusinessReportData(Request $request)
+    {
+         // Get Kawarabis
+         $search = $request->input('search');
+         $kawarabis = BusinessReport::Where('year', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate(10);
+ 
+         // Return collection of Kawarabis as a resource
+         return BusinessReportResource::collection($kawarabis);
     }
 }

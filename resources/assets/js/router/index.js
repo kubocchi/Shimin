@@ -180,8 +180,8 @@ const routes = [
                 ]
             },
             {
-                path: '/admin/file/businessReport',
-                redirect: 'file/businessReport/list',
+                path: '/admin/file/business-report',
+                redirect: 'file/business-report/list',
                 component: {
                     render(c) { return c('router-view'); }
                 },

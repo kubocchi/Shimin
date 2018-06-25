@@ -70,39 +70,17 @@ class KawarabiController extends Controller
         }    
     }
 
+    /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getKawarabiData(Request $request)
     {
          // Get Kawarabis
-         $kawarabis;
-         $type = $request->input('type');
          $search = $request->input('search');
-         switch ($type) 
-         {
-             # All type
-             case '0':
-                 $kawarabis = Kawarabi::Where('title', 'like', '%' . $search . '%')
-                             ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-             # Running type
-             case '1':
-                 $kawarabis = Kawarabi::Where('title', 'like', '%' . $search . '%')
-                             ->whereDate('start_date', '<=', date("Y-m-d"))
-                             ->whereDate('end_date', '>=', date("Y-m-d"))
-                             ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-             # Future type
-             case '2':
-                 $kawarabis = Kawarabi::Where('title', 'like', '%' . $search . '%')
-                     ->whereDate('start_date', '>', date("Y-m-d"))
-                     ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-             # Previous type
-             case '3':
-                 $kawarabis = Kawarabi::Where('title', 'like', '%' . $search . '%')
-                     ->whereDate('end_date', '<', date("Y-m-d"))
-                     ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-         }
+         $kawarabis = Kawarabi::Where('subject', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate(10);
  
          // Return collection of Kawarabis as a resource
          return KawarabiResource::collection($kawarabis);

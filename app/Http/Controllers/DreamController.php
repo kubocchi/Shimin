@@ -70,41 +70,19 @@ class DreamController extends Controller
         }    
     }
 
+    /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getDreamData(Request $request)
     {
-         // Get Dreams
-         $dreams;
-         $type = $request->input('type');
+         // Get Kawarabis
          $search = $request->input('search');
-         switch ($type) 
-         {
-             # All type
-             case '0':
-                 $dreams = Dream::Where('title', 'like', '%' . $search . '%')
-                             ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-             # Running type
-             case '1':
-                 $dreams = Dream::Where('title', 'like', '%' . $search . '%')
-                             ->whereDate('start_date', '<=', date("Y-m-d"))
-                             ->whereDate('end_date', '>=', date("Y-m-d"))
-                             ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-             # Future type
-             case '2':
-                 $dreams = Dream::Where('title', 'like', '%' . $search . '%')
-                     ->whereDate('start_date', '>', date("Y-m-d"))
-                     ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-             # Previous type
-             case '3':
-                 $dreams = Dream::Where('title', 'like', '%' . $search . '%')
-                     ->whereDate('end_date', '<', date("Y-m-d"))
-                     ->orderBy('created_at', 'desc')->paginate(10);
-                 break;
-         }
+         $kawarabis = Dream::Where('subject', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate(10);
  
-         // Return collection of Dreams as a resource
-         return DreamResource::collection($dreams);
+         // Return collection of Kawarabis as a resource
+         return DreamResource::collection($kawarabis);
     }
 }

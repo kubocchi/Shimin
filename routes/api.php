@@ -117,7 +117,7 @@ Route::delete('disaster/{id}', 'DisasterController@destroy');
 
 # 2.2 Business-report routes
 // List business-report
-Route::post('business-reports', 'BusinessReportController@index');
+Route::get('business-reports', 'BusinessReportController@index');
 // List single business-report
 Route::get('business-report/{id}', 'BusinessReportController@show');
 // Create new business-report
@@ -126,6 +126,8 @@ Route::post('business-report', 'BusinessReportController@store');
 Route::put('business-report', 'BusinessReportController@store');
 // Delete business-report
 Route::delete('business-report/{id}', 'BusinessReportController@destroy');
+//  List business-report
+Route::post('business-reports', 'BusinessReportController@getBusinessReportData');
 
 # 2.3 Dream routes
 // List dream
@@ -138,6 +140,8 @@ Route::post('dream', 'DreamController@store');
 Route::put('dream', 'DreamController@store');
 // Delete dream
 Route::delete('dream/{id}', 'DreamController@destroy');
+//  List dream
+Route::post('dreams', 'DreamController@getDreamData');
 
 # 2.4 Kawarabi routes
 // List kawarabi
@@ -150,5 +154,7 @@ Route::post('kawarabi', 'KawarabiController@store');
 Route::put('kawarabi', 'KawarabiController@store');
 // Delete kawarabi
 Route::delete('kawarabi/{id}', 'KawarabiController@destroy');
+// List membership with parameters
+Route::post('kawarabis', 'KawarabiController@getKawarabiData');
 
 
