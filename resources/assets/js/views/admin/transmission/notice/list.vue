@@ -85,7 +85,7 @@
                             <tr v-for="(notice, rowNumber) in notices" v-bind:key="notice.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ notice.subject }}</td>
-                                <td>{{ notice.id }}</td>
+                                <td>{{ notice.created_at }}</td>
                                 <td>
                                     <router-link :to="{ name: 'noticeForm', params: { model: notice, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>
@@ -101,6 +101,7 @@
                                 </td>
                             </tr>
                         </tbody>
+                        {{notices}}
                     </table>
                 </div>
                 <ul class="pagination justify-content-end">

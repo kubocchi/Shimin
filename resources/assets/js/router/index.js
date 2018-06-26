@@ -43,6 +43,9 @@ import YearList from '../views/admin/file/businessReport/year/list'
 import BusinessForm from '../views/admin/file/businessReport/business/form'
 import BusinessList from '../views/admin/file/businessReport/business/list'
 
+import GroupInformationForm from '../views/admin/group-information/form'
+import GroupInformationList from '../views/admin/group-information/list'
+
 
 /***********************Admin-Panel-Components***********************/
 
@@ -288,6 +291,27 @@ const routes = [
                         path: 'list',
                         name: 'kawarabiList',
                         component: KawarabiList,
+                        meta: 'admin'
+                    }
+                ]
+            },
+            {
+                path: '/admin/group-information',
+                redirect: '/group-information/list',
+                component: {
+                    render(c) { return c('router-view'); }
+                },
+                children: [
+                    {
+                        path: 'form',
+                        name: 'groupInformationForm',
+                        component: GroupInformationForm,
+                        meta: 'admin'
+                    },
+                    {
+                        path: 'list',
+                        name: 'groupInformationList',
+                        component: GroupInformationList,
                         meta: 'admin'
                     }
                 ]

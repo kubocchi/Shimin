@@ -64,15 +64,13 @@
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
                                             <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange" accept='image/*'> 参照
                                         </label>
-
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                                 <div class="form-group">
                                                     <button class="btn btn-outline-danger btn-sm" @click.prevent="removeAttachment(attachment)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
-                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1))
-                                                        + 'MB)'}}</span>
+                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</span>
                                                 </div>
                                             </div>
                                         </div>

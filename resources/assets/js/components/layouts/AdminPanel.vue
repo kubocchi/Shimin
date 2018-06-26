@@ -68,10 +68,13 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span>
-                                    <i class="fas fa-feather"></i>
-                                </span> 団体情報登録</a>
+                            <router-link :to="{ name: 'groupInformationList' }">
+                                <a class="nav-link">
+                                    <span>
+                                        <i class="fas fa-feather"></i>
+                                    </span> 団体情報登録
+                                </a>
+                            </router-link>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">

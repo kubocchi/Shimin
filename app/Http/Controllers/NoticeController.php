@@ -20,10 +20,10 @@ class NoticeController extends Controller
     public function index()
     {
         // Get ActiveCenters
-        $events = Event::select('id', 'subject')->get();
-        $volunteers = Volunteer::select('id', 'subject')->get();
-        $memberships = Membership::select('id', 'organizer')->get();
-        $mergedData = $events->merge($volunteers)->merge($memberships)->sortByDesc('id');
+        $events = Event::select('id', 'subject', 'start_date', 'end_date', 'created_at')->paginate(5);
+        $volunteers = Volunteer::select('id', 'subject', 'start_date', 'end_date', 'created_at')->paginate(5);
+        $memberships = Membership::select('id', 'organizer as subject', 'start_date', 'end_date', 'created_at')->paginate(5);
+        $mergedData = $events->merge($volunteers)->merge($memberships)->sortByDesc('created_at');
 
         // $events = Event::select('id', 'subject')->get()->toArray();
         // $volunteers = Volunteer::select('id', 'subject')->get()->toArray();
