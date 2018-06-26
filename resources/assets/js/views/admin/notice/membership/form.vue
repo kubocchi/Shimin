@@ -53,7 +53,7 @@
 							
                             <div class="form-group  col-lg-12">
 								<label for="contents">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
-								<textarea v-model="membership.content" class="form-control" id="contents" required="" rows="3"></textarea>
+                                <wysiwyg v-model="membership.content"  name="content" data-vv-as="掲載内容" type="text" />
 							</div>
                             
                             
@@ -77,8 +77,8 @@
                                       
                                     </div>
                                     <div class="form-check">
-                                        <p-radio class="p-icon p-curve p-jelly" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" name="" value="月" color="primary-o" checked>月</p-radio>
-                                        <p-radio class="p-icon p-curve p-jelly" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" value="年" color="primary-o">年</p-radio>
+                                        <p-radio class="p-default p-curve" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" name="" value="月" color="primary-o" checked>月</p-radio>
+                                        <p-radio class="p-default p-curve" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" value="年" color="primary-o">年</p-radio>
                                     </div>
                                     
                                 </div>
@@ -162,14 +162,14 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【内容詳細】</label>
-                                                                        <p>{{membership.content}}</p>
+                                                                        <p v-html="membership.content"></p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【会費】</label>
                                                                         <p>{{membership.is_payment === "0"? '無' : '有'}}</p>
                                                                     </div>
                                                                      <div v-if="membership.is_payment === '1'   ">
-                                                                        <p>{{membership.membership_fee}}円 &nbsp; {{membership.payment_type}}</p>
+                                                                        <p>{{membership.membership_fee}}円 / {{membership.payment_type}}</p>
                                                                     </div>
                                                                     
                                                                     <div>
@@ -178,7 +178,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【問い合わせ先】</label>
-                                                                        <p  v-html="membership.contact"></p>
+                                                                        <p v-html="membership.contact"></p>
                                                                     </div>
                                                                 </div>
                                                             </form>

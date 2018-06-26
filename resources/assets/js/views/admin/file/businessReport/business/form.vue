@@ -13,9 +13,20 @@
                         <fieldset>
                             <div class="form-group col-lg-12">
                                 <label class="col-form-label" for="subject">【年度】（必須）</label>
-                                <multiselect v-model="yearSelected" :options="years" @select="onSelectYear"  track-by="id" label="year" 
-                                    placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
-                                    v-validate="'required'" name="year" data-vv-as="年度"></multiselect>
+                                <multiselect 
+                                    v-model="selectedYear" 
+                                    :options="years" 
+                                    @select="onSelectYear"  
+                                    track-by="id" 
+                                    label="year" 
+                                    placeholder="選んでください" 
+                                    selectLabel="クリックして選択する" 
+                                    deselectLabel="クリックして選択を解除する" 
+                                    selectedLabel="選ばれた" 
+                                    v-validate="'required'" 
+                                    name="year" 
+                                    data-vv-as="年度">
+                                </multiselect>
                                 <span class="is-danger">{{ errors.first('year') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -63,13 +74,13 @@
                                                         <form action="" method="post">
                                                             <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
                                                             <div>
+                                                                 <div>
+                                                                    <label>【件名】</label>
+                                                                    <p>{{selectedYear? selectedYear.year : ''}}</p>
+                                                                </div>
                                                                 <div>
                                                                     <label>【件名】</label>
                                                                     <p>{{business.name}}</p>
-                                                                </div>
-                                                                 <div>
-                                                                    <label>【件名】</label>
-                                                                    <p>{{business.year_id}}</p>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -157,7 +168,7 @@
                 currentAddedFileIs: [],
                 width:'0%',
                 years: [],
-                yearSelected: ""
+                selectedYear: ""
             };
         },
         computed: {
@@ -270,8 +281,6 @@
                         console.log('true')
                     }
                     else{
-                        this.business.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : ""
-                        this.business.end_date = !!this.range ? this.range[1].toISOString().slice(0,10) : ""
                         $("#confirmationModal").modal('show')
                     }
                 });

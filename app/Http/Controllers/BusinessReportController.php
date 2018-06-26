@@ -82,7 +82,6 @@ class BusinessReportController extends Controller
          // Get Kawarabis
          $search = $request->input('search');
          $yearId = $request->input('year');
-         $kawarabis;
          
          $kawarabis = BusinessReport::join('businesses', 'business_reports.business_id', '=', 'businesses.id')
                             ->With('year')

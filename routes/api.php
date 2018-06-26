@@ -115,6 +115,21 @@ Route::put('disaster', 'DisasterController@store');
 // Delete Disaster
 Route::delete('disaster/{id}', 'DisasterController@destroy');
 
+# 2.1 Various routes
+// List various
+Route::get('variouses', 'VariousController@index');
+// List single various
+Route::get('various/{id}', 'VariousController@show');
+// Create new various
+Route::post('various', 'VariousController@store');
+// Update various
+Route::put('various', 'VariousController@store');
+// Delete various
+Route::delete('various/{id}', 'VariousController@destroy');
+// List membership with parameters
+Route::post('variouses', 'VariousController@getVariousData');
+
+
 # 2.2 Business-report routes
 // List business-report
 Route::get('business-reports', 'BusinessReportController@index');

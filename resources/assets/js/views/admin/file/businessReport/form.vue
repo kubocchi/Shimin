@@ -507,8 +507,6 @@
                         console.log('true')
                     }
                     else{
-                        this.businessReport.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : ""
-                        this.businessReport.end_date = !!this.range ? this.range[1].toISOString().slice(0,10) : ""
                         $("#confirmationModal").modal('show')
                     }
                 });
@@ -525,7 +523,6 @@
                 if(selectedOption){
                     this.businessReport.business_id = selectedOption.id
                     console.log(selectedOption.id)
-                    // /console.log(this.years.find(x => x.id === this.businessReport.year_id))
                 }
             },
             fetchYear(page_url) {
