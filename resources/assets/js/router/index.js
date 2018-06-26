@@ -3,22 +3,22 @@
 /***********************Admin-Panel-Components***********************/
 import Dashboard from '../views/Dashboard'
 // 1.1 Active center Routes
-import ActiveCenterForm from '../views/admin/activeCenter/Form'
-import ActiveCenterList from '../views/admin/activeCenter/List'
+import ActiveCenterForm from '../views/admin/transmission/active-center/Form'
+import ActiveCenterList from '../views/admin/transmission/active-center/List'
 
 // 1.2 Notice Routes
-import NoticeEventForm from '../views/admin/notice/event/form'
-import NoticeVolunteerForm from '../views/admin/notice/volunteer/form'
-import NoticeMembershipForm from '../views/admin/notice/membership/form'
-import NoticeList from '../views/admin/notice/list'
+import NoticeEventForm from '../views/admin/transmission/notice/event/form'
+import NoticeVolunteerForm from '../views/admin/transmission/notice/volunteer/form'
+import NoticeMembershipForm from '../views/admin/transmission/notice/membership/form'
+import NoticeList from '../views/admin/transmission/notice/list'
 
 // 1.3 Subsidy Routes
-import SubsidyForm from '../views/admin/subsidy/Form'
-import SubsidyList from '../views/admin/subsidy/List'
+import SubsidyForm from '../views/admin/transmission/subsidy/Form'
+import SubsidyList from '../views/admin/transmission/subsidy/List'
 
 // 1.4 Disaster Routes
-import DisasterForm from '../views/admin/disaster/Form'
-import DisasterList from '../views/admin/disaster/List'
+import DisasterForm from '../views/admin/transmission/disaster/Form'
+import DisasterList from '../views/admin/transmission/disaster/List'
 
 
 // 2.4 Kawarabi Routes

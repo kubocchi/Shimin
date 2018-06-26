@@ -11,27 +11,30 @@
                 <div class="bs-component">
                     <form @submit.prevent="submitClicked">
                         <fieldset>
-                            <div class="form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="subject">【件名】（必須）</label>
                                 <input class="form-control" v-model="activeCenter.title" placeholder="件名" id="subject" v-validate="'required'" name="title" data-vv-as="件名" type="text">
                                 <span class="is-danger">{{ errors.first('title') }}</span>
                             </div>
-                            <div class="form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="txtDate">【掲載開始日】（必須）</label>    
                                 <div class="row">
                                     <vue-datepicker-local  v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="description">【掲載内容】</label>
                                 <wysiwyg v-model="activeCenter.content"  v-validate="'required'" name="content" data-vv-as="掲載内容" type="text"/>
                                 <span class="is-danger">{{ errors.first('content') }}</span>
                             </div>
-                            【サイトに公開する】
-                            <div class="row">
-                                <toggle-button v-model="activeCenter.deactivate" :value="false" :color="color" :sync="true" :labels="{checked: 'はい', unchecked: 'いいえ'}" />
+                             <div class="col-lg-12 form-group">
+                                <label class="col-form-label">【サイトに公開する】</label>
+                                <div class="form-group row">
+                                    <toggle-button v-model="activeCenter.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    />
+                                </div>
                             </div>
-                             <div class="form-group">
+                             <div class="col-lg-12 form-group">
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
@@ -102,7 +105,6 @@
                                                                     <label>【掲載内容】</label>
                                                                     <p class="main" v-html="activeCenter.content"></p>
                                                                 </div>
-
                                                                 <div>
                                                                     <label>【添付ファイル】</label>
                                                                     <div class="form-group files">
@@ -175,7 +177,7 @@
                 pagination: {},
                 edit: false,
                 dateFormat: 'YYYY-MM-DD',
-                color: '#DC3545',
+                switchColorDeactivate: '#DC3545',
                 time: new Date(),
                 range: [new Date(), new Date()],
                 emptyTime: '',
