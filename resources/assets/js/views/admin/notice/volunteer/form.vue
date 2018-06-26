@@ -20,21 +20,23 @@
                                 <label>【フォーマット】</label>
                                 <p>ボランティア</p>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-sm-12 col-lg-6">
-                                    <label for="active_category">【活動カテゴリ】</label>
-                                   <multiselect v-model="acitvityCategorySelected" :options="categories" @select="onSelect"
-                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する"
-                                        selectedLabel="選ばれた"  track-by="id" label="name" 
-                                        v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"></multiselect>
-                                    <span class="is-danger">{{ errors.first('activity_category') }}</span>
-                                </div>
-                                <div class="form-group col-sm-12 col-lg-6">
-                                    <label class="col-form-label">【掲載開始日】（必須）</label>
-                                    <div class="row">
-                                        <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
-                                    </div>
-                                </div>
+                            <div class="form-group col-sm-12 col-lg-12">
+                                <label for="active_category">【活動カテゴリ】</label>
+                                <multiselect 
+                                    v-model="selectedActivityCategory" 
+                                    :options="categories" 
+                                    @select="onSelect"
+                                    placeholder="選んでください" 
+                                    selectLabel="クリックして選択する" 
+                                    deselectLabel="クリックして選択を解除する"
+                                    selectedLabel="選ばれた"  
+                                    track-by="id" 
+                                    label="name" 
+                                    v-validate="'required'" 
+                                    name="activity_category" 
+                                    data-vv-as="活動カテゴリ">
+                                </multiselect>
+                                <span class="is-danger">{{ errors.first('activity_category') }}</span>
                             </div>
 
                             <div class="col-lg-12 form-group">
@@ -44,18 +46,23 @@
                                     />
                                 </div>
                             </div>
-
+                            <div class="form-group col-sm-12 col-lg-12">
+                                <label class="col-form-label">【掲載開始日】（必須）</label>
+                                <div class="row">
+                                    <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                </div>
+                            </div>
                             <div class="col-lg-12 form-group">
-                                <label class="col-form-label" for="sponsor">【主催】</label>
-                                <input v-model="volunteer.organizer" class="form-control" id="sponsor" type="text" v-validate="'required'" name="organizer" data-vv-as="主催">
+                                <label class="col-form-label" for="sponsor">【募集団体】</label>
+                                <input v-model="volunteer.sponsor" class="form-control" id="sponsor" type="text" v-validate="'required'" name="organizer" data-vv-as="主催">
                                 <span class="is-danger">{{ errors.first('organizer') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <label for="inputFile">【添付ファイル】</label>
+                                <label for="inputFile">【イメージ画像】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange" accept='image/*'> 参照
                                         </label>
 
                                         <div class="form-group files">
@@ -102,7 +109,7 @@
 							</div>
 							<div class="col-lg-12 form-group">
 								<label for="content">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
-								<textarea v-model="volunteer.content" class="form-control" id="content" required="" rows="3"></textarea>
+                                <wysiwyg v-model="volunteer.content"  type="text" />
 							</div>
 							<div class="col-lg-12 form-group">
 								【関連URL】
@@ -112,7 +119,7 @@
 							<div class=" col-lg-12 form-group">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
 								<!-- <textarea v-model="volunteer.contact" class="form-control" id="contact" required="" rows="3"></textarea> -->
-                                <wysiwyg v-model="volunteer.contact"  name="content" data-vv-as="掲載内容" type="text" />
+                                <wysiwyg v-model="volunteer.contact"  type="text" />
 							</div>
 
                             <div class="col-lg-12 form-group">
@@ -164,11 +171,11 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動カテゴリ】</label>
-                                                                        <p>{{volunteer.subject}}</p>
+                                                                        <p>{{selectedActivityCategory? selectedActivityCategory.name : ''}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【子供の参加】</label>
-                                                                        <p>{{volunteer.children}}</p>
+                                                                        <p>{{volunteer.children? 'はい' : 'いいえ'}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【掲載開始日】</label>
@@ -358,7 +365,7 @@
                     { id: "2000", name: "条例に基づく活動" },
                     { id: "2100", name: "その他" }
                 ],
-                acitvityCategorySelected: ""
+                selectedActivityCategory: ""
             };
         },
         computed: {

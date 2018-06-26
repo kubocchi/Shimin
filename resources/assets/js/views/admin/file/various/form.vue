@@ -24,20 +24,10 @@
                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【様式のグループ】（必須）</label>
                                 <div class="col-lg-12 form-group">
-                                    <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="various.group" value="1" color="primary-o" checked v-validate="'required'" name="group" data-vv-as="説明">市民活動団体登録・情報変更</p-radio>
-                                    </div>
-                                    <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="various.group" value="2" color="primary-o" v-validate="'required'" name="group" data-vv-as="説明">個人ボランティア登録・情報変更・抹消</p-radio>
-                                    </div>
-                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="various.group" value="3" color="primary-o" v-validate="'required'" name="group" data-vv-as="説明">かわら版掲載申込書</p-radio>
-                                    </div>
-                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="various.group" value="4" color="primary-o" v-validate="'required'" name="group" data-vv-as="説明">各種申込用紙</p-radio>
+                                    <div v-for="group in groups" v-bind:key="group.id" class="form-group row">
+                                        <p-radio class="p-default p-curve" v-model="various.group"  v-bind:value="group.id"  color="primary-o" checked >{{group.label}}</p-radio>
                                     </div>
                                 </div>
-                                <span class="is-danger">{{ errors.first('detail') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
@@ -111,6 +101,10 @@
                                                                     <label>【説明】</label>
                                                                     <p>{{various.detail}}</p>
                                                                 </div>
+                                                                <div>
+                                                                    <label>【説明】</label>
+                                                                    <p>{{various.group}}</p>
+                                                                </div>
 
                                                                 <div>
                                                                     <label>【添付ファイル】</label>
@@ -173,7 +167,7 @@
                     id: "",
                     subject: "",
                     detail: "",
-                    group: "1",
+                    group: 1,
                     file: "",
                     deactivate: false,
                     created_by: 1,
@@ -208,7 +202,13 @@
                 percentCompleted: 0,
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
-                width:'0%'
+                width:'0%',
+                groups:[
+                    {'id': 1, 'label':'市民活動団体登録・情報変更'},
+                    {'id': 2, 'label':'個人ボランティア登録・情報変更・抹消'},
+                    {'id': 3, 'label':'かわら版掲載申込書'},
+                    {'id': 4, 'label':'各種申込用紙'},
+                ]
             };
         },
         computed: {
@@ -298,7 +298,7 @@
                 this.various.id = various.id
                 this.various.subject = various.subject
                 this.various.detail = various.detail
-                this.various.group = various.group.toString()
+                this.various.group = various.group
                 this.various.file = various.file
                 this.various.deactivate = !! various.deactivate == 1 ? true:false
                 this.various.created_by = various.created_by

@@ -23,9 +23,20 @@
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-4">
                                     <label for="active_category">【活動カテゴリ】</label>
-                                    <multiselect v-model="acitvityCategorySelected" :options="categories" @select="onSelect"  track-by="id" label="name" 
-                                        placeholder="選んでください" selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" 
-                                        v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"></multiselect>
+                                    <multiselect 
+                                        v-model="selectedActivityCategory" 
+                                        :options="categories" 
+                                        @select="onSelect"  
+                                        track-by="id" 
+                                        label="name" 
+                                        placeholder="選んでください" 
+                                        selectLabel="クリックして選択する" 
+                                        deselectLabel="クリックして選択を解除する" 
+                                        selectedLabel="選ばれた" 
+                                        v-validate="'required'" 
+                                        name="activity_category" 
+                                        data-vv-as="活動カテゴリ">
+                                    </multiselect>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-4">
@@ -103,7 +114,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contents">【内容詳細】</label>
-                                <textarea v-model="event.detail" class="form-control" id="contents" required="" rows="3"></textarea>
+                                <wysiwyg v-model="event.detail" type="text" />
                             </div>
                             <div class="col-lg-12 form-group">
                                 【関連URL】
@@ -165,7 +176,8 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動カテゴリ】</label>
-                                                                        <p>{{event.activity_category}}</p>
+                                                                        <p>{{selectedActivityCategory? selectedActivityCategory.name : ''}}</p>
+                                                                        
                                                                     </div>
                                                                     <div>
                                                                         <label>【子供の参加】</label>
@@ -224,7 +236,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【内容詳細】</label>
-                                                                        <p>{{event.detail}}</p>
+                                                                        <p v-html="event.detail"></p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【関連URL】</label>
@@ -232,7 +244,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【問い合わせ先】</label>
-                                                                        <p  v-html="event.phone"></p>
+                                                                        <p v-html="event.phone"></p>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -358,7 +370,7 @@
                     { id: "2000", name: "条例に基づく活動" },
                     { id: "2100", name: "その他" }
                 ],
-                acitvityCategorySelected: ""
+                selectedActivityCategory: ""
             };
         },
         computed: {
