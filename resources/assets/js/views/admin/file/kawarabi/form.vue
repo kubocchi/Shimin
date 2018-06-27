@@ -18,15 +18,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                	<label for="contents">【説明】</label>
-								<textarea class="form-control" v-model="kawarabi.detail" id="detail" rows="3" v-validate="'required'" name="detail" data-vv-as="説明" type="text"></textarea>
-                                <span class="is-danger">{{ errors.first('detail') }}</span>
-                            </div>
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label">【サイトに公開する】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="kawarabi.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
-                                    />
-                                </div>
+                                <wysiwyg v-model="kawarabi.detail" type="text"/>
                             </div>
                              <div class="col-lg-12 form-group">
                                 <label for="inputFile">【添付ファイル】</label>

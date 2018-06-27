@@ -3,7 +3,7 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span>かわら版 登録画面</h4>
+            </span>事業報告  事業名登録画面</h4>
         <hr>
         
         <div class="row mt-4">
@@ -30,16 +30,9 @@
                                 <span class="is-danger">{{ errors.first('year') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="business.name" placeholder="件名" id="subject" v-validate="'required'" name="business" data-vv-as="件名" type="text">
+                                <label class="col-form-label" for="subject">【事業名】（必須）</label>
+                                <input class="form-control" v-model="business.name" placeholder="事業名" id="subject" v-validate="'required'" name="business" data-vv-as="事業名" type="text">
                                 <span class="is-danger">{{ errors.first('business') }}</span>
-                            </div>
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label">【サイトに公開する】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="business.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
-                                    />
-                                </div>
                             </div>
 
                             <router-link :to="{ name: 'businessList' }">
@@ -60,7 +53,7 @@
                                     <h4 class="modal-subject">
                                         <span>
                                             <i class="fas fa-dove"></i>
-                                        </span> かわら版 登録確認画面
+                                        </span> 事業報告 事業名登録確認画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -75,11 +68,11 @@
                                                             <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
                                                             <div>
                                                                  <div>
-                                                                    <label>【件名】</label>
+                                                                    <label>【年度】</label>
                                                                     <p>{{selectedYear? selectedYear.year : ''}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【件名】</label>
+                                                                    <label>【事業名】</label>
                                                                     <p>{{business.name}}</p>
                                                                 </div>
                                                             </div>

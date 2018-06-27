@@ -13,18 +13,26 @@
                     </span> お知らせの登録</h5>
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="pages/1-1_01list.html" role="button">宮崎市民活動センターからのお知らせ</a>
+                        <router-link :to="{ name: 'activeCenterList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">宮崎市民可動センターからのお知らせ</button>
+                        </router-link>
                     </div>
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="pages/1-2_01list.html" role="button">登録団体、行政などからのお知らせ</a>
+                         <router-link :to="{ name: 'noticeList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">登録団体、行政などからのお知らせ</button>
+                        </router-link>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="pages/1-3_01list.html" role="button">助成金情報</a>
+                         <router-link :to="{ name: 'subsidyList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">助成金情報</button>
+                        </router-link>
                     </div>
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="pages/1-4_01list.html" role="button">災害ボランティア情報</a>
+                         <router-link :to="{ name: 'disasterList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">災害ボランティア情報</button>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -40,18 +48,26 @@
                     </span> 各種様式ファイルの登録</h5>
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="#" role="button">各種様式</a>
+                        <router-link :to="{ name: 'variousList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">各種様式</button>
+                        </router-link>
                     </div>
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="#" role="button">事業報告</a>
+                        <router-link :to="{ name: 'businessReportList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">事業報告</button>
+                        </router-link>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="#" role="button">夢交差点</a>
+                        <router-link :to="{ name: 'dreamList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">夢交差点</button>
+                        </router-link>
                     </div>
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="#" role="button">かわら版</a>
+                        <router-link :to="{ name: 'kawarabiList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">かわら版</button>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -67,7 +83,9 @@
                     </span> 団体情報の登録</h5>
                 <div class="row">
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block topmenu" href="#" role="button">団体情報の登録</a>
+                        <router-link :to="{ name: 'groupInformationList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">団体情報の登録</button>
+                        </router-link>
                     </div>
                 </div>
             </div>

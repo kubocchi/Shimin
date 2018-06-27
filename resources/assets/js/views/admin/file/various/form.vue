@@ -3,7 +3,7 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span>各種様式 一覧画面</h4>
+            </span>各種様式　登録画面</h4>
         <hr>
         
         <div class="row mt-4">
@@ -18,8 +18,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                	<label for="contents">【説明】</label>
-								<textarea class="form-control" v-model="various.detail" id="detail" rows="3" v-validate="'required'" name="detail" data-vv-as="説明" type="text"></textarea>
-                                <span class="is-danger">{{ errors.first('detail') }}</span>
+                                <wysiwyg v-model="various.detail"  type="text"/>
                             </div>
                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【様式のグループ】（必須）</label>
@@ -29,13 +28,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label">【サイトに公開する】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="various.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
-                                    />
-                                </div>
-                            </div>
 
                             
                              <div class="col-lg-12 form-group">
@@ -43,9 +35,10 @@
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                             <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange">
+                                             <input type="file" multiple="multiple" v-validate.initial="attachments" id="attachments" v-validate="'required'" name="attachments" data-vv-as="件名" style="display: none" @change="uploadFieldChange">
                                             参照
                                         </label>
+                                        <span class="is-danger">{{ errors.first('attachments') }}</span>
                                         
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
@@ -99,11 +92,11 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【説明】</label>
-                                                                    <p>{{various.detail}}</p>
+                                                                    <p v-html="various.detail"></p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【説明】</label>
-                                                                    <p>{{various.group}}</p>
+                                                                    <p>{{groups.find(x => x.id === this.various.group).label}}</p>
                                                                 </div>
 
                                                                 <div>
@@ -148,6 +141,7 @@
                             </div>
                     </fieldset>
                 </form>
+                {{attachments.length}}
                 </div>
             </div>
         </div>

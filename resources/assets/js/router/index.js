@@ -1,7 +1,7 @@
 
 
 /***********************Admin-Panel-Components***********************/
-import Dashboard from '../views/Dashboard'
+import Dashboard from '../views/admin/Dashboard'
 // 1.1 Active center Routes
 import ActiveCenterForm from '../views/admin/transmission/active-center/Form'
 import ActiveCenterList from '../views/admin/transmission/active-center/List'

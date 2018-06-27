@@ -13,7 +13,7 @@
                         <fieldset>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-6">
-                                   <label class="col-form-label" for="subject">【事業名】（必須）</label>
+                                   <label class="col-form-label" for="subject">【年度】（必須）</label>
                                     <multiselect 
                                         v-model="selectedYear" 
                                         :options="years" 
@@ -53,17 +53,9 @@
 
                             <div class="col-lg-12 form-group">
                                	<label for="contents">【説明】</label>
-								<textarea class="form-control" v-model="businessReport.detail" id="detail" rows="3" v-validate="'required'" name="detail" data-vv-as="説明" type="text"></textarea>
-                                <span class="is-danger">{{ errors.first('detail') }}</span>
+                                <wysiwyg v-model="businessReport.detail" type="text"/>
                             </div>
 
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label">【サイトに公開する】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="businessReport.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
-                                    />
-                                </div>
-                            </div>
                              <div class="col-lg-12 form-group">
                                 <label for="inputFile">【公開ファイル】（必須）</label>
                                 <div class="file-upload">
@@ -105,7 +97,7 @@
                                     <h4 class="modal-subject">
                                         <span>
                                             <i class="fas fa-dove"></i>
-                                        </span> 夢交差点 登録確認画面
+                                        </span> 事業報告 登録画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -129,7 +121,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【説明】</label>
-                                                                    <p>{{businessReport.detail}}</p>
+                                                                    <p v-html="businessReport.detail"></p>
                                                                 </div>
 
                                                                 <div>

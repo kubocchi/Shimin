@@ -41,12 +41,13 @@
                     <table class="table table-sm">
                         <thead>
                             <tr class="table-primary">
-                                <th class="col-xs-1" scope="col">No.</th>
+                               <th class="col-xs-1" scope="col">No.</th>
+								<th class="col-xs-2 wide_d" scope="col">ステータス</th>
 								<th class="col-xs-3 wide_s" scope="col">件名</th>
+								<th class="col-xs-2 wide_d" scope="col">登録日</th>
 								<th class="col-xs-2 wide_d" scope="col">更新日</th>
-								<th class="col-xs-2" align="center">複製</th>
-								<th class="col-xs-2" scope="col">変更</th>
-								<th class="col-xs-2" scope="col">削除</th>
+								<th class="col-xs-1" scope="col">変更</th>
+								<th class="col-xs-1" scope="col">削除</th>
                             </tr>
                         </thead>
 
@@ -54,12 +55,9 @@
                             <tr v-for="(dream, rowNumber) in dreams" v-bind:key="dream.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ dream.subject }}</td>
+                                <td></td>
                                 <td>{{ dream.created_at }}</td>
-                                <td>
-                                    <router-link :to="{ name: 'dreamForm', params: { model: dream, requestType: 'copy' }}">
-                                        <button class="btn btn-outline-primary btn-block" role="button">複製</button>
-                                    </router-link>
-                                </td>
+                                <td>{{ dream.updated_at }}</td>
                                 <td>
                                     <router-link :to="{ name: 'dreamForm', params: { model: dream, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>

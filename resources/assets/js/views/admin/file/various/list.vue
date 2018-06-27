@@ -4,7 +4,7 @@
         <h4>
             <span>
                 <i class="fas fa-file"></i>
-            </span>夢交差点 一覧画面</h4>
+            </span>各種様式　一覧画面</h4>
         <hr>
         <div class="row mt-4">
             <div class="col-lg-12">

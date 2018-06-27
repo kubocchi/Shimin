@@ -4,7 +4,7 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span>災害ボランティア情報 一覧画面</h4>
+            </span>事業報告  事業名一覧画面</h4>
         <hr>
         <div class="row mt-4">
             <div class="col-lg-12">
@@ -42,8 +42,7 @@
                         <thead>
                             <tr class="table-primary">
                                 <th class="col-xs-1" scope="col">No.</th>
-								<th class="col-xs-3 wide_s" scope="col">件名</th>
-								<th class="col-xs-2 wide_d" scope="col">状態</th>
+								<th class="col-xs-3 wide_s" scope="col">事業名</th>
 								<th class="col-xs-2" align="center">複製</th>
 								<th class="col-xs-2" scope="col">変更</th>
 								<th class="col-xs-2" scope="col">削除</th>
@@ -54,14 +53,6 @@
                             <tr v-for="(business, rowNumber) in businesses" v-bind:key="business.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ business.name }}</td>
-                                <td>
-                                    <span v-if="business.deactivate == '0'">
-                                        <i class='fas fa-check'></i>
-                                    </span>
-                                    <span v-else>
-                                        <i class='fas fa-times'></i>
-                                    </span>
-                                </td>
                                 <td>
                                     <router-link :to="{ name: 'businessForm', params: { model: business, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>
@@ -79,6 +70,9 @@
                         </tbody>
                     </table>
                 </div>
+                 <router-link :to="{ name: 'businessReportList' }">
+                    <button class="btn btn-outline-primary">戻る</button>
+                </router-link> 
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <button class="page-link" href="#" @click="fetchBusiness(pagination.prev_page_url)">前へ</button>

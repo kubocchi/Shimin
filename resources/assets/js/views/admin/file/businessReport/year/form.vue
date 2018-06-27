@@ -3,7 +3,7 @@
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
-            </span>かわら版 登録画面</h4>
+            </span>事業報告  年度登録画面</h4>
         <hr>
         
         <div class="row mt-4">
@@ -12,16 +12,9 @@
                     <form @submit.prevent="submitClicked">
                         <fieldset>
                             <div class="col-lg-12 form-group">
-                                <label class="col-form-label" for="subject">【件名】（必須）</label>
-                                <input class="form-control" v-model="year.year" placeholder="件名" id="subject" v-validate="'required'" name="year" data-vv-as="件名" type="text">
+                                <label class="col-form-label" for="subject">【年度】（必須）</label>
+                                <input class="form-control" v-model="year.year" placeholder="年度" id="subject" v-validate="'required'" name="year" data-vv-as="件名" type="text">
                                 <span class="is-danger">{{ errors.first('year') }}</span>
-                            </div>
-                            <div class="col-lg-12 form-group">
-                                <label class="col-form-label">【サイトに公開する】</label>
-                                <div class="form-group row">
-                                    <toggle-button v-model="year.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
-                                    />
-                                </div>
                             </div>
 
                             <router-link :to="{ name: 'yearList' }">
@@ -42,7 +35,7 @@
                                     <h4 class="modal-subject">
                                         <span>
                                             <i class="fas fa-dove"></i>
-                                        </span> かわら版 登録確認画面
+                                        </span>事業報告 年度登録確認画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -57,7 +50,7 @@
                                                             <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
                                                             <div>
                                                                 <div>
-                                                                    <label>【件名】</label>
+                                                                    <label>【年度】</label>
                                                                     <p>{{year.year}}</p>
                                                                 </div>
                                                                 
