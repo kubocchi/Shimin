@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BusinessReport;
+use App\Year;
 use App\Http\Resources\BusinessReportResource;
+use Response;
 class BusinessReportController extends Controller
 {
     /**
@@ -96,5 +98,31 @@ class BusinessReportController extends Controller
          
          // Return collection of Kawarabis as a resource
          return BusinessReportResource::collection($kawarabis);
+    }
+
+    /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getFrontPageData()
+    {
+        $businessReports = Year::join('businesses', 'businesses.year_id', '=', 'years.id')
+                            ->join('business_reports', 'business_reports.business_id', '=', 'businesses.id')
+                            ->orderBy('years.created_at', 'desc')
+                            ->get();
+
+        // Group By Student ID from Query data               
+        $groupByData = [];
+        foreach($businessReports as $businessReport)
+        { 
+            $groupByData[$businessReport->year][] = $businessReport;
+        }
+
+
+        
+
+        return Response::json(['data' => $groupByData], 201);
     }
 }

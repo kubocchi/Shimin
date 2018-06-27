@@ -26,6 +26,10 @@ Route::post('/attachments/store', 'AttachmentController@storeAttachments');
 Route::get('asset/attachments/{ids}', 'AttachmentController@pullAttachments');
 // Delete attachments
 Route::delete('/attachments/', 'AttachmentController@deleteAttachment');
+// Download attachments
+Route::get('/download/{file}', function ($file='') {
+    return response()->download(public_path('public/attachments/'.$file)); 
+});
 
 # 1.1 active-center routes
 // List active-center
@@ -147,6 +151,8 @@ Route::put('business-report', 'BusinessReportController@store');
 Route::delete('business-report/{id}', 'BusinessReportController@destroy');
 //  List business-report
 Route::post('business-reports', 'BusinessReportController@getBusinessReportData');
+// List single business
+Route::get('frontpage-business-reports', 'BusinessReportController@getFrontPageData');
 
 # 2.3 Dream routes
 // List dream
@@ -207,6 +213,7 @@ Route::delete('business/{id}', 'BusinessController@destroy');
 Route::post('businesses', 'BusinessController@getBusinessData');
 // List single business
 Route::get('business/year/{id}', 'BusinessController@yearWiseBusiness');
+
 
 # 3 Group-information routes
 // List group-information

@@ -64,6 +64,9 @@ import DisasterDetail from '../views/website/disaster/detail'
 // Subsidy Center
 import SubsidyIndex from '../views/website/subsidy/index'
 import SubsidyDetail from '../views/website/subsidy/detail'
+
+// Business Report 
+import BusinessReport from '../views/website/business-report/index'
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -388,6 +391,11 @@ const routes = [
                 component: SubsidyDetail
             }
         ]
+    },
+    {
+        path: '/business-report',
+        name: 'business-report',
+        component: BusinessReport
     },
 ];
 

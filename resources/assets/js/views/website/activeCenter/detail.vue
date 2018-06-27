@@ -133,9 +133,9 @@
                                 <!-- <a href="#">ドネーション説明会表.pdf</a> -->
                                 <div v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                     <div class="form-group">
-                                        <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) +
+                                        <a class="label label-primary" @click="downloadFile(attachment.path)">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) +
                                             'MB)'}}
-                                        </span>
+                                        </a>
                                     </div>
                                 </div>
                             </dd>
@@ -240,6 +240,27 @@
                         loader.hide()
                     })
                     .catch(err => console.log(err))
+            },
+            downloadFile(filepath) {
+                console.log(filepath)
+                // fetch(`/api//download/${filepath}`)
+                //     .then(res => res.json())
+                //     .then(res => {
+                //         var headers = res.headers();
+                //         var blob = new Blob([res.data],{type:headers['content-type']});
+                //         var link = document.createElement('a');
+                //         link.href = window.URL.createObjectURL(blob);
+                //         link.download = "Filename";
+                //         link.click();
+                //     })
+                //     .catch(err => console.log(err))
+
+                let response = await Vue.http.get(`/api/download/${filepath}`, {responseType: 'arraybuffer'});
+                let blob = new Blob([response.data], {type:response.headers.get('content-type')});
+                let link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = this.name;
+                link.click();
             },
         }
     };

@@ -44,7 +44,8 @@ class AttachmentRepository extends BaseRepository
 	 */
 	public function getPublicUrlPath($name)
 	{
-		return 'storage/attachments/' . $name;
+		//return 'storage/attachments/' . $name;
+		return $name;
 	}	
 
 	/**
