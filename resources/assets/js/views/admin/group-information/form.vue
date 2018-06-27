@@ -133,10 +133,10 @@
                                 <label class="col-form-label">【代表者電話番号の開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.representative_phone_disclosure" value="0" color="primary-o" checked>開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone" value="0" color="primary-o" checked>開示しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.representative_phone_disclosure" value="1" color="primary-o">開示する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone" value="1" color="primary-o">開示する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -148,10 +148,10 @@
                                 <label class="col-form-label">【代表者携帯番号の開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.representative_phone_disclosure" value="0" color="primary-o" checked>開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="0" color="primary-o" checked>開示しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.representative_phone_disclosure" value="1" color="primary-o">開示する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="1" color="primary-o">開示する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -163,10 +163,10 @@
                                 <label class="col-form-label">【代表者FAXの開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.representative_fax_disclosure" value="0" color="primary-o" checked>開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_fax" value="0" color="primary-o" checked>開示しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.representative_fax_disclosure" value="1" color="primary-o">開示する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_fax" value="1" color="primary-o">開示する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="address_name"></label>宛名
                                         <input class="form-control" v-model="groupInformation.contact_address_name" id="address_name" type="text">
-                                    </div>
+                                    </div> &nbsp;
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="address_title"></label>敬称
                                         <input class="form-control" v-model="groupInformation.contact_address_title" id="address_title" type="text">
@@ -301,8 +301,10 @@
                                 <label class="col-form-label">【活動分類】（必須）</label>
                                 <div class="col-lg-12 form-group">
                                     <div v-for="activityCategory in activityCategories" v-bind:key="activityCategory.id" class="form-group row" >
-                                        <p-check class="p-default p-curve p-thick p-smooth" v-model="groupInformation.active_category" v-bind:value="activityCategory.id" color="primary-o">{{activityCategory.name}}</p-check>
+                                        <p-check class="p-default p-curve p-thick p-smooth" v-model="groupInformation.activity_category" :id="'category_' + activityCategory.id" 
+                                        :value="activityCategory.id" color="primary-o" v-validate="'required'" name="activity_category" data-vv-as="件名">{{activityCategory.name}}</p-check>
                                     </div>
+                                    <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                     <div class="form-group">
                                         <input class="form-control"  v-model="groupInformation.active_category_supplement" id="active_category23_supplement" type="text">
                                     </div>
@@ -324,8 +326,8 @@
                                 【活動回数】
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
-                                        <label class="col-form-label" for="activity_frequency"></label>
-                                        <input class="form-control" id="activity_frequency" type="text">回 /
+                                        <label class="col-form-label" for="activity_frequency"></label> 
+                                        <input class="form-control" id="activity_frequency" type="text">&nbsp; 回 / &nbsp;
                                     </div>
                                     <div class="form-group form-inline text-right">
                                         <select name="activity_day" onchange="">
@@ -409,15 +411,15 @@
                                                             <div>
                                                                 <div>
                                                                     <label>【団体番号】</label>
-                                                                    <p>Sample Title</p>
+                                                                    <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【団体種類】</label>
-                                                                    <p>Sample</p>
+                                                                     <p>{{groupInformation.type === '0'? '一般団体' : '個人登録ボランティア'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【登録場所】</label>
-                                                                    <p>Sample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【公開状況】</label>
@@ -442,27 +444,27 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【団体名】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【団体名ふりがな】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名ふりがな】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名の公開有無】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者電話番号】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者電話番号】</label>
@@ -470,7 +472,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者携帯番号】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者携帯番号の開示有無】</label>
@@ -478,7 +480,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者FAX】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者FAXの開示有無】</label>
@@ -486,11 +488,11 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局ふりがな】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局の公開有無】</label>
@@ -512,7 +514,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先電話番号（１）】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先電話番号（１）の公開有無】</label>
@@ -552,15 +554,15 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【会員数（男性）】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【会員数（女性）】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【会員数（合計）】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動回数】</label>
@@ -573,23 +575,23 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動内容・事業内容】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【ロッカー】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【メールBOX】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【方法】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【備考】</label>
-                                                                    <p>samplsamplesample</p>
+                                                                     <p>{{groupInformation.number}}</p>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -622,6 +624,7 @@
                                 </div>
                             </div>
                         </fieldset>
+                        {{groupInformation}}
                     </form>
                 </div>
             </div>
@@ -655,11 +658,11 @@
                     representative_name_phonetic: "",
                     disclosure_name: "0",
                     representative_phone: "",
-                    representative_phone_disclosure: "0",
+                    disclosure_representative_phone: "0",
                     representative_phone_2: "",
-                    representative_phone_2_disclosure: "",
+                    disclosure_representative_phone_2: "",
                     representative_fax: "",
-                    representative_fax_disclosure: "0",
+                    disclosure_representative_fax: "0",
                     contact_name: "",
                     contact_name_phonetic: "",
                     disclosure_contact_name: "0",
@@ -678,7 +681,7 @@
                     disclosure_contact_mail: "0",
                     contact_url: "",
                     disclosure_contact_url: "0",
-                    activity_category: "",
+                    activity_category: [],
                     active_category_supplement: "",
                     membership_male: "",
                     membership_female: "",
@@ -758,7 +761,10 @@
                     { id: "2200", name: "NPO支援" },
                     { id: "2300", name: "その他区分" },
                 ],
-                selectedActivityCategory: null
+                selectedActivityCategory: null,
+                item: {
+                    category: []
+                }
             };
         },
         computed: {

@@ -203,3 +203,19 @@ Route::delete('business/{id}', 'BusinessController@destroy');
 Route::post('businesses', 'BusinessController@getBusinessData');
 // List single business
 Route::get('business/year/{id}', 'BusinessController@yearWiseBusiness');
+
+# 3 Group-information routes
+// List group-information
+Route::get('group-informations', 'GroupInformationController@index');
+// List single group-information
+Route::get('group-information/{id}', 'GroupInformationController@show');
+// Create new group-information
+Route::post('group-information', 'GroupInformationController@store');
+// Update group-information
+Route::put('group-information', 'GroupInformationController@store');
+// Delete group-information
+Route::delete('group-information/{id}', 'GroupInformationController@destroy');
+// List membership with parameters
+Route::post('group-informations', 'GroupInformationController@getgroup-informationData');
+// List single group-information
+Route::get('group-information/year/{id}', 'GroupInformationController@yearWisegroup-information');
