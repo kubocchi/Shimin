@@ -129,18 +129,9 @@ class GroupInformationController extends Controller
          $search = $request->input('search');
          $yearId = $request->input('year');
          
-         $kawarabis = GroupInformation::join('businesses', 'business_reports.business_id', '=', 'businesses.id')
-                            ->With('year')
-                            ->With('business')
-                            ->where('businesses.name', 'like', '%' . $search . '%')
-                            ->where(function($query) use ($yearId)  {
-                                if(isset($yearId)) {
-                                    $query->where('business_reports.year_id', $yearId);
-                                }
-                             })
-                            ->paginate(10);
+         $groupInformations = GroupInformation::orderBy('created_at', 'desc')->Where('deactivate', 0)->paginate(10);
          
          // Return collection of Kawarabis as a resource
-         return GroupInformationResource::collection($kawarabis);
+         return GroupInformationResource::collection($groupInformations);
     }
 }

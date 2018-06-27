@@ -1,7 +1,7 @@
 //slider pro
 $(document).ready(function(){
     $( '#slider-main' ).sliderPro({
-    width: 1040 ,
+    width: 920 ,
     height: 470 ,
     arrows: true, //矢印の有無
     buttons: true, //ページャーの有無
@@ -88,7 +88,7 @@ $(function () {
 
 //header transform
 $(function() {
-  var dist = 80;
+  var dist = 90;
   $(window).scroll(function() {
     if ($(window).scrollTop() > dist) {
       $('#global_nav').addClass('scrol');
@@ -98,6 +98,7 @@ $(function() {
     }
   });
 });
+
 //header transform
 $(function() {
   var dist = 650;

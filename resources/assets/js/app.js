@@ -22,6 +22,7 @@ import App from './components/App'
 require('./external/bootstrap')
 require('./external/jquery.sliderPro')
 require('./external/script')
+require('./external/scrol-fixed')
 import PopperJs from 'popper.js'
 //Vue.use(PopperJs)
 window.jQuery = require('jquery')

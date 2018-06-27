@@ -54,8 +54,16 @@ import GroupInformationList from '../views/admin/group-information/list'
 import Home from '../views/website/home'
 
 // Active Center
-import WebsiteActiveCenterIndex from '../views/website/activeCenter/index'
-import WebsiteActiveCenterDetail from '../views/website/activeCenter/detail'
+import activeCenterIndex from '../views/website/activeCenter/index'
+import activeCenterDetail from '../views/website/activeCenter/detail'
+
+// Disaster Center
+import DisasterIndex from '../views/website/disaster/index'
+import DisasterDetail from '../views/website/disaster/detail'
+
+// Subsidy Center
+import SubsidyIndex from '../views/website/subsidy/index'
+import SubsidyDetail from '../views/website/subsidy/detail'
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -333,13 +341,51 @@ const routes = [
         children: [
             {
                 path: 'index',
-                name: 'websiteActiveCenterIndex',
-                component: WebsiteActiveCenterIndex
+                name: 'activeCenterIndex',
+                component: activeCenterIndex
             },
             {
-                path: 'detail',
-                name: 'websiteActiveCenterDetail',
-                component: WebsiteActiveCenterDetail
+                path: ':id/detail',
+                name: 'activeCenterDetail',
+                component: activeCenterDetail
+            }
+        ]
+    },
+    {
+        path: '/disaster',
+        redirect: '/disaster/index',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'index',
+                name: 'disasterIndex',
+                component: DisasterIndex
+            },
+            {
+                path: ':id/detail',
+                name: 'disasterDetail',
+                component: DisasterDetail
+            }
+        ]
+    },
+    {
+        path: '/subsidy',
+        redirect: '/subsidy/index',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'index',
+                name: 'subsidyIndex',
+                component: SubsidyIndex
+            },
+            {
+                path: ':id/detail',
+                name: 'subsidyDetail',
+                component: SubsidyDetail
             }
         ]
     },

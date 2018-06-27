@@ -1,8 +1,11 @@
 <template>
     <div>
         <!-- <Spinner name="pulse" color="#2E92E8"/> -->
-       <h4><span><i class="fas fa-feather"></i></span> 団体情報 一覧画面</h4>
-	    <hr>
+        <h4>
+            <span>
+                <i class="fas fa-feather"></i>
+            </span> 団体情報 一覧画面</h4>
+        <hr>
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
@@ -70,9 +73,18 @@
                         <div class="input-group">
                             <input class="form-control" type="text">
                             <span class="input-group-btn">
-                            <button class="btn btn-outline-primary" type="submit"><span class="input-group-btn"><i class="fas fa-search"></i></span></button>
-                            </span> 　 <span class="input-group-btn">
-                            <button class="btn btn-outline-primary" type="submit"><span class="input-group-btn"><i class="fas fa-times"></i></span></button>
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <span class="input-group-btn">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </button>
+                            </span> 
+                            <span class="input-group-btn">
+                                <button class="btn btn-outline-primary" type="submit">
+                                    <span class="input-group-btn">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                </button>
                             </span>
                         </div>
                     </div>
@@ -92,52 +104,52 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>センター</td>
-                                <td>公開</td>
-                                <td>団体</td>
-                                <td>まちづくり</td>
-                                <td>まちづくり団体sample0000001</td>
-                                <td><a class="btn btn-outline-success btn-block" href="#" role="button">変更</a></td>
-                                <td><a class="btn btn-outline-danger btn-block" href="#" role="button">削除</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>社協</td>
-                                <td>非公開</td>
-                                <td>個人</td>
-                                <td>国際協力</td>
-                                <td>パーソナルサンプル登録</td>
-                                <td><a class="btn btn-outline-success btn-block" href="#" role="button">変更</a></td>
-                                <td><a class="btn btn-outline-danger btn-block" href="#" role="button">削除</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>佐土原</td>
-                                <td>公開</td>
-                                <td>団体</td>
-                                <td>子どもの健全育成</td>
-                                <td>子供の健全育成促進団体AAAA</td>
-                                <td><a class="btn btn-outline-success btn-block" href="#" role="button">変更</a></td>
-                                <td><a class="btn btn-outline-danger btn-block" href="#" role="button">削除</a></td>
+                            <tr v-for="( groupInformation, rowNumber) in groupInformations" :key=rowNumber>
+                                <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
+                                <td>{{ groupInformation.number }}</td>
+                                <td>{{ groupInformation.number }}</td>
+                                <td>{{ groupInformation.number }}</td>
+                                <td>{{ groupInformation.created_at }}</td>
+                                <td>{{ groupInformation.updated_at }}</td>
+                                <td>
+                                    <router-link :to="{ name: ' groupInformationForm', params: { model:  groupInformation, requestType: 'edit' }}">
+                                        <button class="btn btn-outline-success btn-block" role="button">変更</button>
+                                    </router-link>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteGroupInformation( groupInformation.id)" role="button">削除</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="bs-component">
                     <div class="row">
-                        <div class="col-md-2 mt-4"> <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV出力</a> </div>
-                        <div class="col-md-2 mt-4 mb-4"> <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV入力</a> </div>
+                        <div class="col-md-2 mt-4">
+                            <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV出力</a>
+                        </div>
+                        <div class="col-md-2 mt-4 mb-4">
+                            <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV入力</a>
+                        </div>
                     </div>
                 </div>
                 <nav aria-label="Page navigation shikatsu">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item"> <a class="page-link" href="#">前へ</a> </li>
-                        <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                        <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                        <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                        <li class="page-item"> <a class="page-link" href="#">次へ</a> </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">前へ</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">次へ</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -146,125 +158,125 @@
 </template>
 
 <script>
-import Multiselect from "vue-multiselect";
-export default {
-  components: { Multiselect },
-  data() {
-    return {
-      variouses: [],
-      pagination: {},
-      edit: false,
-      params: {
-        search: "",
-        group: null
-      },
-      selectedGroup: { id: null, label: "すべて" },
-      groups: [
-        { id: null, label: "すべて" },
-        { id: 1, label: "市民活動団体登録・情報変更" },
-        { id: 2, label: "個人ボランティア登録・情報変更・抹消" },
-        { id: 3, label: "かわら版掲載申込書" },
-        { id: 4, label: "各種申込用紙" }
-      ]
+    import Multiselect from "vue-multiselect";
+    export default {
+        components: { Multiselect },
+        data() {
+            return {
+                groupInformations: [],
+                pagination: {},
+                edit: false,
+                params: {
+                    search: "",
+                    group: null
+                },
+                selectedGroup: { id: null, label: "すべて" },
+                groups: [
+                    { id: null, label: "すべて" },
+                    { id: 1, label: "市民活動団体登録・情報変更" },
+                    { id: 2, label: "個人ボランティア登録・情報変更・抹消" },
+                    { id: 3, label: "かわら版掲載申込書" },
+                    { id: 4, label: "各種申込用紙" }
+                ]
+            };
+        },
+
+        created() {
+            this.fetchGroupInformation();
+        },
+
+        methods: {
+            // Pulling data from API, its a post request with search-term, type
+            fetchGroupInformation(page_url) {
+                let loader = this.$loading.show();
+                let vm = this;
+                page_url = page_url || "/api/group-informations";
+
+                fetch(page_url, {
+                    method: "post",
+                    body: JSON.stringify(this.params),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        this.groupInformations = res.data;
+                        console.log(this.groupInformations);
+                        vm.makePagination(res.meta, res.links);
+                        loader.hide();
+                    })
+                    .catch(err => console.log(err));
+            },
+
+            // Paginating the table data
+            makePagination(meta, links) {
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: links.next,
+                    prev_page_url: links.prev
+                };
+
+                this.pagination = pagination;
+            },
+
+            // Deleting the selected data
+            deleteVarious(id) {
+                this.$swal({
+                    title: "このデータを削除しますか？",
+                    text: "削除したデータは元に戻すことができません!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "OK",
+                    cancelButtonText: "キャンセル"
+                }).then(result => {
+                    if (result.value) {
+                        let loader = this.$loading.show();
+                        fetch(`api/various/${id}`, {
+                            method: "delete"
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                this.$swal(
+                                    "削除しました!",
+                                    "選択したデータが削除されました",
+                                    "success"
+                                );
+                                loader.hide();
+                                this.fetchGroupInformation();
+                            })
+                            .catch(err => console.log(err));
+                    } else {
+                        this.$swal(
+                            "キャンセルしました",
+                            "データは削除されていません",
+                            "error"
+                        );
+                    }
+                });
+            },
+
+            // Loads table data on changing
+            onTypeChanged: function (e) {
+                this.params.type = event.srcElement.value;
+                this.fetchGroupInformation();
+            },
+
+            // Clearing the user typed search term
+            clearSearch() {
+                this.params.search = "";
+                this.fetchGroupInformation();
+            },
+            onSelectGroup(selectedOption, id) {
+                if (selectedOption) {
+                    console.log(selectedOption.id);
+                    this.params.group = selectedOption.id;
+                    this.fetchGroupInformation();
+                }
+            }
+        }
     };
-  },
-
-  created() {
-    this.fetchVarious();
-  },
-
-  methods: {
-    // Pulling data from API, its a post request with search-term, type
-    fetchVarious(page_url) {
-      let loader = this.$loading.show();
-      let vm = this;
-      page_url = page_url || "/api/variouses";
-
-      fetch(page_url, {
-        method: "post",
-        body: JSON.stringify(this.params),
-        headers: {
-          "content-type": "application/json"
-        }
-      })
-        .then(res => res.json())
-        .then(res => {
-          this.variouses = res.data;
-          console.log(this.variouses);
-          vm.makePagination(res.meta, res.links);
-          loader.hide();
-        })
-        .catch(err => console.log(err));
-    },
-
-    // Paginating the table data
-    makePagination(meta, links) {
-      let pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev
-      };
-
-      this.pagination = pagination;
-    },
-
-    // Deleting the selected data
-    deleteVarious(id) {
-      this.$swal({
-        title: "このデータを削除しますか？",
-        text: "削除したデータは元に戻すことができません!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "OK",
-        cancelButtonText: "キャンセル"
-      }).then(result => {
-        if (result.value) {
-          let loader = this.$loading.show();
-          fetch(`api/various/${id}`, {
-            method: "delete"
-          })
-            .then(res => res.json())
-            .then(data => {
-              this.$swal(
-                "削除しました!",
-                "選択したデータが削除されました",
-                "success"
-              );
-              loader.hide();
-              this.fetchVarious();
-            })
-            .catch(err => console.log(err));
-        } else {
-          this.$swal(
-            "キャンセルしました",
-            "データは削除されていません",
-            "error"
-          );
-        }
-      });
-    },
-
-    // Loads table data on changing
-    onTypeChanged: function(e) {
-      this.params.type = event.srcElement.value;
-      this.fetchVarious();
-    },
-
-    // Clearing the user typed search term
-    clearSearch() {
-      this.params.search = "";
-      this.fetchVarious();
-    },
-    onSelectGroup(selectedOption, id) {
-      if (selectedOption) {
-        console.log(selectedOption.id);
-        this.params.group = selectedOption.id;
-        this.fetchVarious();
-      }
-    }
-  }
-};
 </script>

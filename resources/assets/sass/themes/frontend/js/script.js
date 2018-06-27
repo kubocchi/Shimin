@@ -1,5 +1,15 @@
 //slider pro
-
+$(document).ready(function(){
+    $( '#slider-main' ).sliderPro({
+    width: 920 ,
+    height: 470 ,
+    arrows: true, //矢印の有無
+    buttons: true, //ページャーの有無
+    autoplay: true, //自動再生
+	slideDistance:0,//スライド同士の距離
+	visibleSize: '100%' //サイドの画像
+    });
+});
 
 //smooth scroll
 $(function() {
@@ -78,7 +88,7 @@ $(function () {
 
 //header transform
 $(function() {
-  var dist = 80;
+  var dist = 90;
   $(window).scroll(function() {
     if ($(window).scrollTop() > dist) {
       $('#global_nav').addClass('scrol');
@@ -88,6 +98,7 @@ $(function() {
     }
   });
 });
+
 //header transform
 $(function() {
   var dist = 650;

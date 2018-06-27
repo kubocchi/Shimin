@@ -26,7 +26,9 @@ class DisasterResource extends JsonResource
             'end_date' => $this->end_date,
             'deactivate'=>$this->deactivate,
             'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by
+            'updated_by' => $this->updated_by,
+            'created_at' => $this->created_at->format('Y-m-d'),
+            'updated_at' => $this->updated_at->format('Y-m-d'),
         ];
     }
     public function with($request) {

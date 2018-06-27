@@ -31,13 +31,22 @@
                     <div class="sp-slides">
                         <!-- main slide-->
                         <div class="sp-slide">
-                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_01.png" />
+                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_01.jpg" alt="宮崎市民活動センター" />
                         </div>
                         <div class="sp-slide">
-                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_02.png" />
+                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_02.jpg" alt="イベントの様子" />
                         </div>
                         <div class="sp-slide">
-                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_03.png" />
+                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_03.jpg" alt="センター内の様子" />
+                        </div>
+                        <div class="sp-slide">
+                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_04.jpg" alt="講座の様子" />
+                        </div>
+                        <div class="sp-slide">
+                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_05.jpg" alt="ドネーション商品販売会" />
+                        </div>
+                        <div class="sp-slide">
+                            <img class="sp-image" src="../../../sass/themes/frontend/images/mainslide_06.jpg" alt="センター内の様子" />
                         </div>
                     </div>
                 </div>
@@ -45,6 +54,7 @@
         </div>
 
         <!-- nav -->
+
         <div id="global_nav" class="home">
             <div class="navbar navbar-expand-lg">
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -52,7 +62,7 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li class="open">
-                            <a href="#">
+                            <a href="index.html">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
                             </a>
@@ -64,13 +74,13 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動センターとは</a>
+                                    <a href="infomation/">市民活動センターとは</a>
                                 </li>
                                 <li>
-                                    <a href="#">施設のご案内</a>
+                                    <a href="floormap/">施設のご案内</a>
                                 </li>
                                 <li>
-                                    <a href="#">各種書式</a>
+                                    <a href="format/">各種書式</a>
                                 </li>
                             </ul>
                         </li>
@@ -81,13 +91,13 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動団体とは</a>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
                                 </li>
                                 <li>
-                                    <a href="#">登録について</a>
+                                    <a href="oraganization/regist.html">登録について</a>
                                 </li>
                                 <li>
-                                    <a href="#">団体を探したい</a>
+                                    <a href="oraganization/">団体を探したい</a>
                                 </li>
                             </ul>
                         </li>
@@ -98,39 +108,47 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">ボランティアとは</a>
+                                    <a href="volunteer/">ボランティアをしたい</a>
                                 </li>
                                 <li>
-                                    <a href="#">ボランティアをしたい</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアを
+                                    <a href="volunteer/recruitment.html">ボランティアを
                                         <br>募集したい</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a class="toggle">
                                 <span class="i"></span>
                                 <span class="t">Q & A</span>
                             </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="question/">センターについて</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
             </div>
         </div>
-        
+
         <!-- contents -->
         <div id="contents_wrap">
+
             <div class="container">
+
                 <!-- main wrap -->
                 <div id="main_wrap">
-                    <!-- shimin news -->
+
+                    <!-- nponews -->
                     <div id="news">
                         <div class="h2">
                             <h2>センターからのお知らせ</h2>
                         </div>
-                        <div class="news_contents">
+                       <div class="news_contents">
                             <dl v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
                                 <dt>{{activeCenter.start_date}}</dt>
                                 <dd>
@@ -141,7 +159,7 @@
                             </dl>
                         </div>
                         <div class="btn_blue">
-                            <router-link :to="{ name: 'websiteActiveCenterIndex' }">
+                            <router-link :to="{ name: 'activeCenterIndex' }">
                                 <span>一覧へ</span>
                             </router-link>
                         </div>
@@ -352,11 +370,11 @@
                             </div>
                         </div>
                         <div class="btn_blue">
-                            <a href="#">一覧へ</a>
+                            <a href="topics/">一覧へ</a>
                         </div>
                         <div class="link_blue">
                             <p>
-                                <a href="" class="hatena">ボランティアを募集するには？</a>
+                                <a href="volunteer/" class="hatena">ボランティアを募集するには？</a>
                             </p>
                         </div>
                     </div>
@@ -369,27 +387,27 @@
                     <div class="erea_brown">
                         <!-- 団体を探す -->
                         <div class="btn_big">
-                            <a href="#">
+                            <a href="oraganization/">
                                 <img src="../../../sass/themes/frontend/images/btn_searchgroup.png" alt="団体をさがす">
                             </a>
                         </div>
                         <!-- 地域まちづくり情報 -->
                         <div class="btn_big">
-                            <a href="#">
+                            <a href="machidukuri/">
                                 <img src="../../../sass/themes/frontend/images/btn_machidukuri.png" alt="地域街づくり情報">
                             </a>
                         </div>
                         <!-- 広報誌 -->
                         <ul class="btn_book clearfix">
                             <li>
-                                <a href="#">
+                                <a href="yumekousaten/">
                                     <img src="../../../sass/themes/frontend/images/btn_book_yumeko.png" alt="夢交差点">
                                     <p>最新号：
                                         <br>Vol.65(H29.1月発行)</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="kawaraban/">
                                     <img src="../../../sass/themes/frontend/images/btn_book_kawara.png" alt="かわら版">
                                     <p>最新号：
                                         <br>平成29年5月1日発行</p>
@@ -399,16 +417,16 @@
                         <!-- mini menu -->
                         <ul class="mini_menu">
                             <li>
-                                <a href="#">事業報告</a>
+                                <a href="business-report/">事業報告</a>
                             </li>
                             <li>
-                                <a href="#">各種書式</a>
+                                <a href="format/">各種書式</a>
                             </li>
                             <li>
-                                <a href="#">助成金情報</a>
+                                <a href="joseikin/">助成金情報</a>
                             </li>
                             <li>
-                                <a href="#">災害ボランティア情報</a>
+                                <a href="disaster/">災害ボランティア情報</a>
                             </li>
                         </ul>
                     </div>
@@ -427,7 +445,7 @@
                     </div>
                     <!-- admmin btn -->
                     <div class="btn_admin">
-                        <a href="#">管理者ログイン</a>
+                        <a href="admin">管理者ログイン</a>
                     </div>
                 </div>
             </div>
@@ -473,16 +491,16 @@
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             },
-            loadSlider(){
-                $(document).ready(function(){
-                    $( '#slider-main' ).sliderPro({
-                    width: 1040 ,
-                    height: 470 ,
-                    arrows: true, //矢印の有無
-                    buttons: true, //ページャーの有無
-                    autoplay: true, //自動再生
-                    slideDistance:0,//スライド同士の距離
-                    visibleSize: '100%' //サイドの画像
+            loadSlider() {
+                $(document).ready(function () {
+                    $('#slider-main').sliderPro({
+                        width: 1040,
+                        height: 470,
+                        arrows: true, //矢印の有無
+                        buttons: true, //ページャーの有無
+                        autoplay: true, //自動再生
+                        slideDistance: 0,//スライド同士の距離
+                        visibleSize: '100%' //サイドの画像
                     });
                 });
             }

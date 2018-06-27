@@ -2,14 +2,13 @@
     <div>
         <!-- favicon -->
 	    <link rel="shortcut icon" href="../../../sass/themes/frontend/images/favicon.ico">
+        <!-- header -->
         <div id="header">
             <div class="container clearfix">
                 <div class="head_left">
                     <h1>
                         <a href="index.html" class="clearfix">
-                            <p class="logo">
-                                <img src="../../../sass/themes/frontend/images/h1_logo.png" alt="宮崎市民活動センター">
-                            </p>
+                            <p class="logo"><img src="images/h1_logo.png" alt="宮崎市民活動センター"></p>
                             <p class="s_text">私たちは宮崎市民の市民活動・ボランティアを支援します。</p>
                             <p class="l_text"></p>
                         </a>
@@ -19,49 +18,27 @@
                     <ul class="clearfix">
                         <li>開館時間 9:00 ～ 22:00</li>
                         <li>0985-20-8777</li>
-                        <li>
-                            <a href="#">お問合せ</a>
-                        </li>
-                        <li>
-                            <a href="#">アクセス</a>
-                        </li>
+                        <li><a href="https://net-semi.sakura.ne.jp/contact_ssl/miyanpo/" target="_blank">お問合せ</a></li>
+                        <li><a href="infomation/index.html#access">アクセス</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-
-        
 
         <!-- contents -->
         <transition name="fade" >
             <router-view></router-view>
         </transition>
 
+       
         <!-- banner -->
-
         <div id="banner">
             <div class="container">
                 <ul class="banner">
-                    <li>
-                        <a href="http://www.city.miyazaki.miyazaki.jp/" target="_blank">
-                            <img src="../../../sass/themes/frontend/images/banner_mycity.png" alt="宮崎市">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.my-shakyo.jp/" target="_blank">
-                            <img src="../../../sass/themes/frontend/images/banner_myshakyo.png" alt="宮崎市社会福祉協議会">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.jnpoc.ne.jp/" target="_blank">
-                            <img src="../../../sass/themes/frontend/images/banner_jnpoc.png" alt="日本NPOセンター">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://npo.pref.miyazaki.lg.jp/" target="_blank">
-                            <img src="../../../sass/themes/frontend/images/banner_mynpo.png" alt="宮崎県NPOポータルサイト">
-                        </a>
-                    </li>
+                    <li><a href="http://www.city.miyazaki.miyazaki.jp/" target="_blank"><img src="images/banner_mycity.png" alt="宮崎市"></a></li>
+                    <li><a href="http://www.my-shakyo.jp/" target="_blank"><img src="images/banner_myshakyo.png" alt="宮崎市社会福祉協議会"></a></li>
+                    <li><a href="http://www.jnpoc.ne.jp/" target="_blank"><img src="images/banner_jnpoc.png" alt="日本NPOセンター"></a></li>
+                    <li><a href="http://npo.pref.miyazaki.lg.jp/" target="_blank"><img src="images/banner_mynpo.png" alt="宮崎県NPOポータルサイト"></a></li>
                 </ul>
             </div>
             <div class="bg-wave">
@@ -72,119 +49,70 @@
                 </div>
             </div>
         </div>
-
         <!-- footer -->
 
         <div id="footer">
             <div class="container">
-
                 <!-- sitemap -->
                 <div class="sitemap clearfix">
                     <dl class="links">
                         <dt>センター案内</dt>
-                        <dd>
-                            <a href="#">市民活動団体センターとは</a>
-                        </dd>
-                        <dd>
-                            <a href="#">施設のご案内</a>
-                        </dd>
-                        <dd>
-                            <a href="#">各種書式</a>
-                        </dd>
+                        <dd><a href="infomation/">市民活動団体センターとは</a></dd>
+                        <dd><a href="floormap/">施設のご案内</a></dd>
+                        <dd><a href="format/">各種書式</a></dd>
                     </dl>
                     <dl class="links">
                         <dt>市民活動団体</dt>
-                        <dd>
-                            <a href="#">市民活動団体とは</a>
-                        </dd>
-                        <dd>
-                            <a href="#">登録について</a>
-                        </dd>
-                        <dd>
-                            <a href="#">団体を探したい</a>
-                        </dd>
+                        <dd><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a></dd>
+                        <dd><a href="oraganization/regist.html">登録について</a></dd>
+                        <dd><a href="oraganization/">団体を探したい</a></dd>
                     </dl>
                     <dl class="links">
                         <dt>ボランティア</dt>
-                        <dd>
-                            <a href="#">ボランティアとは</a>
-                        </dd>
-                        <dd>
-                            <a href="#">ボランティアをしたい</a>
-                        </dd>
-                        <dd>
-                            <a href="#">ボランティアを募集したい</a>
-                        </dd>
-                        <dt>
-                            <a href="#">Q&A</a>
-                        </dt>
+                        <dd><a href="volunteer/">ボランティアをしたい</a></dd>
+                        <dd><a href="volunteer/recruitment.html">ボランティアを募集したい</a></dd>
+                        <dt>Q&A</dt>
+                        <dd><a href="question/">センターについて</a></dd>
+                        <dd><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a></dd>
                     </dl>
                     <dl class="links">
-                        <dt>
-                            <a href="#">センターからのお知らせ</a>
-                        </dt>
-                        <dt>
-                            <a href="#">ボランティア募集・イベント情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">地域まちづくり情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">夢交差点</a>
-                        </dt>
-                        <dt>
-                            <a href="#">かわら版</a>
-                        </dt>
+                        <dt><a href="news/">センターからのお知らせ</a></dt>
+                        <dt><a href="topics/">ボランティア募集・イベント情報</a></dt>
+                        <dt><a href="machidukuri/">地域まちづくり情報</a></dt>
+                        <dt><a href="yumekousaten/">夢交差点</a></dt>
+                        <dt><a href="kawaraban/">かわら版</a></dt>
                     </dl>
                     <dl class="links">
-                        <dt>
-                            <a href="#">事業報告</a>
-                        </dt>
-                        <dt>
-                            <a href="#">助成金情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">災害ボランティア情報</a>
-                        </dt>
-                        <dt>
-                            <a href="#">管理者ログイン</a>
-                        </dt>
+                        <dt><a href="business-report/">事業報告</a></dt>
+                        <dt><a href="joseikin/">助成金情報</a></dt>
+                        <dt><a href="disaster/">災害ボランティア情報</a></dt>
+                        <dt><a href="admin">管理者ログイン</a></dt>
                     </dl>
                 </div>
-
+                
                 <!-- center-info -->
                 <div id="center_info" class="clearfix">
                     <div class="left">
-                        <p class="logo">
-                            <img src="../../../sass/themes/frontend/images/logo_foot.png" alt="宮崎市民活動センター">
-                        </p>
+                        <p class="logo"><img src="images/logo_foot.png" alt="宮崎市民活動センター"></p>
                         <p class="l">宮崎市民活動センター</p>
                         <p class="s">開館時間 9:00 ～ 22:00</p>
+                        <p class="s">※日曜は夕方6時まで</p>
                     </div>
                     <div class="right">
-                        <p>〒880-0001
-                            <br> 宮崎市橘通西1丁目1番2号　宮崎市民プラザ3階</p>
-                        <p>TEL：(0985) 20-8777
-                            <br> FAX：(0985) 20-8411</p>
+                        <p>〒880-0001 <br> 宮崎市橘通西1丁目1番2号　宮崎市民プラザ3階</p>
+                        <p>TEL：(0985) 20-8777　<br> FAX：(0985) 20-8411</p>
                         <p>E-mail：info@miyazaki-npocenter.jp</p>
                     </div>
                 </div>
-
+                
                 <!-- nav -->
                 <ul class="foot_nav">
-                    <li>
-                        <a href="#">利用規約</a>
-                    </li>
-                    <li>
-                        <a href="#">免責事項</a>
-                    </li>
-                    <li>
-                        <a href="#">お問合せ</a>
-                    </li>
+                    <li><a href="privacy">利用規約</a></li>
+                    <li><a href="menseki/">免責事項</a></li>
+                    <li><a href="https://net-semi.sakura.ne.jp/contact_ssl/miyanpo/" target="_blank">お問合せ</a></li>
                 </ul>
-
             </div>
-
+            
             <!-- address -->
             <div class="footer_address">
                 <address>Copyright(C)Miyazaki NPO Center All Rights Reserved.</address>

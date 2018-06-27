@@ -99,11 +99,13 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_name">【団体名】（必須）（漢字または全角ひらがな・カタカナ　例：旭入浴サービス ）</label>
-                                <input class="form-control" v-model="groupInformation.name" id="dantai_name" required type="text">
+                                <input class="form-control" v-model="groupInformation.name" id="dantai_name" type="text" v-validate="'required'" name="name" data-vv-as="件名">
+                                <span class="is-danger">{{ errors.first('name') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_name_f">【団体名ふりがな】（必須）（ひらがな　例：あさひにゅうよくさーびす ）</label>
-                                <input class="form-control" v-model="groupInformation.name_phonetic" id="dantai_name_f" required="" type="text">
+                                <input class="form-control" v-model="groupInformation.name_phonetic" id="dantai_name_f" required="" type="text" v-validate="'required'" name="name_phonetic" data-vv-as="件名">
+                                <span class="is-danger">{{ errors.first('name_phonetic') }}</span>
                             </div>
                             <hr>
                             <div class="col-lg-12 form-group">
@@ -118,10 +120,10 @@
                                 <label class="col-form-label">【代表者氏名の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="0" color="primary-o" checked>公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +188,7 @@
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="0" color="primary-o" checked>公開しない  </p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +199,8 @@
                             <div class="col-lg-12 form-group"> 【住所（所在地）】（必須）
                                 <br>
                                 <div class="form-group mt-3">
-                                    <input class="form-control" v-model="groupInformation.contact_address" id="m_address" type="text" required="">
+                                    <input class="form-control" v-model="groupInformation.contact_address" id="m_address" type="text" v-validate="'required'" name="contact_address" data-vv-as="住所">
+                                    <span class="is-danger">{{ errors.first('contact_address') }}</span>
                                 </div>
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
@@ -229,10 +232,10 @@
                                 <label class="col-form-label">【連絡先電話番号の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="0" color="primary-o" checked>公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -244,10 +247,10 @@
                                 <label class="col-form-label">【連絡先携帯番号の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="0" color="primary-o" checked>公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -259,10 +262,10 @@
                                 <label class="col-form-label">【連絡先FAXの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="0" color="primary-o" checked>公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -274,10 +277,10 @@
                                 <label class="col-form-label">【e-mailの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="0" color="primary-o" checked>公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -289,10 +292,10 @@
                                 <label class="col-form-label">【URLの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="0" color="primary-o" checked>公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="1" color="primary-o">公開する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -428,43 +431,43 @@
                                                                 <div>
                                                                     <label>【活動状況】</label>
                                                                     <p>休止中</p>
-                                                                    <p>xxxx/xx/xx</p>
+                                                                    <p>{{groupInformation.pause_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【申請年月日】</label>
-                                                                    <p>xxxx/xx/xx</p>
+                                                                    <p>{{groupInformation.application_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【登録年月日】</label>
-                                                                    <p>xxxx/xx/xx</p>
+                                                                    <p>{{groupInformation.registration_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【設立年月日】</label>
-                                                                    <p>xxxx/xx/xx</p>
+                                                                    <p>{{groupInformation.establishment_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【団体名】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.name}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【団体名ふりがな】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.name_phonetic}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.representative_name}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名ふりがな】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.representative_name_phonetic}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名の公開有無】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.representative_phone}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者電話番号】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.disclosure_representative_phone}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者電話番号】</label>
@@ -480,11 +483,11 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者FAX】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.representative_fax}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者FAXの開示有無】</label>
-                                                                    <p>開示しない</p>
+                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局】</label>
@@ -496,7 +499,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局の公開有無】</label>
-                                                                    <p>公開する</p>
+                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局郵便番号】</label>
@@ -510,7 +513,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【所在地の公開有無】</label>
-                                                                    <p>公開しない</p>
+                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先電話番号（１）】</label>
@@ -526,7 +529,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先電話番号（２）の公開有無】</label>
-                                                                    <p>公開しない</p>
+                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先FAX】</label>
@@ -534,19 +537,19 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先FAXの公開有無】</label>
-                                                                    <p>公開する</p>
+                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【e-mail】</label>
-                                                                    <p>test@mail.jp</p>
+                                                                    <p>{{groupInformation.contact_mail}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【e-mailの公開有無】</label>
-                                                                    <p>公開する</p>
+                                                                    <p>{{groupInformation.disclosure_contact_mail === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【URL】</label>
-                                                                    <p>https://www.google.com/</p>
+                                                                    <p>{{groupInformation.contact_url}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動分類】</label>
@@ -785,7 +788,7 @@
         methods: {
             // Add new, sends model to API
             addGroupInformation() {
-                this.groupInformation.file = this.currentAddedFileIs.join(',')
+                this.groupInformation.activity_category = this.groupInformation.activity_category.join(',')
 
                 let self = this
                 console.log(this.groupInformation)
@@ -793,7 +796,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/groupInformation", {
+                    fetch("api/group-information", {
                         method: "post",
                         body: JSON.stringify(this.groupInformation),
                         headers: {
@@ -820,7 +823,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/groupInformation", {
+                    fetch("api/group-information", {
                         method: "put",
                         body: JSON.stringify(this.groupInformation),
                         headers: {
@@ -851,11 +854,57 @@
                 console.log(groupInformation)
                 this.pullAttachments(groupInformation)
 
-                this.groupInformation.id = groupInformation.id
-                this.groupInformation.subject = groupInformation.subject
-                this.groupInformation.detail = groupInformation.detail
-                this.groupInformation.group = groupInformation.group
-                this.groupInformation.file = groupInformation.file
+                this.groupInformation.id= groupInformation.id,
+                this.groupInformation.number= groupInformation.number,
+                this.groupInformation.type= groupInformation.type,
+                this.groupInformation.regist_management= groupInformation.regist_management,
+                this.groupInformation.open_situation= groupInformation.open_situation,
+                this.groupInformation.active_status= groupInformation.active_status,
+                this.groupInformation.pause_date= groupInformation.pause_date,
+                this.groupInformation.application_date= groupInformation.application_date,
+                this.groupInformation.registration_date= groupInformation.registration_date,
+                this.groupInformation.establishment_date= groupInformation.establishment_date,
+                this.groupInformation.name= groupInformation.name,
+                this.groupInformation.name_phonetic= groupInformation.name_phonetic,
+                this.groupInformation.representative_name= groupInformation.representative_name,
+                this.groupInformation.representative_name_phonetic= groupInformation.representative_name_phonetic,
+                this.groupInformation.disclosure_name= groupInformation.disclosure_name,
+                this.groupInformation.representative_phone= groupInformation.representative_phone,
+                this.groupInformation.disclosure_representative_phone= groupInformation.disclosure_representative_phone,
+                this.groupInformation.representative_phone_2= groupInformation.representative_phone_2,
+                this.groupInformation.disclosure_representative_phone_2= groupInformation.disclosure_representative_phone_2,
+                this.groupInformation.representative_fax= groupInformation.representative_fax,
+                this.groupInformation.disclosure_representative_fax= groupInformation.disclosure_representative_fax,
+                this.groupInformation.contact_name= groupInformation.contact_name,
+                this.groupInformation.contact_name_phonetic= groupInformation.contact_name_phonetic,
+                this.groupInformation.disclosure_contact_name= groupInformation.disclosure_contact_name,
+                this.groupInformation.postal_code= groupInformation.postal_code,
+                this.groupInformation.contact_address= groupInformation.contact_address,
+                this.groupInformation.contact_address_name= groupInformation.contact_address_name,
+                this.groupInformation.contact_address_title= groupInformation.contact_address_title,
+                this.groupInformation.disclosure_contact_address= groupInformation.disclosure_contact_address,
+                this.groupInformation.contact_phone= groupInformation.contact_phone,
+                this.groupInformation.disclosure_contact_phone= groupInformation.disclosure_contact_phone,
+                this.groupInformation.contact_phone_2= groupInformation.contact_phone_2,
+                this.groupInformation.disclosure_contact_phone_2= groupInformation.disclosure_contact_phone_2,
+                this.groupInformation.contact_fax= groupInformation.contact_fax,
+                this.groupInformation.disclosure_contact_fax= groupInformation.disclosure_contact_fax,
+                this.groupInformation.contact_mail= groupInformation.contact_mail,
+                this.groupInformation.disclosure_contact_mail= groupInformation.disclosure_contact_mail,
+                this.groupInformation.contact_url= groupInformation.contact_url,
+                this.groupInformation.disclosure_contact_url= groupInformation.disclosure_contact_url,
+                this.groupInformation.activity_category= groupInformation.activity_category,
+                this.groupInformation.active_category_supplement= groupInformation.active_category_supplement,
+                this.groupInformation.membership_male= groupInformation.membership_male,
+                this.groupInformation.membership_female= groupInformation.membership_female,
+                this.groupInformation.all_member= groupInformation.all_member,
+                this.groupInformation.dues= groupInformation.dues,
+                this.groupInformation.dues_price= groupInformation.dues_price,
+                this.groupInformation.content= groupInformation.content,
+                this.groupInformation.rocker= groupInformation.rocker,
+                this.groupInformation.mail_box= groupInformation.mail_box,
+                this.groupInformation.method= groupInformation.method,
+                this.groupInformation.supplement= groupInformation.supplement,
                 this.groupInformation.deactivate = !!groupInformation.deactivate == 1 ? true : false
                 this.groupInformation.created_by = groupInformation.created_by
                 this.groupInformation.updated_by = groupInformation.updated_by
@@ -1022,8 +1071,10 @@
                         console.log('true')
                     }
                     else {
-                        this.groupInformation.start_date = !!this.range ? this.range[0].toISOString().slice(0, 10) : ""
-                        this.groupInformation.end_date = !!this.range ? this.range[1].toISOString().slice(0, 10) : ""
+                        this.groupInformation.pause_date = this.groupInformation.pause_date.toISOString().slice(0, 10)
+                        this.groupInformation.application_date = this.groupInformation.application_date.toISOString().slice(0, 10)
+                        this.groupInformation.registration_date = this.groupInformation.registration_date.toISOString().slice(0, 10)
+                        this.groupInformation.establishment_date = this.groupInformation.establishment_date.toISOString().slice(0, 10)
                         $("#confirmationModal").modal('show')
                     }
                 });

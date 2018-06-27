@@ -104,8 +104,10 @@ Route::delete('subsidy/{id}', 'SubsidyController@destroy');
 Route::post('subsidies', 'SubsidyController@getSubsidyData');
 
 # 1.4 Disaster routes
+// List active-center
+Route::get('disasters', 'DisasterController@index');
 // List Disaster
-Route::post('disasters', 'DisasterController@index');
+Route::post('getDisasterData', 'DisasterController@index');
 // List single Disaster
 Route::get('disaster/{id}', 'DisasterController@show');
 // Create new Disaster
@@ -114,6 +116,8 @@ Route::post('disaster', 'DisasterController@store');
 Route::put('disaster', 'DisasterController@store');
 // Delete Disaster
 Route::delete('disaster/{id}', 'DisasterController@destroy');
+// List single active-center
+Route::post('disasters', 'DisasterController@getDisasterData');
 
 # 2.1 Various routes
 // List various
@@ -216,6 +220,4 @@ Route::put('group-information', 'GroupInformationController@store');
 // Delete group-information
 Route::delete('group-information/{id}', 'GroupInformationController@destroy');
 // List membership with parameters
-Route::post('group-informations', 'GroupInformationController@getgroup-informationData');
-// List single group-information
-Route::get('group-information/year/{id}', 'GroupInformationController@yearWisegroup-information');
+Route::post('group-informations', 'GroupInformationController@getGroupInformationData');

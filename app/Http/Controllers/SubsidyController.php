@@ -17,7 +17,7 @@ class SubsidyController extends Controller
     public function index()
     {
         // Get ActiveCenters
-        $activeCenters = Subsidy::orderBy('created_at', 'desc')->Where('deactivate', 0)->paginate(10);
+        $activeCenters = Subsidy::orderBy('start_date', 'desc')->Where('deactivate', 0)->paginate(10);
 
         // Return collection of ActiveCenters as a resource
         return SubsidyResource::collection($activeCenters);

@@ -214,9 +214,9 @@
 .news_contents dl{
 	display: table ;
 	margin-bottom: 0 ;
-	border-top: #e7d8bc 1px dashed ;
+	
 	width: 100% ;
-	padding: 18px 0 ;
+	padding: 8px 0 ;
 }
 .news_contents dl dt{
 	display: table-cell ;
@@ -494,7 +494,7 @@
 }
 .topic-list .item a:hover{
 	border-color: #1b89e7 ;
-	box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2) ;
+	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1) ;
 }
 .topic-list .item a:hover p.title{
 	color: #1b89e7 ;

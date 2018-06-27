@@ -78,7 +78,7 @@
         </div>
 
         <!-- pagetitle -->
-        
+
         <div id="pagetitle" class="news">
             <div class="container">
                 <div class="h2">
@@ -98,7 +98,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{ name: 'websiteActiveCenterIndex' }">
+                        <router-link :to="{ name: 'activeCenterIndex' }">
                             <span>センターからのお知らせ</span>
                         </router-link>
                     </li>
@@ -134,22 +134,23 @@
                                 <div v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                     <div class="form-group">
                                         <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) +
-                                            'MB)'}}</span>
+                                            'MB)'}}
+                                        </span>
                                     </div>
                                 </div>
                             </dd>
                         </dl>
                         <!-- URL -->
-                        <dl class="url">
+                        <!-- <dl class="url">
                             <dt>URL</dt>
                             <dd>
                                 <a href="#">https://XXXXXXXXXXXXXXXXXXXX</a>
                             </dd>
-                        </dl>
+                        </dl> -->
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <router-link :to="{ name: 'websiteActiveCenterIndex' }">
+                    <router-link :to="{ name: 'activeCenterIndex' }">
                         <span>一覧に戻る</span>
                     </router-link>
                 </div>
@@ -180,13 +181,15 @@
         },
 
         created() {
-            if (this.$route.params.model)
-                this.getActiveCenter(this.$route.params.model)
+            console.log(this.$route.params)
+            if (this.$route.params.id) {
+                this.activeCenter.id = this.$route.params.id
+                this.getDetail()
+            }
         },
 
         methods: {
-            getActiveCenter(activeCenter) {
-                console.log(activeCenter)
+            fillFormWithData(activeCenter) {
                 this.pullAttachments(activeCenter);
                 this.edit = true
                 this.activeCenter.id = activeCenter.id
@@ -198,10 +201,6 @@
                 this.activeCenter.deactivate = !!activeCenter.deactivate == 1 ? true : false
                 this.activeCenter.created_by = activeCenter.created_by
                 this.activeCenter.updated_by = activeCenter.updated_by
-
-                // For Files
-                // if(activeCenter.file)
-                //     this.currentAddedFileIs = activeCenter.file.split(',')
             },
             pullAttachments(activeCenter) {
                 // Make HTTP request to store announcement
@@ -228,6 +227,19 @@
                 this.attachments.map((item) => { this.upload_size += parseInt(item.size) })
                 this.upload_size = Number((this.upload_size).toFixed(1))
                 this.$forceUpdate();
+            },
+            getDetail(page_url) {
+                let loader = this.$loading.show();
+                let vm = this;
+                page_url = page_url || `/api/active-center/${this.activeCenter.id}`
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.fillFormWithData(res.data)
+                        console.log(res.data)
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
             },
         }
     };

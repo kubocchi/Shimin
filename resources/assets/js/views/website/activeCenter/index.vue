@@ -112,9 +112,12 @@
                         <!-- day -->
                         <dt>{{activeCenter.start_date}}</dt>
                         <!-- title -->
-                         <dd>
-                            <router-link :to="{ name: 'websiteActiveCenterDetail', params: { model: activeCenter }}">
-                                <span class="new"></span>{{activeCenter.title}}
+                        <dd>
+                            <router-link :to="{ path: `/active-center/${activeCenter.id}/detail`}">
+                                <span v-if="activeCenter.start_date === newTagDate">
+                                    <span class="new"></span>
+                                </span>
+                               {{activeCenter.title}}
                             </router-link>
                         </dd>
                     </dl>
@@ -123,9 +126,9 @@
                 <!-- pagenation -->
                 <div class="pagenation">
                     <nav class="pager">
-                        <ul >
+                        <ul>
                             <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
-                                <a href="#" @click="fetchActiveCenter(pagination.prev_page_url)">前のページ</a>
+                                <a href="#" @click="fetchactiveCenter(pagination.prev_page_url)">前のページ</a>
                             </li>
 
                             <li class="page-item disabled">
@@ -133,7 +136,7 @@
                             </li>
 
                             <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
-                                <a href="#" @click="fetchActiveCenter(pagination.next_page_url)">次のページ</a>
+                                <a href="#" @click="fetchactiveCenter(pagination.next_page_url)">次のページ</a>
                             </li>
                         </ul>
                     </nav>
@@ -150,15 +153,16 @@
             return {
                 activeCenters: [],
                 pagination: {},
+                newTagDate: new Date('1900-01-01')
             }
         },
 
         created() {
-            this.fetchActiveCenter()
+            this.fetchactiveCenter()
         },
 
         methods: {
-            fetchActiveCenter(page_url) {
+            fetchactiveCenter(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
                 page_url = page_url || "/api/active-centers"
@@ -167,6 +171,13 @@
                     .then(res => {
                         this.activeCenters = res.data
                         console.log(this.activeCenters)
+
+                        this.activeCenters.forEach(activeCenter => {
+                            if(new Date(activeCenter.start_date) > new Date(this.newTagDate))
+                                this.newTagDate = activeCenter.start_date
+                        });
+
+                        console.log(this.newTagDate)
                         vm.makePagination(res.meta, res.links);
                         loader.hide()
                     })
