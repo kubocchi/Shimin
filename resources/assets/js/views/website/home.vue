@@ -152,8 +152,10 @@
                             <dl v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
                                 <dt>{{activeCenter.start_date}}</dt>
                                 <dd>
-                                    <router-link :to="{ name: 'websiteActiveCenterDetail', params: { model: activeCenter }}">
-                                        <span class="new"></span>{{activeCenter.title}}
+                                     <router-link :to="{ path: `/active-center/${activeCenter.id}/detail`}">
+                                        <span v-if="activeCenter.start_date === newTagDate">
+                                            <span class="new"></span>
+                                        </span> {{activeCenter.title}}
                                     </router-link>
                                 </dd>
                             </dl>
@@ -459,6 +461,7 @@
         data() {
             return {
                 activeCenters: [],
+                newTagDate: new Date('1900-01-01')
             }
         },
 
@@ -478,6 +481,11 @@
                     .then(res => {
                         this.activeCenters = res.data
                         console.log(this.activeCenters)
+
+                        this.activeCenters.forEach(activeCenter => {
+                            if(new Date(activeCenter.start_date) >  new Date(this.newTagDate))
+                                this.newTagDate = activeCenter.start_date
+                        });
                         loader.hide()
                     })
                     .catch(err => console.log(err))
