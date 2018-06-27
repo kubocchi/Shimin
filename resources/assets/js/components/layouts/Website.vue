@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <!-- favicon -->
 	    <link rel="shortcut icon" href="../../../sass/themes/frontend/images/favicon.ico">
         <!-- header -->
