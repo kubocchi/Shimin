@@ -134,4 +134,13 @@ class GroupInformationController extends Controller
          // Return collection of Kawarabis as a resource
          return GroupInformationResource::collection($groupInformations);
     }
+
+    public function getCSV(Request $request)
+    {
+        $file = $request->hasFile('file'); 
+        if(isset($file))
+        {
+            //perform operation
+        }
+    }
 }

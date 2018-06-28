@@ -228,3 +228,5 @@ Route::put('group-information', 'GroupInformationController@store');
 Route::delete('group-information/{id}', 'GroupInformationController@destroy');
 // List membership with parameters
 Route::post('group-informations', 'GroupInformationController@getGroupInformationData');
+// List membership with parameters
+Route::post('uploadCSV', 'GroupInformationController@getCSV');

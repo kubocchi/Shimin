@@ -78,7 +78,7 @@
                                         <i class="fas fa-search"></i>
                                     </span>
                                 </button>
-                            </span> 
+                            </span>
                             <span class="input-group-btn">
                                 <button class="btn btn-outline-primary" type="submit">
                                     <span class="input-group-btn">
@@ -130,6 +130,10 @@
                         </div>
                         <div class="col-md-2 mt-4 mb-4">
                             <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV入力</a>
+                            <label>File
+                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
+                            </label>
+                            <button v-on:click="submitFile()">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -177,7 +181,8 @@
                     { id: 2, label: "個人ボランティア登録・情報変更・抹消" },
                     { id: 3, label: "かわら版掲載申込書" },
                     { id: 4, label: "各種申込用紙" }
-                ]
+                ],
+                file: ''
             };
         },
 
@@ -276,6 +281,43 @@
                     this.params.group = selectedOption.id;
                     this.fetchGroupInformation();
                 }
+            },
+            /*
+                Submits the file to the server
+            */
+            submitFile() {
+                /*
+                    Initialize the form data
+                */
+                let formData = new FormData();
+                /*
+                    Add the form data we need to submit
+                */
+                formData.append('file', this.file);
+
+                /*
+                Make the request to the POST /single-file URL
+                */
+                axios.post('/api/uploadCSV',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                ).then(function () {
+                    console.log('SUCCESS!!');
+                })
+                    .catch(function () {
+                        console.log('FAILURE!!');
+                    });
+            },
+
+            /*
+                Handles a change on the file upload
+            */
+            handleFileUpload() {
+                this.file = this.$refs.file.files[0];
             }
         }
     };

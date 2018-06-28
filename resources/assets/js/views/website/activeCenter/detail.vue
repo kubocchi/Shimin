@@ -244,7 +244,7 @@
             downloadFile(attachment) {
                 console.log(attachment)
                 //window.open(`/api//download/${filepath}`)
-                //window.location.href = `/api//download/${attachment.path}`
+                window.location.href = `/api//download/${attachment.path}`
                 fetch(`/api/download/${attachment.path}`)
                     .then(res => {
                         var blob = new Blob([res.data],{type:attachment.type});

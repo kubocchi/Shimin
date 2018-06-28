@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BusinessReport;
 use App\Year;
+use App\Attachment;
 use App\Http\Resources\BusinessReportResource;
 use Response;
 class BusinessReportController extends Controller
@@ -113,6 +114,19 @@ class BusinessReportController extends Controller
                             ->orderBy('years.created_at', 'desc')
                             ->get();
 
+        foreach($businessReports as $businessReport)
+        {
+            $files = explode(",", $businessReport['file']);
+           
+            // $attachments = [];
+            // foreach ($files as $key => $value) 
+            // {
+            //     array_push($attachments, Attachment::Where('id', $value)->get());
+            // }
+
+            $businessReport['attachments'] =  Attachment::WhereIn('id', $files)->get();
+        }
+                            
         // Group By Student ID from Query data               
         $groupByData = [];
         foreach($businessReports as $businessReport)
@@ -120,8 +134,6 @@ class BusinessReportController extends Controller
             $groupByData[$businessReport->year][] = $businessReport;
         }
 
-
-        
 
         return Response::json(['data' => $groupByData], 201);
     }
