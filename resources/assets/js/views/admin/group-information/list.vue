@@ -17,57 +17,68 @@
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-2 mb-4">
-                        <select class="form-control" id="active_classification">
-                            <option> 区分 </option>
-                            <option> センター </option>
-                            <option> 社協 </option>
-                            <option> 佐土原 </option>
-                            <option> 高岡 </option>
-                            <option> 田野 </option>
-                            <option> 清武 </option>
-                        </select>
+                        <multiselect 
+                            v-model="selectedManagement" 
+                            :options="managements" 
+                            @select="onSelectManagement"  
+                            track-by="id" 
+                            label="label" 
+                            placeholder="区分" 
+                            selectLabel="" 
+                            deselectLabel="" 
+                            selectedLabel="選ばれた" 
+                            v-validate="'required'" 
+                            name="business" 
+                            data-vv-as="登録場所">
+                        </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                        <select class="form-control" id="active_status">
-                            <option> ステータス </option>
-                            <option> 公開 </option>
-                            <option> 非公開 </option>
-                        </select>
+                         <multiselect 
+                            v-model="selectedManagement" 
+                            :options="statuses" 
+                            @select="onSelectManagement"  
+                            track-by="id" 
+                            label="label" 
+                            placeholder="ステータス" 
+                            selectLabel="" 
+                            deselectLabel="" 
+                            selectedLabel="選ばれた" 
+                            v-validate="'required'" 
+                            name="business" 
+                            data-vv-as="登録場所">
+                        </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                        <select class="form-control" id="active_type">
-                            <option> 種別 </option>
-                            <option> 団体 </option>
-                            <option> 個人 </option>
-                        </select>
+                        <multiselect 
+                            v-model="selectedActivityCategory" 
+                            :options="activityCategories" 
+                            @select="onSelectActivityCategory"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="種別" 
+                            selectLabel="" 
+                            deselectLabel="" 
+                            selectedLabel="選ばれた" 
+                            v-validate="'required'" 
+                            name="business" 
+                            data-vv-as="登録場所">
+                        </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                        <select class="form-control" id="active_category">
-                            <option> 活動分類 </option>
-                            <option value="100"> 保健・医療</option>
-                            <option value="200"> 高齢者福祉 </option>
-                            <option value="300"> 障害者福祉 </option>
-                            <option value="400"> 児童福祉 </option>
-                            <option value="500"> 社会教育 </option>
-                            <option value="600"> まちづくり </option>
-                            <option value="700"> 観光 </option>
-                            <option value="800"> 農山漁村 </option>
-                            <option value="900"> 文化芸術 </option>
-                            <option value="1000"> 環境保全 </option>
-                            <option value="1100"> 災害救援 </option>
-                            <option value="1200">地域安全 </option>
-                            <option value="1300"> 人権・平和 </option>
-                            <option value="1400"> 国際協力 </option>
-                            <option value="1500"> 男女共同 </option>
-                            <option value="1600"> 子供育成</option>
-                            <option value="1700"> 情報社会 </option>
-                            <option value="1800"> 科学技術 </option>
-                            <option value="1900"> 経済活動 </option>
-                            <option value="2000"> 職業・雇用 </option>
-                            <option value="2100"> 消費者保護</option>
-                            <option value="2200"> NPO支援 </option>
-                            <option value="2300"> その他区分 </option>
-                        </select>
+                        <multiselect 
+                            v-model="selectedActivityCategory" 
+                            :options="activityCategories" 
+                            @select="onSelectActivityCategory"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="活動分類" 
+                            selectLabel="" 
+                            deselectLabel="" 
+                            selectedLabel="選ばれた" 
+                            v-validate="'required'" 
+                            name="business" 
+                            data-vv-as="登録場所">
+                        </multiselect>
                     </div>
                     <div class="form-group col-md-4">
                         <div class="input-group">
@@ -182,7 +193,52 @@
                     { id: 3, label: "かわら版掲載申込書" },
                     { id: 4, label: "各種申込用紙" }
                 ],
-                file: ''
+                file: '',
+                managements: [
+                    { 'id': 1, 'label': 'センター' },
+                    { 'id': 2, 'label': '社協' },
+                    { 'id': 3, 'label': '佐土原' },
+                    { 'id': 4, 'label': '高岡' },
+                    { 'id': 5, 'label': '田野' },
+                    { 'id': 6, 'label': '清武' },
+                ],
+                selectedManagement: null,
+                activityCategories: [
+                    { id: "100", name: "保健・医療" },
+                    { id: "200", name: "高齢者福祉" },
+                    { id: "300", name: "障害者福祉" },
+                    { id: "400", name: "児童福祉" },
+                    { id: "500", name: "社会教育" },
+                    { id: "600", name: "まちづくり" },
+                    { id: "700", name: "観光" },
+                    { id: "800", name: "農山漁村" },
+                    { id: "900", name: "文化芸術" },
+                    { id: "1000", name: "環境保全" },
+                    { id: "1100", name: "災害救援" },
+                    { id: "1200", name: "地域安全" },
+                    { id: "1300", name: "人権・平和" },
+                    { id: "1400", name: "国際協力" },
+                    { id: "1500", name: "男女共同" },
+                    { id: "1600", name: "子供育成" },
+                    { id: "1700", name: "情報社会" },
+                    { id: "1800", name: "科学技術" },
+                    { id: "1900", name: "経済活動" },
+                    { id: "2000", name: "職業・雇用" },
+                    { id: "2100", name: "消費者保護" },
+                    { id: "2200", name: "NPO支援" },
+                    { id: "2300", name: "その他区分" },
+                ],
+                selectedActivityCategory: null,
+                statuses: [
+                    { 'id': 1, 'label': '公開' },
+                    { 'id': 2, 'label': '非公開' },
+                ],
+                selectedstatus: null,
+                types: [
+                    { 'id': 1, 'label': '団体' },
+                    { 'id': 2, 'label': '個人' },
+                ],
+                selectedType: null,
             };
         },
 
@@ -318,6 +374,24 @@
             */
             handleFileUpload() {
                 this.file = this.$refs.file.files[0];
+            },
+            onSelectManagement(selectedOption, id) {
+                if(selectedOption){
+                    this.groupInformation.regist_management = selectedOption.id
+                    console.log(selectedOption.id)
+                }
+            },
+            onSelectActivityCategory(selectedOption, id) {
+                if(selectedOption){
+                    this.groupInformation.activity_category = selectedOption.id
+                    console.log(selectedOption.id)
+                }
+            },
+            onSelectType(selectedOption, id) {
+                if(selectedOption){
+                    this.groupInformation.activity_category = selectedOption.id
+                    console.log(selectedOption.id)
+                }
             }
         }
     };
