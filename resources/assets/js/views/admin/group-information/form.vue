@@ -12,7 +12,7 @@
                         <fieldset>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_no">【団体番号】（必須）</label>
-                                <input v-model="groupInformation.number" class="form-control" id="organizer" type="text" v-validate="'required'" name="number" data-vv-as="件名">
+                                <input v-model="groupInformation.number" class="form-control" id="organizer" type="text" v-validate="'required'" name="number" data-vv-as="団体番号">
                                 <span class="is-danger">{{ errors.first('number') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -40,7 +40,7 @@
                                     selectedLabel="選ばれた" 
                                     v-validate="'required'" 
                                     name="business" 
-                                    data-vv-as="事業名">
+                                    data-vv-as="登録場所">
                                 </multiselect>
                                 <span class="is-danger">{{ errors.first('business') }}</span>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="form-group col-sm-12 col-lg-6">
                                     <label class="col-form-label">休止年月日 / 抹消年月日</label>
                                     <div class="row">
-                                        <vue-datepicker-local v-model="groupInformation.pause_date" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                        <vue-datepicker-local v-model="groupInformation.pause_date" :local="local" :disabled="groupInformation.active_status == '0' ? true : false" :format="dateFormat"></vue-datepicker-local>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-6">
@@ -99,12 +99,12 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_name">【団体名】（必須）（漢字または全角ひらがな・カタカナ　例：旭入浴サービス ）</label>
-                                <input class="form-control" v-model="groupInformation.name" id="dantai_name" type="text" v-validate="'required'" name="name" data-vv-as="件名">
+                                <input class="form-control" v-model="groupInformation.name" id="dantai_name" type="text" v-validate="'required'" name="name" data-vv-as="団体名">
                                 <span class="is-danger">{{ errors.first('name') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_name_f">【団体名ふりがな】（必須）（ひらがな　例：あさひにゅうよくさーびす ）</label>
-                                <input class="form-control" v-model="groupInformation.name_phonetic" id="dantai_name_f" required="" type="text" v-validate="'required'" name="name_phonetic" data-vv-as="件名">
+                                <input class="form-control" v-model="groupInformation.name_phonetic" id="dantai_name_f" required="" type="text" v-validate="'required'" name="name_phonetic" data-vv-as="団体名ふりがな">
                                 <span class="is-danger">{{ errors.first('name_phonetic') }}</span>
                             </div>
                             <hr>
@@ -120,10 +120,10 @@
                                 <label class="col-form-label">【代表者氏名の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="0" color="primary-o" >公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                 <label class="col-form-label">【代表者携帯番号の開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="0" color="primary-o" checked>開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="0" color="primary-o" >開示しない</p-radio>
                                     </div>
                                     <div class="form-group row">
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="1" color="primary-o">開示する</p-radio>
@@ -188,7 +188,7 @@
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="0" color="primary-o" checked>公開しない  </p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -232,10 +232,10 @@
                                 <label class="col-form-label">【連絡先電話番号の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="0" color="primary-o" checked>公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -247,10 +247,10 @@
                                 <label class="col-form-label">【連絡先携帯番号の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="0" color="primary-o" checked>公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_phone_2" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -262,10 +262,10 @@
                                 <label class="col-form-label">【連絡先FAXの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="0" color="primary-o" checked>公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_fax" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -277,10 +277,10 @@
                                 <label class="col-form-label">【e-mailの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="0" color="primary-o" checked>公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_mail" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -292,10 +292,10 @@
                                 <label class="col-form-label">【URLの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="0" color="primary-o" checked>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="0" color="primary-o" checked>公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="1" color="primary-o">{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_url" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +305,7 @@
                                 <div class="col-lg-12 form-group">
                                     <div v-for="activityCategory in activityCategories" v-bind:key="activityCategory.id" class="form-group row" >
                                         <p-check class="p-default p-curve p-thick p-smooth" v-model="groupInformation.activity_category" :id="'category_' + activityCategory.id" 
-                                        :value="activityCategory.id" color="primary-o" v-validate="'required'" name="activity_category" data-vv-as="件名">{{activityCategory.name}}</p-check>
+                                        :value="activityCategory.id" color="primary-o" v-validate="'required'" name="activity_category" data-vv-as="活動分類">{{activityCategory.name}}</p-check>
                                     </div>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                     <div class="form-group">
@@ -355,7 +355,7 @@
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="dues_price"></label>
-                                        <input class="form-control"  v-model="groupInformation.dues_price" id="dues_price" type="text">
+                                        <input class="form-control"  v-model="groupInformation.dues_price" :disabled="groupInformation.dues == '0' ? true : false" id="dues_price" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -398,7 +398,7 @@
                                     <h4 class="modal-subject">
                                         <span>
                                             <i class="fas fa-dove"></i>
-                                        </span>各種様式 登録確認画面
+                                        </span>団体情報 登録確認画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -627,7 +627,6 @@
                                 </div>
                             </div>
                         </fieldset>
-                        {{groupInformation}}
                     </form>
                 </div>
             </div>
@@ -663,7 +662,7 @@
                     representative_phone: "",
                     disclosure_representative_phone: "0",
                     representative_phone_2: "",
-                    disclosure_representative_phone_2: "",
+                    disclosure_representative_phone_2: "0",
                     representative_fax: "",
                     disclosure_representative_fax: "0",
                     contact_name: "",

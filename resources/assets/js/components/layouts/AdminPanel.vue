@@ -33,7 +33,7 @@
                                 </span> 情報発信</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                                 <router-link :to="{ name: 'activeCenterList' }">
-                                    <button class="dropdown-item">宮崎市民可動センターからのお知らせ</button>
+                                    <button class="dropdown-item">宮崎市民活動センター</button>
                                 </router-link>
                                  <router-link :to="{ name: 'noticeList' }">
                                     <button class="dropdown-item">登録団体、行政等からのお知らせ</button>
