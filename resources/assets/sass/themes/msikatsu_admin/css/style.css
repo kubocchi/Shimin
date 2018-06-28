@@ -6,6 +6,7 @@
 body {
 	background: rgb(255, 255, 255);
 	color: #06c;
+	font-size :14px;
 }
 
 /* ログイン画面 */
@@ -176,15 +177,8 @@ h2 {
 hr {
 	border-top-color: rgb(59, 153, 234);
 }
-.footer {
-	background-color: #1C89E7;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	border-top: 1px solid #285c8a;
-}
-address {
-	text-align: center;
-	color: #FFF;
+.form-control {
+font-size: 14px;
 }
 
 /* ボタン全体長文改行*/
@@ -196,7 +190,12 @@ address {
 	background-color: #1C89E7;
 	border-color: #007bff;
 }
-
+.btn-outline-danger {
+    color: #dc3545;
+    background-color: transparent;
+    background-image: none;
+    border-color: #dc3545;
+}
 /* トップページメインエリアボタン見出しとメニューボタン */
 .topmidashi {
 	background-color: #06C;
@@ -204,13 +203,13 @@ address {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 6px;
 }
 .topmenu {
 	text-align: left;
 	min-height: 70px;
 	margin-top: 10px;
 }
-
 
 /* tableここから */
 table.list_table {
@@ -264,6 +263,19 @@ table.list_table td {
 	}
 }
 /* tableここまで */
+
+.footer {
+	background-color: #1C89E7;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-top: 1px solid #285c8a;
+}
+address {
+	text-align: center;
+	color: #FFF;
+}
+
+
 
 .fade-enter-active, .fade-leave-active {
 	transition-property: opacity;

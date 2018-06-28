@@ -72,20 +72,22 @@
                     <table class="table table-sm">
                         <thead>
                             <tr class="table-primary">
-                                <th class="col-xs-1" scope="col">No.</th>
-								<th class="col-xs-3 wide_s" scope="col">件名</th>
+                               <th class="col-xs-1" scope="col">No.</th>
+								<th class="col-xs-2 wide_d" scope="col">種別</th>
+								<th class="col-xs-4 wide_s" scope="col">件名</th>
 								<th class="col-xs-2 wide_d" scope="col">更新日</th>
-								<th class="col-xs-2" align="center">複製</th>
-								<th class="col-xs-2" scope="col">変更</th>
-								<th class="col-xs-2" scope="col">削除</th>
+								<th class="col-xs-1" scope="col">複製</th>
+								<th class="col-xs-1" scope="col">変更</th>
+								<th class="col-xs-1" scope="col">削除</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr v-for="(notice, rowNumber) in notices" v-bind:key="notice.id">
-                                <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
+                            <tr v-for="(notice, rowNumber) in notices" v-bind:key="rowNumber">
+                                <th scope="row">{{rowNumber + 1}}</th>
+                                <td>{{ notice.type }}</td>
                                 <td>{{ notice.subject }}</td>
-                                <td>{{ notice.created_at }}</td>
+                                <td>{{ notice.date }}</td>
                                 <td>
                                     <router-link :to="{ name: 'noticeForm', params: { model: notice, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>

@@ -80,6 +80,11 @@ const routes = [
         },
         children: [
             {
+                path: '/login',
+                name: 'login',
+                meta: 'login'
+            },
+            {
                 path: '/admin/dashboard',
                 name: 'dashboard',
                 component: Dashboard,

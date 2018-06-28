@@ -9,6 +9,8 @@ use App\Membership;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Resources\NoticeResource;
 use Illuminate\Pagination\Paginator;
+use Response;
+use \stdClass;
 
 class NoticeController extends Controller
 {
@@ -19,18 +21,70 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        // Get ActiveCenters
-        $events = Event::select('id', 'subject', 'start_date', 'end_date', 'created_at')->paginate(5);
-        $volunteers = Volunteer::select('id', 'subject', 'start_date', 'end_date', 'created_at')->paginate(5);
-        $memberships = Membership::select('id', 'organizer as subject', 'start_date', 'end_date', 'created_at')->paginate(5);
-        $mergedData = $events->merge($volunteers)->merge($memberships)->sortByDesc('created_at');
+        // Get ActiveCenter
+
+
+        $events = Event::get()->toArray();
+        $volunteers = Volunteer::get()->toArray();
+        $memberships = Membership::get()->toArray();
+
+        $newEvents = [];
+        foreach ($events as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = 'イベント';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['subject'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+           array_push($newEvents, $obj);
+        }
+
+        foreach ($memberships as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = '会員募集';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['organizer'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($newEvents, $obj);
+        }
+
+
+        //$newVolunteers = [];
+        foreach ($volunteers as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = 'ボランティア情報';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['subject'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($newEvents, $obj);
+        }
+
+        
+        usort($newEvents, function($a, $b)
+        {
+            return strcmp($b->date, $a->date);
+        });
+
+
+        //$mergedData = $events->merge($volunteers)->sortByDesc('created_at');
+
+        //$mergedData = $events->merge($volunteers)->merge($memberships)->sortByDesc('created_at');
+
+
+
+        return Response::json(['data' => $newEvents], 201);
 
         // $events = Event::select('id', 'subject')->get()->toArray();
         // $volunteers = Volunteer::select('id', 'subject')->get()->toArray();
         // $mergedData = array_merge($events, $volunteers);
 
         // Return collection of ActiveCenters as a resource
-        return NoticeResource::collection($mergedData, 10);
+        //return NoticeResource::collection($mergedData, 10);
     }
 
     public function paginates($items, $perPage)
