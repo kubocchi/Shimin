@@ -67,6 +67,9 @@ import SubsidyDetail from '../views/website/subsidy/detail'
 
 // Business Report 
 import BusinessReport from '../views/website/business-report/index'
+
+// Format
+import FormatIndex from '../views/website/format/index'
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -396,6 +399,11 @@ const routes = [
         path: '/business-report',
         name: 'businessReportIndex',
         component: BusinessReport
+    },
+    {
+        path: '/format',
+        name: 'format',
+        component: FormatIndex
     },
 ];
 

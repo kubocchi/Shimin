@@ -30,7 +30,7 @@
                              <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="activeCenter.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="activeCenter.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: '非公開', unchecked: '公開' }"
                                     />
                                 </div>
                             </div>
