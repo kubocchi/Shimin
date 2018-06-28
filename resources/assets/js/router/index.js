@@ -394,7 +394,7 @@ const routes = [
     },
     {
         path: '/business-report',
-        name: 'business-report',
+        name: 'businessReportIndex',
         component: BusinessReport
     },
 ];

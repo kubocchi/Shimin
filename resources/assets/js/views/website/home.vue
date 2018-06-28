@@ -419,16 +419,22 @@
                         <!-- mini menu -->
                         <ul class="mini_menu">
                             <li>
-                                <a href="business-report/">事業報告</a>
+                                <router-link :to="{ name: 'businessReportIndex' }">
+                                    <span>事業報告</span>
+                                </router-link>
                             </li>
                             <li>
                                 <a href="format/">各種書式</a>
                             </li>
                             <li>
-                                <a href="joseikin/">助成金情報</a>
+                                <router-link :to="{ name: 'subsidyIndex' }">
+                                    <span>助成金情報</span>
+                                </router-link>
                             </li>
                             <li>
-                                <a href="disaster/">災害ボランティア情報</a>
+                                <router-link :to="{ name: 'disasterIndex' }">
+                                    <span>災害ボランティア情報</span>
+                                </router-link>
                             </li>
                         </ul>
                     </div>

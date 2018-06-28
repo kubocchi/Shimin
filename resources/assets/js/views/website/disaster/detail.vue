@@ -133,8 +133,9 @@
                                 <!-- <a href="#">ドネーション説明会表.pdf</a> -->
                                 <div v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                     <div class="form-group">
-                                        <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) +
-                                            'MB)'}}</span>
+                                        <a class="label label-primary" @click="downloadFile(attachment)">
+                                            {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
+                                        </a>
                                     </div>
                                 </div>
                             </dd>
@@ -242,6 +243,18 @@
                         this.fillFormWithData(res.data)
                         console.log(res.data)
                         loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
+            downloadFile(attachment) {
+                console.log(attachment)
+                fetch(`/api/download/${attachment.path}`)
+                    .then(res => {
+                        var blob = new Blob([res.data],{type:attachment.type});
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = attachment.name;
+                        link.click();
                     })
                     .catch(err => console.log(err))
             },
