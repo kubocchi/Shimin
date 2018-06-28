@@ -36,7 +36,7 @@ class BusinessReportController extends Controller
         $businessReport->year_id= $request->input('year_id');
         $businessReport->business_id= $request->input('business_id');
         $businessReport->detail= $request->input('detail');
-        $businessReport->file= $request->input('file');
+        $businessReport->attachment_id= $request->input('attachment_id');
         $businessReport->deactivate= $request->input('deactivate');
         $businessReport->created_by= $request->input('created_by');
         $businessReport->updated_by= $request->input('updated_by');
@@ -87,7 +87,10 @@ class BusinessReportController extends Controller
          $yearId = $request->input('year');
          
          $kawarabis = BusinessReport::With('year')
+                            ->With('attachment')
                             ->With('business')
+                            ->join('attachments', 'attachments.id', '=', 'business_reports.attachment_id')
+                            ->Where('attachments.name', 'like', '%' . $search . '%')
                             ->where(function($query) use ($yearId)  {
                                 if(isset($yearId)) {
                                     $query->where('business_reports.year_id', $yearId);

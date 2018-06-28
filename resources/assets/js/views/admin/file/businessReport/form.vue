@@ -256,7 +256,7 @@
         methods: {
             // Add new, sends model to API
             addbusinessReport() {
-                this.businessReport.file = this.currentAddedFileIs.join(',')
+                this.businessReport.attachment_id = this.currentAddedFileIs.join(',')
 
                 let self = this
                 console.log(this.businessReport)
@@ -325,14 +325,14 @@
                 this.businessReport.year_id = businessReport.year.id
                 this.businessReport.business_id = businessReport.business.id
                 this.businessReport.detail = businessReport.detail
-                this.businessReport.file = businessReport.file
+                this.businessReport.attachment_id = businessReport.attachment_id
                 this.businessReport.deactivate = !! businessReport.deactivate == 1 ? true:false
                 this.businessReport.created_by = businessReport.created_by
                 this.businessReport.updated_by = businessReport.updated_by
 
                 // For Files
-                if(businessReport.file)
-                    this.currentAddedFileIs = businessReport.file.split(',')
+                if(businessReport.attachment_id)
+                    this.currentAddedFileIs = businessReport.attachment_id.split(',')
             },
 
             // Analyzing attachmet file size
@@ -476,7 +476,7 @@
             // Pull required attachmets
             pullAttachments(businessReport) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${businessReport.file}`).then(function (response) {
+                axios.get(`api/asset/attachments/${businessReport.attachment.id}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

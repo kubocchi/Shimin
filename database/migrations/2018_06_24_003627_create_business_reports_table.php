@@ -17,8 +17,8 @@ class CreateBusinessReportsTable extends Migration
             $table->increments('id');
             $table->integer('year_id');
             $table->integer('business_id');
-            $table->longtext('detail');
-            $table->string('file');
+            $table->longtext('detail')->nullable();
+            $table->integer('attachment_id');
             $table->boolean('deactivate');
             $table->integer('created_by');
             $table->integer('updated_by');
