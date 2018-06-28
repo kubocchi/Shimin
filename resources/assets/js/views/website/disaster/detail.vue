@@ -248,15 +248,6 @@
             },
             downloadFile(attachment) {
                 console.log(attachment)
-                // fetch(`/api/download/${attachment.path}`)
-                //     .then(res => {
-                //         var blob = new Blob([res.data],{type:attachment.type});
-                //         var link = document.createElement('a');
-                //         link.href = window.URL.createObjectURL(blob);
-                //         link.download = attachment.name;
-                //         link.click();
-                //     })
-                //     .catch(err => console.log(err))
                 window.location.href = `/api/download/${attachment.path}`
             },
         }
