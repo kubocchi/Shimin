@@ -111,7 +111,7 @@
                         <div id="year-btns" class="list-group">
                             <ul class="year_btns">
                                 <li v-for="(businessReport, key) in businessReports" v-bind:key="key">
-                                    <a @click.prevent class="list-group-item list-group-item-action" v-bind:href="'#'+key">{{key}}</a>
+                                    <a  class="list-group-item list-group-item-action" v-bind:href="'#Y'+key">{{key}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -122,22 +122,19 @@
                 <div class="report_list">
                     <div class="report_body">
                         <div data-spy="scroll" data-target="#year-btns" data-offset="100" class="scrollspy-example">
-                            
-                            <div v-for="(businessReport, key, rowNumber) in businessReports" v-bind:key="rowNumber">
-                                <div class="y_block" id="h29">
-                                    <div></div>
-                                    <p class="yearnumber">{{key}}</p>
-                                    <div  v-for="business in businessReport" v-bind:key="business.id">
-                                        <div class="reports">
-                                            <p class="title">{{business.name}}</p>
-                                            <ul>
-                                                <li v-for="attachment in business.attachments" v-bind:key="attachment.id">
-                                                    <a @click.prevent="downloadFile(attachment)" target="_blank" href="#">
-                                                        {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                            <div v-for="(businessReport, key, rowNumber) in businessReports" v-bind:key="rowNumber" class="y_block" :id="'Y'+key">
+                                <div></div>
+                                <p class="yearnumber">{{key}}</p>
+                                <div  v-for="business in businessReport" v-bind:key="business.id">
+                                    <div class="reports">
+                                        <p class="title">{{business.name}}</p>
+                                        <ul>
+                                            <li v-for="attachment in business.attachments" v-bind:key="attachment.id">
+                                                <a @click.prevent="downloadFile(attachment)" target="_blank" href="#">
+                                                    {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

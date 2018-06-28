@@ -26,7 +26,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" @click.prevent="openDropdown('#dropdown01')" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <span>
                                     <i class="fas fa-dove"></i>
@@ -47,7 +47,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" @click.prevent="openDropdown('#dropdown02')" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <span>
                                     <i class="fas fa-file"></i>
@@ -131,6 +131,10 @@
         },
 
         methods: {
+            openDropdown(domElement){
+                $(domElement).dropdown('dispose')
+                $(domElement).dropdown('toggle')
+            }
         }
     };
 </script>
