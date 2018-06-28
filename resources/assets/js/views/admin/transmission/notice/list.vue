@@ -101,7 +101,6 @@
                                 </td>
                             </tr>
                         </tbody>
-                        {{notices}}
                     </table>
                 </div>
                 <ul class="pagination justify-content-end">
@@ -119,7 +118,6 @@
                 </ul>
             </div>
         </div>
-       
     </div>
 </template>
 

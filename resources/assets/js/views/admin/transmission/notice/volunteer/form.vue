@@ -21,7 +21,7 @@
                                 <p>ボランティア</p>
                             </div>
                             <div class="form-group col-sm-12 col-lg-12">
-                                <label for="active_category">【活動カテゴリ】</label>
+                                <label for="active_category">【活動カテゴリ】（必須）</label>
                                 <multiselect 
                                     v-model="selectedActivityCategory" 
                                     :options="categories" 
@@ -42,7 +42,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【子供の参加】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="volunteer.children" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="volunteer.children" :width="60" :value="true" :color="switchColorOther" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
                                     />
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="sponsor">【募集団体】</label>
-                                <input v-model="volunteer.sponsor" class="form-control" id="sponsor" type="text" v-validate="'required'" name="organizer" data-vv-as="主催">
+                                <input v-model="volunteer.sponsor" class="form-control" id="sponsor" type="text" v-validate="'required'" name="organizer" data-vv-as="募集団体">
                                 <span class="is-danger">{{ errors.first('organizer') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -340,28 +340,30 @@
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
                 width: "0%",
-                categories: [
-                    { id: "100", name: "保健・医療・福祉" },
-                    { id: "200", name: "社会教育" },
-                    { id: "300", name: "まちづくり" },
-                    { id: "400", name: "文化・芸術・スポーツ" },
-                    { id: "500", name: "環境保全" },
-                    { id: "600", name: "災害救助" },
-                    { id: "700", name: "地域安全" },
-                    { id: "800", name: "人権・平和" },
-                    { id: "900", name: "国際協力" },
-                    { id: "1000", name: "男女共同参画社会" },
-                    { id: "1100", name: "子どもの健全育成" },
-                    { id: "1200", name: "NPO活動支援" },
-                    { id: "1300", name: "情報化社会" },
-                    { id: "1400", name: "科学技術" },
-                    { id: "1500", name: "経済活性" },
-                    { id: "1600", name: "職業能力・雇用" },
-                    { id: "1700", name: "消費者保護" },
-                    { id: "1800", name: "観光" },
-                    { id: "1900", name: "農村漁村" },
-                    { id: "2000", name: "条例に基づく活動" },
-                    { id: "2100", name: "その他" }
+                categories:[
+                    { id: "100", name: "保健・医療" },
+                    { id: "200", name: "高齢者福祉" },
+                    { id: "300", name: "障害者福祉" },
+                    { id: "400", name: "児童福祉" },
+                    { id: "500", name: "社会教育" },
+                    { id: "600", name: "まちづくり" },
+                    { id: "700", name: "観光" },
+                    { id: "800", name: "農山漁村" },
+                    { id: "900", name: "文化芸術" },
+                    { id: "1000", name: "環境保全" },
+                    { id: "1100", name: "災害救援" },
+                    { id: "1200", name: "地域安全" },
+                    { id: "1300", name: "人権・平和" },
+                    { id: "1400", name: "国際協力" },
+                    { id: "1500", name: "男女共同" },
+                    { id: "1600", name: "子供育成" },
+                    { id: "1700", name: "情報社会" },
+                    { id: "1800", name: "科学技術" },
+                    { id: "1900", name: "経済活動" },
+                    { id: "2000", name: "職業・雇用" },
+                    { id: "2100", name: "消費者保護" },
+                    { id: "2200", name: "NPO支援" },
+                    { id: "2300", name: "その他区分" }
                 ],
                 selectedActivityCategory: ""
             };
@@ -430,8 +432,8 @@
                             loader.hide();
                             self
                                 .$swal({
-                                    title: "成功!",
-                                    text: "活動センターが追加されました!",
+                                    title: "登録完了!",
+                                    text: "登録が完了しました!",
                                     type: "success",
                                     confirmButtonText: "OK"
                                 })
@@ -643,14 +645,14 @@
                 this.$validator.validate().then(result => {
                     if (!result) {
                         console.log("true");
-                        this.$swal({
-                            title: "警告!",
-                            text: "必須フィールドに記入してください",
-                            type: "warning",
-                            animation: false,
-                            customClass: "animated tada",
-                            confirmButtonText: "OK"
-                        });
+                        // this.$swal({
+                        //     title: "警告!",
+                        //     text: "必須フィールドに記入してください",
+                        //     type: "warning",
+                        //     animation: false,
+                        //     customClass: "animated tada",
+                        //     confirmButtonText: "OK"
+                        // });
                     } else {
                         this.volunteer.volunteer_date = moment(String(this.volunteerDate)).format("YYYY-MM-DD");
                         this.volunteer.start_date = !!this.range

@@ -75,7 +75,7 @@
                                     <h4 class="modal-title">
                                         <span>
                                             <i class="fas fa-dove"></i>
-                                        </span>宮崎市民活動センターからのお知らせ 登録確認画面
+                                        </span>助成金情報 登録確認画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
