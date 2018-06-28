@@ -86,10 +86,8 @@ class BusinessReportController extends Controller
          $search = $request->input('search');
          $yearId = $request->input('year');
          
-         $kawarabis = BusinessReport::join('businesses', 'business_reports.business_id', '=', 'businesses.id')
-                            ->With('year')
+         $kawarabis = BusinessReport::With('year')
                             ->With('business')
-                            ->where('businesses.name', 'like', '%' . $search . '%')
                             ->where(function($query) use ($yearId)  {
                                 if(isset($yearId)) {
                                     $query->where('business_reports.year_id', $yearId);

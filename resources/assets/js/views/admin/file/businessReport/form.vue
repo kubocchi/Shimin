@@ -60,10 +60,15 @@
                                 <label for="inputFile">【公開ファイル】（必須）</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                             <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange">
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
                                             参照
                                         </label>
+
+                                        <div class="row">
+                                            <span class="is-danger" :hidden="attachments.length > 0 ? true : false">添付ファイルが指定されていません</span>
+                                        </div>
                                         
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
@@ -362,6 +367,17 @@
 
             // This function will be called every time you add a file
             uploadFieldChange(e) {
+                console.log(this.attachments.length)
+                if(this.attachments.length > 0) {
+                    this.$swal({
+                        title: "警告!",
+                        text: "必須フィールドに記入してください",
+                        type: "warning",
+                        confirmButtonText: "OK"
+                    });
+                    return;
+                }
+
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -495,6 +511,9 @@
             // Checking for validation and reconfirm opening modal
             confirm(){
                 this.$validator.validate().then(result => {
+                    if(this.attachments.length == 0){
+                        return
+                    }
                     if (!result) {
                         console.log('true')
                     }

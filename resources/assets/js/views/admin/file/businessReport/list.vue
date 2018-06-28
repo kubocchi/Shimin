@@ -77,9 +77,9 @@
                         <tbody>
                             <tr v-for="(businessReport, rowNumber) in businessReports" v-bind:key="businessReport.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ businessReport.year.year }}</td>
-                                <td>{{ businessReport.business.name }}</td>
-                                <td>{{ businessReport.business.created_at }}</td>
+                                <td>{{ businessReport.detail }}</td>
+                                <td>{{ businessReport.detail}}</td>
+                                <td>{{ businessReport.created_at }}</td>
                                 <td>
                                     <router-link :to="{ name: 'businessReportForm', params: { model: businessReport, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>
