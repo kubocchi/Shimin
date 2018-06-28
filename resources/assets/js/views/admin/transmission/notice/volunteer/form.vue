@@ -58,7 +58,7 @@
                                 <span class="is-danger">{{ errors.first('organizer') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <label for="inputFile">【イメージ画像】</label>
+                                <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
