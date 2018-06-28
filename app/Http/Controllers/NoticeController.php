@@ -21,14 +21,11 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        // Get ActiveCenter
-
-
         $events = Event::get()->toArray();
         $volunteers = Volunteer::get()->toArray();
         $memberships = Membership::get()->toArray();
 
-        $newEvents = [];
+        $formattedData = [];
         foreach ($events as $key => $value) 
         {
             $obj = new stdClass;
@@ -37,7 +34,7 @@ class NoticeController extends Controller
             $obj->subject = $value['subject'];
             $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
 
-           array_push($newEvents, $obj);
+            array_push($formattedData, $obj);
         }
 
         foreach ($memberships as $key => $value) 
@@ -48,11 +45,9 @@ class NoticeController extends Controller
             $obj->subject = $value['organizer'];
             $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
 
-            array_push($newEvents, $obj);
+            array_push($formattedData, $obj);
         }
 
-
-        //$newVolunteers = [];
         foreach ($volunteers as $key => $value) 
         {
             $obj = new stdClass;
@@ -61,30 +56,16 @@ class NoticeController extends Controller
             $obj->subject = $value['subject'];
             $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
 
-            array_push($newEvents, $obj);
+            array_push($formattedData, $obj);
         }
 
         
-        usort($newEvents, function($a, $b)
+        usort($formattedData, function($a, $b)
         {
             return strcmp($b->date, $a->date);
         });
 
-
-        //$mergedData = $events->merge($volunteers)->sortByDesc('created_at');
-
-        //$mergedData = $events->merge($volunteers)->merge($memberships)->sortByDesc('created_at');
-
-
-
-        return Response::json(['data' => $newEvents], 201);
-
-        // $events = Event::select('id', 'subject')->get()->toArray();
-        // $volunteers = Volunteer::select('id', 'subject')->get()->toArray();
-        // $mergedData = array_merge($events, $volunteers);
-
-        // Return collection of ActiveCenters as a resource
-        //return NoticeResource::collection($mergedData, 10);
+        return Response::json(['data' => $formattedData], 201);
     }
 
     public function paginates($items, $perPage)

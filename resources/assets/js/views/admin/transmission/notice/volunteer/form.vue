@@ -269,8 +269,10 @@
                                 </div>
                             </div>
                         </fieldset>
+                        
                     </form>
                 </div>
+                {{selectedActivityCategory}}
             </div>
         </div>
     </div>
@@ -343,7 +345,7 @@
                 categories:[
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
-                    { id: "300", name: "障害者福祉" },
+                    { id: 300, name: "障害者福祉" },
                     { id: "400", name: "児童福祉" },
                     { id: "500", name: "社会教育" },
                     { id: "600", name: "まちづくり" },
@@ -365,7 +367,7 @@
                     { id: "2200", name: "NPO支援" },
                     { id: "2300", name: "その他区分" }
                 ],
-                selectedActivityCategory: ""
+                selectedActivityCategory: null
             };
         },
         computed: {
@@ -377,7 +379,7 @@
         created() {
             console.log(this.$route.params);
             if (this.$route.params.model)
-                this.fillFormWithRecievedModel(this.$route.params.model);
+                 this.fetchVolunteer(this.$route.params.model);
 
             if (this.$route.params.requestType === "edit") this.edit = true;
         },
@@ -453,10 +455,13 @@
 
                 this.range[0] = new Date(volunteer.start_date);
                 this.range[1] = new Date(volunteer.end_date);
+                console.log(this.categories.find(x => x.id === this.volunteer.activity_category))
+
+                this.selectedActivityCategory = this.categories.find(x => x.id === this.volunteer.activity_category)
 
                 this.volunteer.subject = volunteer.subject;
                 this.volunteer.activity_category = volunteer.activity_category;
-                this.volunteer.children = volunteer.children;
+                this.volunteer.children = volunteer.children == 1 ? true : false;;
                 this.volunteer.volunteer_date = volunteer.volunteer_date;
                 this.volunteer.start_date = volunteer.start_date;
                 this.volunteer.end_date = volunteer.end_date;
@@ -471,7 +476,7 @@
                 this.volunteer.detail = volunteer.detail;
                 this.volunteer.url = volunteer.url;
                 this.volunteer.phone = volunteer.phone;
-                this.volunteer.deactivate = !!volunteer.deactivate == 1 ? true : false;
+                this.volunteer.deactivate = volunteer.deactivate == 1 ? true : false;
                 this.volunteer.created_by = volunteer.created_by;
                 this.volunteer.updated_by = volunteer.updated_by;
 
@@ -670,7 +675,19 @@
                     this.volunteer.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                 }
-            }
+            },
+            fetchVolunteer(model) {
+                let loader = this.$loading.show();
+
+                fetch(`/api/volunteer/${model.id}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.fillFormWithRecievedModel(res.data);
+                        console.log(res.data);
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
         }
     };
 </script>

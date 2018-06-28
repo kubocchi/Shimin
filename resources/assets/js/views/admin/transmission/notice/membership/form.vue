@@ -313,9 +313,10 @@
         created() {
             console.log(this.$route.params);
             if (this.$route.params.model)
-                this.fillFormWithRecievedModel(this.$route.params.model);
+                this.fetchMembership(this.$route.params.model);
 
-            if (this.$route.params.requestType === "edit") this.edit = true;
+            if (this.$route.params.requestType === "edit") 
+                this.edit = true;
         },
 
         methods: {
@@ -385,6 +386,7 @@
 
             // Edit new, sends model to API
             fillFormWithRecievedModel(membership) {
+                
                 this.pullAttachments(membership);
 
                 this.range[0] = new Date(membership.start_date);
@@ -610,7 +612,19 @@
             onChange(value, srcmembership){
                 //console.log(value)
                 isDisabled = value
-            }
+            },
+            fetchMembership(model) {
+                let loader = this.$loading.show();
+
+                fetch(`/api/membership/${model.id}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.fillFormWithRecievedModel(res.data);
+                        console.log(this.membership);
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
         }
     };
 </script>

@@ -89,14 +89,10 @@
                                 <td>{{ notice.subject }}</td>
                                 <td>{{ notice.date }}</td>
                                 <td>
-                                    <router-link :to="{ name: 'noticeForm', params: { model: notice, requestType: 'copy' }}">
-                                        <button class="btn btn-outline-primary btn-block" role="button">複製</button>
-                                    </router-link>
+                                    <button class="btn btn-outline-primary btn-block" role="button" @click="copyOrEdit(notice, 'copy')">複製</button>
                                 </td>
                                 <td>
-                                    <router-link :to="{ name: 'noticeForm', params: { model: notice, requestType: 'edit' }}">
-                                        <button class="btn btn-outline-success btn-block" role="button">変更</button>
-                                    </router-link>
+                                    <button class="btn btn-outline-success btn-block" role="button"  @click="copyOrEdit(notice, 'edit')">変更</button>
                                 </td>
                                 <td>
                                     <a class="btn btn-outline-danger btn-block" @click="deleteNotice(notice.id)" role="button">削除</a>
@@ -129,7 +125,6 @@
             return {
                 notices: [],
                 pagination: {},
-                edit: false,
                 params: {
                     search: "",
                     type: 0
@@ -220,6 +215,22 @@
             clearSearch() {
                 this.params.search = ""
                 this.fetchNotice()
+            },
+            copyOrEdit(object, type){
+                console.log(object, type)
+                let routeName = ''
+                switch (object.type) {
+                    case 'イベント':
+                        routeName = 'noticeEventForm'
+                        break;
+                    case 'ボランティア情報':
+                        routeName = 'noticeVolunteerForm'
+                        break;
+                    case '会員募集':
+                        routeName = 'noticeMembershipForm'
+                        break;
+                }
+                this.$router.push({name: routeName, params: {model: object, requestType: type }})
             }
         }
     };
