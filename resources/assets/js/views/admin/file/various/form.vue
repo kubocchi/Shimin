@@ -141,7 +141,6 @@
                             </div>
                     </fieldset>
                 </form>
-                {{attachments.length}}
                 </div>
             </div>
         </div>
