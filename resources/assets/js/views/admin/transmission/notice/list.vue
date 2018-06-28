@@ -28,31 +28,28 @@
 					</div>
 				</div>
                 <div class="row mt-4">
-                    <div class="form-group col-md-2 mb-4">
+                    <!-- <div class="form-group col-md-2 mb-4">
                         <select v-model="params.type" v-on:change="onTypeChanged" class="form-control" id="attribute_shikatsu">
                             <option value="0">すべて</option>
                             <option value="1">公開中</option>
                             <option value="2">登録作業中</option>
                             <option value="3">終了</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="form-group col-md-3 mb-4">
-                        <select class="form-control" id="attribute_dantai">
-                            <option>
-                                すべて
-                            </option>
-                            <option>
-                                イベント
-                            </option>
-                            <option>
-                                ボランテイア情報
-                            </option>
-                            <option>
-                                会員募集
-                            </option>
-                        </select>
+                        <multiselect 
+                            v-model="selectedNoticeType" 
+                            :options="noticeTypes" 
+                            @select="onSelectNoticeType"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="選んでください" 
+                            selectedLabel="選ばれた" 
+                            selectLabel="" 
+                            deselectLabel="" >
+                        </multiselect>
                     </div>
-                    <div class="form-group col-md-4 offset-sm-3">
+                    <div class="form-group col-md-4 offset-sm-5">
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
@@ -95,7 +92,7 @@
                                     <button class="btn btn-outline-success btn-block" role="button"  @click="copyOrEdit(notice, 'edit')">変更</button>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteNotice(notice.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click="deleteNotice(notice)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -120,15 +117,24 @@
 </template>
 
 <script>
+ import Multiselect from "vue-multiselect"
     export default {
+        components: { Multiselect},
         data() {
             return {
                 notices: [],
                 pagination: {},
                 params: {
                     search: "",
-                    type: 0
-                }
+                    noticeType: 0
+                },
+                noticeTypes:[
+                    { id: 0, name: "すべて" },
+                    { id: 1, name: "イベント" },
+                    { id: 2, name: "ボランテイア情報" },
+                    { id: 3, name: "会員募集" },
+                ],
+                selectedNoticeType :  { id: 0, name: "すべて" }
             };
         },
 
@@ -140,10 +146,14 @@
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
                 let loader = this.$loading.show();
-                let vm = this;
-                page_url = page_url || "/api/notices";
 
-                fetch(page_url)
+                 fetch('/api/notices', {
+                    method: "post",
+                    body: JSON.stringify(this.params),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                })
                     .then(res => res.json())
                     .then(res => {
                         this.notices = res.data;
@@ -167,7 +177,7 @@
             },
 
             // Deleting the selected data
-            deleteNotice(id) {
+            deleteNotice(object) {
                 this.$swal({
                     title: 'このデータを削除しますか？',
                     text: "削除したデータは元に戻すことができません!",
@@ -180,7 +190,21 @@
                 }).then((result) => {
                     if (result.value) {
                         let loader = this.$loading.show();
-                        fetch(`api/notice/${id}`, {
+                        let routeName = ''
+                        
+                        switch (object.type) {
+                            case 'イベント':
+                                routeName = 'event'
+                                break;
+                            case 'ボランティア情報':
+                                routeName = 'volunteer'
+                                break;
+                            case '会員募集':
+                                routeName = 'membership'
+                                break;
+                            }
+
+                        fetch(`api/${routeName}/${object.id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())
@@ -231,7 +255,14 @@
                         break;
                 }
                 this.$router.push({name: routeName, params: {model: object, requestType: type }})
-            }
+            },
+             onSelectNoticeType(selectedOption, id) {
+                if(selectedOption){
+                    console.log(selectedOption.id)
+                    this.params.noticeType = selectedOption.id
+                    this.fetchNotice()
+                }
+            },
         }
     };
 </script>

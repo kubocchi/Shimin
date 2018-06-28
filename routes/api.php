@@ -48,6 +48,8 @@ Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
 # 1.2 Notice routes
 // List notice
 Route::get('notices', 'NoticeController@index');
+// List with parameters
+Route::post('notices', 'NoticeController@getNoticeData');
 
 
 # 1.2.1 Event routes

@@ -269,10 +269,8 @@
                                 </div>
                             </div>
                         </fieldset>
-                        
                     </form>
                 </div>
-                {{selectedActivityCategory}}
             </div>
         </div>
     </div>
@@ -345,7 +343,7 @@
                 categories:[
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
-                    { id: 300, name: "障害者福祉" },
+                    { id: "300", name: "障害者福祉" },
                     { id: "400", name: "児童福祉" },
                     { id: "500", name: "社会教育" },
                     { id: "600", name: "まちづくり" },
@@ -455,9 +453,9 @@
 
                 this.range[0] = new Date(volunteer.start_date);
                 this.range[1] = new Date(volunteer.end_date);
-                console.log(this.categories.find(x => x.id === this.volunteer.activity_category))
+                console.log(this.categories.find(x => x.id === volunteer.activity_category))
 
-                this.selectedActivityCategory = this.categories.find(x => x.id === this.volunteer.activity_category)
+                this.selectedActivityCategory = this.categories.find(x => x.id === volunteer.activity_category.toString())
 
                 this.volunteer.subject = volunteer.subject;
                 this.volunteer.activity_category = volunteer.activity_category;

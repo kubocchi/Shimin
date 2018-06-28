@@ -279,6 +279,7 @@
                         </fieldset>
                     </form>
                 </div>
+                {{selectedActivityCategory}}
             </div>
         </div>
     </div>
@@ -372,7 +373,7 @@
                     { id: "2200", name: "NPO支援" },
                     { id: "2300", name: "その他区分" }
                 ],
-                selectedActivityCategory: ""
+                selectedActivityCategory: null
             };
         },
         computed: {
@@ -384,9 +385,10 @@
         created() {
             console.log(this.$route.params);
             if (this.$route.params.model)
-                this.fillFormWithRecievedModel(this.$route.params.model);
+                this.fetchEvent(this.$route.params.model)
 
-            if (this.$route.params.requestType === "edit") this.edit = true;
+            if (this.$route.params.requestType === "edit") 
+                this.edit = true
         },
 
         methods: {
@@ -460,10 +462,11 @@
 
                 this.range[0] = new Date(event.start_date);
                 this.range[1] = new Date(event.end_date);
+                this.selectedActivityCategory = this.categories.find(x => x.id === event.activity_category.toString())
 
                 this.event.subject = event.subject;
                 this.event.activity_category = event.activity_category;
-                this.event.children = event.children;
+                this.event.children = event.children == 1 ? true : false;
                 this.event.event_date = event.event_date;
                 this.event.start_date = event.start_date;
                 this.event.end_date = event.end_date;
@@ -478,7 +481,7 @@
                 this.event.detail = event.detail;
                 this.event.url = event.url;
                 this.event.phone = event.phone;
-                this.event.deactivate = !!event.deactivate == 1 ? true : false;
+                this.event.deactivate = event.deactivate == 1 ? true : false;
                 this.event.created_by = event.created_by;
                 this.event.updated_by = event.updated_by;
 
@@ -690,7 +693,19 @@
                     this.event.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                 }
-            }
+            },
+            fetchEvent(model) {
+                let loader = this.$loading.show();
+
+                fetch(`/api/event/${model.id}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.fillFormWithRecievedModel(res.data);
+                        console.log(res.data);
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
         }
     };
 </script>
