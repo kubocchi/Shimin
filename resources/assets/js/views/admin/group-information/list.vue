@@ -34,9 +34,9 @@
                     </div>
                     <div class="form-group col-md-2 mb-4">
                          <multiselect 
-                            v-model="selectedManagement" 
+                            v-model="selectedstatus" 
                             :options="statuses" 
-                            @select="onSelectManagement"  
+                            @select="onSelectStatus"  
                             track-by="id" 
                             label="label" 
                             placeholder="ステータス" 
@@ -50,11 +50,11 @@
                     </div>
                     <div class="form-group col-md-2 mb-4">
                         <multiselect 
-                            v-model="selectedActivityCategory" 
-                            :options="activityCategories" 
-                            @select="onSelectActivityCategory"  
+                            v-model="selectedType" 
+                            :options="types" 
+                            @select="onSelectType"  
                             track-by="id" 
-                            label="name" 
+                            label="label" 
                             placeholder="種別" 
                             selectLabel="" 
                             deselectLabel="" 
@@ -82,19 +82,15 @@
                     </div>
                     <div class="form-group col-md-4">
                         <div class="input-group">
-                            <input class="form-control" type="text">
+                            <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" type="submit">
-                                    <span class="input-group-btn">
-                                        <i class="fas fa-search"></i>
-                                    </span>
+                                <button class="btn btn-outline-primary" @click="fetchGroupInformation()">
+                                    <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" type="submit">
-                                    <span class="input-group-btn">
-                                        <i class="fas fa-times"></i>
-                                    </span>
+                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                    <i class="fas fa-times"></i>
                                 </button>
                             </span>
                         </div>
@@ -183,18 +179,13 @@
                 edit: false,
                 params: {
                     search: "",
-                    group: null
+                    management : null,
+                    activityCategory: null,
+                    status: null,
+                    type: null
                 },
-                selectedGroup: { id: null, label: "すべて" },
-                groups: [
-                    { id: null, label: "すべて" },
-                    { id: 1, label: "市民活動団体登録・情報変更" },
-                    { id: 2, label: "個人ボランティア登録・情報変更・抹消" },
-                    { id: 3, label: "かわら版掲載申込書" },
-                    { id: 4, label: "各種申込用紙" }
-                ],
-                file: '',
                 managements: [
+                    { 'id': null, label: "すべて" },
                     { 'id': 1, 'label': 'センター' },
                     { 'id': 2, 'label': '社協' },
                     { 'id': 3, 'label': '佐土原' },
@@ -202,8 +193,9 @@
                     { 'id': 5, 'label': '田野' },
                     { 'id': 6, 'label': '清武' },
                 ],
-                selectedManagement: null,
+                selectedManagement: { id: null, label: "すべて" },
                 activityCategories: [
+                    { id: null, name: "すべて" },
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
                     { id: "300", name: "障害者福祉" },
@@ -228,17 +220,19 @@
                     { id: "2200", name: "NPO支援" },
                     { id: "2300", name: "その他区分" },
                 ],
-                selectedActivityCategory: null,
+                selectedActivityCategory: { id: null, name: "すべて" },
                 statuses: [
+                    { 'id': null, 'label': 'すべて' },
                     { 'id': 1, 'label': '公開' },
                     { 'id': 2, 'label': '非公開' },
                 ],
-                selectedstatus: null,
+                selectedstatus:  { 'id': null, 'label': 'すべて' },
                 types: [
+                    { 'id': null, 'label': 'すべて' },
                     { 'id': 1, 'label': '団体' },
                     { 'id': 2, 'label': '個人' },
                 ],
-                selectedType: null,
+                selectedType: { 'id': null, 'label': 'すべて' },
             };
         },
 
@@ -331,13 +325,6 @@
                 this.params.search = "";
                 this.fetchGroupInformation();
             },
-            onSelectGroup(selectedOption, id) {
-                if (selectedOption) {
-                    console.log(selectedOption.id);
-                    this.params.group = selectedOption.id;
-                    this.fetchGroupInformation();
-                }
-            },
             /*
                 Submits the file to the server
             */
@@ -377,20 +364,30 @@
             },
             onSelectManagement(selectedOption, id) {
                 if(selectedOption){
-                    this.groupInformation.regist_management = selectedOption.id
+                    this.params.management = selectedOption.id
                     console.log(selectedOption.id)
+                    this.fetchGroupInformation()
                 }
             },
             onSelectActivityCategory(selectedOption, id) {
                 if(selectedOption){
-                    this.groupInformation.activity_category = selectedOption.id
+                    this.params.activity_category = selectedOption.id
                     console.log(selectedOption.id)
+                    this.fetchGroupInformation()
+                }
+            },
+            onSelectStatus(selectedOption, id) {
+                if(selectedOption){
+                    this.params.status = selectedOption.id
+                    console.log(selectedOption.id)
+                    this.fetchGroupInformation()
                 }
             },
             onSelectType(selectedOption, id) {
                 if(selectedOption){
-                    this.groupInformation.activity_category = selectedOption.id
+                    this.params.type = selectedOption.id
                     console.log(selectedOption.id)
+                    this.fetchGroupInformation()
                 }
             }
         }

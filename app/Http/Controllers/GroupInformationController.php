@@ -125,11 +125,35 @@ class GroupInformationController extends Controller
      */
     public function getGroupInformationData(Request $request)
     {
-         // Get Kawarabis
          $search = $request->input('search');
-         $yearId = $request->input('year');
+         $management = $request->input('management');
+         $activityCategory = $request->input('activityCategory');
+         $status = $request->input('status');
+         $type = $request->input('type');
          
-         $groupInformations = GroupInformation::orderBy('created_at', 'desc')->Where('deactivate', 0)->paginate(10);
+         $groupInformations = GroupInformation::
+                                    Where('name', 'like', '%' . $search . '%')
+                                    ->where(function($query) use ($management)  {
+                                        if(isset($management)) {
+                                            $query->where('regist_management', $management);
+                                        }
+                                    })
+                                    ->where(function($query) use ($activityCategory)  {
+                                        if(isset($activityCategory)) {
+                                            $query->where('activity_category', $activityCategory);
+                                        }
+                                    })
+                                    ->where(function($query) use ($status)  {
+                                        if(isset($status)) {
+                                            $query->where('active_status', $status);
+                                        }
+                                    })
+                                    ->where(function($query) use ($type)  {
+                                        if(isset($type)) {
+                                            $query->where('type', $type);
+                                        }
+                                    })
+                                    ->paginate(10);
          
          // Return collection of Kawarabis as a resource
          return GroupInformationResource::collection($groupInformations);
