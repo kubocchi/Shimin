@@ -17,6 +17,7 @@ class MembershipResource extends JsonResource
         return [
             'id' => $this->id,
             'organizer' => $this->organizer,
+            'activity_category' => $this->activity_category,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'file' => $this->file,

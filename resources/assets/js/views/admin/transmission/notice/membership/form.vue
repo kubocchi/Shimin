@@ -20,7 +20,24 @@
 								<label>【フォーマット】</label>
 								<p>会員募集</p>
 							</div>
-							
+							 <div class="form-group col-sm-12 col-lg-12">
+                                <label for="active_category">【活動カテゴリ】（必須）</label>
+                                <multiselect 
+                                    v-model="selectedActivityCategory" 
+                                    :options="categories" 
+                                    @select="onActivityCategorySelect"
+                                    placeholder="選んでください" 
+                                    selectLabel="クリックして選択する" 
+                                    deselectLabel="クリックして選択を解除する"
+                                    selectedLabel="選ばれた"  
+                                    track-by="id" 
+                                    label="name" 
+                                    v-validate="'required'" 
+                                    name="activity_category" 
+                                    data-vv-as="活動カテゴリ">
+                                </multiselect>
+                                <span class="is-danger">{{ errors.first('activity_category') }}</span>
+                            </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【掲載開始日】（必須）</label>
                                 <div class="row">
@@ -300,7 +317,7 @@
                     { id: "2200", name: "NPO支援" },
                     { id: "2300", name: "その他区分" }
                 ],
-                acitvityCategorySelected: "",
+                selectedActivityCategory: null,
                 isDisabled: true
             };
         },
@@ -391,8 +408,9 @@
 
                 this.range[0] = new Date(membership.start_date);
                 this.range[1] = new Date(membership.end_date);
-
-                this.membership.subject = membership.subject;
+                this.selectedActivityCategory = this.categories.find(x => x.id === membership.activity_category.toString())
+                
+                this.membership.id = membership.id;
                 this.membership.activity_category = membership.activity_category;
                 this.membership.children = membership.children;
                 this.membership.membership_date = membership.membership_date;
@@ -603,7 +621,7 @@
                     }
                 });
             },
-            onSelect(selectedOption, id) {
+            onActivityCategorySelect(selectedOption, id) {
                 if(selectedOption){
                     this.membership.activity_category = selectedOption.id
                     console.log(selectedOption.id)
@@ -620,7 +638,7 @@
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithRecievedModel(res.data);
-                        console.log(this.membership);
+                        console.log(res.data);
                         loader.hide()
                     })
                     .catch(err => console.log(err))

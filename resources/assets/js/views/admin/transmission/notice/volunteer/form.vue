@@ -25,7 +25,7 @@
                                 <multiselect 
                                     v-model="selectedActivityCategory" 
                                     :options="categories" 
-                                    @select="onSelect"
+                                    @select="onActivityCategorySelect"
                                     placeholder="選んでください" 
                                     selectLabel="クリックして選択する" 
                                     deselectLabel="クリックして選択を解除する"
@@ -54,8 +54,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="sponsor">【募集団体】</label>
-                                <input v-model="volunteer.sponsor" class="form-control" id="sponsor" type="text" v-validate="'required'" name="organizer" data-vv-as="募集団体">
-                                <span class="is-danger">{{ errors.first('organizer') }}</span>
+                                <input v-model="volunteer.sponsor" class="form-control" id="sponsor" type="text" >
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="inputFile">【添付ファイル】</label>
@@ -456,7 +455,8 @@
                 console.log(this.categories.find(x => x.id === volunteer.activity_category))
 
                 this.selectedActivityCategory = this.categories.find(x => x.id === volunteer.activity_category.toString())
-
+                
+                this.volunteer.id = volunteer.id;
                 this.volunteer.subject = volunteer.subject;
                 this.volunteer.activity_category = volunteer.activity_category;
                 this.volunteer.children = volunteer.children == 1 ? true : false;;
@@ -668,7 +668,7 @@
                     }
                 });
             },
-            onSelect(selectedOption, id) {
+            onActivityCategorySelect(selectedOption, id) {
                 if(selectedOption){
                     this.volunteer.activity_category = selectedOption.id
                     console.log(selectedOption.id)

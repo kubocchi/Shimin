@@ -16,6 +16,7 @@ class CreateMembershipsTable extends Migration
         Schema::create('memberships', function (Blueprint $table) {
             $table->increments('id');
             $table->string('organizer');
+            $table->integer('activity_category');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('file')->nullable();

@@ -279,7 +279,6 @@
                         </fieldset>
                     </form>
                 </div>
-                {{selectedActivityCategory}}
             </div>
         </div>
     </div>
@@ -464,6 +463,7 @@
                 this.range[1] = new Date(event.end_date);
                 this.selectedActivityCategory = this.categories.find(x => x.id === event.activity_category.toString())
 
+                this.event.id = event.id;
                 this.event.subject = event.subject;
                 this.event.activity_category = event.activity_category;
                 this.event.children = event.children == 1 ? true : false;

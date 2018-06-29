@@ -31,6 +31,7 @@ class MembershipController extends Controller
         $membership = $request->isMethod('put') ? Membership::findOrFail($request->id) : new Membership;
 
         $membership->organizer= $request->input('organizer');
+        $membership->activity_category= $request->input('activity_category');
         $membership->start_date= $request->input('start_date');
         $membership->end_date= $request->input('end_date');
         $membership->file= $request->input('file');
