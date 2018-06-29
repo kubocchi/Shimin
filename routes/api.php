@@ -50,6 +50,8 @@ Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
 Route::get('notices', 'NoticeController@index');
 // List with parameters
 Route::post('notices', 'NoticeController@getNoticeData');
+// List with parameters
+Route::post('notices', 'NoticeController@getNoticeFrontData');
 
 
 # 1.2.1 Event routes

@@ -18,4 +18,5 @@ mix.browserSync({
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .copy('resources/assets/sass/themes/frontend/images', 'public/images')
+   .copy('resources/assets/sass/themes/frontend/webfonts', 'public/webfonts')
    .options({ processCssUrls: false });

@@ -58,6 +58,8 @@ class CreateGroupInformationsTable extends Migration
             $table->string('membership_male')->nullable();
             $table->string('membership_female')->nullable();
             $table->string('all_member')->nullable();
+            $table->string('activity_frequency')->nullable();
+            $table->string('activity_day')->nullable();
             $table->string('dues')->nullable();
             $table->string('dues_price')->nullable();
             $table->string('content')->nullable();
