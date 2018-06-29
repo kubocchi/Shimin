@@ -169,6 +169,8 @@ Route::put('dream', 'DreamController@store');
 Route::delete('dream/{id}', 'DreamController@destroy');
 //  List dream
 Route::post('dreams', 'DreamController@getDreamData');
+// List dream
+Route::get('dreams-frontend', 'DreamController@getDreamDataFront');
 
 # 2.4 Kawarabi routes
 // List kawarabi
@@ -183,6 +185,8 @@ Route::put('kawarabi', 'KawarabiController@store');
 Route::delete('kawarabi/{id}', 'KawarabiController@destroy');
 // List membership with parameters
 Route::post('kawarabis', 'KawarabiController@getKawarabiData');
+// List kawarabi
+Route::get('kawarabis-frontend', 'KawarabiController@getKawarabiDataFront');
 
 
 # 2.4 Year routes
