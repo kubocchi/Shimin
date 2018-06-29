@@ -71,6 +71,13 @@ import BusinessReport from '../views/website/business-report/index'
 // Format
 import FormatIndex from '../views/website/format/index'
 
+// Dream
+import DreamIndex from '../views/website/yumekousaten/index'
+import DreamDetail from '../views/website/yumekousaten/index'
+
+// Kawarabi
+import KawarabiIndex from '../views/website/kawaraban/index'
+import KawarabiDetail from '../views/website/kawaraban/index'
 // Notice Center
 import NoticeIndex from '../views/website/notice/index'
 import EventDetail from '../views/website/notice/event/detail'
@@ -415,6 +422,46 @@ const routes = [
         path: '/format',
         name: 'format',
         component: FormatIndex
+    },
+    {
+        path: '/yumekousaten',
+        redirect: '/yumekousaten/index',
+        path: '/notice',
+        redirect: '/notice/index',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'index',
+                name: 'yumekousatenIndex',
+                component: DreamIndex
+            },
+            {
+                path: ':id/detail',
+                name: 'yumekousatenDetail',
+                component: DreamDetail
+            }
+        ]
+    },
+    {
+        path: '/kawaraban',
+        redirect: '/kawaraban/index',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'index',
+                name: 'kawarabanIndex',
+                component: KawarabiIndex
+            },
+            {
+                path: ':id/detail',
+                name: 'kawarabanDetail',
+                component: KawarabiDetail
+            }
+        ]
     },
     {
         path: '/notice',

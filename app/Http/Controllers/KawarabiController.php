@@ -85,4 +85,20 @@ class KawarabiController extends Controller
          // Return collection of Kawarabis as a resource
          return KawarabiResource::collection($kawarabis);
     }
+
+    /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getKawarabiDataFront(Request $request)
+    {
+         // Get Kawarabis
+         $search = $request->input('search');
+         $kawarabis = Kawarabi::Where('subject', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->take(1)->get();
+ 
+         // Return collection of Kawarabis as a resource
+         return KawarabiResource::collection($kawarabis);
+    }
 }

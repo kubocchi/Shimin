@@ -85,4 +85,18 @@ class DreamController extends Controller
          // Return collection of Kawarabis as a resource
          return DreamResource::collection($kawarabis);
     }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function getDreamDataFront()
+     {
+         // Get Dreams
+         $dreams = Dream::orderBy('created_at', 'desc')->Where('deactivate', 0)->take(4)->get();
+ 
+         // Return collection of Dreams as a resource
+         return DreamResource::collection($dreams);
+     }
 }
