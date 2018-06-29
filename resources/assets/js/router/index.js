@@ -73,7 +73,9 @@ import FormatIndex from '../views/website/format/index'
 
 // Notice Center
 import NoticeIndex from '../views/website/notice/index'
-import NoticeDetail from '../views/website/notice/detail'
+import EventDetail from '../views/website/notice/event/detail'
+import VolunteerDetail from '../views/website/notice/volunteer/detail'
+import MembershipDetail from '../views/website/notice/membership/detail'
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -427,9 +429,19 @@ const routes = [
                 component: NoticeIndex
             },
             {
-                path: ':id/detail',
-                name: 'noticeDetail',
-                component: NoticeDetail
+                path: 'event/:id/detail',
+                name: 'eventDetail',
+                component: EventDetail
+            },
+            {
+                path: 'volunteer/:id/detail',
+                name: 'volunteerDetail',
+                component: VolunteerDetail
+            },
+            {
+                path: 'membership/:id/detail',
+                name: 'membershipDetail',
+                component: MembershipDetail
             }
         ]
     },

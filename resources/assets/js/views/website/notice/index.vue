@@ -124,12 +124,12 @@
                                         <label class="checkbox all">
                                             <input name="category" v-model="params.noticeType" value="0" type="radio">
                                             <span  class="icon"></span>全て</label>
-                                        <label   class="checkbox volunteer">
-                                            <input type="radio" name="category" v-model="params.noticeType" value="1">
-                                            <span class="icon"></span>ボランティア</label>
                                         <label class="checkbox event">
-                                            <input type="radio" name="category" v-model="params.noticeType" value="2">
+                                            <input type="radio" name="category" v-model="params.noticeType" value="1">
                                             <span class="icon"></span>イベント</label>
+                                        <label   class="checkbox volunteer">
+                                            <input type="radio" name="category" v-model="params.noticeType" value="2">
+                                            <span class="icon"></span>ボランティア</label>
                                         <label class="checkbox member">
                                             <input type="radio" name="category" v-model="params.noticeType" value="3">
                                             <span class="icon"></span>会員募集</label>
@@ -151,7 +151,10 @@
                                         label="name" 
                                         v-validate="'required'" 
                                         name="activity_category" 
-                                        data-vv-as="活動カテゴリ">
+                                        data-vv-as="活動カテゴリ"
+                                        :max-height="150"
+                                        @remove="onActivityCategoryRemove"
+                                        >
                                     </multiselect>
                                     </dd>
                                 </dl>
@@ -183,8 +186,6 @@
                                     <div class="type">
                                         <span v-bind:class="getType(notice.type)">{{notice.type}}</span>
                                     </div>
-                                   
-                                    
                                     <!-- activity_date -->
                                     <div class="day">{{notice.date}}</div>
                                     <!-- category -->
@@ -322,6 +323,12 @@
                     console.log(selectedOption.id)
                 }
             },
+            onActivityCategoryRemove(removedOption, id) {
+                if(removedOption){
+                    this.params.activityCategory = null
+                    console.log(removedOption.id)
+                }
+            },
             getActivityCategoryName(id){
                 return this.categories.find(x => x.id === id).name
             },
@@ -342,6 +349,22 @@
             },
             getCategoryWiseClass(id){
                 return this.categories.find(x => x.id === id).class
+            },
+            gotoDetail(object){
+                console.log(object)
+                let routeName = ''
+                switch (object.type) {
+                    case 'イベント':
+                        routeName = 'eventDetail'
+                        break;
+                    case 'ボランティア情報':
+                        routeName = 'volunteerDetail'
+                        break;
+                    case '会員募集':
+                        routeName = 'membershipDetail'
+                        break;
+                }
+                this.$router.push({path: routeName, params: {model: object, requestType: type }})
             },
         }
     };
