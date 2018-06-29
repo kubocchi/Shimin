@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kawarabi;
 use App\Http\Resources\KawarabiResource;
+use App\Attachment;
+use Response;
 class KawarabiController extends Controller
 {
     /**
@@ -94,11 +96,16 @@ class KawarabiController extends Controller
      */
     public function getKawarabiDataFront(Request $request)
     {
-         // Get Kawarabis
-         $search = $request->input('search');
-         $kawarabis = Kawarabi::Where('subject', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->take(1)->get();
+        // Get Kawarabis
+        $kawarabis = Kawarabi::orderBy('created_at', 'desc')->take(1)->get();
+
+        foreach($kawarabis as $kawarabi)
+        {
+            $files = explode(",", $kawarabi['file']);
+            $kawarabi['attachment'] =  Attachment::WhereIn('id', $files)->get();
+        }
  
          // Return collection of Kawarabis as a resource
-         return KawarabiResource::collection($kawarabis);
+        return Response::json(['data' => $kawarabi], 201);
     }
 }

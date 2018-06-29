@@ -81,6 +81,7 @@ import KawarabiDetail from '../views/website/kawaraban/index'
 // Notice Center
 import NoticeIndex from '../views/website/notice/index'
 import EventDetail from '../views/website/notice/event/detail'
+
 import VolunteerDetail from '../views/website/notice/volunteer/detail'
 import MembershipDetail from '../views/website/notice/membership/detail'
 /***********************Website-Components***********************/
@@ -426,8 +427,6 @@ const routes = [
     {
         path: '/yumekousaten',
         redirect: '/yumekousaten/index',
-        path: '/notice',
-        redirect: '/notice/index',
         component: {
             render(c) { return c('router-view'); }
         },

@@ -1,0 +1,357 @@
+<template>
+    <div>
+        <!-- nav -->
+
+        <div id="global_nav">
+            <div class="navbar navbar-expand-lg">
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"></button>
+                <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="clearfix">
+                        <li>
+                            <a href="../index.html">
+                                <span class="i"></span>
+                                <span class="t">HOME</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">センター案内</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="../infomation/">市民活動センターとは</a>
+                                </li>
+                                <li>
+                                    <a href="../floormap/">施設のご案内</a>
+                                </li>
+                                <li>
+                                    <a href="../format/">各種書式</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">市民活動団体</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
+                                </li>
+                                <li>
+                                    <a href="../oraganization/regist.html">登録について</a>
+                                </li>
+                                <li>
+                                    <a href="../oraganization/">団体を探したい</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">ボランティア</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="../volunteer/">ボランティアをしたい</a>
+                                </li>
+                                <li>
+                                    <a href="../volunteer/recruitment.html">ボランティアを
+                                        <br>募集したい</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">Q & A</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="../question/">センターについて</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- pagetitle -->
+
+        <div id="pagetitle" class="topics">
+            <div class="container">
+                <div class="h2">
+                    <h2>ボランティア募集・イベント情報</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- topicpath -->
+
+        <div id="topicpath">
+            <div class="container">
+                <ol class="topicpath">
+                    <li>
+                        <a href="../index.html">HOME</a>
+                    </li>
+                    <li>
+                        <a href="#">ボランティア募集・イベント情報</a>
+                    </li>
+                    <li>詳細</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- main contents -->
+
+        <div id="detail" class="maincontents">
+            <div class="container">
+                <div class="detail_haed">
+                    <!-- type -->
+                    <p class="type">
+                        <span class="event">イベント</span>
+                    </p>
+                    <!-- <span class="event">イベント</span><span class="member">会員募集</span> -->
+                    <!-- title -->
+                    <p class="title">{{event.subject}}</p>
+                </div>
+                <div class="detail_body">
+                    <div class="topinformation">
+                        <!-- category -->
+                        <dl class="cate">
+                            <dt>活動分野：</dt>
+                            <dd>
+                                <span v-bind:class="getCategoryWiseClass(event.activity_category)"> {{getActivityCategoryName(event.activity_category)}}</span>
+                            </dd>
+                            <!-- type01 ~ 23 -->
+                        </dl>
+                        <!-- dd=>sponsor -->
+                        <dl class="group">
+                            <dt>募集団体：</dt>
+                            <dd>{{event.organizer}}</dd>
+                        </dl>
+                    </div>
+                    <div class="information">
+                        <!-- dd=>Details -->
+                        <dl>
+                            <dt>内容詳細</dt>
+                            <dd>{{event.detail}}
+                            </dd>
+                        </dl>
+                        <!-- dd=>activity_date -->
+                        <dl>
+                            <dt>活動日時</dt>
+                            <dd>{{event.event_date}}</dd>
+                        </dl>
+                        <!-- dd=>Deadline -->
+                        <dl>
+                            <dt>募集締め切り日</dt>
+                            <dd>{{event.deadline}}</dd>
+                        </dl>
+                        <!-- dd=>Activity location -->
+                        <dl>
+                            <dt>会場</dt>
+                            <dd>{{event.venue}}</dd>
+                        </dl>
+                        <!-- dd=> Number of people -->
+                        <dl>
+                            <dt>定員</dt>
+                            <dd>{{event.capacity}}</dd>
+                        </dl>
+                        <!-- dd=>child -->
+                        <dl>
+                            <dt>子どもの参加</dt>
+                            <dd>{{event.children == 1? ' 許可' : '未許可'}}</dd>
+                            <!-- いいえ -->
+                        </dl>
+                        <!-- dd=> Support -->
+                        <dl>
+                            <dt>費用負担</dt>
+                            <dd>{{event.cost}}</dd>
+                        </dl>
+                        <!-- dd=>subscription -->
+                        <dl>
+                            <dt>申込み方法</dt>
+                            <dd>{{event.how_to_apply}}</dd>
+                        </dl>
+                        <!-- dd=>URL -->
+                        <dl>
+                            <dt>URL</dt>
+                            <dd>
+                                <a href="#">{{event.url}}</a>
+                            </dd>
+                        </dl>
+                        <!-- dd=>contact information -->
+                        <dl>
+                            <dt>問合せ先</dt>
+                            <dd>{{event.phone}}</dd>
+                        </dl>
+                        <!-- dd=>attachments -->
+                        <dl>
+                            <dt>添付ファイル</dt>
+                            <dd v-for="attachment in attachments" :key="attachment.id">
+                                <a :href="'/api/download/' + attachment.path">
+                                    {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
+                                </a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="btn_pageback">
+                    <a href="index.html">一覧に戻る</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        components: {},
+        name: "company",
+        data() {
+            return {
+                event: {
+                    id: "",
+                    subject: "",
+                    activity_category: "",
+                    children: true,
+                    event_date: "",
+                    start_date: "",
+                    end_date: "",
+                    organizer: "",
+                    file: "",
+                    deadline: "",
+                    venue: "",
+                    capacity: "",
+                    target: "",
+                    how_to_apply: "",
+                    cost: "",
+                    detail: "",
+                    url: "",
+                    phone: "",
+                },
+                attachments: [],
+                categories:[
+                    { id: 100, name: "保健・医療", class: "type01" },
+                    { id: 200, name: "高齢者福祉", class: "type02" },
+                    { id: 300, name: "障害者福祉", class: "type03" },
+                    { id: 400, name: "児童福祉", class: "type04" },
+                    { id: 500, name: "社会教育", class: "type05" },
+                    { id: 600, name: "まちづくり", class: "type06" },
+                    { id: 700, name: "観光", class: "type07" },
+                    { id: 800, name: "農山漁村", class: "type08" },
+                    { id: 900, name: "文化芸術", class: "type09" },
+                    { id: 1000, name: "環境保全", class: "type10" },
+                    { id: 1100, name: "災害救援", class: "type11" },
+                    { id: 1200, name: "地域安全", class: "type12" },
+                    { id: 1300, name: "人権・平和", class: "type13" },
+                    { id: 1400, name: "国際協力", class: "type14" },
+                    { id: 1500, name: "男女共同", class: "type15" },
+                    { id: 1600, name: "子供育成", class: "type16" },
+                    { id: 1700, name: "情報社会", class: "type17" },
+                    { id: 1800, name: "科学技術", class: "type18" },
+                    { id: 1900, name: "経済活動", class: "type19" },
+                    { id: 2000, name: "職業・雇用", class: "type20" },
+                    { id: 2100, name: "消費者保護", class: "type21" },
+                    { id: 2200, name: "NPO支援", class: "type22" },
+                    { id: 2300, name: "その他区分", class: "type23" }
+                ],
+            };
+        },
+
+        created() {
+            console.log(this.$route.params)
+            if (this.$route.params.id) {
+                this.event.id = this.$route.params.id
+                this.getDetail()
+            }
+        },
+
+        methods: {
+            fillFormWithData(event) {
+                console.log(event)
+                this.pullAttachments(event);
+                
+                this.event.id = event.id;
+                this.event.subject = event.subject;
+                this.event.activity_category = event.activity_category;
+                this.event.children = event.children;
+                this.event.event_date = event.event_date;
+                this.event.start_date = event.start_date;
+                this.event.end_date = event.end_date;
+                this.event.organizer = event.organizer;
+                this.event.file = event.file;
+                this.event.deadline = event.deadline;
+                this.event.venue = event.venue;
+                this.event.capacity = event.capacity;
+                this.event.target = event.target;
+                this.event.how_to_apply = event.how_to_apply;
+                this.event.cost = event.cost;
+                this.event.detail = event.detail;
+                this.event.url = event.url;
+                this.event.phone = event.phone;
+
+                // For Files
+                // if(event.file)
+                //     this.currentAddedFileIs = event.file.split(',')
+            },
+            pullAttachments(event) {
+                // Make HTTP request to store announcement
+                let loader = this.$loading.show();
+                axios.get(`api/asset/attachments/${event.file}`).then(function (response) {
+                    console.log(response);
+                    if (response.data.success) {
+                        this.attachments = response.data.data;
+                        console.log('Attachments: ', this.attachments)
+                        this.getAttachmentSize()
+                        loader.hide()
+                    } else {
+                        console.log(response.data.errors)
+                    }
+
+                }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            getAttachmentSize() {
+                this.upload_size = 0; // Reset to beginningƒ
+                this.attachments.map((item) => { this.upload_size += parseInt(item.size) })
+                this.upload_size = Number((this.upload_size).toFixed(1))
+                this.$forceUpdate();
+            },
+            getDetail(page_url) {
+                let loader = this.$loading.show();
+                let vm = this;
+                page_url = page_url || `/api/event/${this.event.id}`
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.fillFormWithData(res.data)
+                        console.log(res.data)
+                        loader.hide()
+                    })
+                    .catch(err => console.log(err))
+            },
+            downloadFile(attachment) {
+                console.log(attachment)
+                window.location.href = `/api/download/${attachment.path}`
+            },
+            getActivityCategoryName(id){
+                return this.categories.find(x => x.id === id).name
+            },
+            getCategoryWiseClass(id){
+                console.log(id)
+                return this.categories.find(x => x.id === id).class
+            },
+        }
+    };
+</script>

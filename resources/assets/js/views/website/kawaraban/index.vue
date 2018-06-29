@@ -90,15 +90,9 @@
                     <div class="book_contents">
                         
                         <div class="links">
-                            <dl v-for="(kawarabi) in kawarabis" v-bind:key="kawarabi.id">
-                                <!-- title -->
-                                <dt v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                    <a class="label label-primary" @click="downloadFile(attachment)">
-                                        {{kawarabi.subject}}
-                                    </a>
-                                </dt>
-                                <!-- detail -->
-                                <dd>{{kawarabi.detail}}</dd>
+                            <dl v-for="attachment in kawarabi.attachment" :key="attachment.id">
+                                <dt><a @click="downloadFile(attachment)" href="#">{{attachment.name}}</a></dt>
+                                <dd>{{kawarabi.subject}}</dd>
                             </dl>
                         </div>
                         <div class="other_info">
@@ -140,7 +134,7 @@
         name: "home",
         data() {
             return {
-                kawarabis: [],
+                kawarabi: [],
                 attachments: []
             }
         },
@@ -157,10 +151,9 @@
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
-                        this.kawarabis = res.data
-                        console.log(this.kawarabis)
+                        this.kawarabi = res.data
+                        console.log(this.kawarabi)
 
-                        console.log(this.newTagDate)
                         loader.hide()
                     })
                     .catch(err => console.log(err))

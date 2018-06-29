@@ -118,7 +118,7 @@
                                         {{dream.subject}}
                                     </a>
                                 </dt>
-                                <dd>{{dream.detail}}</dd>
+                                <dd v-html="dream.detail"></dd>
                             </dl>
                         </div>
                         <div class="other_info">

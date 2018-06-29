@@ -139,23 +139,23 @@
                                 <dl class="input-group">
                                     <dt>活動分野</dt>
                                     <dd>
-                                    <multiselect 
-                                        v-model="selectedActivityCategory" 
-                                        :options="categories" 
-                                        @select="onActivityCategorySelect"
-                                        placeholder="選んでください" 
-                                        selectLabel="クリックして選択する" 
-                                        deselectLabel="クリックして選択を解除する"
-                                        selectedLabel="選ばれた"  
-                                        track-by="id" 
-                                        label="name" 
-                                        v-validate="'required'" 
-                                        name="activity_category" 
-                                        data-vv-as="活動カテゴリ"
-                                        :max-height="150"
-                                        @remove="onActivityCategoryRemove"
-                                        >
-                                    </multiselect>
+                                        <multiselect 
+                                            v-model="selectedActivityCategory" 
+                                            :options="categories" 
+                                            @select="onActivityCategorySelect"
+                                            placeholder="選んでください" 
+                                            selectLabel="クリックして選択する" 
+                                            deselectLabel="クリックして選択を解除する"
+                                            selectedLabel="選ばれた"  
+                                            track-by="id" 
+                                            label="name" 
+                                            v-validate="'required'" 
+                                            name="activity_category" 
+                                            data-vv-as="活動カテゴリ"
+                                            :max-height="150"
+                                            @remove="onActivityCategoryRemove"
+                                            >
+                                        </multiselect>
                                     </dd>
                                 </dl>
                                 <!-- free word -->
@@ -180,7 +180,7 @@
                     <div class="topics_body">
                         <!-- link : volunteer -->
                         <div class="item" v-for="(notice, rowNumber) in notices" v-bind:key="rowNumber">
-                            <a href="#">
+                            <a @click="gotoDetail(notice)" href="#">
                                 <div class="sinfo">
                                     <!-- format -->
                                     <div class="type">
@@ -355,16 +355,17 @@
                 let routeName = ''
                 switch (object.type) {
                     case 'イベント':
-                        routeName = 'eventDetail'
+                        routeName = 'event'
                         break;
                     case 'ボランティア情報':
-                        routeName = 'volunteerDetail'
+                        routeName = 'volunteer'
                         break;
                     case '会員募集':
-                        routeName = 'membershipDetail'
+                        routeName = 'membership'
                         break;
                 }
-                this.$router.push({path: routeName, params: {model: object, requestType: type }})
+                console.log(`${routeName}/${object.id}/detail`)
+                this.$router.push({path: `${routeName}/${object.id}/detail` })
             },
         }
     };
