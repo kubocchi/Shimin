@@ -172,4 +172,121 @@ class NoticeController extends Controller
 
         return Response::json(['data' => $formattedData], 201);
     }
+
+    public function getNoticeFrontData(Request $request)
+    {
+        $type = $request->input('noticeType');
+        $search = $request->input('search');
+        $activityCategory = $request->input('activityCategory');
+
+        $events = Event::Where('subject', 'like', '%' . $search . '%')
+                            ->where(function($query) use ($activityCategory)  {
+                                if(isset($activityCategory)) {
+                                    $query->where('activity_category', $activityCategory);
+                                }
+                            })
+                            ->get()->toArray();
+        $volunteers = Volunteer::Where('subject', 'like', '%' . $search . '%')
+                            ->where(function($query) use ($activityCategory)  {
+                                if(isset($activityCategory)) {
+                                    $query->where('activity_category', $activityCategory);
+                                }
+                            })->get()->toArray();
+        $memberships = Membership::Where('organizer', 'like', '%' . $search . '%') 
+                            ->where(function($query) use ($activityCategory)  {
+                                if(isset($activityCategory)) {
+                                    $query->where('activity_category', $activityCategory);
+                                }
+                            })->get()->toArray();
+
+        $formattedData = [];
+        if($type == 1)
+        {
+            foreach ($events as $key => $value) 
+            {
+                $obj = new stdClass;
+                $obj->type = 'イベント';
+                $obj->id =  $value['id'];
+                $obj->subject = $value['subject'];
+                $obj->activityCategory = $value['activity_category'];
+                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+    
+                array_push($formattedData, $obj);
+            }
+        }
+        else if($type == 2)
+        {
+           
+            foreach ($volunteers as $key => $value) 
+            {
+                $obj = new stdClass;
+                $obj->type = 'ボランティア情報';
+                $obj->id =  $value['id'];
+                $obj->subject = $value['subject'];
+                $obj->activityCategory = $value['activity_category'];
+                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+                array_push($formattedData, $obj);
+            }
+        }
+        else if($type == 3)
+        {
+            foreach ($memberships as $key => $value) 
+            {
+                $obj = new stdClass;
+                $obj->type = '会員募集';
+                $obj->id =  $value['id'];
+                $obj->subject = $value['organizer'];
+                $obj->activityCategory = $value['activity_category'];
+                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+                array_push($formattedData, $obj);
+            }
+        }
+        else
+        {
+            foreach ($events as $key => $value) 
+            {
+                $obj = new stdClass;
+                $obj->type = 'イベント';
+                $obj->id =  $value['id'];
+                $obj->subject = $value['subject'];
+                $obj->activityCategory = $value['activity_category'];
+                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+    
+                array_push($formattedData, $obj);
+            }
+
+            foreach ($memberships as $key => $value) 
+            {
+                $obj = new stdClass;
+                $obj->type = '会員募集';
+                $obj->id =  $value['id'];
+                $obj->subject = $value['organizer'];
+                $obj->activityCategory = $value['activity_category'];
+                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+                array_push($formattedData, $obj);
+            }
+
+            foreach ($volunteers as $key => $value) 
+            {
+                $obj = new stdClass;
+                $obj->type = 'ボランティア情報';
+                $obj->id =  $value['id'];
+                $obj->subject = $value['subject'];
+                $obj->activityCategory = $value['activity_category'];
+                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+                array_push($formattedData, $obj);
+            }
+        }
+        
+        usort($formattedData, function($a, $b)
+        {
+            return strcmp($b->date, $a->date);
+        });
+
+        return Response::json(['data' => $formattedData], 201);
+    }
 }

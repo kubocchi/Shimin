@@ -70,6 +70,10 @@ import BusinessReport from '../views/website/business-report/index'
 
 // Format
 import FormatIndex from '../views/website/format/index'
+
+// Notice Center
+import NoticeIndex from '../views/website/notice/index'
+import NoticeDetail from '../views/website/notice/detail'
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -409,6 +413,25 @@ const routes = [
         path: '/format',
         name: 'format',
         component: FormatIndex
+    },
+    {
+        path: '/notice',
+        redirect: '/notice/index',
+        component: {
+            render(c) { return c('router-view'); }
+        },
+        children: [
+            {
+                path: 'index',
+                name: 'noticeIndex',
+                component: NoticeIndex
+            },
+            {
+                path: ':id/detail',
+                name: 'noticeDetail',
+                component: NoticeDetail
+            }
+        ]
     },
 ];
 
