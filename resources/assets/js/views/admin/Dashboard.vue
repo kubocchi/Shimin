@@ -4,6 +4,24 @@
         <hr>
         <div class="row mt-4">
             <div class="col-md-4 topmidashi">
+                <h5>団体情報登録</h5>
+            </div>
+            <div class="col-md-8">
+                <h5>
+                    <span>
+                        <i class="fas fa-feather"></i>
+                    </span> 団体情報の登録</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <router-link :to="{ name: 'groupInformationList' }">
+                            <button class="btn btn-primary btn-lg btn-block topmenu">団体情報の登録</button>
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 topmidashi">
                 <h5>情報発信</h5>
             </div>
             <div class="col-md-8">
@@ -72,23 +90,6 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-4 topmidashi">
-                <h5>団体情報登録</h5>
-            </div>
-            <div class="col-md-8">
-                <h5>
-                    <span>
-                        <i class="fas fa-feather"></i>
-                    </span> 団体情報の登録</h5>
-                <div class="row">
-                    <div class="col-md-6">
-                        <router-link :to="{ name: 'groupInformationList' }">
-                            <button class="btn btn-primary btn-lg btn-block topmenu">団体情報の登録</button>
-                        </router-link>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </template>
