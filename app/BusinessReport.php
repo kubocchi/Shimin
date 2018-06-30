@@ -13,8 +13,4 @@ class BusinessReport extends Model
     public function business(){
         return $this->belongsTo(Business::class);
     }
-
-    public function attachment(){
-        return $this->belongsTo(Attachment::class);
-    }
 }

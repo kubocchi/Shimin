@@ -222,7 +222,9 @@ table.list_table td {
 .wide_s {
 	width: 50%;
 }
-
+.wide_d {
+	min-width: 100px;
+}
 /* 768px */
 @media screen and (max-width: 768px) {
 	table.list_table {

@@ -60,8 +60,8 @@
                                 <label for="inputFile">【公開ファイル】（必須）</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
-                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
+                                             <input type="file" id="attachments" multiple="multiple" style="display: none" @change="uploadFieldChange"  
                                              accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
                                             参照
                                         </label>
@@ -256,7 +256,7 @@
         methods: {
             // Add new, sends model to API
             addbusinessReport() {
-                this.businessReport.attachment_id = this.currentAddedFileIs.join(',')
+                this.businessReport.file = this.currentAddedFileIs.join(',')
 
                 let self = this
                 console.log(this.businessReport)
@@ -319,20 +319,21 @@
 
             // Edit new, sends model to API
             fillFormWithRecievedModel(businessReport) {
+                console.log(businessReport)
                 this.pullAttachments(businessReport);
 
                 this.businessReport.id = businessReport.id
                 this.businessReport.year_id = businessReport.year.id
                 this.businessReport.business_id = businessReport.business.id
                 this.businessReport.detail = businessReport.detail
-                this.businessReport.attachment_id = businessReport.attachment_id
-                this.businessReport.deactivate = !! businessReport.deactivate == 1 ? true:false
+                this.businessReport.file = businessReport.file
+                this.businessReport.deactivate = businessReport.deactivate == 1 ? true:false
                 this.businessReport.created_by = businessReport.created_by
                 this.businessReport.updated_by = businessReport.updated_by
 
                 // For Files
-                if(businessReport.attachment_id)
-                    this.currentAddedFileIs = businessReport.attachment_id.split(',')
+                if(businessReport.file)
+                    this.currentAddedFileIs = businessReport.file.split(',')
             },
 
             // Analyzing attachmet file size
@@ -348,6 +349,7 @@
                 for (var i = this.attachments.length - 1; i >= 0; i--) {
                     console.log(this.attachments[i].category_id);
                     this.uploadedData.append("attachments[][0]", this.attachments[i]);
+                    this.uploadedData.append("attachments[][1]", this.attachments[i].category_id);
                 }
 
                 for (var i = this.attachment_labels.length - 1; i >= 0; i--) {
@@ -358,7 +360,7 @@
             // Removing attachment on button click
             removeAttachment(attachment) {
                 console.log(attachment)
-                if(attachment.id)
+                if (attachment.id)
                     this.tempRemovedFileIds.push(attachment.id)
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
@@ -367,17 +369,6 @@
 
             // This function will be called every time you add a file
             uploadFieldChange(e) {
-                console.log(this.attachments.length)
-                if(this.attachments.length > 0) {
-                    this.$swal({
-                        title: "警告!",
-                        text: "必須フィールドに記入してください",
-                        type: "warning",
-                        confirmButtonText: "OK"
-                    });
-                    return;
-                }
-
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -396,9 +387,9 @@
                 this.prepareFields()
 
                 var config = {
-                    headers: { 'Content-Type': 'multipart/form-data' } ,
-                    onUploadProgress: function(progressEvent) {
-                        this.percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total )
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    onUploadProgress: function (progressEvent) {
+                        this.percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
                         console.log(this.percentCompleted)
                         this.width = this.percentCompleted + '%'
                         this.$forceUpdate()
@@ -408,35 +399,21 @@
                 //Make HTTP request to store announcement
                 $("#progressModal").modal({ backdrop: 'static' }, 'show');
                 axios.post('/api/attachments/store', this.uploadedData, config)
-                .then(function (response) {
-                    console.log(response);
-                    if (response.data.success) {
-                        console.log('Successfull upload')
-                        this.currentAddedFileIs.push(response.data.data)
-                        this.resetData()
-                        this.addbusinessReport()
-                         $("#progressModal").modal('hide')
-                    } else {
-                        console.log('Unsuccessful Upload')
-                    }
-                }
-                .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(error => {
-                        if (error.response) {
-                            console.log(error.response);
-                            if(error.response.status === 413){
-                                $("#progressModal").modal("hide");
-                                 this.$swal({
-                                    title: "警告!",
-                                    text: "必須フィールドに記入してください",
-                                    type: "warning",
-                                    animation: false,
-                                    customClass: "animated tada",
-                                    confirmButtonText: "OK"
-                                });
-                            }
-                                
+                    .then(function (response) {
+                        console.log(response);
+                        if (response.data.success) {
+                            console.log('Successfull upload')
+                            this.currentAddedFileIs.push(response.data.data)
+                            this.resetData()
+                            this.addbusinessReport()
+                            $("#progressModal").modal('hide')
+                        } else {
+                            console.log('Unsuccessful Upload')
                         }
+                    }
+                        .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                    .catch(function (error) {
+                        console.log('Attachment catch', error)
                     });
                 console.log(attachments)
             },
@@ -449,9 +426,9 @@
             },
 
             // Removing attachment form database and server, sends file id to attachment remove API
-            removeServerAttachment(attachment_id){
+            removeServerAttachment(attachment_id) {
                 let data = {
-                    params: 
+                    params:
                     {
                         attachment_id: attachment_id
                     }
@@ -459,24 +436,24 @@
 
                 // Make HTTP request to store announcement
                 axios.delete('/api/attachments/', data)
-                .then(function (response) {
-                    console.log(response)
-                    if (response.data.success) {
-                        this.getAttachmentSize()
-                    } else {
-                        console.log(response.data.errors)
-                    }
-                    
-                }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(function (response) {
+                        console.log(response)
+                        if (response.data.success) {
+                            this.getAttachmentSize()
+                        } else {
+                            console.log(response.data.errors)
+                        }
+
+                    }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             },
 
             // Pull required attachmets
-            pullAttachments(businessReport) {
+            pullAttachments(object) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${businessReport.attachment.id}`).then(function (response) {
+                axios.get(`api/asset/attachments/${object.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
@@ -485,12 +462,14 @@
                     } else {
                         console.log(response.data.errors)
                     }
-                    
+
                 }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
             },
+
 
             // Final submisison clicked for form data
             submitClicked(){

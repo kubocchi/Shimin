@@ -29,19 +29,9 @@
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-3 mb-4">
-                         <multiselect 
-                            v-model="selectedYear" 
-                            :options="years" 
-                            @select="onSelectYear"  
-                            track-by="id" 
-                            label="year" 
-                            placeholder="選んでください" 
-                            selectLabel="クリックして選択する" 
-                            deselectLabel="クリックして選択を解除する" 
-                            selectedLabel="選ばれた" 
-                            v-validate="'required'" 
-                            name="year" 
-                            data-vv-as="事業名">
+                        <multiselect v-model="selectedYear" :options="years" @select="onSelectYear" track-by="id" label="year" placeholder="選んでください"
+                            selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" v-validate="'required'"
+                            name="year" data-vv-as="事業名">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-4 offset-sm-5">
@@ -64,14 +54,15 @@
                     <table class="table table-sm">
                         <thead>
                             <tr class="table-primary">
-                                <th class="col-xs-1" scope="col">No.</th>
-								<th class="col-xs-2 wide_d" scope="col">年度</th>
-								<th class="col-xs-2 wide_d" scope="col">事業名</th>
-								<th class="col-xs-3 wide_s" scope="col">件名</th>
-								<th class="col-xs-2 wide_d" scope="col">更新日</th>
-								<th class="col-xs-1" scope="col">変更</th>
-								<th class="col-xs-1" scope="col">削除</th>
-                            </tr>
+                                <tr class="table-primary">
+                                    <th class="col-xs-1" scope="col">No.</th>
+                                    <th class="col-xs-2 wide_d" scope="col">年度</th>
+                                    <th class="col-xs-2 wide_d" scope="col">事業名</th>
+                                    <th class="col-xs-3 wide_s" scope="col">件名</th>
+                                    <th class="col-xs-2 wide_d" scope="col">更新日</th>
+                                    <th class="col-xs-1" scope="col">変更</th>
+                                    <th class="col-xs-1" scope="col">削除</th>
+                                </tr>
                         </thead>
 
                         <tbody>
@@ -79,7 +70,13 @@
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ businessReport.year.year }}</td>
                                 <td>{{ businessReport.business.name }}</td>
-                                <td>{{ businessReport.attachment.name}}</td>
+                                <td>
+									<ul style="list-style-type: none">
+										<li v-for="attachment in businessReport.attachments" v-bind:key="attachment.id">
+                                            {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
+                                        </li>
+									</ul>
+								</td>
                                 <td>{{ businessReport.created_at }}</td>
                                 <td>
                                     <router-link :to="{ name: 'businessReportForm', params: { model: businessReport, requestType: 'edit' }}">
@@ -112,9 +109,9 @@
 </template>
 
 <script>
- import Multiselect from "vue-multiselect"
+    import Multiselect from "vue-multiselect"
     export default {
-        components: { Multiselect},
+        components: { Multiselect },
         data() {
             return {
                 businessReports: [],
@@ -187,17 +184,17 @@
                         fetch(`api/business-report/${id}`, {
                             method: "delete"
                         })
-                        .then(res => res.json())
-                        .then(data => {
-                            this.$swal(
-                                '削除しました!',
-                                '選択したデータが削除されました',
-                                'success'
-                            )
-                            loader.hide()
-                            this.fetchBusinessReport()
-                        })
-                        .catch(err => console.log(err))
+                            .then(res => res.json())
+                            .then(data => {
+                                this.$swal(
+                                    '削除しました!',
+                                    '選択したデータが削除されました',
+                                    'success'
+                                )
+                                loader.hide()
+                                this.fetchBusinessReport()
+                            })
+                            .catch(err => console.log(err))
                     }
                     else {
                         this.$swal(
@@ -220,7 +217,7 @@
                 this.params.search = ""
                 this.fetchBusinessReport()
             },
-             // Pulling data from API, its a post request with search-term, type
+            // Pulling data from API, its a post request with search-term, type
             fetchYear(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
@@ -231,7 +228,7 @@
                     .then(res => {
                         this.years = res.data;
                         console.log(this.years);
-                        let fakeOption = {'id' : null, 'year': 'すべて'}
+                        let fakeOption = { 'id': null, 'year': 'すべて' }
                         this.years.unshift(fakeOption)
                         this.selectedYear = fakeOption
                         loader.hide()
@@ -239,7 +236,7 @@
                     .catch(err => console.log(err))
             },
             onSelectYear(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     console.log(selectedOption.id)
                     this.params.year = selectedOption.id
                     this.fetchBusinessReport()

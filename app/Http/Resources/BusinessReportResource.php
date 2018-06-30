@@ -19,12 +19,11 @@ class BusinessReportResource extends JsonResource
             'year' => $this->year,
             'business' => $this->business,
             'detail' => $this->detail,
-            'attachment' => $this->attachment,
+            'file' => $this->file,
+            'attachments' => $this->attachments,
             'deactivate'=>$this->deactivate,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'updated_at' => $this->updated_at->format('Y-m-d'),
         ];
     }
     public function with($request) {

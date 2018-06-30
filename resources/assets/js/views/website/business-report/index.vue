@@ -130,8 +130,8 @@
                                         <p class="title">{{business.name}}</p>
                                         <ul>
                                             <li v-for="attachment in business.attachments" v-bind:key="attachment.id">
-                                                <a @click.prevent="downloadFile(attachment)" target="_blank" href="#">
-                                                    {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
+                                                <a href="#" @click.prevent="downloadFile(attachment)" target="_blank">
+                                                   {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
                                                 </a>
                                             </li>
                                         </ul>
@@ -185,17 +185,7 @@
             },
             downloadFile(attachment) {
                 console.log(attachment)
-                //window.open(`/api/download/${attachment.path}`)
                 window.location.href = `/api/download/${attachment.path}`
-                // fetch(`/api/download/${attachment.path}`)
-                //     .then(res => {
-                //         var blob = new Blob([res.data],{type:attachment.type});
-                //         var link = document.createElement('a');
-                //         link.href = window.URL.createObjectURL(blob);
-                //         link.download = attachment.name;
-                //         link.click();
-                //     })
-                //     .catch(err => console.log(err))
             },
         }
     };

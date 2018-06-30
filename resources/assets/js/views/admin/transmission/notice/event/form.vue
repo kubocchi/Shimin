@@ -440,8 +440,8 @@
                             loader.hide();
                             self
                                 .$swal({
-                                    title: "成功!",
-                                    text: "活動センターが追加されました!",
+                                    title: "登録完了!",
+                                    text: "登録が完了しました!",
                                     type: "success",
                                     confirmButtonText: "OK"
                                 })
