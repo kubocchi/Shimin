@@ -162,7 +162,6 @@ class GroupInformationController extends Controller
     public function getCSV(Request $request)
     {
         setlocale ( LC_ALL ,  'ja_JP.UTF - 8' );
-
         if($request->hasFile('file'))
         {
             try {
@@ -197,10 +196,10 @@ class GroupInformationController extends Controller
                     
                     $groupInformation->number= $column[7]; //   1
                     //$groupInformation->type= $column[8]; //   2
-                    $groupInformation->type= ($column[8]=='団体')?"0":"1"; //   2
+                    $groupInformation->type= ($column[8]=='団体')?"1":"0"; //   2
     
                     for($index=1; $index<7; $index++){
-                        if($column[$index])break;
+                        if($column[$index]=='TRUE')break;
                     }
                     $groupInformation->regist_management= $index; //   3
 
@@ -246,7 +245,7 @@ class GroupInformationController extends Controller
                     $groupInformation->disclosure_contact_url= ($column[44]=='TRUE')?"1":"0"; //   38
     
                     for($index=52; $index<75; $index++){
-                        if($column[$index])break;
+                        if($column[$index]=='TRUE')break;
                     }
                     $groupInformation->activity_category= strval(($index-51)*100); //   39
                     $groupInformation->active_category_supplement = $column[75]; //   40
@@ -280,7 +279,35 @@ class GroupInformationController extends Controller
             catch (\Exception $e) {
                 throw $e;
             }
-               
         }
+    }
+
+    /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getGroupInformationFrontData(Request $request)
+    {
+         $search = $request->input('search');
+         $activityCategory = $request->input('activityCategory');
+         $type = $request->input('type');
+         
+         $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
+                                    ->where(function($query) use ($activityCategory)  {
+                                        if(isset($activityCategory)) {
+                                            $query->where('activity_category', $activityCategory);
+                                        }
+                                    })
+                                    ->where(function($query) use ($type)  {
+                                        if(isset($type)) {
+                                            $query->where('type', $type);
+                                        }
+                                    })
+                                    ->paginate(40);
+         
+         // Return collection of Kawarabis as a resource
+         return GroupInformationResource::collection($groupInformations);
     }
 }
