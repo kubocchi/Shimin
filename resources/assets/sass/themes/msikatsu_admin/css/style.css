@@ -220,11 +220,21 @@ table.list_table td {
 	word-break: break-all;
 }
 .wide_s {
-	width: 50%;
+	width: 40%;
 }
 .wide_d {
 	min-width: 100px;
 }
+.btn.btn-outline-success.btn-block{
+	min-width: 70px;;
+}
+.btn.btn-outline-danger.btn-block {
+	min-width: 70px;;
+}
+.btn.btn-outline-primary.btn-block {
+	min-width: 70px;;
+}
+
 /* 768px */
 @media screen and (max-width: 768px) {
 	table.list_table {
@@ -236,6 +246,15 @@ table.list_table td {
 	}
 	.wide_d {
 		min-width: 100px;
+	}
+	.btn.btn-outline-success.btn-block{
+		min-width: 75px;
+	}
+	.btn.btn-outline-danger.btn-block {
+    		min-width: 75px;
+	}
+	.btn.btn-outline-primary.btn-block {
+    		min-width: 75px;
 	}
 }
 /* 480px */
@@ -276,6 +295,8 @@ address {
 	text-align: center;
 	color: #FFF;
 }
+
+
 
 
 
