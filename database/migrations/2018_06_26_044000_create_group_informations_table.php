@@ -62,11 +62,11 @@ class CreateGroupInformationsTable extends Migration
             $table->string('activity_day')->nullable();
             $table->string('dues')->nullable();
             $table->string('dues_price')->nullable();
-            $table->string('content')->nullable();
+            $table->longText('content')->nullable();
             $table->string('rocker')->nullable();
             $table->string('mail_box')->nullable();
             $table->string('method')->nullable();
-            $table->string('supplement')->nullable();
+            $table->longText('supplement')->nullable();
             $table->boolean('deactivate');
             $table->integer('created_by');
             $table->integer('updated_by');

@@ -14,20 +14,20 @@
                                 <span class="t">HOME</span>
                             </a>
                         </li>
-                        <li class="open">
+                        <li>
                             <a class="toggle">
                                 <span class="i"></span>
                                 <span class="t">センター案内</span>
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動センターとは</a>
+                                    <a href="../infomation/">市民活動センターとは</a>
                                 </li>
                                 <li>
-                                    <a href="#">施設のご案内</a>
+                                    <a href="../floormap/">施設のご案内</a>
                                 </li>
                                 <li>
-                                    <a href="#">各種書式</a>
+                                    <a href="../format/">各種書式</a>
                                 </li>
                             </ul>
                         </li>
@@ -38,39 +38,44 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動団体とは</a>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
                                 </li>
                                 <li>
-                                    <a href="#">登録について</a>
+                                    <a href="../oraganization/regist.html">登録について</a>
                                 </li>
                                 <li>
-                                    <a href="#">団体を探したい</a>
+                                    <a href="../oraganization/">団体を探したい</a>
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="open">
                             <a class="toggle">
                                 <span class="i"></span>
                                 <span class="t">ボランティア</span>
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">ボランティアとは</a>
+                                    <a href="../volunteer/">ボランティアをしたい</a>
                                 </li>
                                 <li>
-                                    <a href="#">ボランティアをしたい</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアを
+                                    <a href="../volunteer/recruitment.html">ボランティアを
                                         <br>募集したい</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a class="toggle">
                                 <span class="i"></span>
                                 <span class="t">Q & A</span>
                             </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="../question/">センターについて</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -78,11 +83,11 @@
         </div>
 
         <!-- pagetitle -->
-        
-        <div id="pagetitle" class="news">
+
+        <div id="pagetitle" class="topics">
             <div class="container">
                 <div class="h2">
-                    <h2>センターからのお知らせ</h2>
+                    <h2>ボランティア募集・イベント情報</h2>
                 </div>
             </div>
         </div>
@@ -93,14 +98,10 @@
             <div class="container">
                 <ol class="topicpath">
                     <li>
-                        <router-link :to="{ name: 'home' }">
-                            <span>Home</span>
-                        </router-link>
+                        <a href="../index.html">HOME</a>
                     </li>
                     <li>
-                        <router-link :to="{ name: 'disasterIndex' }">
-                            <span>センターからのお知らせ</span>
-                        </router-link>
+                        <a href="#">ボランティア募集・イベント情報</a>
                     </li>
                     <li>詳細</li>
                 </ol>
@@ -112,47 +113,68 @@
         <div id="detail" class="maincontents">
             <div class="container">
                 <div class="detail_haed">
-                    <!-- day -->
-                    <p class="day">{{disaster.start_date}}</p>
+                    <!-- format -->
+                    <p class="type">
+                        <span class="member">会員募集</span>
+                    </p>
+                    <!-- <span class="event">イベント</span><span class="member">会員募集</span> -->
                     <!-- title -->
-                    <p class="title">{{disaster.title}}</p>
-                    <ul class="sns_share">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                    <p class="title">{{volunteer.organizer}}</p>
                 </div>
                 <div class="detail_body">
-                    <div style="overflow:hidden" class="information">
-                        <!-- text -->
-                        <p v-html="disaster.content" class="text_moredetail"></p>
-                        <!-- attachments -->
-                        <dl class="file">
-                            <dt>添付ファイル</dt>
+                    <div class="topinformation">
+                        <!-- category -->
+                        <dl class="cate">
+                            <dt>活動分野：</dt>
                             <dd>
-                                <!-- <a href="#">ドネーション説明会表.pdf</a> -->
-                                <div v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                    <div class="form-group">
-                                        <a class="label label-primary" @click="downloadFile(attachment)">
-                                            {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
-                                        </a>
-                                    </div>
-                                </div>
+                               
+                            </dd>
+                            <!-- type01 ~ 23 -->
+                        </dl>
+                        <!-- dd=>sponsor -->
+                        <dl class="group">
+                            <dt>募集団体：</dt>
+                            <dd>{{volunteer.organizer}}</dd>
+                        </dl>
+                    </div>
+                    <div class="information">
+                        <!-- dd=>Details -->
+                        <dl>
+                            <dt>内容詳細</dt>
+                            <dd v-html="volunteer.content">
                             </dd>
                         </dl>
-                        <!-- URL -->
-                        <!-- <dl class="url">
+                        <!-- dd=>volunteer_fee -->
+                        <dl>
+                            <dt>会費</dt>
+                            <dd>{{volunteer.amount}}円 / 月</dd>
+                        </dl>
+                        <!-- dd=>URL -->
+                        <dl>
                             <dt>URL</dt>
                             <dd>
-                                <a href="#">https://XXXXXXXXXXXXXXXXXXXX</a>
+                                <a href="#">{{volunteer.linkname}}</a>
                             </dd>
-                        </dl> -->
+                        </dl>
+                        <!-- dd=>contact information -->
+                        <dl>
+                            <dt>問合せ先</dt>
+                            <dd v-html="volunteer.contact">
+                            </dd>
+                        </dl>
+                        <!-- dd=>attachments -->
+                        <dl>
+                            <dt>添付ファイル</dt>
+                            <dd v-for="attachment in attachments" :key="attachment.id">
+                                <a :href="'/api/download/' + attachment.path">
+                                    {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
+                                </a>
+                            </dd>
+                        </dl>
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <router-link :to="{ name: 'disasterIndex' }">
-                        <span>一覧に戻る</span>
-                    </router-link>
+                    <a href="index.html">一覧に戻る</a>
                 </div>
             </div>
         </div>
@@ -165,52 +187,84 @@
         name: "company",
         data() {
             return {
-                disaster: {
+                volunteer: {
                     id: "",
-                    title: "",
-                    start_date: !!this.range ? this.dateRange[0] : "",
-                    end_date: !!this.range ? this.dateRange[1] : "",
-                    content: "",
+                    organizer: "",
+                    activity_category: "",
+                    start_date: "",
+                    end_date: "",
                     file: "",
-                    deactivate: false,
-                    created_by: 1,
-                    updated_by: 1
+                    content: "",
+                    is_payment: "0",
+                    amount: "",
+                    payment_type: "月",
+                    linkname: "",
+                    contact: "",
                 },
                 attachments: [],
+                categories: [
+                    { id: 100, name: "保健・医療", class: "type01" },
+                    { id: 200, name: "高齢者福祉", class: "type02" },
+                    { id: 300, name: "障害者福祉", class: "type03" },
+                    { id: 400, name: "児童福祉", class: "type04" },
+                    { id: 500, name: "社会教育", class: "type05" },
+                    { id: 600, name: "まちづくり", class: "type06" },
+                    { id: 700, name: "観光", class: "type07" },
+                    { id: 800, name: "農山漁村", class: "type08" },
+                    { id: 900, name: "文化芸術", class: "type09" },
+                    { id: 1000, name: "環境保全", class: "type10" },
+                    { id: 1100, name: "災害救援", class: "type11" },
+                    { id: 1200, name: "地域安全", class: "type12" },
+                    { id: 1300, name: "人権・平和", class: "type13" },
+                    { id: 1400, name: "国際協力", class: "type14" },
+                    { id: 1500, name: "男女共同", class: "type15" },
+                    { id: 1600, name: "子供育成", class: "type16" },
+                    { id: 1700, name: "情報社会", class: "type17" },
+                    { id: 1800, name: "科学技術", class: "type18" },
+                    { id: 1900, name: "経済活動", class: "type19" },
+                    { id: 2000, name: "職業・雇用", class: "type20" },
+                    { id: 2100, name: "消費者保護", class: "type21" },
+                    { id: 2200, name: "NPO支援", class: "type22" },
+                    { id: 2300, name: "その他区分", class: "type23" }
+                ],
             };
         },
 
         created() {
             console.log(this.$route.params)
-            if (this.$route.params.id){
-                this.disaster.id = this.$route.params.id
+            if (this.$route.params.id) {
+                this.volunteer.id = this.$route.params.id
                 this.getDetail()
             }
         },
 
         methods: {
-            fillFormWithData(disaster) {
-                console.log(disaster)
-                this.pullAttachments(disaster);
-                this.edit = true
-                this.disaster.id = disaster.id
-                this.disaster.title = disaster.title
-                this.disaster.start_date = disaster.start_date
-                this.disaster.end_date = disaster.end_date
-                this.disaster.content = disaster.content
-                this.disaster.file = disaster.file
-                this.disaster.deactivate = !!disaster.deactivate == 1 ? true : false
-                this.disaster.created_by = disaster.created_by
-                this.disaster.updated_by = disaster.updated_by
+            fillFormWithData(volunteer) {
+                console.log(volunteer)
+                this.pullAttachments(volunteer);
+
+
+                this.volunteer.id = volunteer.id;
+                this.volunteer.organizer = volunteer.organizer;
+                this.volunteer.activity_category = volunteer.activity_category;
+                this.volunteer.start_date = volunteer.start_date;
+                this.volunteer.end_date = volunteer.end_date;
+                this.volunteer.file = volunteer.file;
+                this.volunteer.content = volunteer.content;
+                this.volunteer.is_payment = volunteer.is_payment;
+                this.volunteer.amount = volunteer.amount;
+                this.volunteer.payment_type = volunteer.payment_type;
+                this.volunteer.linkname = volunteer.linkname;
+                this.volunteer.contact = volunteer.contact;
 
                 // For Files
-                // if(disaster.file)
-                //     this.currentAddedFileIs = disaster.file.split(',')
+                // if(event.file)
+                //     this.currentAddedFileIs = event.file.split(',')
             },
-            pullAttachments(disaster) {
+            pullAttachments(object) {
                 // Make HTTP request to store announcement
                 let loader = this.$loading.show();
-                axios.get(`api/asset/attachments/${disaster.file}`).then(function (response) {
+                axios.get(`api/asset/attachments/${object.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
@@ -236,7 +290,7 @@
             getDetail(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || `/api/disaster/${this.disaster.id}`
+                page_url = page_url || `/api/volunteer/${this.volunteer.id}`
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
@@ -249,6 +303,13 @@
             downloadFile(attachment) {
                 console.log(attachment)
                 window.location.href = `/api/download/${attachment.path}`
+            },
+            getActivityCategoryName(id) {
+                return this.categories.find(x => x.id === id).name
+            },
+            getCategoryWiseClass(id) {
+                console.log(id)
+                return this.categories.find(x => x.id === id).class
             },
         }
     };

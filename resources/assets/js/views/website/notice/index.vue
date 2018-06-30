@@ -180,7 +180,7 @@
                     <div class="topics_body">
                         <!-- link : volunteer -->
                         <div class="item" v-for="(notice, rowNumber) in notices" v-bind:key="rowNumber">
-                            <a @click="gotoDetail(notice)" href="#">
+                           <router-link :to="{ path: `/notice/${getType(notice.type)}/${notice.id}/detail` }">
                                 <div class="sinfo">
                                     <!-- format -->
                                     <div class="type">
@@ -197,12 +197,12 @@
                                 </div>
                                 <!-- title -->
                                 <div class="title">
-                                     <span v-if="notice.date === newTagDate">
+                                    <span v-if="notice.date === newTagDate">
                                         <span class="new">new</span>
                                     </span>
                                     {{notice.subject}}
                                 </div>
-                            </a>
+                            </router-link>
                         </div>
                         <!-- link : event -->
                     </div>
@@ -361,11 +361,11 @@
                         routeName = 'volunteer'
                         break;
                     case '会員募集':
-                        routeName = 'membership'
+                        routeName = 'member'
                         break;
                 }
                 console.log(`${routeName}/${object.id}/detail`)
-                this.$router.push({path: `${routeName}/${object.id}/detail` })
+                return routeName
             },
         }
     };
