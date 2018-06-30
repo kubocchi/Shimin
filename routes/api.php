@@ -56,6 +56,8 @@ Route::get('notices', 'NoticeController@index');
 Route::post('notices', 'NoticeController@getNoticeData');
 // List with parameters
 Route::post('notices', 'NoticeController@getNoticeFrontData');
+// List notice
+Route::get('notices-homepage', 'NoticeController@getNoticeHomePageData');
 
 
 # 1.2.1 Event routes

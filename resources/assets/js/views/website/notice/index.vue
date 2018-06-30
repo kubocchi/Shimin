@@ -381,8 +381,8 @@
                         routeName = 'member'
                         break;
                 }
-                console.log(`${routeName}/${object.id}/detail`)
-                return routeName
+                console.log(`notice/${routeName}/${object.id}/detail`)
+                return `notice/${routeName}/${object.id}/detail`
             },
         }
     };

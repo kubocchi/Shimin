@@ -248,18 +248,31 @@
             //
             console.log('reload', localStorage.getItem("reload"))
 
-            // if(localStorage.getItem("reload") == null){
-            //     localStorage.setItem("reload", 'website');
-            // }
-            // else if(localStorage.getItem("reload") == 'admin'){
-            //     window.location.reload(true)
-            //     localStorage.removeItem("reload");
-            //     localStorage.setItem("reload", 'website');
-            // }
-                
+            if(localStorage.getItem("reload") == null){
+                localStorage.setItem("reload", 'website');
+            }
+            else if(localStorage.getItem("reload") != 'website'){
+                window.location.reload(true)
+                localStorage.removeItem("reload");
+                localStorage.setItem("reload", 'website');
+            }
+
+            this.loadNav()
         },
 
         methods: {
+            loadNav(){
+                $(function () {
+                    var nav = $('nav.global_nav');
+                    $('li', nav)
+                        .mouseover(function (e) {
+                            $('ul.submenu', this).stop().slideDown('200');
+                        })
+                        .mouseout(function (e) {
+                            $('ul.submenu', this).stop().slideUp('200');
+                        });
+                });
+            }
         }
     };
 </script>

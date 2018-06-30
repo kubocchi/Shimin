@@ -244,7 +244,7 @@
             },
 
             // Deleting the selected data
-            deleteVarious(id) {
+            deleteGroupInformation(id) {
                 this.$swal({
                     title: "このデータを削除しますか？",
                     text: "削除したデータは元に戻すことができません!",
@@ -257,7 +257,7 @@
                 }).then(result => {
                     if (result.value) {
                         let loader = this.$loading.show();
-                        fetch(`api/various/${id}`, {
+                        fetch(`api/group-information/${id}`, {
                             method: "delete"
                         })
                             .then(res => res.json())

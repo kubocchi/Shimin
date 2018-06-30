@@ -289,4 +289,98 @@ class NoticeController extends Controller
 
         return Response::json(['data' => $formattedData], 201);
     }
+
+    public function getNoticeHomePageData()
+    {
+
+        $events = Event::take(6)->get()->toArray();
+        $volunteers = Volunteer::take(6)->get()->toArray();
+        $memberships = Membership::take(6)->get()->toArray();
+
+        $eventsResponce = [];
+        $volunteersResponce = [];
+        $membershipResponce = [];
+        $allResponce = [];
+
+        foreach ($events as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = 'イベント';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['subject'];
+            $obj->activityCategory = $value['activity_category'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($eventsResponce, $obj);
+        }
+
+        foreach ($volunteers as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = 'ボランティア情報';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['subject'];
+            $obj->activityCategory = $value['activity_category'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($volunteersResponce, $obj);
+        }
+
+        foreach ($memberships as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = '会員募集';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['organizer'];
+            $obj->activityCategory = $value['activity_category'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($membershipResponce, $obj);
+        }
+
+        foreach ($events as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = 'イベント';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['subject'];
+            $obj->activityCategory = $value['activity_category'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($allResponce, $obj);
+        }
+
+        foreach ($memberships as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = '会員募集';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['organizer'];
+            $obj->activityCategory = $value['activity_category'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($allResponce, $obj);
+        }
+
+        foreach ($volunteers as $key => $value) 
+        {
+            $obj = new stdClass;
+            $obj->type = 'ボランティア情報';
+            $obj->id =  $value['id'];
+            $obj->subject = $value['subject'];
+            $obj->activityCategory = $value['activity_category'];
+            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+
+            array_push($allResponce, $obj);
+        }
+        
+        usort($allResponce, function($a, $b)
+        {
+            return strcmp($b->date, $a->date);
+        }); 
+        $allResponce = array_slice($allResponce, 0, 6);
+
+        
+        return Response::json(['data' => ['events'=> $eventsResponce, 'volunteers'=> $volunteersResponce, 'memberships'=> $membershipResponce, 'all'=> $allResponce]], 201);
+    }
 }

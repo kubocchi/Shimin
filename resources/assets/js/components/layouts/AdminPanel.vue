@@ -77,15 +77,15 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span>
+                            <a class="nav-link" href="#" @click.prevent="logout()">
+                                <span >
                                     <i class="fas fa-power-off"></i>
                                 </span> ログアウト</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <span class="navbar-text" style=" color:#FFF; font-weight:bold;">loginuser name</span>
+                            <span class="navbar-text" style=" color:#FFF; font-weight:bold;">{{username}}</span>
                         </li>
                     </ul>
                 </div>
@@ -123,6 +123,7 @@
         name: "company",
         data() {
             return {
+                username: ""
             }
         },
 
@@ -130,20 +131,31 @@
             //localStorage.removeItem("reload");
             console.log('reload', localStorage.getItem("reload"))
 
-            // if(localStorage.getItem("reload") == null){
-            //     localStorage.setItem("reload", 'admin');
-            // }
-            // else if(localStorage.getItem("reload") == 'website'){
-            //     window.location.reload(true)
-            //     localStorage.removeItem("reload");
-            //     localStorage.setItem("reload", 'admin');
-            // }
+            if(localStorage.getItem("reload") == null){
+                localStorage.setItem("reload", 'admin');
+            }
+            else if(localStorage.getItem("reload") != 'admin'){
+                window.location.reload(true)
+                localStorage.removeItem("reload");
+                localStorage.setItem("reload", 'admin');
+            }
+
+            if(localStorage.getItem("login") == null){
+                this.$router.push({name: 'login' })
+            }
+            else{
+                this.username = localStorage.getItem("login")
+            }
         },
 
         methods: {
             openDropdown(domElement){
                 $(domElement).dropdown('dispose')
                 $(domElement).dropdown('toggle')
+            },
+            logout(){
+                localStorage.removeItem("login");
+                this.$router.push({name: 'login' })
             }
         }
     };
