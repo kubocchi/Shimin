@@ -529,12 +529,12 @@ const routes = [
         component: Information
     },
     {
-        path: '/group-information/index',
+        path: '/group-information',
         name: 'groupInformationIndex',
         component: GroupInformationIndex
     },
     {
-        path: '/group-information/detail',
+        path: '/group-information/:id/detail',
         name: 'groupInformationDetail',
         component: GroupInformationDetail
     },

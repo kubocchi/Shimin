@@ -184,7 +184,9 @@
 
                     <div class="oraganization_body">
                         <div v-for="groupInformation in groupInformations" :key="groupInformation.id" class="item">
-                            <a href="#">{{groupInformation.name}}</a>
+                            <router-link :to="{ path: `group-information/${groupInformation.id}/detail` }">
+                                {{groupInformation.name}}
+                            </router-link>
                         </div>
                     </div>
 
