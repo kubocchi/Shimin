@@ -144,25 +144,19 @@
                         </div>
                     </div>
                 </div>
-                <nav aria-label="Page navigation shikatsu">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item">
-                            <a class="page-link" href="#">前へ</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">次へ</a>
-                        </li>
-                    </ul>
-                </nav>
+               <ul class="pagination justify-content-end">
+                    <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
+                        <button class="page-link" href="#" @click="fetchGroupInformation(pagination.prev_page_url)">前へ</button>
+                    </li>
+
+                    <li class="page-item disabled">
+                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                    </li>
+
+                    <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
+                        <button class="page-link" href="#" @click="fetchGroupInformation(pagination.next_page_url)">次へ</button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

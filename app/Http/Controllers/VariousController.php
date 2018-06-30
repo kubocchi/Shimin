@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Various;
+use App\Attachment;
 use App\Http\Resources\VariousResource;
+use Response;
 class VariousController extends Controller
 {
     /**
@@ -93,5 +95,37 @@ class VariousController extends Controller
  
          // Return collection of Variouss as a resource
          return VariousResource::collection($variouses);
+    }
+
+     /**
+     * Display a listing of the resource with requested parameters.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getVariousFrontData(Request $request)
+    {
+        $citizens = Various::where('group', 1)->get();
+        $personals = Various::where('group', 2)->get();
+        $kawarabis = Various::where('group', 3)->get();
+        $variouses = Various::where('group', 4)->get();
+ 
+         // Return collection of Variouss as a resource
+        return Response::json( ['data' => ['citizens' => $this->getAttachment($citizens), 
+                                'personals' =>  $this->getAttachment($personals), 
+                                'kawarabis' => $this->getAttachment($kawarabis), 
+                                'variouses' => $this->getAttachment($variouses)]], 
+                            201);
+    }
+
+    public function getAttachment($object)
+    {
+        foreach($object as $prop)
+        {
+            $files = explode(",", $prop['file']);
+            $prop['attachments'] =  Attachment::WhereIn('id', $files)->get();
+        }
+
+        return $object;
     }
 }

@@ -69,7 +69,7 @@ import SubsidyDetail from '../views/website/subsidy/detail'
 import BusinessReport from '../views/website/business-report/index'
 
 // Format
-import FormatIndex from '../views/website/format/index'
+import VariousIndex from '../views/website/various/index'
 
 // Dream
 import DreamIndex from '../views/website/yumekousaten/index'
@@ -419,9 +419,9 @@ const routes = [
         component: BusinessReport
     },
     {
-        path: '/format',
-        name: 'format',
-        component: FormatIndex
+        path: '/various',
+        name: 'various',
+        component: VariousIndex
     },
     {
         path: '/yumekousaten',

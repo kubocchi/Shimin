@@ -126,8 +126,8 @@
                         <!-- category -->
                         <dl class="cate">
                             <dt>活動分野：</dt>
-                            <dd>
-                               
+                             <dd>
+                                <span v-bind:class="getCategoryWiseClass(membership.activity_category)"> {{getActivityCategoryName(membership.activity_category)}}</span>
                             </dd>
                             <!-- type01 ~ 23 -->
                         </dl>
@@ -152,8 +152,8 @@
                         <!-- dd=>URL -->
                         <dl>
                             <dt>URL</dt>
-                            <dd>
-                                <a href="#">{{membership.linkname}}</a>
+                             <dd>
+                                <a @click="openInNewTab(membership.linkname)">{{membership.linkname}}</a>
                             </dd>
                         </dl>
                         <!-- dd=>contact information -->
@@ -311,6 +311,10 @@
                 console.log(id)
                 return this.categories.find(x => x.id === id).class
             },
+            openInNewTab(url) {
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
         }
     };
 </script>

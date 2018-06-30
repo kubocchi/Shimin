@@ -335,9 +335,9 @@
                                     <div class="form-group form-inline text-right">
                                         <select name="activity_day" onchange="">
                                             <option value="1">年 </option>
-                                            <option value="2"> 月 </option>
-                                            <option value="3"> 週</option>
-                                            <option value="3"> -</option>
+                                            <option value="2">月 </option>
+                                            <option value="3">週</option>
+                                            <option value="4">-</option>
                                         </select>
                                     </div>
                                 </div>

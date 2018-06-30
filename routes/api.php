@@ -144,6 +144,8 @@ Route::put('various', 'VariousController@store');
 Route::delete('various/{id}', 'VariousController@destroy');
 // List membership with parameters
 Route::post('variouses', 'VariousController@getVariousData');
+// List membership with parameters
+Route::get('variouses-frontend', 'VariousController@getVariousFrontData');
 
 
 # 2.2 Business-report routes

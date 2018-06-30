@@ -184,7 +184,7 @@
                         <dl>
                             <dt>URL</dt>
                             <dd>
-                                <a href="#">{{event.url}}</a>
+                                <a @click="openInNewTab(event.url)">{{event.url}}</a>
                             </dd>
                         </dl>
                         <!-- dd=>contact information -->
@@ -352,6 +352,10 @@
                 console.log(id)
                 return this.categories.find(x => x.id === id).class
             },
+            openInNewTab(url) {
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
         }
     };
 </script>

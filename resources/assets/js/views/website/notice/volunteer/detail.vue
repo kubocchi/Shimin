@@ -4,8 +4,7 @@
 
         <div id="global_nav">
             <div class="navbar navbar-expand-lg">
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"></button>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
@@ -20,15 +19,9 @@
                                 <span class="t">センター案内</span>
                             </a>
                             <ul class="submenu">
-                                <li>
-                                    <a href="../infomation/">市民活動センターとは</a>
-                                </li>
-                                <li>
-                                    <a href="../floormap/">施設のご案内</a>
-                                </li>
-                                <li>
-                                    <a href="../format/">各種書式</a>
-                                </li>
+                                <li><a href="../infomation/">市民活動センターとは</a></li>
+                                <li><a href="../floormap/">施設のご案内</a></li>
+                                <li><a href="../format/">各種書式</a></li>
                             </ul>
                         </li>
                         <li>
@@ -37,15 +30,9 @@
                                 <span class="t">市民活動団体</span>
                             </a>
                             <ul class="submenu">
-                                <li>
-                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
-                                </li>
-                                <li>
-                                    <a href="../oraganization/regist.html">登録について</a>
-                                </li>
-                                <li>
-                                    <a href="../oraganization/">団体を探したい</a>
-                                </li>
+                                <li><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a></li>
+                                <li><a href="../oraganization/regist.html">登録について</a></li>
+                                <li><a href="../oraganization/">団体を探したい</a></li>
                             </ul>
                         </li>
                         <li class="open">
@@ -54,13 +41,8 @@
                                 <span class="t">ボランティア</span>
                             </a>
                             <ul class="submenu">
-                                <li>
-                                    <a href="../volunteer/">ボランティアをしたい</a>
-                                </li>
-                                <li>
-                                    <a href="../volunteer/recruitment.html">ボランティアを
-                                        <br>募集したい</a>
-                                </li>
+                                <li><a href="../volunteer/">ボランティアをしたい</a></li>
+                                <li><a href="../volunteer/recruitment.html">ボランティアを<br>募集したい</a></li>
                             </ul>
                         </li>
                         <li>
@@ -69,12 +51,8 @@
                                 <span class="t">Q & A</span>
                             </a>
                             <ul class="submenu">
-                                <li>
-                                    <a href="../question/">センターについて</a>
-                                </li>
-                                <li>
-                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
-                                </li>
+                                <li><a href="../question/">センターについて</a></li>
+                                <li><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -97,12 +75,8 @@
         <div id="topicpath">
             <div class="container">
                 <ol class="topicpath">
-                    <li>
-                        <a href="../index.html">HOME</a>
-                    </li>
-                    <li>
-                        <a href="#">ボランティア募集・イベント情報</a>
-                    </li>
+                    <li><a href="../index.html">HOME</a></li>
+                    <li><a href="#">ボランティア募集・イベント情報</a></li>
                     <li>詳細</li>
                 </ol>
             </div>
@@ -114,12 +88,9 @@
             <div class="container">
                 <div class="detail_haed">
                     <!-- format -->
-                    <p class="type">
-                        <span class="member">会員募集</span>
-                    </p>
-                    <!-- <span class="event">イベント</span><span class="member">会員募集</span> -->
+                    <p class="type"><span class="volunteer">ボランティア</span></p><!-- <span class="event">イベント</span><span class="member">会員募集</span> -->
                     <!-- title -->
-                    <p class="title">{{volunteer.organizer}}</p>
+                    <p class="title">{{volunteer.subject}}</p>
                 </div>
                 <div class="detail_body">
                     <div class="topinformation">
@@ -127,14 +98,13 @@
                         <dl class="cate">
                             <dt>活動分野：</dt>
                             <dd>
-                               
+                                <span v-bind:class="getCategoryWiseClass(volunteer.activity_category)"> {{getActivityCategoryName(volunteer.activity_category)}}</span>
                             </dd>
-                            <!-- type01 ~ 23 -->
                         </dl>
                         <!-- dd=>sponsor -->
                         <dl class="group">
                             <dt>募集団体：</dt>
-                            <dd>{{volunteer.organizer}}</dd>
+                            <dd>{{volunteer.sponsor}}</dd>
                         </dl>
                     </div>
                     <div class="information">
@@ -144,26 +114,58 @@
                             <dd v-html="volunteer.content">
                             </dd>
                         </dl>
-                        <!-- dd=>volunteer_fee -->
+                        <!-- dd=>activity_date -->
                         <dl>
-                            <dt>会費</dt>
-                            <dd>{{volunteer.amount}}円 / 月</dd>
+                            <dt>活動日時</dt>
+                            <dd>{{volunteer.activity_date}}</dd>
+                        </dl>
+                        <!-- dd=>Deadline -->
+                        <dl>
+                            <dt>募集締め切り日</dt>
+                            <dd>{{volunteer.deadline}}</dd>
+                        </dl>
+                        <!-- dd=>Activity location -->
+                        <dl>
+                            <dt>活動場所</dt>
+                            <dd>{{volunteer.activity_location}}</dd>
+                        </dl>
+                        <!-- dd=> Number of people -->
+                        <dl>
+                            <dt>募集人数</dt>
+                            <dd>{{volunteer.number_of_people}}</dd>
+                        </dl>
+                        <!-- dd=>child -->
+                        <dl>
+                            <dt>子どもの参加</dt>
+                            <dd>{{volunteer.children == 1? ' 許可' : '未許可'}}</dd>
+                        </dl>
+                        <!-- dde=>orientation -->
+                        <dl>
+                            <dt>オリエンテーション</dt>
+                            <dd>{{volunteer.orientation}}</dd>
+                        </dl>
+                        <!-- dd=> Support -->
+                        <dl>
+                            <dt>費用負担</dt>
+                            <dd v-html="volunteer.cost"></dd>
+                        </dl>
+                        <!-- dd=>subscription -->
+                        <dl>
+                            <dt>申込み方法</dt>
+                            <dd>{{volunteer.subscription}}</dd>
                         </dl>
                         <!-- dd=>URL -->
                         <dl>
                             <dt>URL</dt>
-                            <dd>
-                                <a href="#">{{volunteer.linkname}}</a>
-                            </dd>
+                            <dd><a @click="openInNewTab(volunteer.linkname)">{{volunteer.linkname}}</a></dd>
                         </dl>
                         <!-- dd=>contact information -->
                         <dl>
                             <dt>問合せ先</dt>
-                            <dd v-html="volunteer.contact">
-                            </dd>
+                            <dd v-html="volunteer.contact"></dd>
                         </dl>
                         <!-- dd=>attachments -->
-                        <dl>
+                         <dl>
                             <dt>添付ファイル</dt>
                             <dd v-for="attachment in attachments" :key="attachment.id">
                                 <a :href="'/api/download/' + attachment.path">
@@ -189,15 +191,21 @@
             return {
                 volunteer: {
                     id: "",
-                    organizer: "",
+                    subject: "",
                     activity_category: "",
+                    children: true,
                     start_date: "",
                     end_date: "",
+                    sponsor: "",
                     file: "",
+                    activity_date: "",
+                    deadline: "",
+                    activity_location: "",
+                    number_of_people: "",
+                    orientation: "",
+                    cost: "",
+                    subscription: "",
                     content: "",
-                    is_payment: "0",
-                    amount: "",
-                    payment_type: "月",
                     linkname: "",
                     contact: "",
                 },
@@ -245,17 +253,26 @@
 
 
                 this.volunteer.id = volunteer.id;
-                this.volunteer.organizer = volunteer.organizer;
+                this.volunteer.subject = volunteer.subject;
                 this.volunteer.activity_category = volunteer.activity_category;
+                this.volunteer.children = volunteer.children;
                 this.volunteer.start_date = volunteer.start_date;
                 this.volunteer.end_date = volunteer.end_date;
+                this.volunteer.sponsor = volunteer.sponsor;
                 this.volunteer.file = volunteer.file;
+                this.volunteer.activity_date = volunteer.activity_date;
+                this.volunteer.deadline = volunteer.deadline;
+                this.volunteer.activity_location = volunteer.activity_location;
+                this.volunteer.number_of_people = volunteer.number_of_people;
+                this.volunteer.orientation = volunteer.orientation;
+                this.volunteer.cost = volunteer.cost;
+                this.volunteer.subscription = volunteer.subscription;
                 this.volunteer.content = volunteer.content;
-                this.volunteer.is_payment = volunteer.is_payment;
-                this.volunteer.amount = volunteer.amount;
-                this.volunteer.payment_type = volunteer.payment_type;
                 this.volunteer.linkname = volunteer.linkname;
                 this.volunteer.contact = volunteer.contact;
+                this.volunteer.deactivate = volunteer.deactivate;
+                this.volunteer.created_by = volunteer.created_by;
+                this.volunteer.updated_by = volunteer.updated_by;
 
                 // For Files
                 // if(event.file)
@@ -311,6 +328,10 @@
                 console.log(id)
                 return this.categories.find(x => x.id === id).class
             },
+            openInNewTab(url) {
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
         }
     };
 </script>
