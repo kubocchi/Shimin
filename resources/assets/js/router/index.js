@@ -91,10 +91,12 @@ import Floormap from '../views/website/floormap'
 import Information from '../views/website/information'
 
 //GroupInformation
-import GroupInformation from '../views/website/group-information/regist'
+import GroupInformationIndex from '../views/website/group-information/index'
+import GroupInformationDetail from '../views/website/group-information/detail'
+import GroupInformationRegist from '../views/website/group-information/regist'
 
 //volunteer
-import Volunteer from '../views/website/volunteer/index'
+import VolunteerIndex from '../views/website/volunteer/index'
 import VolunteerRecruitment from '../views/website/volunteer/recruitment'
 
 //machidukuri
@@ -106,7 +108,7 @@ import Question from '../views/website/question'
 //privacy
 import Privacy from '../views/website/privacy'
 
-//privacy
+//menseki
 import Menseki from '../views/website/menseki'
 
 /***********************Website-Components***********************/
@@ -527,14 +529,24 @@ const routes = [
         component: Information
     },
     {
+        path: '/group-information/index',
+        name: 'groupInformationIndex',
+        component: GroupInformationIndex
+    },
+    {
+        path: '/group-information/detail',
+        name: 'groupInformationDetail',
+        component: GroupInformationDetail
+    },
+    {
         path: '/group-information/regist',
-        name: 'groupInformation',
-        component: GroupInformation
+        name: 'groupInformationRegist',
+        component: GroupInformationRegist
     },
     {
         path: '/volunteer/index',
-        name: 'volunteer',
-        component: Volunteer
+        name: 'volunteerIndex',
+        component: VolunteerIndex
     },
     {
         path: '/volunteer/recruitment',

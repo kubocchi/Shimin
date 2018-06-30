@@ -25,7 +25,9 @@
                             <a href="https://net-semi.sakura.ne.jp/contact_ssl/miyanpo/" target="_blank">お問合せ</a>
                         </li>
                         <li>
-                            <a href="infomation/index.html#access">アクセス</a>
+                            <router-link :to="{ name: 'information' }">
+                                <span>アクセス</span>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -102,23 +104,33 @@
                             <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
                         </dd>
                         <dd>
-                            <a href="oraganization/regist.html">登録について</a>
+                            <router-link :to="{ name: 'groupInformationRegist' }">
+                                <span>登録について</span>
+                            </router-link>
                         </dd>
                         <dd>
-                            <a href="oraganization/">団体を探したい</a>
+                            <router-link :to="{ name: 'groupInformationIndex' }">
+                                <span>団体を探したい</span>
+                            </router-link>
                         </dd>
                     </dl>
                     <dl class="links">
                         <dt>ボランティア</dt>
                         <dd>
-                            <a href="volunteer/">ボランティアをしたい</a>
+                            <router-link :to="{ name: 'volunteerIndex' }">
+                                <span>ボランティアをしたい</span>
+                            </router-link>
                         </dd>
                         <dd>
-                            <a href="volunteer/recruitment.html">ボランティアを募集したい</a>
+                            <router-link :to="{ name: 'volunteerRecruitment' }">
+                                <span>ボランティアを募集したい</span>
+                            </router-link>
                         </dd>
                         <dt>Q&A</dt>
                         <dd>
-                            <a href="question/">センターについて</a>
+                            <router-link :to="{ name: 'question' }">
+                                <span>センターについて</span>
+                            </router-link>
                         </dd>
                         <dd>
                             <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
@@ -131,30 +143,41 @@
                             </router-link>
                         </dt>
                         <dt>
-                            <a href="topics/">ボランティア募集・イベント情報</a>
+                            <router-link :to="{ name: 'noticeIndex' }">
+                                <span>ボランティア募集・イベント情報</span>
+                            </router-link>
                         </dt>
                         <dt>
-                            <a href="machidukuri/">地域まちづくり情報</a>
+                            <router-link :to="{ name: 'machidukuri' }">
+                                <span>地域まちづくり情報</span>
+                            </router-link>
                         </dt>
                         <dt>
-                            <a href="yumekousaten/">夢交差点</a>
+                            <router-link :to="{ name: 'yumekousatenIndex' }">
+                                <span>夢交差点</span>
+                            </router-link>
                         </dt>
                         <dt>
-                            <a href="kawaraban/">かわら版</a>
+                            <router-link :to="{ name: 'kawarabanIndex' }">
+                                <span>かわら版</span>
+                            </router-link>
                         </dt>
                     </dl>
                     <dl class="links">
                         <dt>
-                            <a href="business-report/">事業報告</a>
+                            <router-link :to="{ name: 'businessReportIndex' }">
+                                <span>事業報告</span>
+                            </router-link>
                         </dt>
                         <dt>
-                            <a href="joseikin/">助成金情報</a>
+                            <router-link :to="{ name: 'subsidyIndex' }">
+                                <span>助成金情報</span>
+                            </router-link>
                         </dt>
                         <dt>
-                            <a href="disaster/">災害ボランティア情報</a>
-                        </dt>
-                        <dt>
-                            <a href="admin">管理者ログイン</a>
+                            <router-link :to="{ name: 'disasterIndex' }">
+                                <span>災害ボランティア情報</span>
+                            </router-link>
                         </dt>
                     </dl>
                 </div>
@@ -181,10 +204,14 @@
                 <!-- nav -->
                 <ul class="foot_nav">
                     <li>
-                        <a href="privacy">利用規約</a>
+                        <router-link :to="{ name: 'privacy' }">
+                            <span>利用規約</span>
+                        </router-link>
                     </li>
                     <li>
-                        <a href="menseki/">免責事項</a>
+                        <router-link :to="{ name: 'menseki' }">
+                            <span>免責事項</span>
+                        </router-link>
                     </li>
                     <li>
                         <a href="https://net-semi.sakura.ne.jp/contact_ssl/miyanpo/" target="_blank">お問合せ</a>
