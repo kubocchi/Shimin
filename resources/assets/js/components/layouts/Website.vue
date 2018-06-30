@@ -248,14 +248,14 @@
             //
             console.log('reload', localStorage.getItem("reload"))
 
-            if(localStorage.getItem("reload") == null){
-                localStorage.setItem("reload", 'website');
-            }
-            else if(localStorage.getItem("reload") == 'admin'){
-                window.location.reload(true)
-                localStorage.removeItem("reload");
-                localStorage.setItem("reload", 'website');
-            }
+            // if(localStorage.getItem("reload") == null){
+            //     localStorage.setItem("reload", 'website');
+            // }
+            // else if(localStorage.getItem("reload") == 'admin'){
+            //     window.location.reload(true)
+            //     localStorage.removeItem("reload");
+            //     localStorage.setItem("reload", 'website');
+            // }
                 
         },
 

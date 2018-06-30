@@ -36,7 +36,7 @@ class BusinessReportController extends Controller
         $businessReport->year_id= $request->input('year_id');
         $businessReport->business_id= $request->input('business_id');
         $businessReport->detail= $request->input('detail');
-        $businessReport->attachment_id= $request->input('attachment_id');
+        $businessReport->file= $request->input('file');
         $businessReport->deactivate= $request->input('deactivate');
         $businessReport->created_by= $request->input('created_by');
         $businessReport->updated_by= $request->input('updated_by');
@@ -86,20 +86,25 @@ class BusinessReportController extends Controller
          $search = $request->input('search');
          $yearId = $request->input('year');
          
-         $kawarabis = BusinessReport::With('year')
-                            ->With('attachment')
+         $businessReports = BusinessReport::With('year')
                             ->With('business')
-                            ->join('attachments', 'attachments.id', '=', 'business_reports.attachment_id')
-                            ->Where('attachments.name', 'like', '%' . $search . '%')
+                            //->join('businesses', 'business_reports.business_id', '=', 'businesses.id')
+                           // ->Where('businesses.name', 'like', '%' . $search . '%')
                             ->where(function($query) use ($yearId)  {
                                 if(isset($yearId)) {
                                     $query->where('business_reports.year_id', $yearId);
                                 }
                              })
                             ->paginate(10);
+
+        foreach($businessReports as $businessReport)
+        {
+            $files = explode(",", $businessReport['file']);
+            $businessReport['attachments'] =  Attachment::WhereIn('id', $files)->get();
+        }
          
          // Return collection of Kawarabis as a resource
-         return BusinessReportResource::collection($kawarabis);
+         return BusinessReportResource::collection($businessReports);
     }
 
     /**
@@ -118,13 +123,6 @@ class BusinessReportController extends Controller
         foreach($businessReports as $businessReport)
         {
             $files = explode(",", $businessReport['file']);
-           
-            // $attachments = [];
-            // foreach ($files as $key => $value) 
-            // {
-            //     array_push($attachments, Attachment::Where('id', $value)->get());
-            // }
-
             $businessReport['attachments'] =  Attachment::WhereIn('id', $files)->get();
         }
                             
