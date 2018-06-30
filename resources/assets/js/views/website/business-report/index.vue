@@ -1,6 +1,7 @@
 <template>
     <div>
         <!-- nav -->
+        
         <div id="global_nav">
             <div class="navbar navbar-expand-lg">
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -13,7 +14,7 @@
                                 <span class="t">HOME</span>
                             </router-link>
                         </li>
-                        <li class="open">
+                        <li>
                             <a class="toggle">
                                 <span class="i"></span>
                                 <span class="t">センター案内</span>
@@ -78,7 +79,7 @@
 
         <!-- pagetitle -->
 
-        <div id="pagetitle" class="news">
+        <div id="pagetitle" class="format">
             <div class="container">
                 <div class="h2">
                     <h2>事業報告</h2>

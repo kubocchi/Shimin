@@ -5,62 +5,99 @@
 <!-- nav -->
 
 <div id="global_nav">
-	<div class="navbar navbar-expand-lg">
-		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-		<nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="clearfix">
-				<li>
-					<a href="../index.html">
-						<span class="i"></span>
-						<span class="t">HOME</span>
-					</a>
-				</li>
-				<li>
-					<a class="toggle">
-						<span class="i"></span>
-						<span class="t">センター案内</span>
-					</a>
-					<ul class="submenu">
-						<li><a href="../infomation/">市民活動センターとは</a></li>
-						<li><a href="../floormap/">施設のご案内</a></li>
-						<li><a href="../format/">各種書式</a></li>
-					</ul>
-				</li>
-				<li>
-					<a class="toggle">
-						<span class="i"></span>
-						<span class="t">市民活動団体</span>
-					</a>
-					<ul class="submenu">
-						<li><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a></li>
-						<li><a href="../oraganization/regist.html">登録について</a></li>
-						<li><a href="../oraganization/">団体を探したい</a></li>
-					</ul>
-				</li>
-				<li>
-					<a class="toggle">
-						<span class="i"></span>
-						<span class="t">ボランティア</span>
-					</a>
-					<ul class="submenu">
-						<li><a href="../volunteer/">ボランティアをしたい</a></li>
-						<li><a href="../volunteer/recruitment.html">ボランティアを<br>募集したい</a></li>
-					</ul>
-				</li>
-				<li>
-					<a class="toggle">
-						<span class="i"></span>
-						<span class="t">Q & A</span>
-					</a>
-					<ul class="submenu">
-						<li><a href="../question/">センターについて</a></li>
-						<li><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</div>
+            <div class="navbar navbar-expand-lg">
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"></button>
+                <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="clearfix">
+                        <li>
+                           <router-link :to="{ name: 'home' }">
+                                <span class="i"></span>
+                                <span class="t">HOME</span>
+                            </router-link>
+                        </li>
+                        <li class="open">
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">センター案内</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <router-link :to="{ name: 'information' }">
+                                        <span>市民活動センターとは</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'floormap' }">
+                                        <span>施設のご案内</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'various' }">
+                                        <span>各種書式</span>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">市民活動団体</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'groupInformationRegist' }">
+                                        <span>登録について</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'groupInformationIndex' }">
+                                        <span>団体を探したい</span>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">ボランティア</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <router-link :to="{ name: 'volunteerIndex' }">
+                                        <span>ボランティアをしたい</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'volunteerRecruitment' }">
+                                        <span>ボランティアを<br>募集したい</span>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="toggle">
+                                <span class="i"></span>
+                                <span class="t">Q & A</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <router-link :to="{ name: 'question' }">
+                                        <span>センターについて</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
 
 <!-- pagetitle -->
 
@@ -77,7 +114,11 @@
 <div id="topicpath">
 	<div class="container">
 		<ol class="topicpath">
-			<li><a href="../index.html">HOME</a></li>
+			<li>
+				<router-link :to="{ name: 'home' }">
+            	    <span>HOME</span>
+                </router-link>
+			</li>
 			<li>地域まちづくり情報</li>
 		</ol>
 	</div>
