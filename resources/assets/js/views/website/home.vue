@@ -118,11 +118,14 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="volunteer/">ボランティアをしたい</a>
+                                    <router-link :to="{ name: 'volunteerIndex' }">
+                                        <span>ボランティアをしたい</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="volunteer/recruitment.html">ボランティアを
-                                        <br>募集したい</a>
+                                    <router-link :to="{ name: 'volunteerRecruitment' }">
+                                        <span>ボランティアを<br>募集したい</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
@@ -133,7 +136,9 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="question/">センターについて</a>
+                                    <router-link :to="{ name: 'question' }">
+                                        <span>センターについて</span>
+                                    </router-link>
                                 </li>
                                 <li>
                                     <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
