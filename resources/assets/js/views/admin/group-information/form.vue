@@ -304,8 +304,16 @@
                                 <label class="col-form-label">【活動分類】（必須）</label>
                                 <div class="col-lg-12 form-group">
                                     <div v-for="activityCategory in activityCategories" v-bind:key="activityCategory.id" class="form-group row" >
-                                        <p-check class="p-default p-curve p-thick p-smooth" v-model="groupInformation.activity_category" :id="'category_' + activityCategory.id" 
-                                        :value="activityCategory.id" color="primary-o" v-validate="'required'" name="activity_category" data-vv-as="活動分類">{{activityCategory.name}}</p-check>
+                                        <p-check class="p-default p-curve p-thick p-smooth" 
+                                            v-model="groupInformation.activity_category" 
+                                            :id="'category_' + activityCategory.id" 
+                                            :value="activityCategory.id" 
+                                            color="primary-o" 
+                                            v-validate="'required'" 
+                                            name="activity_category" 
+                                            data-vv-as="活動分類">
+                                            {{activityCategory.name}}
+                                        </p-check>
                                     </div>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                     <div class="form-group">

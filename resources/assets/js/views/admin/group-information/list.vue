@@ -17,67 +17,25 @@
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-2 mb-4">
-                        <multiselect 
-                            v-model="selectedManagement" 
-                            :options="managements" 
-                            @select="onSelectManagement"  
-                            track-by="id" 
-                            label="label" 
-                            placeholder="区分" 
-                            selectLabel="" 
-                            deselectLabel="" 
-                            selectedLabel="選ばれた" 
-                            v-validate="'required'" 
-                            name="business" 
+                        <multiselect v-model="selectedManagement" :options="managements" @select="onSelectManagement" track-by="id" label="label"
+                            placeholder="区分" selectLabel="" deselectLabel="" selectedLabel="選ばれた" v-validate="'required'" name="business"
                             data-vv-as="登録場所">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                         <multiselect 
-                            v-model="selectedstatus" 
-                            :options="statuses" 
-                            @select="onSelectStatus"  
-                            track-by="id" 
-                            label="label" 
-                            placeholder="ステータス" 
-                            selectLabel="" 
-                            deselectLabel="" 
-                            selectedLabel="選ばれた" 
-                            v-validate="'required'" 
-                            name="business" 
-                            data-vv-as="登録場所">
+                        <multiselect v-model="selectedstatus" :options="statuses" @select="onSelectStatus" track-by="id" label="label" placeholder="ステータス"
+                            selectLabel="" deselectLabel="" selectedLabel="選ばれた" v-validate="'required'" name="business" data-vv-as="登録場所">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                        <multiselect 
-                            v-model="selectedType" 
-                            :options="types" 
-                            @select="onSelectType"  
-                            track-by="id" 
-                            label="label" 
-                            placeholder="種別" 
-                            selectLabel="" 
-                            deselectLabel="" 
-                            selectedLabel="選ばれた" 
-                            v-validate="'required'" 
-                            name="business" 
-                            data-vv-as="登録場所">
+                        <multiselect v-model="selectedType" :options="types" @select="onSelectType" track-by="id" label="label" placeholder="種別"
+                            selectLabel="" deselectLabel="" selectedLabel="選ばれた" v-validate="'required'" name="business" data-vv-as="登録場所">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                        <multiselect 
-                            v-model="selectedActivityCategory" 
-                            :options="activityCategories" 
-                            @select="onSelectActivityCategory"  
-                            track-by="id" 
-                            label="name" 
-                            placeholder="活動分類" 
-                            selectLabel="" 
-                            deselectLabel="" 
-                            selectedLabel="選ばれた" 
-                            v-validate="'required'" 
-                            name="business" 
-                            data-vv-as="登録場所">
+                        <multiselect v-model="selectedActivityCategory" :options="activityCategories" @select="onSelectActivityCategory" track-by="id"
+                            label="name" placeholder="活動分類" selectLabel="" deselectLabel="" selectedLabel="選ばれた" v-validate="'required'"
+                            name="business" data-vv-as="登録場所">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-4">
@@ -113,11 +71,11 @@
                         <tbody>
                             <tr v-for="( groupInformation, rowNumber) in groupInformations" :key=rowNumber>
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ groupInformation.number }}</td>
-                                <td>{{ groupInformation.number }}</td>
-                                <td>{{ groupInformation.number }}</td>
-                                <td>{{ groupInformation.created_at }}</td>
-                                <td>{{ groupInformation.updated_at }}</td>
+                                <td>{{ getManagement(parseInt(groupInformation.regist_management)) }}</td>
+                                <td>{{ getStatus(parseInt(groupInformation.open_situation)) }}</td>
+                                <td>{{ getType(parseInt(groupInformation.type)) }}</td>
+                                <td>{{ getActivityCategoryName(groupInformation.activity_category) }}</td>
+                                <td>{{ groupInformation.name }}</td>
                                 <td>
                                     <router-link :to="{ name: ' groupInformationForm', params: { model:  groupInformation, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
@@ -130,7 +88,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="bs-component">
+                <!-- <div class="bs-component">
                     <div class="row">
                         <div class="col-md-2 mt-4">
                             <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV出力</a>
@@ -143,8 +101,23 @@
                             <button v-on:click="submitFile()">Submit</button>
                         </div>
                     </div>
+                </div> -->
+                <div class="bs-component">
+                    <div class="row">
+                        <div class="col-md-2 mt-4"> <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV出力</a> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 mt-4 mb-4"> <a class="btn btn-outline-primary  btn-block" v-on:click="submitFile()" href="#" role="button">CSV入力</a> </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <div class="form-group mt-4">
+                                    <input aria-describedby="fileHelp" class=" btn form-control-file" id="file" ref="file" v-on:change="handleFileUpload()" type="file">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-               <ul class="pagination justify-content-end">
+                <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <button class="page-link" href="#" @click="fetchGroupInformation(pagination.prev_page_url)">前へ</button>
                     </li>
@@ -173,23 +146,23 @@
                 edit: false,
                 params: {
                     search: "",
-                    management : null,
+                    management: null,
                     activityCategory: null,
                     status: null,
                     type: null
                 },
                 managements: [
-                    { 'id': null, label: "すべて" },
-                    { 'id': 1, 'label': 'センター' },
-                    { 'id': 2, 'label': '社協' },
-                    { 'id': 3, 'label': '佐土原' },
-                    { 'id': 4, 'label': '高岡' },
-                    { 'id': 5, 'label': '田野' },
-                    { 'id': 6, 'label': '清武' },
+                    { id: null, label: "すべて" },
+                    { id: 1, 'label': 'センター' },
+                    { id: 2, 'label': '社協' },
+                    { id: 3, 'label': '佐土原' },
+                    { id: 4, 'label': '高岡' },
+                    { id: 5, 'label': '田野' },
+                    { id: 6, 'label': '清武' },
                 ],
                 selectedManagement: { id: null, label: "すべて" },
                 activityCategories: [
-                    { id: null, name: "すべて" },
+                    { id: null, name: "すべて"},
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
                     { id: "300", name: "障害者福祉" },
@@ -212,19 +185,19 @@
                     { id: "2000", name: "職業・雇用" },
                     { id: "2100", name: "消費者保護" },
                     { id: "2200", name: "NPO支援" },
-                    { id: "2300", name: "その他区分" },
+                    { id: "2300", name: "その他区分" }
                 ],
                 selectedActivityCategory: { id: null, name: "すべて" },
                 statuses: [
                     { 'id': null, 'label': 'すべて' },
-                    { 'id': 1, 'label': '公開' },
-                    { 'id': 2, 'label': '非公開' },
+                    { 'id': 0, 'label': '公開' },
+                    { 'id': 1, 'label': '非公開' },
                 ],
-                selectedstatus:  { 'id': null, 'label': 'すべて' },
+                selectedstatus: { 'id': null, 'label': 'すべて' },
                 types: [
-                    { 'id': null, 'label': 'すべて' },
-                    { 'id': 1, 'label': '団体' },
-                    { 'id': 2, 'label': '個人' },
+                    { id: null, label: 'すべて' },
+                    { id: 0, label: '団体' },
+                    { id: 1, label: '個人' },
                 ],
                 selectedType: { 'id': null, 'label': 'すべて' },
             };
@@ -357,33 +330,45 @@
                 this.file = this.$refs.file.files[0];
             },
             onSelectManagement(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.params.management = selectedOption.id
                     console.log(selectedOption.id)
                     this.fetchGroupInformation()
                 }
             },
             onSelectActivityCategory(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.params.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                     this.fetchGroupInformation()
                 }
             },
             onSelectStatus(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.params.status = selectedOption.id
                     console.log(selectedOption.id)
                     this.fetchGroupInformation()
                 }
             },
             onSelectType(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.params.type = selectedOption.id
                     console.log(selectedOption.id)
                     this.fetchGroupInformation()
                 }
-            }
+            },
+            getActivityCategoryName(id) {
+                return this.activityCategories.find(x => x.id === id).name
+            },
+            getType(id) {
+                return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''
+            },
+            getStatus(id) {
+                return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''
+            },
+            getManagement(id) {
+                return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''
+            },
         }
     };
 </script>
