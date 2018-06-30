@@ -62,10 +62,10 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li class="open">
-                            <a href="index.html">
+                            <router-link :to="{ name: 'home' }">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
-                            </a>
+                            </router-link>
                         </li>
                         <li>
                             <a class="toggle">

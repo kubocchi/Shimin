@@ -82,7 +82,7 @@
         <div id="pagetitle" class="news">
             <div class="container">
                 <div class="h2">
-                    <h2>センターからのお知らせ</h2>
+                    <h2>助成金情報</h2>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                     </li>
                     <li>
                         <router-link :to="{ name: 'subsidyIndex' }">
-                            <span>センターからのお知らせ</span>
+                            <span>助成金情報</span>
                         </router-link>
                     </li>
                     <li>詳細</li>

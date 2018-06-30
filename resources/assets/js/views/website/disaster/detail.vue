@@ -1,18 +1,19 @@
 <template>
     <div>
+        
         <!-- nav -->
 
-        <div id="global_nav">
+                <div id="global_nav">
             <div class="navbar navbar-expand-lg">
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"></button>
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
-                            <a href="../index.html">
+                           <router-link :to="{ name: 'home' }">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
-                            </a>
+                            </router-link>
                         </li>
                         <li class="open">
                             <a class="toggle">
@@ -21,13 +22,19 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動センターとは</a>
+                                    <router-link :to="{ name: 'information' }">
+                                        <span>市民活動団体センターとは</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="#">施設のご案内</a>
+                                    <router-link :to="{ name: 'floormap' }">
+                                        <span>施設のご案内</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="#">各種書式</a>
+                                    <router-link :to="{ name: 'various' }">
+                                        <span>各種書式</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
@@ -38,13 +45,17 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動団体とは</a>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
                                 </li>
                                 <li>
-                                    <a href="#">登録について</a>
+                                    <router-link :to="{ name: 'groupInformationRegist' }">
+                                        <span>登録について</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="#">団体を探したい</a>
+                                    <router-link :to="{ name: 'groupInformationIndex' }">
+                                        <span>団体を探したい</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
@@ -55,22 +66,32 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">ボランティアとは</a>
+                                    <router-link :to="{ name: 'volunteerIndex' }">
+                                        <span>ボランティアをしたい</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="#">ボランティアをしたい</a>
-                                </li>
-                                <li>
-                                    <a href="#">ボランティアを
-                                        <br>募集したい</a>
+                                    <router-link :to="{ name: 'volunteerRecruitment' }">
+                                        <span>ボランティアを<br>募集したい</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a class="toggle">
                                 <span class="i"></span>
                                 <span class="t">Q & A</span>
                             </a>
+                            <ul class="submenu">
+                                <li>
+                                    <router-link :to="{ name: 'question' }">
+                                        <span>センターについて</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -82,7 +103,7 @@
         <div id="pagetitle" class="news">
             <div class="container">
                 <div class="h2">
-                    <h2>センターからのお知らせ</h2>
+                    <h2>災害ボランティア情報</h2>
                 </div>
             </div>
         </div>
@@ -99,7 +120,7 @@
                     </li>
                     <li>
                         <router-link :to="{ name: 'disasterIndex' }">
-                            <span>センターからのお知らせ</span>
+                            <span>災害ボランティア情報</span>
                         </router-link>
                     </li>
                     <li>詳細</li>
