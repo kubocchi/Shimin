@@ -206,11 +206,11 @@
                                 <!-- all -->
                                 <div class="tab-pane fade show clearfix active" id="all" role="tabpanel" aria-labelledby="all-tab">
                                     <div v-for="(all, rowIndex) in notices.all" :key="rowIndex" v-bind:class="getType(all)">
-                                        <router-link :to="{ name: gotoDetail(all) }">
+                                        <router-link :to="{ path: gotoDetail(all) }">
                                             <span>
                                                 <p class="day">{{all.date}}</p>
                                                 <p class="title">
-                                                    <span class="new"></span>{{all.subject}}</p>
+                                                    {{all.subject}}</p>
                                                 <p class="detail">詳細</p>
                                             </span>
                                         </router-link>
@@ -218,103 +218,41 @@
                                 </div>
                                 <!-- volunteer -->
                                 <div class="tab-pane fade clearfix" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
-                                    <div v-for="(volunteer, rowIndex) in notices.volunteers" :key="rowIndex" class="item volunteer">
-                                        <a href="#">
-                                            <p class="day">{{volunteer.date}}</p>
-                                            <p class="title">
-                                                <span class="new"></span>{{volunteer.subject}}</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
+                                    <div v-for="(volunteer, rowIndex) in notices.volunteers" :key="rowIndex" v-bind:class="getType(volunteer)">
+                                        <router-link :to="{ path: gotoDetail(volunteer) }">
+                                            <span>
+                                                <p class="day">{{volunteer.date}}</p>
+                                                <p class="title">
+                                                    {{volunteer.subject}}</p>
+                                                <p class="detail">詳細</p>
+                                            </span>
+                                        </router-link>
                                     </div>
                                 </div>
                                 <!-- event -->
                                 <div class="tab-pane fade clearfix" id="event" role="tabpanel" aria-labelledby="event-tab">
-                                    <div class="item event">
-                                        <a href="#">
-                                            <p class="day">6/17(月)~8/26(日)</p>
-                                            <p class="title">ボランティア養成講座</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item event">
-                                        <a href="#">
-                                            <p class="day">5/20(日)</p>
-                                            <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item event">
-                                        <a href="#">
-                                            <p class="day">6/17(月)~8/26(日)</p>
-                                            <p class="title">ボランティア養成講座</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item event">
-                                        <a href="#">
-                                            <p class="day">5/20(日)</p>
-                                            <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item event">
-                                        <a href="#">
-                                            <p class="day">6/17(月)~8/26(日)</p>
-                                            <p class="title">ボランティア養成講座</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item event">
-                                        <a href="#">
-                                            <p class="day">5/20(日)</p>
-                                            <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
+                                    <div v-for="(event, rowIndex) in notices.events" :key="rowIndex" v-bind:class="getType(event)">
+                                        <router-link :to="{ path: gotoDetail(event) }">
+                                            <span>
+                                                <p class="day">{{event.date}}</p>
+                                                <p class="title">
+                                                    {{event.subject}}</p>
+                                                <p class="detail">詳細</p>
+                                            </span>
+                                        </router-link>
                                     </div>
                                 </div>
                                 <!-- member -->
                                 <div class="tab-pane fade clearfix" id="member" role="tabpanel" aria-labelledby="member-tab">
-                                    <div class="item member">
-                                        <a href="#">
-                                            <p class="day">6/24(日)</p>
-                                            <p class="title">宮崎市民活動センター</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item member">
-                                        <a href="#">
-                                            <p class="day">6/24(日)</p>
-                                            <p class="title">大淀地域まちづくり推進協議会</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item member">
-                                        <a href="#">
-                                            <p class="day">6/24(日)</p>
-                                            <p class="title">宮崎市民活動センター</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item member">
-                                        <a href="#">
-                                            <p class="day">6/24(日)</p>
-                                            <p class="title">大淀地域まちづくり推進協議会</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item member">
-                                        <a href="#">
-                                            <p class="day">6/24(日)</p>
-                                            <p class="title">宮崎市民活動センター</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
-                                    </div>
-                                    <div class="item member">
-                                        <a href="#">
-                                            <p class="day">6/24(日)</p>
-                                            <p class="title">大淀地域まちづくり推進協議会</p>
-                                            <p class="detail">詳細</p>
-                                        </a>
+                                    <div v-for="(member, rowIndex) in notices.memberships" :key="rowIndex" v-bind:class="getType(member)">
+                                        <router-link :to="{ path: gotoDetail(member) }">
+                                            <span>
+                                                <p class="day">{{member.date}}</p>
+                                                <p class="title">
+                                                    {{member.subject}}</p>
+                                                <p class="detail">詳細</p>
+                                            </span>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -518,8 +456,8 @@
                         routeName = 'member'
                         break;
                 }
-                console.log(`${routeName}/${object.id}/detail`)
-                return routeName
+                console.log(`notice/${routeName}/${object.id}/detail`)
+                return `notice/${routeName}/${object.id}/detail`
             },
         }
     };
