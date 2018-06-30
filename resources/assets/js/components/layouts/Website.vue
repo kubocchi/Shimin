@@ -127,3 +127,31 @@
 <style>
     @import '../../../sass/themes/frontend/css/common.css';
 </style>
+
+<script>
+    export default {
+        name: "company",
+        data() {
+            return {
+            }
+        },
+
+        created() {
+            //
+            console.log('reload', localStorage.getItem("reload"))
+
+            if(localStorage.getItem("reload") == null){
+                localStorage.setItem("reload", 'website');
+            }
+            else if(localStorage.getItem("reload") == 'admin'){
+                window.location.reload(true)
+                localStorage.removeItem("reload");
+                localStorage.setItem("reload", 'website');
+            }
+                
+        },
+
+        methods: {
+        }
+    };
+</script>

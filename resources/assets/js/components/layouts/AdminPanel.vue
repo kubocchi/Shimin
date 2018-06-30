@@ -127,7 +127,17 @@
         },
 
         created() {
-            
+            //localStorage.removeItem("reload");
+            console.log('reload', localStorage.getItem("reload"))
+
+            if(localStorage.getItem("reload") == null){
+                localStorage.setItem("reload", 'admin');
+            }
+            else if(localStorage.getItem("reload") == 'website'){
+                window.location.reload(true)
+                localStorage.removeItem("reload");
+                localStorage.setItem("reload", 'admin');
+            }
         },
 
         methods: {
