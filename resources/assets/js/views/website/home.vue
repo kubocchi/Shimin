@@ -74,13 +74,19 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="infomation/">市民活動センターとは</a>
+                                    <router-link :to="{ name: 'information' }">
+                                        <span>市民活動団体センターとは</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="floormap/">施設のご案内</a>
+                                    <router-link :to="{ name: 'floormap' }">
+                                        <span>施設のご案内</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="format/">各種書式</a>
+                                    <router-link :to="{ name: 'various' }">
+                                        <span>各種書式</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
@@ -94,10 +100,14 @@
                                     <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
                                 </li>
                                 <li>
-                                    <a href="oraganization/regist.html">登録について</a>
+                                    <router-link :to="{ name: 'groupInformationRegist' }">
+                                        <span>登録について</span>
+                                    </router-link>
                                 </li>
                                 <li>
-                                    <a href="oraganization/">団体を探したい</a>
+                                    <router-link :to="{ name: 'groupInformationIndex' }">
+                                        <span>団体を探したい</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
@@ -372,11 +382,15 @@
                             </div>
                         </div>
                         <div class="btn_blue">
-                            <a href="topics/">一覧へ</a>
+                            <router-link :to="{ name: 'noticeIndex' }">
+                                <span>一覧へ</span>
+                            </router-link>
                         </div>
                         <div class="link_blue">
                             <p>
-                                <a href="volunteer/" class="hatena">ボランティアを募集するには？</a>
+                                <router-link :to="{ name: 'volunteerIndex' }">
+                                    <a class="hatena">ボランティアを募集するには？</a>
+                                </router-link>
                             </p>
                         </div>
                     </div>
@@ -389,31 +403,27 @@
                     <div class="erea_brown">
                         <!-- 団体を探す -->
                         <div class="btn_big">
-                            <a href="oraganization/">
+                            <router-link :to="{ name: 'groupInformationIndex' }">
                                 <img src="../../../sass/themes/frontend/images/btn_searchgroup.png" alt="団体をさがす">
-                            </a>
+                            </router-link>
                         </div>
                         <!-- 地域まちづくり情報 -->
                         <div class="btn_big">
-                            <a href="machidukuri/">
+                            <router-link :to="{ name: 'machidukuri' }">
                                 <img src="../../../sass/themes/frontend/images/btn_machidukuri.png" alt="地域街づくり情報">
-                            </a>
+                            </router-link>
                         </div>
                         <!-- 広報誌 -->
                         <ul class="btn_book clearfix">
                             <li>
-                                <a href="yumekousaten/">
+                                <router-link :to="{ name: 'yumekousatenIndex' }">
                                     <img src="../../../sass/themes/frontend/images/btn_book_yumeko.png" alt="夢交差点">
-                                    <p>最新号：
-                                        <br>Vol.65(H29.1月発行)</p>
-                                </a>
+                                </router-link>
                             </li>
                             <li>
-                                <a href="kawaraban/">
+                                <router-link :to="{ name: 'kawarabanIndex' }">
                                     <img src="../../../sass/themes/frontend/images/btn_book_kawara.png" alt="かわら版">
-                                    <p>最新号：
-                                        <br>平成29年5月1日発行</p>
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
                         <!-- mini menu -->
@@ -424,7 +434,9 @@
                                 </router-link>
                             </li>
                             <li>
-                                <a href="format/">各種書式</a>
+                                <router-link :to="{ name: 'various' }">
+                                    <span>各種書式</span>
+                                </router-link>
                             </li>
                             <li>
                                 <router-link :to="{ name: 'subsidyIndex' }">
@@ -453,7 +465,9 @@
                     </div>
                     <!-- admmin btn -->
                     <div class="btn_admin">
-                        <a href="admin">管理者ログイン</a>
+                        <router-link :to="{ name: 'login' }">
+                            <span>管理者ログイン</span>
+                        </router-link>
                     </div>
                 </div>
             </div>

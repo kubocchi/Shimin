@@ -83,6 +83,34 @@ import NoticeIndex from '../views/website/notice/index'
 import EventDetail from '../views/website/notice/event/detail'
 import VolunteerDetail from '../views/website/notice/volunteer/detail'
 import MembershipDetail from '../views/website/notice/membership/detail'
+
+//Floormap
+import Floormap from '../views/website/floormap'
+
+//Information
+import Information from '../views/website/information'
+
+//GroupInformation
+import GroupInformationIndex from '../views/website/group-information/index'
+import GroupInformationDetail from '../views/website/group-information/detail'
+import GroupInformationRegist from '../views/website/group-information/regist'
+
+//volunteer
+import VolunteerIndex from '../views/website/volunteer/index'
+import VolunteerRecruitment from '../views/website/volunteer/recruitment'
+
+//machidukuri
+import Machidukuri from '../views/website/machidukuri'
+
+//question
+import Question from '../views/website/question'
+
+//privacy
+import Privacy from '../views/website/privacy'
+
+//menseki
+import Menseki from '../views/website/menseki'
+
 /***********************Website-Components***********************/
 const routes = [
     {
@@ -489,6 +517,61 @@ const routes = [
                 component: MembershipDetail
             }
         ]
+    },
+    {
+        path: '/floormap',
+        name: 'floormap',
+        component: Floormap
+    },
+    {
+        path: '/information',
+        name: 'information',
+        component: Information
+    },
+    {
+        path: '/group-information/index',
+        name: 'groupInformationIndex',
+        component: GroupInformationIndex
+    },
+    {
+        path: '/group-information/detail',
+        name: 'groupInformationDetail',
+        component: GroupInformationDetail
+    },
+    {
+        path: '/group-information/regist',
+        name: 'groupInformationRegist',
+        component: GroupInformationRegist
+    },
+    {
+        path: '/volunteer/index',
+        name: 'volunteerIndex',
+        component: VolunteerIndex
+    },
+    {
+        path: '/volunteer/recruitment',
+        name: 'volunteerRecruitment',
+        component: VolunteerRecruitment
+    },
+    {
+        path: '/machidukuri',
+        name: 'machidukuri',
+        component: Machidukuri
+    },
+    {
+        path: '/question',
+        name: 'question',
+        component: Question
+    },
+    {
+        path: '/privacy',
+        name: 'privacy',
+        component: Privacy
+    },
+    {
+        path: '/menseki',
+        name: 'menseki',
+        component: Menseki
     },
 ];
 
