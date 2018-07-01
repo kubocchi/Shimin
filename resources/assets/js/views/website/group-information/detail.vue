@@ -10,7 +10,7 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
-                            <a href="../index.html">
+                            <a href="../#">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
                             </a>
@@ -99,7 +99,7 @@
             <div class="container">
                 <ol class="topicpath">
                     <li>
-                        <a href="../index.html">HOME</a>
+                        <a href="../#">HOME</a>
                     </li>
                     <li>
                         <a href="#">団体そさがす</a>
@@ -290,7 +290,7 @@
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <a href="index.html">一覧に戻る</a>
+                    <a href="#">一覧に戻る</a>
                 </div>
             </div>
         </div>

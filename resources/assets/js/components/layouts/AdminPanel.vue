@@ -4,7 +4,7 @@
         <div class="masthead">
             <div class="header_logo">
                 <h1>
-                    <a href="index.html">
+                    <a href="#">
                         <img src="../../../sass/themes/msikatsu_admin/img/logo.png" class="img-fluid">
                     </a>
                 </h1>

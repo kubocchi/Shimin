@@ -9,7 +9,7 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
-                            <a href="../index.html">
+                            <a href="../#">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
                             </a>
@@ -98,7 +98,7 @@
             <div class="container">
                 <ol class="topicpath">
                     <li>
-                        <a href="../index.html">HOME</a>
+                        <a href="../#">HOME</a>
                     </li>
                     <li>団体をさがす</li>
                 </ol>

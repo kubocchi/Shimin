@@ -114,7 +114,7 @@
             <div class="container">
                 <ol class="topicpath">
                     <li>
-                        <a href="../index.html">HOME</a>
+                        <a href="../#">HOME</a>
                     </li>
                     <li>ボランティア募集・イベント情報</li>
                 </ol>
