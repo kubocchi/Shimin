@@ -4,9 +4,11 @@
         <div class="masthead">
             <div class="header_logo">
                 <h1>
-                    <a href="#">
-                        <img src="../../../sass/themes/msikatsu_admin/img/logo.png" class="img-fluid">
-                    </a>
+                    <router-link :to="{ name: 'dashboard' }">
+                        <a>
+                            <img src="../../../sass/themes/msikatsu_admin/img/logo.png" class="img-fluid">
+                        </a>
+                     </router-link>
                 </h1>
             </div>
             <nav class="navbar navbar-expand-md navbar-light bg-light rounded mb-3">
