@@ -435,16 +435,16 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【登録場所】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{selectedManagement}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【公開状況】</label>
-                                                                    <p>公開</p>
+                                                                    <p>{{groupInformation.open_situation === '0'? '公開' : '非公開'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動状況】</label>
-                                                                    <p>休止中</p>
-                                                                    <p>{{groupInformation.pause_date}}</p>
+                                                                    <p>{{groupInformation.active_status  === '0'? '活動中' : (groupInformation.active_status  === '1'? '休止中' : '抹消')}}</p>
+                                                                    <p :hidden="groupInformation.active_status == '0' ? true : false">{{groupInformation.pause_date}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【申請年月日】</label>
@@ -476,23 +476,23 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者氏名の公開有無】</label>
+                                                                      <p>{{groupInformation.disclosure_name === '0'? '公開しない' : '公開する'}}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <label>【代表者電話番号】</label>
                                                                      <p>{{groupInformation.representative_phone}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【代表者電話番号】</label>
-                                                                     <p>{{groupInformation.disclosure_representative_phone}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者電話番号】</label>
-                                                                    <p>開示しない</p>
+                                                                    <label>【代表者電話番号の開示有無】</label>
+                                                                    <p>{{groupInformation.disclosure_representative_phone === '0'? '開示しない' : '開示する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者携帯番号】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.representative_phone_2}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者携帯番号の開示有無】</label>
-                                                                    <p>開示しない</p>
+                                                                    <p>{{groupInformation.disclosure_representative_phone_2 === '0'? '開示しない' : '開示する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【代表者FAX】</label>
@@ -503,54 +503,54 @@
                                                                     <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}'}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【連絡先・事務所・事務局】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                    <label>【連絡先・事務所・事務局名】</label>
+                                                                     <p>{{groupInformation.contact_name}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局ふりがな】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.contact_name_phonetic}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局の公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
+                                                                    <p>{{groupInformation.disclosure_contact_name === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先・事務所・事務局郵便番号】</label>
-                                                                    <p>100-8440</p>
+                                                                    <p>{{groupInformation.postal_code}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【住所（所在地）】</label>
-                                                                    <p>宮崎県宮崎市</p>
-                                                                    <p>施策太郎</p>
-                                                                    <p>様</p>
+                                                                    <p>{{groupInformation.contact_address}}</p>
+                                                                    <p>{{groupInformation.contact_address_name}}</p>
+                                                                    <p>{{groupInformation.contact_address_title}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【所在地の公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
+                                                                    <p>{{groupInformation.disclosure_contact_address === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【連絡先電話番号（１）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                    <label>【連絡先電話番号】</label>
+                                                                     <p>{{groupInformation.contact_phone}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【連絡先電話番号（１）の公開有無】</label>
-                                                                    <p>市民活動センターへ問い合わせ</p>
+                                                                    <label>【連絡先電話番号の公開有無】</label>
+                                                                    <p>{{groupInformation.disclosure_contact_phone === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【連絡先電話番号（２）】</label>
-                                                                    <p>03 - 0123 - 4567</p>
+                                                                    <label>【連絡先携帯番号】</label>
+                                                                   <p>{{groupInformation.contact_phone_2}}</p>
                                                                 </div>
                                                                 <div>
-                                                                    <label>【連絡先電話番号（２）の公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
+                                                                    <label>【連絡先電話番号の公開有無】</label>
+                                                                    <p>{{groupInformation.disclosure_contact_phone_2 === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先FAX】</label>
-                                                                    <p>03 - 0123 - 5555</p>
+                                                                    <p>{{groupInformation.contact_fax}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【連絡先FAXの公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
+                                                                    <p>{{groupInformation.disclosure_contact_fax === '0'? '公開しない' : '公開する'}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【e-mail】</label>
@@ -566,48 +566,48 @@
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動分類】</label>
-                                                                    <p>高齢者福祉</p>
+                                                                    <p>{{groupInformation.activity_category}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【会員数（男性）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.membership_male}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【会員数（女性）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.membership_female}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【会員数（合計）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.all_member}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動回数】</label>
-                                                                    <p>1回　/　月</p>
+                                                                    <p>{{groupInformation.activity_frequency}}回　/　{{selectedActivityDay}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【会費】</label>
-                                                                    <p>有</p>
-                                                                    <p>年会費3,000円</p>
+                                                                    <p>{{groupInformation.disclosure_contact_mail === '0'? '無' : '有'}}</p>
+                                                                    <p :hidden="groupInformation.active_status == '1' ? true : false">{{groupInformation.dues_price}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【活動内容・事業内容】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.content}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【ロッカー】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.rocker}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【メールBOX】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.mail_box}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【方法】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.method}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <label>【備考】</label>
-                                                                     <p>{{groupInformation.number}}</p>
+                                                                     <p>{{groupInformation.supplement}}</p>
                                                                 </div>
                                                             </div>
                                                         </form>
