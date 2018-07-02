@@ -100,7 +100,7 @@
 
         <!-- pagetitle -->
 
-        <div id="pagetitle" class="volunteer">
+        <div id="pagetitle">
             <div class="container">
                 <div class="h2">
                     <h2>利用規約</h2>
