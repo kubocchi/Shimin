@@ -338,15 +338,20 @@
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="activity_frequency"></label> 
-                                        <input class="form-control" id="activity_frequency" type="text">&nbsp; 回 / &nbsp;
+                                        <input class="form-control" v-model="groupInformation.activity_frequency" id="activity_frequency" type="text">&nbsp; 回 / &nbsp;
                                     </div>
                                     <div class="form-group form-inline text-right">
-                                        <select name="activity_day" onchange="">
-                                            <option value="1">年 </option>
-                                            <option value="2">月 </option>
-                                            <option value="3">週</option>
-                                            <option value="4">-</option>
-                                        </select>
+                                        <multiselect 
+                                            v-model="selectedActivityDay" 
+                                            :options="activityDays" 
+                                            @select="onSelectActivityDay" 
+                                            track-by="id" 
+                                            label="label"
+                                            placeholder="活動回数" 
+                                            selectLabel="" 
+                                            deselectLabel="" 
+                                            selectedLabel="選ばれた" >
+                                        </multiselect>
                                     </div>
                                 </div>
                             </div>
@@ -696,6 +701,7 @@
                     membership_male: "",
                     membership_female: "",
                     all_member: "",
+
                     dues: "0",
                     dues_price: "",
                     content: "",
@@ -774,7 +780,14 @@
                 selectedActivityCategory: null,
                 item: {
                     category: []
-                }
+                },
+                activityDays: [
+                    { 'id': 1, 'label': '年' },
+                    { 'id': 2, 'label': '月' },
+                    { 'id': 3, 'label': '週' },
+                    { 'id': 4, 'label': '-' },
+                ],
+                selectedActivityDay:  { 'id': 1, 'label': '年' },
             };
         },
         computed: {
@@ -905,6 +918,8 @@
                 this.groupInformation.membership_male= groupInformation.membership_male,
                 this.groupInformation.membership_female= groupInformation.membership_female,
                 this.groupInformation.all_member= groupInformation.all_member,
+                this.groupInformation.dues= groupInformation.dues,
+                this.groupInformation.activity_frequency= groupInformation.activity_frequency,
                 this.groupInformation.dues= groupInformation.dues,
                 this.groupInformation.dues_price= groupInformation.dues_price,
                 this.groupInformation.content= groupInformation.content,
@@ -1095,6 +1110,12 @@
             onSelectActivityCategory(selectedOption, id) {
                 if(selectedOption){
                     this.groupInformation.activity_category = selectedOption.id
+                    console.log(selectedOption.id)
+                }
+            },
+            onSelectActivityDay(selectedOption, id) {
+                if(selectedOption){
+                    this.groupInformation.activity_day = selectedOption.id
                     console.log(selectedOption.id)
                 }
             }

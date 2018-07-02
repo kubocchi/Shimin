@@ -102,7 +102,7 @@
                         <a href="../index.html">HOME</a>
                     </li>
                     <li>
-                        <a href="#">団体そさがす</a>
+                        <a href="#">団体をさがす</a>
                     </li>
                     <li>詳細</li>
                 </ol>
@@ -150,7 +150,7 @@
                                 <!-- Activity content -->
                                 <dl>
                                     <dt>活動内容</dt>
-                                    <dd>{{groupInformation.contact}}</dd>
+                                    <dd>{{groupInformation.content}}</dd>
                                 </dl>
                                 <!-- dd=>csv02  -->
                                 <dl>
@@ -160,7 +160,7 @@
                                 <!-- dd=>csv02  -->
                                 <dl>
                                     <dt>団体種類</dt>
-                                    <dd>{{groupInformation.type == 0? '一般団体' : '個人登録ボランティア'}}</dd> <!-- or 個人 -->
+                                    <dd>{{groupInformation.type == 0? '一般団体' : '個人登録ボランティア'}}</dd>
                                 </dl>
                                 <!-- dd=>csv08  -->
                                 <dl>
@@ -181,21 +181,6 @@
                                         {{groupInformation.disclosure_name == 0? '':groupInformation.representative_name_phonetic}}
                                     </dd>
                                 </dl>
-                                <!-- dd=>csv15  -->
-                                <dl>
-                                    <dt>代表者電話番号</dt>
-                                    <dd>{{groupInformation.disclosure_representative_phone == 0? '': groupInformation.representative_phone}}</dd>
-                                </dl>
-                                <!-- dd=>csv17  -->
-                                <dl>
-                                    <dt>代表者携帯番号</dt>
-                                    <dd>{{groupInformation.disclosure_representative_phone == 0? '': groupInformation.representative_phone_2}}</dd>
-                                </dl>
-                                <!-- dd=>csv19  -->
-                                <dl>
-                                    <dt>代表者FAX</dt>
-                                    <dd>{{groupInformation.disclosure_representative_fax == 0? '': groupInformation.representative_fax}}</dd>
-                                </dl>
                                 <!-- dd=>csv09  -->
                                 <dl>
                                     <dt>設立年月日</dt>
@@ -204,17 +189,21 @@
                                 <!-- dd span.man=>csv41  --><!-- dd span.lady=>csv42  --><!-- dd span.all=>csv43  -->
                                 <dl class="member">
                                     <dt>会員数</dt>
-                                    <dd><span class="man">男性 {{groupInformation.membership_male}}人</span><span class="lady">女性 {{groupInformation.membership_female}}人</span><span class="total">合計 {{groupInformation.all_member}}人</span></dd>
+                                    <dd>
+                                        <span class="man">男性 {{groupInformation.membership_male}}人</span>
+                                        <span class="lady">女性 {{groupInformation.membership_female}}人</span>
+                                        <span class="total">合計 {{groupInformation.all_member}}人</span>
+                                    </dd>
                                 </dl>
                                 <!-- dd=>csv44 , csv45  -->
                                 <dl>
-                                    <dt>活動頻度</dt>
-                                    <dd>{{groupInformation.active_status}}</dd>
+                                    <dt>活動回数</dt>
+                                    <dd>{{groupInformation.activity_frequency}}回/ {{groupInformation.activityDays}}</dd>
                                 </dl>
                                 <!-- dd=>csv46  -->
                                 <dl>
                                     <dt>会費</dt>
-                                    <dd>{{groupInformation.dues}}</dd>
+                                    <dd>{{groupInformation.dues == 0? '無し': groupInformation.dues_price}}</dd>
                                 </dl>
                                 <!-- dd=>csv51  -->
                                 <dl>
@@ -226,14 +215,14 @@
                                     <dt>Webサイト</dt>
                                     <dd><a href="#" target="_blank">{{groupInformation.contact_url}}</a></dd>
                                 </dl>
-                                <!-- dd=>53(not scv)  -->
-                                <dl class="report">
+                                <!-- dd=>53(not csv)  -->
+                                <!-- <dl class="report">
                                     <dt>活動報告書</dt>
                                     <dd>
                                         <a href="#"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
                                         <a href="#"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
                                     </dd>
-                                </dl>
+                                </dl> -->
                             </div>
                             <div class="tab-pane fade show" id="sub" role="tabpanel" aria-labelledby="sub-tab">
                                 <!-- dd span=>csv22  -->
@@ -244,16 +233,6 @@
                                 <dl>
                                     <dt>連絡先・事務所・事務局名 ふりがな</dt>
                                     <dd>{{groupInformation.disclosure_contact_name == 0 ? '': groupInformation.contact_name_phonetic}}</dd>
-                                </dl>
-                                <!-- dd=>csv24  -->
-                                <dl>
-                                    <dt>郵便番号</dt>
-                                    <dd>{{groupInformation.disclosure_contact_address == 0 ? '': groupInformation.postal_code}}</dd>
-                                </dl>
-                                <!-- dd=>csv25  -->
-                                <dl>
-                                    <dt>住所</dt>
-                                    <dd>{{groupInformation.disclosure_contact_address == 0 ? '': groupInformation.contact_address}}</dd>
                                 </dl>
                                 <!-- dd=>csv26 csv27  -->
                                 <dl>

@@ -114,7 +114,9 @@
             <div class="container">
                 <ol class="topicpath">
                     <li>
-                        <a href="../index.html">HOME</a>
+                        <router-link :to="{ name: 'home' }">
+                            <a href="">HOME</a>
+                        </router-link>
                     </li>
                     <li>ボランティア募集・イベント情報</li>
                 </ol>
