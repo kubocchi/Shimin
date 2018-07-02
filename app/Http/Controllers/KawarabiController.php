@@ -106,6 +106,6 @@ class KawarabiController extends Controller
         }
  
          // Return collection of Kawarabis as a resource
-        return Response::json(['data' => $kawarabi], 201);
+        return Response::json(['data' => $kawarabis], 201);
     }
 }

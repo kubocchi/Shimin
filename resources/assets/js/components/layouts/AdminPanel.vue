@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <!-- <style lang="scss"> @import './assets/styles/main.scss'; </style> -->
         <div class="masthead">
             <div class="header_logo">
@@ -119,6 +120,7 @@
 
 
 <script>
+   
     export default {
         name: "company",
         data() {

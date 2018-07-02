@@ -10,7 +10,7 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
-                           <router-link :to="{ name: 'home' }">
+                            <router-link :to="{ name: 'home' }">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
                             </router-link>
@@ -72,7 +72,8 @@
                                 </li>
                                 <li>
                                     <router-link :to="{ name: 'volunteerRecruitment' }">
-                                        <span>ボランティアを<br>募集したい</span>
+                                        <span>ボランティアを
+                                            <br>募集したい</span>
                                     </router-link>
                                 </li>
                             </ul>
@@ -141,7 +142,7 @@
                                 <dl class="input-group">
                                     <dd class="clearfix">
                                         <label class="checkbox individual">
-                                            <input type="radio" name="type" v-model="params.type" >
+                                            <input type="radio" name="type" v-model="params.type">
                                             <span class="icon"></span>全て</label>
                                         <label class="checkbox individual">
                                             <input type="radio" name="type" v-model="params.type" value="0">
@@ -155,21 +156,10 @@
                                 <dl class="input-group">
                                     <dt>活動分野</dt>
                                     <dd>
-                                        <multiselect 
-                                            v-model="selectedActivityCategory" 
-                                            :options="categories" 
-                                            @select="onActivityCategorySelect" 
-                                            placeholder="選んでください"
-                                            selectLabel="クリックして選択する" 
-                                            deselectLabel="クリックして選択を解除する" 
-                                            selectedLabel="選ばれた" 
-                                            track-by="id"
-                                            label="name" 
-                                            v-validate="'required'" 
-                                            name="activity_category" 
-                                            data-vv-as="活動カテゴリ"
-                                            :max-height="150" 
-                                            @remove="onActivityCategoryRemove">
+                                        <multiselect v-model="selectedActivityCategory" :options="categories" @select="onActivityCategorySelect" placeholder="選んでください"
+                                            selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" track-by="id"
+                                            label="name" v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"
+                                            :max-height="150" @remove="onActivityCategoryRemove">
                                         </multiselect>
                                     </dd>
                                 </dl>
@@ -214,12 +204,13 @@
                         </div>
                     </div>
 
-                    <!-- pagenation -->
+
+                     <!-- pagenation -->
                     <div class="pagenation">
                         <nav class="pager">
                             <ul>
                                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
-                                    <span href="#" @click="fetchGroupInformation(pagination.prev_page_url)">前のページ</span>
+                                    <a href="#" @click="fetchGroupInformation(pagination.prev_page_url)">前のページ</a>
                                 </li>
 
                                 <li class="page-item disabled">
@@ -227,7 +218,7 @@
                                 </li>
 
                                 <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
-                                    <span href="#" @click="fetchGroupInformation(pagination.next_page_url)">次のページ</span>
+                                    <a href="#" @click="fetchGroupInformation(pagination.next_page_url)">次のページ</a>
                                 </li>
                             </ul>
                         </nav>
@@ -340,7 +331,7 @@
                 return className
             },
             getCategoryWiseClass(id) {
-                return this.categories.find(x => x.id === id).class
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).class : ''
             },
             gotoDetail(object) {
                 console.log(object)
@@ -356,19 +347,19 @@
                         routeName = 'member'
                         break;
                 }
-                console.log(`${routeName}/${object.id}/detail`)
+                //console.log(`${routeName}/${object.id}/detail`)
                 return routeName
             },
             makePagination(meta, links) {
-            let pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: links.next,
-                prev_page_url: links.prev
-            };
+                let pagination = {
+                    current_page: meta.current_page,
+                    last_page: meta.last_page,
+                    next_page_url: links.next,
+                    prev_page_url: links.prev
+                };
 
-            this.pagination = pagination;
-        }
+                this.pagination = pagination;
+            }
         }
     };
 </script>

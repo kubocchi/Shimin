@@ -161,8 +161,7 @@
                         <!-- dd=>Details -->
                         <dl>
                             <dt>内容詳細</dt>
-                            <dd>{{event.detail}}
-                            </dd>
+                            <dd v-html="event.detail"></dd>
                         </dl>
                         <!-- dd=>activity_date -->
                         <dl>
@@ -210,7 +209,7 @@
                         <!-- dd=>contact information -->
                         <dl>
                             <dt>問合せ先</dt>
-                            <dd>{{event.phone}}</dd>
+                            <dd v-html="event.phone"></dd>
                         </dl>
                         <!-- dd=>attachments -->
                         <dl>
