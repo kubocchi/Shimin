@@ -4,14 +4,15 @@
 
         <div id="global_nav">
             <div class="navbar navbar-expand-lg">
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"></button>
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
-                            <a href="../#">
+                           <router-link :to="{ name: 'home' }">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
-                            </a>
+                            </router-link>
                         </li>
                         <li>
                             <a class="toggle">
@@ -19,9 +20,21 @@
                                 <span class="t">センター案内</span>
                             </a>
                             <ul class="submenu">
-                                <li><a href="../infomation/">市民活動センターとは</a></li>
-                                <li><a href="../floormap/">施設のご案内</a></li>
-                                <li><a href="../format/">各種書式</a></li>
+                                <li>
+                                    <router-link :to="{ name: 'information' }">
+                                        <span>市民活動センターとは</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'floormap' }">
+                                        <span>施設のご案内</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'various' }">
+                                        <span>各種書式</span>
+                                    </router-link>
+                                </li>
                             </ul>
                         </li>
                         <li class="open">
@@ -30,9 +43,19 @@
                                 <span class="t">市民活動団体</span>
                             </a>
                             <ul class="submenu">
-                                <li><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a></li>
-                                <li><a href="../oraganization/regist.html">登録について</a></li>
-                                <li><a href="../oraganization/">団体を探したい</a></li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/307.html" target="_blank">市民活動団体とは</a>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'groupInformationRegist' }">
+                                        <span>登録について</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'groupInformationIndex' }">
+                                        <span>団体を探したい</span>
+                                    </router-link>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -41,8 +64,16 @@
                                 <span class="t">ボランティア</span>
                             </a>
                             <ul class="submenu">
-                                <li><a href="../volunteer/">ボランティアをしたい</a></li>
-                                <li><a href="../volunteer/recruitment.html">ボランティアを<br>募集したい</a></li>
+                                <li>
+                                    <router-link :to="{ name: 'volunteerIndex' }">
+                                        <span>ボランティアをしたい</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{ name: 'volunteerRecruitment' }">
+                                        <span>ボランティアを<br>募集したい</span>
+                                    </router-link>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -51,8 +82,14 @@
                                 <span class="t">Q & A</span>
                             </a>
                             <ul class="submenu">
-                                <li><a href="../question/">センターについて</a></li>
-                                <li><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a></li>
+                                <li>
+                                    <router-link :to="{ name: 'question' }">
+                                        <span>センターについて</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <a href="http://www.city.miyazaki.miyazaki.jp/life/activities/civic_action/" target="_blank">市民活動について</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -75,7 +112,11 @@
         <div id="topicpath">
             <div class="container">
                 <ol class="topicpath">
-                    <li><a href="../#">HOME</a></li>
+                    <li>
+                        <router-link :to="{ name: 'home' }">
+                            <span>HOME</span>
+                        </router-link>
+                    </li>
                     <li>登録について</li>
                 </ol>
             </div>
@@ -93,7 +134,9 @@
                         <div class="text">宮崎市民活動センター及び宮崎市社会福祉協議会の施設・機能等を利用する場合は、<span class="color_b">事前のセンター登録</span>が必要です。<br>登録申請手続きは、<span class="color_b">宮崎市民活動センター、宮崎市社会福祉協議会ボランティアセンター、宮崎市社会福祉協議会各支所</span>のいずれでも行うことができ、原則、登録情報を両者で共有いたします。</div>
                     </div>
                     <div class="btn_blue subp">
-                        <a href="#">センター施設の利用方法</a>
+                        <router-link :to="{ name: 'floormap' }">
+                            <span>センター施設の利用方法</span>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -112,7 +155,11 @@
                         </ul>
                         <p>＊電話番号は記載不要。住所は「宮崎市●●町」まで記載されていれば可。</p>
                         <p>＊イベントや写真などの活動の様子がわかる資料があれば、添付する。</p>
-                        <div class="btn_blue subp"><a href="#">各申請書ダウンロードページへ</a></div>
+                        <div class="btn_blue subp">
+                            <router-link :to="{ name: 'various' }">
+                                <span>各申請書ダウンロードページへ</span>
+                            </router-link>
+                        </div>
                     </div>
                     <p class="attention">申請は窓口でしか受付いたしません。</p>
                     <p class="attention">申請から承認まで、通常2週間程度かかります。</p>

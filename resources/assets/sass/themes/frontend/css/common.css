@@ -20,7 +20,7 @@ body{
     font-size: 1.5rem ;
     color: #5f4533 ;
     line-height: 1em ;
-    font-family: "游ゴシック", YuGothic, 'Hiragino Kaku Gothic Pro', Meiryo , sans-serif ;
+    font-family: YuGothic , "游ゴシック", "Yu Gothic Medium" , "游ゴシック体", 'Hiragino Kaku Gothic Pro', Meiryo , sans-serif ;
 	font-weight: 600 ;
 	position: relative ;
 	padding-top: 10px ;
@@ -971,6 +971,9 @@ img.img_responsive{
 	transform: translateY(-50%) ;
     font-family: 'Font Awesome 5 Free';
 	margin-right: 5px ;
+}
+.btn_blue.subp a::after{
+	content: none ;
 }
 .btn_blue.subp a:hover{
 	opacity: 0.8 ;

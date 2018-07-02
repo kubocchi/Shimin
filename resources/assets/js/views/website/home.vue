@@ -75,7 +75,7 @@
                             <ul class="submenu">
                                 <li>
                                     <router-link :to="{ name: 'information' }">
-                                        <span>市民活動団体センターとは</span>
+                                        <span>市民活動センターとは</span>
                                     </router-link>
                                 </li>
                                 <li>
@@ -265,6 +265,11 @@
                         <div class="link_blue">
                             <p>
                                 <router-link :to="{ name: 'volunteerIndex' }">
+                                    <a class="hatena">ボランティアに参加するには？</a>
+                                </router-link>
+                            </p>
+                            <p>
+                                <router-link :to="{ name: 'volunteerRecruitment' }">
                                     <a class="hatena">ボランティアを募集するには？</a>
                                 </router-link>
                             </p>
