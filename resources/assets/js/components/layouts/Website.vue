@@ -8,7 +8,7 @@
             <div class="container clearfix">
                 <div class="head_left">
                     <h1>
-                        <a href="index.html" class="clearfix">
+                        <a href="#" class="clearfix">
                             <p class="logo">
                                 <img src="images/h1_logo.png" alt="宮崎市民活動センター">
                             </p>
@@ -259,9 +259,15 @@
 
             this.loadNav()
         },
+        watch: {
+            '$route': function(from, to) {
+                this.loadNav()
+            }
+        },
 
         methods: {
             loadNav(){
+                console.log('nav')
                 $(function () {
                     var nav = $('nav.global_nav');
                     $('li', nav)

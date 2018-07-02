@@ -8,7 +8,7 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li>
-                            <a href="../index.html">
+                            <a href="../#">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
                             </a>
@@ -75,7 +75,7 @@
         <div id="topicpath">
             <div class="container">
                 <ol class="topicpath">
-                    <li><a href="../index.html">HOME</a></li>
+                    <li><a href="../#">HOME</a></li>
                     <li>登録について</li>
                 </ol>
             </div>

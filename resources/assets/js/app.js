@@ -19,8 +19,8 @@ import App from './components/App'
 
 /*************************START FRONTEND**************************/
 
-require('./external/bootstrap')
-require('./external/jquery.sliderPro')
+ require('./external/bootstrap')
+ require('./external/jquery.sliderPro')
 require('./external/script')
 require('./external/scrol-fixed')
 import PopperJs from 'popper.js'

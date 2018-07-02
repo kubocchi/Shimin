@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <a href="index.html">一覧に戻る</a>
+                    <a href="#">一覧に戻る</a>
                 </div>
             </div>
         </div>
