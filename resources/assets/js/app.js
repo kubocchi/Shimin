@@ -102,6 +102,7 @@ const router = new VueRouter({
     routes: routeCollection
 });
 
+
 const app = new Vue({
     el: '#app',
     render: h => h(App),

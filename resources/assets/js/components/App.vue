@@ -1,5 +1,6 @@
 <template>
     <div>
+        <vue-topprogress ref="topProgress"></vue-topprogress>
         <title>宮崎市民活動センター</title>
         <div v-if="isAdmin">
             <admin-panel></admin-panel>
@@ -16,7 +17,14 @@
 
 
 <script>
+     import { vueTopprogress } from 'vue-top-progress'
     export default {
+        components: {
+            'admin-panel': require('./layouts/AdminPanel'),
+            'website': require('./layouts/Website'),
+            'login': require('./layouts/Login'),
+            vueTopprogress
+        },
         data: function () {
             return {}
         },
@@ -32,17 +40,18 @@
             },
             isLogin: function () {
                 return this.$route.meta === 'login'
-            },
+            }
             
         },
-        mounted() {
-           
+        mounted () {
+            this.$refs.topProgress.start()
+        
+            // Use setTimeout for demo
+            setTimeout(() => {
+            this.$refs.topProgress.done()
+            }, 2000)
         },
-        components: {
-            'admin-panel': require('./layouts/AdminPanel'),
-            'website': require('./layouts/Website'),
-            'login': require('./layouts/Login')
-        },
+        
         created() {
             //window.location.reload(true)
             //this.$router.go(this.$router.currentRoute)
