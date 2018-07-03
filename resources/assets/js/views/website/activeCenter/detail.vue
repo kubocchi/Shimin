@@ -23,7 +23,7 @@
                             <ul class="submenu">
                                 <li>
                                     <router-link :to="{ name: 'information' }">
-                                        <span>市民活動団体センターとは</span>
+                                        <span>市民活動センターとは</span>
                                     </router-link>
                                 </li>
                                 <li>

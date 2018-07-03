@@ -277,6 +277,30 @@
                             $('ul.submenu', this).stop().slideUp('200');
                         });
                 });
+
+                $(function () {
+                    var dist = 90;
+                        $(window).scroll(function() {
+                            if ($(window).scrollTop() > dist) {
+                            $('#global_nav').addClass('scrol');
+                            }
+                            else {
+                            $('#global_nav').removeClass('scrol');
+                            }
+                        });
+                });
+
+                $(function () {
+                    var dist = 650;
+                        $(window).scroll(function() {
+                            if ($(window).scrollTop() > dist) {
+                            $('#global_nav.home').addClass('scrol');
+                            }
+                            else {
+                            $('#global_nav.home').removeClass('scrol');
+                            }
+                        });
+                });
             }
         }
     };
