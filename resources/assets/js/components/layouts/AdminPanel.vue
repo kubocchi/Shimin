@@ -133,21 +133,21 @@
             //localStorage.removeItem("reload");
             console.log('reload', localStorage.getItem("reload"))
 
-            if(localStorage.getItem("reload") == null){
-                localStorage.setItem("reload", 'admin');
-            }
-            else if(localStorage.getItem("reload") != 'admin'){
-                window.location.reload(true)
-                localStorage.removeItem("reload");
-                localStorage.setItem("reload", 'admin');
-            }
+            // if(localStorage.getItem("reload") == null){
+            //     localStorage.setItem("reload", 'admin');
+            // }
+            // else if(localStorage.getItem("reload") != 'admin'){
+            //     window.location.reload(true)
+            //     localStorage.removeItem("reload");
+            //     localStorage.setItem("reload", 'admin');
+            // }
 
-            if(localStorage.getItem("login") == null){
-                this.$router.push({name: 'login' })
-            }
-            else{
-                this.username = localStorage.getItem("login")
-            }
+            // if(localStorage.getItem("login") == null){
+            //     this.$router.push({name: 'login' })
+            // }
+            // else{
+            //     this.username = localStorage.getItem("login")
+            // }
         },
 
         methods: {

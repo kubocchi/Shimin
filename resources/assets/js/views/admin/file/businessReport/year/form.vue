@@ -166,7 +166,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/year", {
+                    fetch("/api/year", {
                         method: "post",
                         body: JSON.stringify(this.year),
                         headers: {
@@ -193,7 +193,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/year", {
+                    fetch("/api/year", {
                         method: "put",
                         body: JSON.stringify(this.year),
                         headers: {

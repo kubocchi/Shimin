@@ -213,7 +213,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/dream", {
+                    fetch("/api/dream", {
                         method: "post",
                         body: JSON.stringify(this.dream),
                         headers: {
@@ -240,7 +240,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/dream", {
+                    fetch("/api/dream", {
                         method: "put",
                         body: JSON.stringify(this.dream),
                         headers: {
@@ -400,7 +400,7 @@
             // Pull required attachmets
             pullAttachments(dream) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${dream.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${dream.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

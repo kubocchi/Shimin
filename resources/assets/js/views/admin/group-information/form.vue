@@ -816,7 +816,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/group-information", {
+                    fetch("/api/group-information", {
                         method: "post",
                         body: JSON.stringify(this.groupInformation),
                         headers: {
@@ -843,7 +843,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/group-information", {
+                    fetch("/api/group-information", {
                         method: "put",
                         body: JSON.stringify(this.groupInformation),
                         headers: {
@@ -1053,7 +1053,7 @@
             // Pull required attachmets
             pullAttachments(groupInformation) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${groupInformation.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${groupInformation.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

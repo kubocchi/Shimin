@@ -379,11 +379,18 @@
             fetchActiveCenter(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
+                const token = localStorage.getItem('token')
+                console.log('token', token)
+
                 page_url = page_url || "/api/active-centers"
-                fetch(page_url)
-                    .then(res => res.json())
-                    .then(res => {
-                        this.activeCenters = res.data
+                axios.get(page_url, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    this.activeCenters = response.data.data
+                    //this.activeCenters = res.data
                         console.log(this.activeCenters)
 
                         this.activeCenters.forEach(activeCenter => {
@@ -391,8 +398,24 @@
                                 this.newTagDate = activeCenter.start_date
                         });
                         loader.hide()
-                    })
-                    .catch(err => console.log(err))
+                })
+                .catch(error => {
+
+                })
+                
+                // fetch(page_url)
+                //     .then(res => res.json())
+                //     .then(res => {
+                //         this.activeCenters = res.data
+                //         console.log(this.activeCenters)
+
+                //         this.activeCenters.forEach(activeCenter => {
+                //             if(new Date(activeCenter.start_date) >  new Date(this.newTagDate))
+                //                 this.newTagDate = activeCenter.start_date
+                //         });
+                //         loader.hide()
+                //     })
+                //     .catch(err => console.log(err))
             },
             loadFacebookPlugin() {
                 (function (d, s, id) {

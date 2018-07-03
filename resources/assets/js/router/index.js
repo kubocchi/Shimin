@@ -111,6 +111,7 @@ import Privacy from '../views/website/privacy'
 //menseki
 import Menseki from '../views/website/menseki'
 
+
 /***********************Website-Components***********************/
 const routes = [
     {

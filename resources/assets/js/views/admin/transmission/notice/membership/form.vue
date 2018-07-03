@@ -347,7 +347,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show();
-                    fetch("api/membership", {
+                    fetch("/api/membership", {
                         method: "post",
                         body: JSON.stringify(this.membership),
                         headers: {
@@ -374,7 +374,7 @@
                 } else {
                     // Update
                     let loader = this.$loading.show();
-                    fetch("api/membership", {
+                    fetch("/api/membership", {
                         method: "put",
                         body: JSON.stringify(this.membership),
                         headers: {

@@ -231,7 +231,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/active-center", {
+                    fetch("/api/active-center", {
                         method: "post",
                         body: JSON.stringify(this.activeCenter),
                         headers: {
@@ -258,7 +258,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/active-center", {
+                    fetch("/api/active-center", {
                         method: "put",
                         body: JSON.stringify(this.activeCenter),
                         headers: {
@@ -423,7 +423,7 @@
             // Pull required attachmets
             pullAttachments(activeCenter) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${activeCenter.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${activeCenter.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

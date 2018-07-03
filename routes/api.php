@@ -13,26 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'auth'], function ($router) {
+Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-
-});
-
-# Attachment routes
-// Editor Image Upload
-Route::post('active-center/images/upload', 'AttachmentController@postImageUpload');
-// Upload attachments
-Route::post('/attachments/store', 'AttachmentController@storeAttachments');
-// Get attachments
-Route::get('asset/attachments/{ids}', 'AttachmentController@pullAttachments');
-// Delete attachments
-Route::delete('/attachments/', 'AttachmentController@deleteAttachment');
-// Download attachments
-Route::get('/download/{file}', function ($file='') {
-    return response()->download(public_path('public/attachments/'.$file)); 
 });
 
 # 1.1 active-center routes
@@ -48,6 +33,23 @@ Route::put('active-center', 'ActiveCenterController@store');
 Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
 // List single active-center
 Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
+
+
+# Attachment routes
+// Editor Image Upload
+Route::post('active-center/images/upload', 'AttachmentController@postImageUpload');
+// Upload attachments
+Route::post('/attachments/store', 'AttachmentController@storeAttachments');
+// Get attachments
+Route::get('asset/attachments/{ids}', 'AttachmentController@pullAttachments');
+// Delete attachments
+Route::delete('/attachments/', 'AttachmentController@deleteAttachment');
+// Download attachments
+Route::get('/download/{file}', function ($file='') {
+    return response()->download(public_path('public/attachments/'.$file)); 
+});
+
+
 
 # 1.2 Notice routes
 // List notice

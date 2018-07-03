@@ -264,7 +264,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/business-report", {
+                    fetch("/api/business-report", {
                         method: "post",
                         body: JSON.stringify(this.businessReport),
                         headers: {
@@ -291,7 +291,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/business-report", {
+                    fetch("/api/business-report", {
                         method: "put",
                         body: JSON.stringify(this.businessReport),
                         headers: {
@@ -453,7 +453,7 @@
             // Pull required attachmets
             pullAttachments(object) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${object.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${object.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

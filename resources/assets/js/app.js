@@ -98,7 +98,8 @@ const router = new VueRouter({
     scrollBehavior() {
         return { x: 0, y: 0 };
     },
-    mode: 'hash', 
+    mode: 'history', 
+    base: '/',
     routes: routeCollection
 });
 
@@ -108,3 +109,6 @@ const app = new Vue({
     render: h => h(App),
     router,
 });
+
+
+

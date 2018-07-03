@@ -226,7 +226,7 @@
             pullAttachments(activeCenter) {
                 // Make HTTP request to store announcement
                 let loader = this.$loading.show();
-                axios.get(`api/asset/attachments/${activeCenter.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${activeCenter.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

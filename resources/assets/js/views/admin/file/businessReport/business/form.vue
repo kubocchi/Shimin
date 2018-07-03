@@ -191,7 +191,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/business", {
+                    fetch("/api/business", {
                         method: "post",
                         body: JSON.stringify(this.business),
                         headers: {
@@ -218,7 +218,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/business", {
+                    fetch("/api/business", {
                         method: "put",
                         body: JSON.stringify(this.business),
                         headers: {
