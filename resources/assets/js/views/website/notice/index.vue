@@ -376,7 +376,7 @@
                     case 'イベント':
                         routeName = 'event'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         routeName = 'volunteer'
                         break;
                     case '会員募集':

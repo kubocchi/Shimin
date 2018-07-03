@@ -194,7 +194,9 @@
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <a href="#">一覧に戻る</a>
+                    <router-link :to="{ name: 'noticeIndex' }">
+                        <a>一覧に戻る</a>
+                    </router-link>
                 </div>
             </div>
         </div>
