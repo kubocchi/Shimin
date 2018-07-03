@@ -271,6 +271,7 @@ nav.global_nav li a.toggle::after{
 	color: #1b89e7 ;
 	font-size: 0.85em ;
 	z-index: 100 ;
+	margin-left: 3px ;
 }
 nav.global_nav li a span.t{
 	font-size: 1.6rem ;
@@ -701,6 +702,13 @@ ul.banner li a:hover::before{
 .sitemap dl.links dd a:hover{
 	color: #f7b515 ;
 }
+.sitemap dl.links dt a[target=_blank]::after,
+.sitemap dl.links dd a[target=_blank]::after{
+	font-family: Font Awesome\ 5 Free;
+	content: "\f2d2";
+	margin-left: 4px ;
+	font-weight: normal ;
+}
 @media (max-width: 991px){
 	.sitemap{
 		max-width: 680px ;
@@ -1084,6 +1092,9 @@ nav.pager ul li.next a::after{
 	margin-bottom: 0 ;
 	font-family: "游ゴシック Medium" , "Yu Gothic Medium" , "游ゴシック体", YuGothic ;
 	font-weight: normal ;
+}
+.detail_body p.text_moredetail img{
+	max-width: 100% ;
 }
 .detail_body .information .attachment_img{
 	padding-top: 30px ;

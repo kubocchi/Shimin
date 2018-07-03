@@ -334,7 +334,7 @@
 .news_contents{
 	margin-bottom: 30px ;
 }
-.news_contents dl{
+#titlelist .news_contents dl{
 	display: table ;
 	margin-bottom: 0 ;
 	width: 100% ;

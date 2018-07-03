@@ -179,9 +179,6 @@ g#colormap path:hover{
 
 /* modal============================== */
 
-.modal-backdrop.show{
-	opacity: 0.2 ;
-}
 .modal-dialog{
 	margin-top: 80px ;
 }

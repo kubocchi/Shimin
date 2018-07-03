@@ -237,9 +237,8 @@
 }
 .detail_body .topinformation{
 	width: 100% ;
-	display: -ms-flex;
-	display: flex ;
 	justify-content: space-between;
+	margin-bottom: 20px ;
 }
 .detail_body .topinformation dl{
 	flex: 1 ;
@@ -247,7 +246,7 @@
 	display: flex ;
 }
 .detail_body .topinformation dl dt{
-
+	min-width: 75px ;
 }
 .detail_body .topinformation dl dd span{
 	padding-left: 22px ;
