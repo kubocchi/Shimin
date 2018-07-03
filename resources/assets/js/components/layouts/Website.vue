@@ -19,8 +19,7 @@
                 </div>
                 <div class="head_right">
                     <ul class="clearfix">
-                        <li>開館時間 9:00 ～ 22:00</li>
-                        <li>0985-20-8777</li>
+                        <li>TEL：0985-20-8777</li>
                         <li>
                             <a href="https://net-semi.sakura.ne.jp/contact_ssl/miyanpo/" target="_blank">お問合せ</a>
                         </li>
@@ -148,11 +147,6 @@
                             </router-link>
                         </dt>
                         <dt>
-                            <router-link :to="{ name: 'machidukuri' }">
-                                <span>地域まちづくり情報</span>
-                            </router-link>
-                        </dt>
-                        <dt>
                             <router-link :to="{ name: 'yumekousatenIndex' }">
                                 <span>夢交差点</span>
                             </router-link>
@@ -164,6 +158,11 @@
                         </dt>
                     </dl>
                     <dl class="links">
+                        <dt>
+                            <router-link :to="{ name: 'machidukuri' }">
+                                <span>地域まちづくり情報</span>
+                            </router-link>
+                        </dt>
                         <dt>
                             <router-link :to="{ name: 'businessReportIndex' }">
                                 <span>事業報告</span>

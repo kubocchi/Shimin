@@ -211,6 +211,7 @@
 }
 .news_contents{
 	margin-bottom: 15px ;
+	min-height: 100px;
 }
 .news_contents dl{
 	display: table ;
@@ -439,6 +440,7 @@
 
 .topic-list{
 	width: 100% ;
+	min-height: 100px;
 	padding-top: 25px ;
 }
 .topic-list .item{

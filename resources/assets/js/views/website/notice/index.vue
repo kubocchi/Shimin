@@ -357,7 +357,7 @@
                     case 'イベント':
                         className = 'event'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         className = 'volunteer'
                         break;
                     case '会員募集':
