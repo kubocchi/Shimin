@@ -33,9 +33,11 @@ class EventController extends Controller
         $event->subject = $request->input('subject');
         $event->activity_category = $request->input('activity_category');
         $event->children = $request->input('children');
-        $event->event_date = $request->input('event_date');
+        $event->event_start_date = $request->input('event_start_date');
+        $event->event_end_date = $request->input('event_end_date');
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
+        $event->datetime = $request->input('datetime');
         $event->organizer = $request->input('organizer');
         $event->file = $request->input('file');
         $event->deadline = $request->input('deadline');
