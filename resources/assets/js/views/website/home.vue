@@ -345,11 +345,11 @@
                         </div>
                     </div>
                     <!-- admmin btn -->
-                    <!-- <div class="btn_admin">
+                    <div class="btn_admin">
                         <router-link :to="{ name: 'login' }">
                             <span>管理者ログイン</span>
                         </router-link>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
