@@ -186,7 +186,7 @@
                         <!-- dd=>child -->
                         <dl>
                             <dt>子どもの参加</dt>
-                            <dd>{{event.children == 1? ' 許可' : '未許可'}}</dd>
+                            <dd>{{event.children == 1? ' 可' : '不可'}}</dd>
                             <!-- いいえ -->
                         </dl>
                         <!-- dd=> Support -->
@@ -223,7 +223,9 @@
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <a href="#">一覧に戻る</a>
+                    <router-link :to="{ name: 'noticeIndex' }">
+                        <a>一覧に戻る</a>
+                    </router-link>
                 </div>
             </div>
         </div>

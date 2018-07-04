@@ -59,9 +59,9 @@
                         <thead>
                             <tr class="table-primary">
                                 <th class="col-xs-1" scope="col">No.</th>
-                                <th class="col-xs-1 wide_d" scope="col">区分</th>
-                                <th class="col-xs-1 wide_d" scope="col">ステータス</th>
-                                <th class="col-xs-1 wide_d" scope="col">種別</th>
+                                <th class="col-xs-1 wide_d" scope="col">登録場所</th>
+                                <th class="col-xs-1 wide_d" scope="col">公開状況</th>
+                                <th class="col-xs-1 wide_d" scope="col">種類</th>
                                 <th class="col-xs-2 wide_d" scope="col">活動分類</th>
                                 <th class="col-xs-4 wide_s" scope="col">団体名</th>
                                 <th class="col-xs-1" scope="col">変更</th>
@@ -71,8 +71,8 @@
                         <tbody>
                             <tr v-for="( groupInformation, rowNumber) in groupInformations" :key=rowNumber>
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ getManagement(parseInt(groupInformation.regist_management)) }}</td>
-                                <td>{{ getStatus(parseInt(groupInformation.open_situation)) }}</td>
+                                <td>{{ getManagement(parseInt(groupInformation.regist_management)) }}</td>  <!-- ==> groupInformation.management -->
+                                <td>{{ getStatus(parseInt(groupInformation.open_situation)) }}</td>  <!-- ==> groupInformation.statuses -->
                                 <td>{{ getType(parseInt(groupInformation.type)) }}</td>
                                 <td>{{ getActivityCategoryName(groupInformation.activity_category) }}</td>
                                 <td>{{ groupInformation.name }}</td>

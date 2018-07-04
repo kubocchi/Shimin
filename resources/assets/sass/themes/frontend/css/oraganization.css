@@ -197,11 +197,8 @@
 	font-size: 0.8em ;
 }
 /* 会員数 */
-.o_detail_body .information dl.member dd span::after{
-	content: "、" ;
-}
-.o_detail_body .information dl.member dd span:last-child::afterr{
-	content: none ;
+.o_detail_body .information dl.member dd span{
+	padding-right: 10px ;
 }
 .o_detail_body .information dl.member dd span::before{
 	font-family: 'Font Awesome 5 Free' ;

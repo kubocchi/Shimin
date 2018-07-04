@@ -179,7 +179,7 @@
                                 <!-- dd=>csv02  -->
                                 <dl>
                                     <dt>団体種類</dt>
-                                    <dd>{{groupInformation.type == 0? '一般団体' : '個人登録ボランティア'}}</dd>
+                                    <dd>{{groupInformation.type == 0? '個人登録ボランティア' :  '一般団体' }}</dd>
                                 </dl>
                                 <!-- dd=>csv08  -->
                                 <dl>

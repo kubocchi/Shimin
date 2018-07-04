@@ -1,7 +1,9 @@
 <template>
     <div>
-
-                <div id="global_nav">
+        
+        <!-- nav -->
+        
+        <div id="global_nav">
             <div class="navbar navbar-expand-lg">
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"></button>

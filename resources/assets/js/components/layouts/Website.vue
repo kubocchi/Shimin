@@ -19,8 +19,7 @@
                 </div>
                 <div class="head_right">
                     <ul class="clearfix">
-                        <li>開館時間 9:00 ～ 22:00</li>
-                        <li>0985-20-8777</li>
+                        <li>TEL：0985-20-8777</li>
                         <li>
                             <a href="https://net-semi.sakura.ne.jp/contact_ssl/miyanpo/" target="_blank">お問合せ</a>
                         </li>
@@ -148,11 +147,6 @@
                             </router-link>
                         </dt>
                         <dt>
-                            <router-link :to="{ name: 'machidukuri' }">
-                                <span>地域まちづくり情報</span>
-                            </router-link>
-                        </dt>
-                        <dt>
                             <router-link :to="{ name: 'yumekousatenIndex' }">
                                 <span>夢交差点</span>
                             </router-link>
@@ -164,6 +158,11 @@
                         </dt>
                     </dl>
                     <dl class="links">
+                        <dt>
+                            <router-link :to="{ name: 'machidukuri' }">
+                                <span>地域まちづくり情報</span>
+                            </router-link>
+                        </dt>
                         <dt>
                             <router-link :to="{ name: 'businessReportIndex' }">
                                 <span>事業報告</span>
@@ -230,7 +229,17 @@
     </div>
 </template>
 <style>
+    @import '../../../sass/themes/frontend/css/bootstrap.css';
+    @import '../../../sass/themes/frontend/css/slider-pro.css';
+    @import '../../../sass/themes/frontend/css/fontawesome-all.css';
+    @import '../../../sass/themes/frontend/css/icomoon.css';
     @import '../../../sass/themes/frontend/css/common.css';
+    @import '../../../sass/themes/frontend/css/index.css';
+    @import '../../../sass/themes/frontend/css/info.css';
+    @import '../../../sass/themes/frontend/css/machidukuri.css';
+    @import '../../../sass/themes/frontend/css/oraganization.css';
+    @import '../../../sass/themes/frontend/css/report.css';
+    @import '../../../sass/themes/frontend/css/topics.css';
     @import '../../../sass/themes/frontend/css/volunteer.css';
     @import '../../../sass/themes/frontend/css/machidukuri.css';
     @import '../../../sass/themes/frontend/css/question.css';
@@ -276,6 +285,30 @@
                         })
                         .mouseout(function (e) {
                             $('ul.submenu', this).stop().slideUp('200');
+                        });
+                });
+
+                $(function () {
+                    var dist = 90;
+                        $(window).scroll(function() {
+                            if ($(window).scrollTop() > dist) {
+                            $('#global_nav').addClass('scrol');
+                            }
+                            else {
+                            $('#global_nav').removeClass('scrol');
+                            }
+                        });
+                });
+
+                $(function () {
+                    var dist = 650;
+                        $(window).scroll(function() {
+                            if ($(window).scrollTop() > dist) {
+                            $('#global_nav.home').addClass('scrol');
+                            }
+                            else {
+                            $('#global_nav.home').removeClass('scrol');
+                            }
                         });
                 });
             }

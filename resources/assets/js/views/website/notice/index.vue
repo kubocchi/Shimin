@@ -163,9 +163,9 @@
                                             :options="categories" 
                                             @select="onActivityCategorySelect"
                                             placeholder="選んでください" 
-                                            selectLabel="クリックして選択する" 
-                                            deselectLabel="クリックして選択を解除する"
-                                            selectedLabel="選ばれた"  
+                                            selectLabel="選択" 
+                                            deselectLabel="選択を解除"
+                                            selectedLabel="選択中"  
                                             track-by="id" 
                                             label="name" 
                                             v-validate="'required'" 
@@ -357,7 +357,7 @@
                     case 'イベント':
                         className = 'event'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         className = 'volunteer'
                         break;
                     case '会員募集':
@@ -376,7 +376,7 @@
                     case 'イベント':
                         routeName = 'event'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         routeName = 'volunteer'
                         break;
                     case '会員募集':
