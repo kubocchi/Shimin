@@ -115,6 +115,7 @@
     </div>
 </template>
 <style>
+    @import '../../../sass/themes/msikatsu_admin/css/bootstrap.min.css';
     @import '../../../sass/themes/msikatsu_admin/css/style.css';
 </style>
 

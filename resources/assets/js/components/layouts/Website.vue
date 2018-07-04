@@ -229,7 +229,17 @@
     </div>
 </template>
 <style>
+    @import '../../../sass/themes/frontend/css/bootstrap.css';
+    @import '../../../sass/themes/frontend/css/slider-pro.css';
+    @import '../../../sass/themes/frontend/css/fontawesome-all.css';
+    @import '../../../sass/themes/frontend/css/icomoon.css';
     @import '../../../sass/themes/frontend/css/common.css';
+    @import '../../../sass/themes/frontend/css/index.css';
+    @import '../../../sass/themes/frontend/css/info.css';
+    @import '../../../sass/themes/frontend/css/machidukuri.css';
+    @import '../../../sass/themes/frontend/css/oraganization.css';
+    @import '../../../sass/themes/frontend/css/report.css';
+    @import '../../../sass/themes/frontend/css/topics.css';
     @import '../../../sass/themes/frontend/css/volunteer.css';
     @import '../../../sass/themes/frontend/css/machidukuri.css';
     @import '../../../sass/themes/frontend/css/question.css';
