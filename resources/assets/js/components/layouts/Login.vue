@@ -82,7 +82,15 @@
                         }
                     )
                     .catch(
-                        (error) => console.log(error)
+                        (error) => {
+                            console.log(error)
+                            this.$swal({
+                                title: "",
+                                text: "IDかパスワードが違います。",
+                                type: "warning",
+                                confirmButtonText: "OK"
+                            });
+                        }
                     );
             },
         }
