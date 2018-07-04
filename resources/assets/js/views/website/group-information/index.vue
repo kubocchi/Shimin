@@ -183,7 +183,7 @@
                                 </dl>
                                 <!-- enter -->
                                 <div class="btn_search">
-                                    <button @click="fetchGroupInformation()">検 索</button>
+                                    <button @click.prevent="fetchGroupInformation()">検 索</button>
                                 </div>
                             </div>
                         </div>
@@ -221,20 +221,19 @@
                         <nav class="pager">
                             <ul>
                                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
-                                    <a href="#" @click="fetchGroupInformation(pagination.prev_page_url)">前のページ</a>
+                                    <a href="#!" @click.prevent="fetchGroupInformation(pagination.prev_page_url)">前のページ</a>
                                 </li>
 
                                 <li class="page-item disabled">
-                                    <span href="#">{{ pagination.current_page }} の {{ pagination.last_page }}</span>
+                                    <span href="#!">{{ pagination.current_page }} の {{ pagination.last_page }}</span>
                                 </li>
 
                                 <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
-                                    <a href="#" @click="fetchGroupInformation(pagination.next_page_url)">次のページ</a>
+                                    <a href="#!" @click.prevent="fetchGroupInformation(pagination.next_page_url)">次のページ</a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -294,7 +293,8 @@
             fetchGroupInformation(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                fetch('/api/group-informations-frontend', {
+                page_url = page_url || '/api/group-informations-frontend'
+                fetch(page_url, {
                     method: "post",
                     body: JSON.stringify(this.params),
                     headers: {

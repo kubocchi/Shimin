@@ -143,7 +143,7 @@
                             <dl v-for="citizen in variouses.citizens" :key="citizen.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(citizen.attachments[0])">{{citizen.subject}}</a>
+                                    <a @click.prevent="downloadFile(citizen.attachments[0])">{{citizen.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="citizen.detail"></dd>
@@ -158,7 +158,7 @@
                             <dl v-for="personal in variouses.personals" :key="personal.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(personal.attachments[0])">{{personal.subject}}</a>
+                                    <a @click.prevent="downloadFile(personal.attachments[0])">{{personal.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="personal.detail"></dd>
@@ -173,7 +173,7 @@
                             <dl v-for="kawarabi in variouses.kawarabis" :key="kawarabi.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(kawarabi.attachments[0])">{{kawarabi.subject}}</a>
+                                    <a @click.prevent="downloadFile(kawarabi.attachments[0])">{{kawarabi.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="kawarabi.detail"></dd>
@@ -188,7 +188,7 @@
                             <dl v-for="various in variouses.variouses" :key="various.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(various.attachments[0])">{{various.subject}}</a>
+                                    <a @click.prevent="downloadFile(various.attachments[0])">{{various.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="various.detail"></dd>

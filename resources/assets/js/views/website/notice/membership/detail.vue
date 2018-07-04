@@ -173,7 +173,7 @@
                         <dl>
                             <dt>URL</dt>
                              <dd>
-                                <a @click="openInNewTab(membership.linkname)">{{membership.linkname}}</a>
+                                <a @click.prevent="openInNewTab(membership.linkname)">{{membership.linkname}}</a>
                             </dd>
                         </dl>
                         <!-- dd=>contact information -->

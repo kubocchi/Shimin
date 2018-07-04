@@ -132,7 +132,7 @@
                         
                         <div class="links">
                             <dl v-for="attachment in kawarabi.attachment" :key="attachment.id">
-                                <dt><a @click="downloadFile(attachment)" href="#">{{attachment.name}}</a></dt>
+                                <dt><a @click.prevent="downloadFile(attachment)" href="#!">{{attachment.name}}</a></dt>
                                 <dd>{{kawarabi.subject}}</dd>
                             </dl>
                         </div>

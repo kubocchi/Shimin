@@ -148,7 +148,7 @@
                     <nav class="pager">
                         <ul>
                             <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
-                                <a href="#" @click="fetchactiveCenter(pagination.prev_page_url)">前のページ</a>
+                                <a href="#" @click.prevent="fetchactiveCenter(pagination.prev_page_url)">前のページ</a>
                             </li>
 
                             <li class="page-item disabled">
@@ -156,7 +156,7 @@
                             </li>
 
                             <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
-                                <a href="#" @click="fetchactiveCenter(pagination.next_page_url)">次のページ</a>
+                                <a href="#" @click.prevent="fetchactiveCenter(pagination.next_page_url)">次のページ</a>
                             </li>
                         </ul>
                     </nav>

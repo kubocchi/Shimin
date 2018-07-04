@@ -8,7 +8,7 @@
             <div class="container clearfix">
                 <div class="head_left">
                     <h1>
-                        <a href="#" class="clearfix">
+                        <a href="#!" class="clearfix">
                             <p class="logo">
                                 <img src="/images/h1_logo.png" alt="宮崎市民活動センター">
                             </p>

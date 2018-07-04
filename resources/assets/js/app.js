@@ -52,7 +52,7 @@ import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 Vue.use(ClientTable);
 Vue.component('delete', {
     props: ['data', 'index', 'column'],
-    template: `<a class='delete' @click='erase'></a>`,
+    template: `<a class='delete' @click.prevent='erase'></a>`,
     methods: {
         erase() {
             let id = this.data.id; // delete the item

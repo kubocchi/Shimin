@@ -52,7 +52,7 @@
                 <nav class="global_nav collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="clearfix">
                         <li class="open">
-                            <a href="#">
+                            <a href="#!">
                                 <span class="i"></span>
                                 <span class="t">HOME</span>
                             </a>
@@ -64,13 +64,13 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動センターとは</a>
+                                    <a href="#!">市民活動センターとは</a>
                                 </li>
                                 <li>
-                                    <a href="#">施設のご案内</a>
+                                    <a href="#!">施設のご案内</a>
                                 </li>
                                 <li>
-                                    <a href="#">各種書式</a>
+                                    <a href="#!">各種書式</a>
                                 </li>
                             </ul>
                         </li>
@@ -81,13 +81,13 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">市民活動団体とは</a>
+                                    <a href="#!">市民活動団体とは</a>
                                 </li>
                                 <li>
-                                    <a href="#">登録について</a>
+                                    <a href="#!">登録について</a>
                                 </li>
                                 <li>
-                                    <a href="#">団体を探したい</a>
+                                    <a href="#!">団体を探したい</a>
                                 </li>
                             </ul>
                         </li>
@@ -98,19 +98,19 @@
                             </a>
                             <ul class="submenu">
                                 <li>
-                                    <a href="#">ボランティアとは</a>
+                                    <a href="#!">ボランティアとは</a>
                                 </li>
                                 <li>
-                                    <a href="#">ボランティアをしたい</a>
+                                    <a href="#!">ボランティアをしたい</a>
                                 </li>
                                 <li>
-                                    <a href="#">ボランティアを
+                                    <a href="#!">ボランティアを
                                         <br>募集したい</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#!">
                                 <span class="i"></span>
                                 <span class="t">Q & A</span>
                             </a>
@@ -171,7 +171,7 @@
                                 <!-- all -->
                                 <div class="tab-pane fade show clearfix active" id="all" role="tabpanel" aria-labelledby="all-tab">
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/17(月)~8/26(日)</p>
                                             <p class="title">
                                                 <span class="new"></span>ボランティア養成講座</p>
@@ -179,35 +179,35 @@
                                         </a>
                                     </div>
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">5/20(日)</p>
                                             <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">第10回　青島鬼の洗濯岩アクアスロン</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">田植え体験</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">宮崎市民活動センター</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">大淀地域まちづくり推進協議会</p>
                                             <p class="detail">詳細</p>
@@ -217,42 +217,42 @@
                                 <!-- volunteer -->
                                 <div class="tab-pane fade clearfix" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">第10回　青島鬼の洗濯岩アクアスロン</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">田植え体験</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">第10回　青島鬼の洗濯岩アクアスロン</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">田植え体験</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">第10回　青島鬼の洗濯岩アクアスロン</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item volunteer">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">田植え体験</p>
                                             <p class="detail">詳細</p>
@@ -262,42 +262,42 @@
                                 <!-- event -->
                                 <div class="tab-pane fade clearfix" id="event" role="tabpanel" aria-labelledby="event-tab">
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/17(月)~8/26(日)</p>
                                             <p class="title">ボランティア養成講座</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">5/20(日)</p>
                                             <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/17(月)~8/26(日)</p>
                                             <p class="title">ボランティア養成講座</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">5/20(日)</p>
                                             <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/17(月)~8/26(日)</p>
                                             <p class="title">ボランティア養成講座</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item event">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">5/20(日)</p>
                                             <p class="title">昭和の歌謡曲レコードコンサート『昭和30年代の歌声』</p>
                                             <p class="detail">詳細</p>
@@ -307,42 +307,42 @@
                                 <!-- member -->
                                 <div class="tab-pane fade clearfix" id="member" role="tabpanel" aria-labelledby="member-tab">
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">宮崎市民活動センター</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">大淀地域まちづくり推進協議会</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">宮崎市民活動センター</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">大淀地域まちづくり推進協議会</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">宮崎市民活動センター</p>
                                             <p class="detail">詳細</p>
                                         </a>
                                     </div>
                                     <div class="item member">
-                                        <a href="#">
+                                        <a href="#!">
                                             <p class="day">6/24(日)</p>
                                             <p class="title">大淀地域まちづくり推進協議会</p>
                                             <p class="detail">詳細</p>
@@ -352,7 +352,7 @@
                             </div>
                         </div>
                         <div class="btn_blue">
-                            <a href="#">一覧へ</a>
+                            <a href="#!">一覧へ</a>
                         </div>
                         <div class="link_blue">
                             <p>
@@ -369,27 +369,27 @@
                     <div class="erea_brown">
                         <!-- 団体を探す -->
                         <div class="btn_big">
-                            <a href="#">
+                            <a href="#!">
                                 <img src="../../../sass/themes/frontend/images/btn_searchgroup.png" alt="団体をさがす">
                             </a>
                         </div>
                         <!-- 地域まちづくり情報 -->
                         <div class="btn_big">
-                            <a href="#">
+                            <a href="#!">
                                 <img src="../../../sass/themes/frontend/images/btn_machidukuri.png" alt="地域街づくり情報">
                             </a>
                         </div>
                         <!-- 広報誌 -->
                         <ul class="btn_book clearfix">
                             <li>
-                                <a href="#">
+                                <a href="#!">
                                     <img src="../../../sass/themes/frontend/images/btn_book_yumeko.png" alt="夢交差点">
                                     <p>最新号：
                                         <br>Vol.65(H29.1月発行)</p>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="#!">
                                     <img src="../../../sass/themes/frontend/images/btn_book_kawara.png" alt="かわら版">
                                     <p>最新号：
                                         <br>平成29年5月1日発行</p>
@@ -399,16 +399,16 @@
                         <!-- mini menu -->
                         <ul class="mini_menu">
                             <li>
-                                <a href="#">事業報告</a>
+                                <a href="#!">事業報告</a>
                             </li>
                             <li>
-                                <a href="#">各種書式</a>
+                                <a href="#!">各種書式</a>
                             </li>
                             <li>
-                                <a href="#">助成金情報</a>
+                                <a href="#!">助成金情報</a>
                             </li>
                             <li>
-                                <a href="#">災害ボランティア情報</a>
+                                <a href="#!">災害ボランティア情報</a>
                             </li>
                         </ul>
                     </div>
@@ -427,7 +427,7 @@
                     </div>
                     <!-- admmin btn -->
                     <div class="btn_admin">
-                        <a href="#">管理者ログイン</a>
+                        <a href="#!">管理者ログイン</a>
                     </div>
                 </div>
             </div>
