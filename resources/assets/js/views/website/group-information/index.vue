@@ -156,10 +156,21 @@
                                 <dl class="input-group">
                                     <dt>活動分野</dt>
                                     <dd>
-                                        <multiselect v-model="selectedActivityCategory" :options="categories" @select="onActivityCategorySelect" placeholder="選んでください"
-                                            selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" track-by="id"
-                                            label="name" v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ"
-                                            :max-height="150" @remove="onActivityCategoryRemove">
+                                        <multiselect
+                                        v-model="selectedActivityCategory" 
+                                        :options="categories" 
+                                        @select="onActivityCategorySelect" 
+                                        placeholder="選んでください"
+                                        selectLabel="選択" 
+                                        deselectLabel="選択を解除" 
+                                        selectedLabel="選択中" 
+                                        track-by="id"
+                                        label="name" 
+                                        v-validate="'required'" 
+                                        name="activity_category" 
+                                        data-vv-as="活動カテゴリ"
+                                        :max-height="150" 
+                                        @remove="onActivityCategoryRemove">
                                         </multiselect>
                                     </dd>
                                 </dl>
