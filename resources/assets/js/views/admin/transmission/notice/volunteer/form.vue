@@ -459,7 +459,7 @@
                 this.volunteer.id = volunteer.id;
                 this.volunteer.subject = volunteer.subject;
                 this.volunteer.activity_category = volunteer.activity_category;
-                this.volunteer.children = volunteer.children;
+                this.volunteer.children = volunteer.children == 1 ? true : false;
                 this.volunteer.start_date = volunteer.start_date;
                 this.volunteer.end_date = volunteer.end_date;
                 this.volunteer.sponsor = volunteer.sponsor;
@@ -611,7 +611,7 @@
             pullAttachments(volunteer) {
                 // Make HTTP request to store announcement
                 axios
-                    .get(`api/asset/attachments/${volunteer.file}`)
+                    .get(`/api/asset/attachments/${volunteer.file}`)
                     .then(
                         function (response) {
                             console.log(response);
