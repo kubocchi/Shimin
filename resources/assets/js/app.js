@@ -19,10 +19,10 @@ import App from './components/App'
 
 /*************************START FRONTEND**************************/
 
- require('./external/bootstrap')
- require('./external/jquery.sliderPro')
+require('./external/bootstrap')
+require('./external/jquery.sliderPro')
 require('./external/script')
-require('./external/scrol-fixed')
+//require('./external/scrol-fixed')
 import PopperJs from 'popper.js'
 //Vue.use(PopperJs)
 window.jQuery = require('jquery')
@@ -48,7 +48,7 @@ Vue.use(wysiwyg, {
 })
 
 // Datatable
-import {ServerTable, ClientTable, Event} from 'vue-tables-2';
+import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 Vue.use(ClientTable);
 Vue.component('delete', {
     props: ['data', 'index', 'column'],
@@ -98,14 +98,42 @@ const router = new VueRouter({
     scrollBehavior() {
         return { x: 0, y: 0 };
     },
-    mode: 'history', 
+    mode: 'history',
     base: '/',
     routes: routeCollection
 });
 
+import Vuex from 'vuex';
+Vue.use(Vuex);
+import VuexPersistence from 'vuex-persist'
+const vuexLocal = new VuexPersistence({
+    storage: window.localStorage
+})
+
+const store = new Vuex.Store({
+    state: {
+        user: {} // default value
+    },
+    getters: {
+        fruitsCount () {
+            return state.user
+        }
+    },
+    mutations: {
+        changeUser(state, user) {
+            console.log('Mutation: changeuser to', user)
+            state.user = user
+        }
+    },
+    plugins: [vuexLocal.plugin]
+})
+
+
+
 
 const app = new Vue({
     el: '#app',
+    store,
     render: h => h(App),
     router,
 });

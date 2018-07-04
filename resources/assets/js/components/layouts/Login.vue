@@ -42,6 +42,11 @@
             //     localStorage.setItem("reload", 'login');
             // }
         },
+         computed: {
+            counter: function() {
+                return this.$store.getters.counter
+            }
+        },
 
         methods: {
             loginClicked() {
@@ -68,9 +73,10 @@
                             // const base64Url = token.split('.')[1];
                             // const base64 = base64Url.replace('-', '+').replace('_', '/');
                             // console.log(JSON.parse(window.atob(base64)));
-                           
-                            localStorage.setItem('token', token);
 
+                            localStorage.setItem('token', token);
+                            this.$store.commit('changeUser', response.data.user)
+                            console.log('user',  this.$store.state.user)
                             console.log('token', localStorage.getItem('token'))
                             window.location.href = '/admin'
                         }

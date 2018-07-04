@@ -157,7 +157,7 @@
                             </div>
 
                             <!--Progress Modal -->
-                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
+                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -193,8 +193,8 @@
                     detail: null,
                     file: null,
                     deactivate: false,
-                    created_by: 1,
-                    updated_by: 1
+                   updated_by: this.$store.state.user.id,
+                    created_by: this.$store.state.user.id
                 },
                 id: "",
                 pagination: {},

@@ -5,19 +5,18 @@
         <div v-if="isAdmin">
             <admin-panel></admin-panel>
         </div>
-        <div v-else-if="isLogin">
-            <login></login>
-        </div>
-        <div v-else>
+         <div v-else-if="isHome">
             <website></website>
         </div>
-        
+        <div v-else>
+            <login></login>
+        </div>
     </div>
 </template>
 
 
 <script>
-     import { vueTopprogress } from 'vue-top-progress'
+    import { vueTopprogress } from 'vue-top-progress'
     export default {
         components: {
             'admin-panel': require('./layouts/AdminPanel'),
@@ -33,13 +32,17 @@
                 return this.$store.getters.isAuthenticated
             },
             isAdmin: function () {
-                return this.$route.meta === 'admin'
+                console.log('token', localStorage.getItem('token'))
+                return this.$route.meta === 'admin' && this.$store.state.user != null
             },
             meta: function () {
                 return this.$store.state.pageMetaStore
             },
             isLogin: function () {
                 return this.$route.meta === 'login'
+            },
+            isHome: function () {
+                return this.$route.meta === 'home'
             }
             
         },
@@ -53,6 +56,7 @@
         },
         
         created() {
+            console.log( this.$store.state.user)
             //window.location.reload(true)
             //this.$router.go(this.$router.currentRoute)
         }

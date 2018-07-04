@@ -194,8 +194,8 @@
                     content: "",
                     file: "",
                     deactivate: false,
-                    created_by: 1,
-                    updated_by: 1
+                   updated_by: this.$store.state.user.id,
+                    created_by: this.$store.state.user.id
                 },
                 attachments: [],
             };

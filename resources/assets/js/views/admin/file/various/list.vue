@@ -177,7 +177,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let loader = this.$loading.show();
-                        fetch(`api/various/${id}`, {
+                        fetch(`/api/various/${id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())

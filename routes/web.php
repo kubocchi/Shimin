@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login/{any}', function () {
+    return view('admin');
+})->where('any', '.*');
 
 Route::get('/admin/{any}', function () {
     return view('admin');

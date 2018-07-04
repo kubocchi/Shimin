@@ -86,7 +86,7 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <span class="navbar-text" style=" color:#FFF; font-weight:bold;">{{username}}</span>
+                            <span class="navbar-text" style=" color:#FFF; font-weight:bold;">{{user.name}}</span>
                         </li>
                     </ul>
                 </div>
@@ -156,8 +156,16 @@
                 $(domElement).dropdown('toggle')
             },
             logout(){
+                localStorage.removeItem("token");
                 localStorage.removeItem("login");
-                this.$router.push({name: 'login' })
+                window.location.href = '/login'
+                this.$store.commit('changeUser', null)
+
+            }
+        },
+        computed: {
+            user(){
+                return this.$store.state.user // here
             }
         }
     };
