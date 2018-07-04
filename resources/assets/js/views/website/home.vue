@@ -346,9 +346,7 @@
                     </div>
                     <!-- admmin btn -->
                     <div class="btn_admin">
-                        <router-link :to="{ name: 'login' }">
-                            <span>管理者ログイン</span>
-                        </router-link>
+                        <a  href="/login"> <span>管理者ログイン</span> </a>
                     </div>
                 </div>
             </div>
@@ -486,6 +484,9 @@
                 }
                 console.log(`notice/${routeName}/${object.id}/detail`)
                 return `notice/${routeName}/${object.id}/detail`
+            },
+            gotoLogin(){
+                window.location.href = '/login'
             },
         }
     };
