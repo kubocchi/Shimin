@@ -40,16 +40,21 @@
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-4">
-                                    <label class="col-form-label">【開催日】（必須）</label>
-                                    <div class="row">
-                                        <vue-datepicker-local v-model="eventDate" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                    <label class="col-form-label">【掲載期間】（必須）</label>
+                                      <div class="row">
+                                        <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-4">
-                                    <label class="col-form-label">【掲載開始日】（必須）</label>
+                                    <label class="col-form-label">【開催期間】（必須）</label>
                                     <div class="row">
-                                        <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                        <vue-datepicker-local v-model="eventDateRange" :local="local" :format="dateFormat"></vue-datepicker-local>
                                     </div>
+                                </div>
+                                 <div class="col-lg-12 form-group">
+                                    <label class="col-form-label" for="sponsor">【開催日時】</label>
+                                    <input v-model="event.datetime" class="form-control" id="sponsor" type="text" v-validate="'required'" name="datetime" data-vv-as="開催日時">
+                                    <span class="is-danger">{{ errors.first('datetime') }}</span>
                                 </div>
                             </div>
 
@@ -264,7 +269,7 @@
                             </div>
 
                             <!--Progress Modal -->
-                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -288,6 +293,7 @@
 <script>
     import VueDatepickerLocal from "vue-datepicker-local";
     import Multiselect from "vue-multiselect";
+    import moment from 'moment'
 
     export default {
         components: { VueDatepickerLocal, Multiselect },
@@ -298,9 +304,11 @@
                     subject: "",
                     activity_category: "",
                     children: true,
-                    event_date: "",
+                    event_start_date: "",
+                    event_end_date: "",
                     start_date: "",
                     end_date: "",
+                    datetime: "",
                     organizer: "",
                     file: "",
                     deadline: "",
@@ -313,8 +321,9 @@
                     url: "",
                     phone: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                    created_by: this.$store.state.user.id,
+                    updated_by: this.$store.state.user.id
+                    
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -322,6 +331,7 @@
                 switchColorOther: "#0066CC",
                 eventDate: new Date(),
                 range: [new Date(), new Date()],
+                eventDateRange: [new Date(), new Date()],
                 emptyTime: "",
                 emptyRange: [],
                 local: {
@@ -461,15 +471,20 @@
 
                 this.range[0] = new Date(event.start_date);
                 this.range[1] = new Date(event.end_date);
+
+                this.eventDateRange[0] = new Date(event.event_start_date);
+                this.eventDateRange[1] = new Date(event.event_end_date);
+                console.log(this.eventDateRange)
                 this.selectedActivityCategory = this.categories.find(x => x.id === event.activity_category.toString())
 
                 this.event.id = event.id;
                 this.event.subject = event.subject;
                 this.event.activity_category = event.activity_category;
-                this.event.children = event.children == 1 ? true : false;
-                this.event.event_date = event.event_date;
-                this.event.start_date = event.start_date;
+                this.event.children = !!event.children == 1 ? true : false;
+                this.event.event_start_date = event.event_start_date;
+                this.event.event_end_date = event.event_end_date;
                 this.event.end_date = event.end_date;
+                this.event.datetime = event.datetime;
                 this.event.organizer = event.organizer;
                 this.event.file = event.file;
                 this.event.deadline = event.deadline;
@@ -481,7 +496,7 @@
                 this.event.detail = event.detail;
                 this.event.url = event.url;
                 this.event.phone = event.phone;
-                this.event.deactivate = event.deactivate == 1 ? true : false;
+                this.event.deactivate = !!event.deactivate == 1 ? true : false;
                 this.event.created_by = event.created_by;
                 this.event.updated_by = event.updated_by;
 
@@ -631,7 +646,7 @@
             pullAttachments(event) {
                 // Make HTTP request to store announcement
                 axios
-                    .get(`api/asset/attachments/${event.file}`)
+                    .get(`/api/asset/attachments/${event.file}`)
                     .then(
                         function (response) {
                             console.log(response);
@@ -677,13 +692,14 @@
                         //     confirmButtonText: "OK"
                         // });
                     } else {
-                        this.event.event_date = this.eventDate.toISOString().slice(0,10)
-                        this.event.start_date = !!this.range
-                            ? this.range[0].toISOString().slice(0,10)
-                            : "";
-                        this.event.end_date = !!this.range
-                            ? this.range[1].toISOString().slice(0,10)
-                            : "";
+
+                        this.event.event_start_date = !!this.eventDateRange ? this.eventDateRange[0].toISOString().slice(0,10) : "";
+                        this.event.event_end_date = !!this.eventDateRange ? this.eventDateRange[1].toISOString().slice(0,10) : "";
+                        
+                        this.event.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
+                        this.event.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        // this.event.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
+                        // this.event.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
                         $("#confirmationModal").modal("show");
                     }
                 });

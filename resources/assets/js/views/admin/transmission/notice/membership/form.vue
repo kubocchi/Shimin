@@ -258,8 +258,8 @@
                     linkname: "",
                     contact: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                   updated_by: this.$store.state.user.id,
+                    created_by: this.$store.state.user.id,
+                    updated_by: this.$store.state.user.id,
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -564,7 +564,7 @@
             pullAttachments(membership) {
                 // Make HTTP request to store announcement
                 axios
-                    .get(`api/asset/attachments/${membership.file}`)
+                    .get(`/api/asset/attachments/${membership.file}`)
                     .then(
                         function (response) {
                             console.log(response);

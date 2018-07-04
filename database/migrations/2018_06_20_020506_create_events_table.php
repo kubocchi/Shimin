@@ -18,9 +18,11 @@ class CreateEventsTable extends Migration
             $table->string('subject');
             $table->integer('activity_category');
             $table->boolean('children');
-            $table->date('event_date');
+            $table->date('event_start_date');
+            $table->date('event_end_date');
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('datetime');
             $table->string('organizer')->nullable();
             $table->string('file')->nullable();
             $table->string('deadline')->nullable();
