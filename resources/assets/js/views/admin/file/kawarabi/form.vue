@@ -116,7 +116,7 @@
                             </div>
 
                             <!--Progress Modal -->
-                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
+                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -151,8 +151,8 @@
                     detail: "",
                     file: "",
                     deactivate: false,
-                    created_by: 1,
-                    updated_by: 1
+                   updated_by: this.$store.state.user.id,
+                    created_by: this.$store.state.user.id
                 },
                 id: "",
                 pagination: {},
@@ -212,7 +212,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/kawarabi", {
+                    fetch("/api/kawarabi", {
                         method: "post",
                         body: JSON.stringify(this.kawarabi),
                         headers: {
@@ -239,7 +239,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/kawarabi", {
+                    fetch("/api/kawarabi", {
                         method: "put",
                         body: JSON.stringify(this.kawarabi),
                         headers: {
@@ -399,7 +399,7 @@
             // Pull required attachmets
             pullAttachments(kawarabi) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${kawarabi.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${kawarabi.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

@@ -13,13 +13,36 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'auth'], function ($router) {
+Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
+    
 });
+
+Route::group(['middleware' => 'jwt.auth'], function ($router) {
+
+    // Create new active-center
+    Route::post('active-center', 'ActiveCenterController@store');
+
+});
+
+# 1.1 active-center routes
+// List active-center
+Route::get('active-centers', 'ActiveCenterController@index');
+// List single active-center
+Route::get('active-center/{id}', 'ActiveCenterController@show');
+// Create new active-center
+//Route::post('active-center', 'ActiveCenterController@store');
+// Update active-center
+Route::put('active-center', 'ActiveCenterController@store');
+// Delete active-center
+Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
+// List single active-center
+Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
+
 
 # Attachment routes
 // Editor Image Upload
@@ -35,19 +58,7 @@ Route::get('/download/{file}', function ($file='') {
     return response()->download(public_path('public/attachments/'.$file)); 
 });
 
-# 1.1 active-center routes
-// List active-center
-Route::get('active-centers', 'ActiveCenterController@index');
-// List single active-center
-Route::get('active-center/{id}', 'ActiveCenterController@show');
-// Create new active-center
-Route::post('active-center', 'ActiveCenterController@store');
-// Update active-center
-Route::put('active-center', 'ActiveCenterController@store');
-// Delete active-center
-Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
-// List single active-center
-Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
+
 
 # 1.2 Notice routes
 // List notice

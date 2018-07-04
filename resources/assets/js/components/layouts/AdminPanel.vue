@@ -86,7 +86,7 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <span class="navbar-text" style=" color:#FFF; font-weight:bold;">{{username}}</span>
+                            <span class="navbar-text" style=" color:#FFF; font-weight:bold;">{{user.name}}</span>
                         </li>
                     </ul>
                 </div>
@@ -134,21 +134,21 @@
             //localStorage.removeItem("reload");
             console.log('reload', localStorage.getItem("reload"))
 
-            if(localStorage.getItem("reload") == null){
-                localStorage.setItem("reload", 'admin');
-            }
-            else if(localStorage.getItem("reload") != 'admin'){
-                window.location.reload(true)
-                localStorage.removeItem("reload");
-                localStorage.setItem("reload", 'admin');
-            }
+            // if(localStorage.getItem("reload") == null){
+            //     localStorage.setItem("reload", 'admin');
+            // }
+            // else if(localStorage.getItem("reload") != 'admin'){
+            //     window.location.reload(true)
+            //     localStorage.removeItem("reload");
+            //     localStorage.setItem("reload", 'admin');
+            // }
 
-            if(localStorage.getItem("login") == null){
-                this.$router.push({name: 'login' })
-            }
-            else{
-                this.username = localStorage.getItem("login")
-            }
+            // if(localStorage.getItem("login") == null){
+            //     this.$router.push({name: 'login' })
+            // }
+            // else{
+            //     this.username = localStorage.getItem("login")
+            // }
         },
 
         methods: {
@@ -157,8 +157,16 @@
                 $(domElement).dropdown('toggle')
             },
             logout(){
+                localStorage.removeItem("token");
                 localStorage.removeItem("login");
-                this.$router.push({name: 'login' })
+                window.location.href = '/login'
+                this.$store.commit('changeUser', null)
+
+            }
+        },
+        computed: {
+            user(){
+                return this.$store.state.user // here
             }
         }
     };

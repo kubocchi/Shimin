@@ -204,7 +204,7 @@
                                 break;
                             }
 
-                        fetch(`api/${routeName}/${object.id}`, {
+                        fetch(`/api/${routeName}/${object.id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())

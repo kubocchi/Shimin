@@ -111,8 +111,14 @@ import Privacy from '../views/website/privacy'
 //menseki
 import Menseki from '../views/website/menseki'
 
+
 /***********************Website-Components***********************/
 const routes = [
+    {
+        path: '/login',
+        name: 'login',
+        meta: 'login'
+    },
     {
         path: '/admin',
         redirect: '/admin/dashboard',
@@ -120,11 +126,6 @@ const routes = [
             render(c) { return c('router-view'); }
         },
         children: [
-            {
-                path: '/login',
-                name: 'login',
-                meta: 'login'
-            },
             {
                 path: '/admin/dashboard',
                 name: 'dashboard',
@@ -394,12 +395,14 @@ const routes = [
             {
                 path: 'index',
                 name: 'activeCenterIndex',
-                component: activeCenterIndex
+                component: activeCenterIndex,
+                meta: 'home'
             },
             {
                 path: ':id/detail',
                 name: 'activeCenterDetail',
-                component: activeCenterDetail
+                component: activeCenterDetail,
+                meta: 'home'
             }
         ]
     },
@@ -413,12 +416,14 @@ const routes = [
             {
                 path: 'index',
                 name: 'disasterIndex',
-                component: DisasterIndex
+                component: DisasterIndex,
+                meta: 'home'
             },
             {
                 path: ':id/detail',
                 name: 'disasterDetail',
-                component: DisasterDetail
+                component: DisasterDetail,
+                meta: 'home'
             }
         ]
     },
@@ -432,24 +437,28 @@ const routes = [
             {
                 path: 'index',
                 name: 'subsidyIndex',
-                component: SubsidyIndex
+                component: SubsidyIndex,
+                meta: 'home'
             },
             {
                 path: ':id/detail',
                 name: 'subsidyDetail',
-                component: SubsidyDetail
+                component: SubsidyDetail,
+                meta: 'home'
             }
         ]
     },
     {
         path: '/business-report',
         name: 'businessReportIndex',
-        component: BusinessReport
+        component: BusinessReport,
+        meta: 'home'
     },
     {
         path: '/various',
         name: 'various',
-        component: VariousIndex
+        component: VariousIndex,
+        meta: 'home'
     },
     {
         path: '/yumekousaten',
@@ -461,12 +470,14 @@ const routes = [
             {
                 path: 'index',
                 name: 'yumekousatenIndex',
-                component: DreamIndex
+                component: DreamIndex,
+                meta: 'home'
             },
             {
                 path: ':id/detail',
                 name: 'yumekousatenDetail',
-                component: DreamDetail
+                component: DreamDetail,
+                meta: 'home'
             }
         ]
     },
@@ -480,12 +491,14 @@ const routes = [
             {
                 path: 'index',
                 name: 'kawarabanIndex',
-                component: KawarabiIndex
+                component: KawarabiIndex,
+                meta: 'home'
             },
             {
                 path: ':id/detail',
                 name: 'kawarabanDetail',
-                component: KawarabiDetail
+                component: KawarabiDetail,
+                meta: 'home'
             }
         ]
     },
@@ -499,79 +512,94 @@ const routes = [
             {
                 path: 'index',
                 name: 'noticeIndex',
-                component: NoticeIndex
+                component: NoticeIndex,
+                meta: 'home'
             },
             {
                 path: 'event/:id/detail',
                 name: 'eventDetail',
-                component: EventDetail
+                component: EventDetail,
+                meta: 'home'
             },
             {
                 path: 'volunteer/:id/detail',
                 name: 'volunteerDetail',
-                component: VolunteerDetail
+                component: VolunteerDetail,
+                meta: 'home'
             },
             {
                 path: 'member/:id/detail',
                 name: 'membershipDetail',
-                component: MembershipDetail
+                component: MembershipDetail,
+                meta: 'home'
             }
         ]
     },
     {
         path: '/floormap',
         name: 'floormap',
-        component: Floormap
+        component: Floormap,
+        meta: 'home'
     },
     {
         path: '/information',
         name: 'information',
-        component: Information
+        component: Information,
+        meta: 'home'
     },
     {
         path: '/group-information',
         name: 'groupInformationIndex',
-        component: GroupInformationIndex
+        component: GroupInformationIndex,
+        meta: 'home'
     },
     {
         path: '/group-information/:id/detail',
         name: 'groupInformationDetail',
-        component: GroupInformationDetail
+        component: GroupInformationDetail,
+        meta: 'home'
     },
     {
         path: '/group-information/regist',
         name: 'groupInformationRegist',
-        component: GroupInformationRegist
+        component: GroupInformationRegist,
+        meta: 'home'
     },
     {
         path: '/volunteer/index',
         name: 'volunteerIndex',
-        component: VolunteerIndex
+        component: VolunteerIndex,
+        meta: 'home'
     },
     {
         path: '/volunteer/recruitment',
         name: 'volunteerRecruitment',
-        component: VolunteerRecruitment
+        component: VolunteerRecruitment,
+        meta: 'home'
     },
     {
         path: '/machidukuri',
         name: 'machidukuri',
-        component: Machidukuri
+        component: Machidukuri,
+        meta: 'home'
     },
     {
         path: '/question',
         name: 'question',
-        component: Question
+        component: Question,
+        meta: 'home'
     },
     {
         path: '/privacy',
         name: 'privacy',
-        component: Privacy
+        component: Privacy,
+        meta: 'home'
     },
     {
         path: '/menseki',
         name: 'menseki',
-        component: Menseki
+        component: Menseki,
+        meta: 'home'
     },
 ];
 

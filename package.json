@@ -23,8 +23,10 @@
 		"vuetable-2": "^1.7.5"
 	},
 	"dependencies": {
+		"js-cookie": "^2.2.0",
 		"moment": "^2.22.2",
 		"pretty-checkbox-vue": "^1.1.8",
+		"validate.js": "^0.12.0",
 		"vee-validate": "^2.1.0-beta.1",
 		"vue-datepicker-local": "^1.0.14",
 		"vue-js-toggle-button": "^1.2.3",
@@ -38,6 +40,9 @@
 		"vue-tables-2": "^1.4.56",
 		"vue-top-progress": "^0.7.0",
 		"vue-wysiwyg": "^1.7.2",
-		"vue2-editor": "^2.4.4"
+		"vue2-editor": "^2.4.4",
+		"vuex": "^3.0.1",
+		"vuex-persist": "^1.4.3",
+		"vuex-persistedstate": "^2.5.4"
 	}
 }

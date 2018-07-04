@@ -135,7 +135,7 @@
                             </div>
 
                             <!--Progress Modal -->
-                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -172,8 +172,8 @@
                     content: "",
                     file: "",
                     deactivate: false,
-                    created_by: 1,
-                    updated_by: 1
+                   updated_by: this.$store.state.user.id,
+                    created_by: this.$store.state.user.id
                 },
                 edit: false,
                 dateFormat: 'YYYY-MM-DD',
@@ -231,7 +231,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("api/disaster", {
+                    fetch("/api/disaster", {
                         method: "post",
                         body: JSON.stringify(this.disaster),
                         headers: {
@@ -258,7 +258,7 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("api/disaster", {
+                    fetch("/api/disaster", {
                         method: "put",
                         body: JSON.stringify(this.disaster),
                         headers: {
@@ -423,7 +423,7 @@
             // Pull required attachmets
             pullAttachments(disaster) {
                 // Make HTTP request to store announcement
-                axios.get(`api/asset/attachments/${disaster.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${disaster.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;

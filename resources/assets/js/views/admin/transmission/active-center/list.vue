@@ -172,7 +172,7 @@
                 }).then((result) => {
                     if (result.value) {
                         let loader = this.$loading.show();
-                        fetch(`api/active-center/${id}`, {
+                        fetch(`/api/active-center/${id}`, {
                             method: "delete"
                         })
                         .then(res => res.json())

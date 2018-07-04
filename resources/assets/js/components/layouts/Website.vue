@@ -2,7 +2,7 @@
     <div>
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="../../../sass/themes/frontend/images/favicon.ico">
+        <link rel="shortcut icon" href="/images/favicon.ico">
         <!-- header -->
         <div id="header">
             <div class="container clearfix">
@@ -10,7 +10,7 @@
                     <h1>
                         <a href="#" class="clearfix">
                             <p class="logo">
-                                <img src="images/h1_logo.png" alt="宮崎市民活動センター">
+                                <img src="/images/h1_logo.png" alt="宮崎市民活動センター">
                             </p>
                             <p class="s_text">私たちは宮崎市民の市民活動・ボランティアを支援します。</p>
                             <p class="l_text"></p>
@@ -45,22 +45,22 @@
                 <ul class="banner">
                     <li>
                         <a href="http://www.city.miyazaki.miyazaki.jp/" target="_blank">
-                            <img src="images/banner_mycity.png" alt="宮崎市">
+                            <img src="/images/banner_mycity.png" alt="宮崎市">
                         </a>
                     </li>
                     <li>
                         <a href="http://www.my-shakyo.jp/" target="_blank">
-                            <img src="images/banner_myshakyo.png" alt="宮崎市社会福祉協議会">
+                            <img src="/images/banner_myshakyo.png" alt="宮崎市社会福祉協議会">
                         </a>
                     </li>
                     <li>
                         <a href="http://www.jnpoc.ne.jp/" target="_blank">
-                            <img src="images/banner_jnpoc.png" alt="日本NPOセンター">
+                            <img src="/images/banner_jnpoc.png" alt="日本NPOセンター">
                         </a>
                     </li>
                     <li>
                         <a href="http://npo.pref.miyazaki.lg.jp/" target="_blank">
-                            <img src="images/banner_mynpo.png" alt="宮崎県NPOポータルサイト">
+                            <img src="/images/banner_mynpo.png" alt="宮崎県NPOポータルサイト">
                         </a>
                     </li>
                 </ul>
@@ -185,7 +185,7 @@
                 <div id="center_info" class="clearfix">
                     <div class="left">
                         <p class="logo">
-                            <img src="images/logo_foot.png" alt="宮崎市民活動センター">
+                            <img src="/images/logo_foot.png" alt="宮崎市民活動センター">
                         </p>
                         <p class="l">宮崎市民活動センター</p>
                         <p class="s">開館時間 9:00 ～ 22:00</p>
@@ -257,14 +257,14 @@
             //
             console.log('reload', localStorage.getItem("reload"))
 
-            if(localStorage.getItem("reload") == null){
-                localStorage.setItem("reload", 'website');
-            }
-            else if(localStorage.getItem("reload") != 'website'){
-                window.location.reload(true)
-                localStorage.removeItem("reload");
-                localStorage.setItem("reload", 'website');
-            }
+            // if(localStorage.getItem("reload") == null){
+            //     localStorage.setItem("reload", 'website');
+            // }
+            // else if(localStorage.getItem("reload") != 'website'){
+            //     window.location.reload(true)
+            //     localStorage.removeItem("reload");
+            //     localStorage.setItem("reload", 'website');
+            // }
 
             this.loadNav()
         },

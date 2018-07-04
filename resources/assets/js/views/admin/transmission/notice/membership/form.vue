@@ -215,7 +215,7 @@
                             </div>
 
                             <!--Progress Modal -->
-                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
@@ -258,8 +258,8 @@
                     linkname: "",
                     contact: "",
                     deactivate: false,
-                    created_by: 1,
-                    updated_by: 1,
+                   updated_by: this.$store.state.user.id,
+                   updated_by: this.$store.state.user.id,
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -347,7 +347,7 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show();
-                    fetch("api/membership", {
+                    fetch("/api/membership", {
                         method: "post",
                         body: JSON.stringify(this.membership),
                         headers: {
@@ -374,7 +374,7 @@
                 } else {
                     // Update
                     let loader = this.$loading.show();
-                    fetch("api/membership", {
+                    fetch("/api/membership", {
                         method: "put",
                         body: JSON.stringify(this.membership),
                         headers: {

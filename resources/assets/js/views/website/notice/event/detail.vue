@@ -326,7 +326,7 @@
             pullAttachments(event) {
                 // Make HTTP request to store announcement
                 let loader = this.$loading.show();
-                axios.get(`api/asset/attachments/${event.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${event.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
