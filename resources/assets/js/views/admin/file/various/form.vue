@@ -166,8 +166,8 @@
                     group: 1,
                     file: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 id: "",
                 pagination: {},

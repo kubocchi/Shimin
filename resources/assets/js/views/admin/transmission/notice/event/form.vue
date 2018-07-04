@@ -321,8 +321,8 @@
                     url: "",
                     phone: "",
                     deactivate: false,
-                    created_by: this.$store.state.user.id,
-                    updated_by: this.$store.state.user.id
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0
                     
                 },
                 edit: false,
