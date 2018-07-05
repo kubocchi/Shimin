@@ -151,7 +151,7 @@
                                         <p class="title">{{business.name}}</p>
                                         <ul>
                                             <li v-for="attachment in business.attachments" v-bind:key="attachment.id">
-                                                <a href="#" @click.prevent="downloadFile(attachment)" target="_blank">
+                                                <a href="#!" @click.prevent="downloadFile(attachment)" target="_blank">
                                                    {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
                                                 </a>
                                             </li>

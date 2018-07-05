@@ -232,14 +232,14 @@
                                 <!-- dd=>csv37  -->
                                 <dl>
                                     <dt>Webサイト</dt>
-                                    <dd><a href="#" target="_blank">{{groupInformation.contact_url}}</a></dd>
+                                    <dd><a href="#!" target="_blank">{{groupInformation.contact_url}}</a></dd>
                                 </dl>
                                 <!-- dd=>53(not csv)  -->
                                 <!-- <dl class="report">
                                     <dt>活動報告書</dt>
                                     <dd>
-                                        <a href="#"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
-                                        <a href="#"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
+                                        <a href="#!"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
+                                        <a href="#!"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
                                     </dd>
                                 </dl> -->
                             </div>
@@ -281,14 +281,14 @@
                                 <!-- dd=>csv37  -->
                                 <dl>
                                     <dt>URL</dt>
-                                    <dd><a href="#">{{groupInformation.disclosure_contact_url == 0 ? '': groupInformation.contact_url}}</a></dd>
+                                    <dd><a href="#!">{{groupInformation.disclosure_contact_url == 0 ? '': groupInformation.contact_url}}</a></dd>
                                 </dl>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="btn_pageback">
-                    <a href="#">一覧に戻る</a>
+                    <a href="#!">一覧に戻る</a>
                 </div>
             </div>
         </div>

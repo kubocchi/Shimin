@@ -186,7 +186,7 @@
                                 </dl>
                                 <!-- enter -->
                                 <div class="btn_search">
-                                    <button @click="fetchNotice()">検 索</button>
+                                    <button @click.prevent="fetchNotice()">検 索</button>
                                 </div>
                             </div>
                         </div>

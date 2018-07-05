@@ -134,7 +134,7 @@
                             <dl v-for="(dream) in dreams" v-bind:key="dream.id">
                                 <!-- title -->
                                 <dt v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                    <a class="label label-primary" @click="downloadFile(attachment)">
+                                    <a class="label label-primary" @click.prevent="downloadFile(attachment)">
                                         {{dream.subject}}
                                     </a>
                                 </dt>

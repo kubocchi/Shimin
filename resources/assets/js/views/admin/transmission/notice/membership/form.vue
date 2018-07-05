@@ -123,7 +123,7 @@
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link>
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>
 
@@ -208,7 +208,7 @@
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
                                         </div>
                                     </div>
                                 </div>

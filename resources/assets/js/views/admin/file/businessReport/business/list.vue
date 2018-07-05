@@ -25,12 +25,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchBusiness()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchBusiness()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -64,7 +64,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteBusiness(business.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteBusiness(business.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -75,15 +75,15 @@
                 </router-link> 
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchBusiness(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchBusiness(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchBusiness(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchBusiness(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>

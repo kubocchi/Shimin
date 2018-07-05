@@ -203,7 +203,7 @@
                         <!-- dd=>URL -->
                         <dl>
                             <dt>URL</dt>
-                            <dd><a @click="openInNewTab(volunteer.linkname)">{{volunteer.linkname}}</a></dd>
+                            <dd><a @click.prevent="openInNewTab(volunteer.linkname)">{{volunteer.linkname}}</a></dd>
                         </dl>
                         <!-- dd=>contact information -->
                         <dl>

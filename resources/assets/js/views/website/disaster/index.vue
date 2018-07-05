@@ -149,15 +149,15 @@
                     <nav class="pager">
                         <ul>
                             <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
-                                <a href="#" @click="fetchDisaster(pagination.prev_page_url)">前のページ</a>
+                                <a href="#!" @click.prevent="fetchDisaster(pagination.prev_page_url)">前のページ</a>
                             </li>
 
                             <li class="page-item disabled">
-                                <span href="#">{{ pagination.current_page }} の {{ pagination.last_page }}</span>
+                                <span href="#!">{{ pagination.current_page }} の {{ pagination.last_page }}</span>
                             </li>
 
                             <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
-                                <a href="#" @click="fetchDisaster(pagination.next_page_url)">次のページ</a>
+                                <a href="#!" @click.prevent="fetchDisaster(pagination.next_page_url)">次のページ</a>
                             </li>
                         </ul>
                     </nav>

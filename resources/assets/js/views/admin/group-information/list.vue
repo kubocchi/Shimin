@@ -42,12 +42,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchGroupInformation()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchGroupInformation()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -82,7 +82,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteGroupInformation( groupInformation.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteGroupInformation( groupInformation.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -91,10 +91,10 @@
                 <!-- <div class="bs-component">
                     <div class="row">
                         <div class="col-md-2 mt-4">
-                            <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV出力</a>
+                            <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV出力</a>
                         </div>
                         <div class="col-md-2 mt-4 mb-4">
-                            <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV入力</a>
+                            <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV入力</a>
                             <label>File
                                 <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
                             </label>
@@ -104,10 +104,10 @@
                 </div> -->
                 <div class="bs-component">
                     <div class="row">
-                        <div class="col-md-2 mt-4"> <a class="btn btn-outline-primary  btn-block" href="#" role="button">CSV出力</a> </div>
+                        <div class="col-md-2 mt-4"> <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV出力</a> </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 mt-4 mb-4"> <a class="btn btn-outline-primary  btn-block" v-on:click="submitFile()" href="#" role="button">CSV入力</a> </div>
+                        <div class="col-md-2 mt-4 mb-4"> <a class="btn btn-outline-primary  btn-block" v-on:click="submitFile()" href="#!" role="button">CSV入力</a> </div>
                         <div class="form-group">
                             <div class="form-inline">
                                 <div class="form-group mt-4">
@@ -119,15 +119,15 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchGroupInformation(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchGroupInformation(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchGroupInformation(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchGroupInformation(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>

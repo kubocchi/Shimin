@@ -150,10 +150,10 @@
                         <dl class="file">
                             <dt>添付ファイル</dt>
                             <dd>
-                                <!-- <a href="#">ドネーション説明会表.pdf</a> -->
+                                <!-- <a href="#!">ドネーション説明会表.pdf</a> -->
                                 <div v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                     <div class="form-group">
-                                        <a class="label label-primary" @click="downloadFile(attachment)">
+                                        <a class="label label-primary" @click.prevent="downloadFile(attachment)">
                                             {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
                                         </a>
                                     </div>
@@ -164,7 +164,7 @@
                         <!-- <dl class="url">
                             <dt>URL</dt>
                             <dd>
-                                <a href="#">https://XXXXXXXXXXXXXXXXXXXX</a>
+                                <a href="#!">https://XXXXXXXXXXXXXXXXXXXX</a>
                             </dd>
                         </dl> -->
                     </div>
