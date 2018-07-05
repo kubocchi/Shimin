@@ -171,7 +171,7 @@
                         <!-- dd=>activity_date -->
                         <dl>
                             <dt>活動日時</dt>
-                            <dd>{{event.event_date}}</dd>
+                            <dd>{{event.datetime}}</dd>
                         </dl>
                         <!-- dd=>Deadline -->
                         <dl>
@@ -187,6 +187,11 @@
                         <dl>
                             <dt>定員</dt>
                             <dd>{{event.capacity}}</dd>
+                        </dl>
+                        <!-- dd=> Number of people -->
+                        <dl>
+                            <dt>対象者</dt>
+                            <dd>{{event.target}}</dd>
                         </dl>
                         <!-- dd=>child -->
                         <dl>
@@ -208,7 +213,7 @@
                         <dl>
                             <dt>URL</dt>
                             <dd>
-                                <a @click.prevent="openInNewTab(event.url)">{{event.url}}</a>
+                                <a @click="openInNewTab(event.url)">{{event.url}}</a>
                             </dd>
                         </dl>
                         <!-- dd=>contact information -->
@@ -248,9 +253,12 @@
                     subject: "",
                     activity_category: "",
                     children: true,
+                    event_start_date: "",
+                    event_end_date: "",
                     event_date: "",
                     start_date: "",
                     end_date: "",
+                    datetime: "",
                     organizer: "",
                     file: "",
                     deadline: "",
@@ -309,9 +317,11 @@
                 this.event.subject = event.subject;
                 this.event.activity_category = event.activity_category;
                 this.event.children = event.children;
-                this.event.event_date = event.event_date;
+                this.event.event_start_date = event.event_start_date;
+                this.event.event_end_date = event.event_end_date;
                 this.event.start_date = event.start_date;
                 this.event.end_date = event.end_date;
+                this.event.datetime = event.datetime;
                 this.event.organizer = event.organizer;
                 this.event.file = event.file;
                 this.event.deadline = event.deadline;
