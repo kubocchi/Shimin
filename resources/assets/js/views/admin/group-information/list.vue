@@ -364,10 +364,10 @@
                 return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''
             },
             getStatus(id) {
-                return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''
+                return this.statuses.find(x => x.id === id) ? this.statuses.find(x => x.id === id).label : ''
             },
             getManagement(id) {
-                return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''
+                return this.managements.find(x => x.id === id) ? this.managements.find(x => x.id === id).label : ''
             },
         }
     };
