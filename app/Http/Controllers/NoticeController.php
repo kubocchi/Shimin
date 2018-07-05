@@ -32,7 +32,7 @@ class NoticeController extends Controller
             $obj->type = 'イベント';
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($formattedData, $obj);
         }
@@ -43,7 +43,7 @@ class NoticeController extends Controller
             $obj->type = '会員募集';
             $obj->id =  $value['id'];
             $obj->subject = $value['organizer'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($formattedData, $obj);
         }
@@ -51,10 +51,10 @@ class NoticeController extends Controller
         foreach ($volunteers as $key => $value) 
         {
             $obj = new stdClass;
-            $obj->type = 'ボランティア情報';
+            $obj->type = 'ボランティア';
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($formattedData, $obj);
         }
@@ -97,7 +97,7 @@ class NoticeController extends Controller
                 $obj->type = 'イベント';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
     
                 array_push($formattedData, $obj);
             }
@@ -108,10 +108,10 @@ class NoticeController extends Controller
             foreach ($volunteers as $key => $value) 
             {
                 $obj = new stdClass;
-                $obj->type = 'ボランティア情報';
+                $obj->type = 'ボランティア';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -124,7 +124,7 @@ class NoticeController extends Controller
                 $obj->type = '会員募集';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['organizer'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -137,7 +137,7 @@ class NoticeController extends Controller
                 $obj->type = 'イベント';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
     
                 array_push($formattedData, $obj);
             }
@@ -148,7 +148,7 @@ class NoticeController extends Controller
                 $obj->type = '会員募集';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['organizer'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -156,10 +156,10 @@ class NoticeController extends Controller
             foreach ($volunteers as $key => $value) 
             {
                 $obj = new stdClass;
-                $obj->type = 'ボランティア情報';
+                $obj->type = 'ボランティア';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -209,7 +209,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
     
                 array_push($formattedData, $obj);
             }
@@ -220,11 +220,11 @@ class NoticeController extends Controller
             foreach ($volunteers as $key => $value) 
             {
                 $obj = new stdClass;
-                $obj->type = 'ボランティア情報';
+                $obj->type = 'ボランティア';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -238,7 +238,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['organizer'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -252,7 +252,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
     
                 array_push($formattedData, $obj);
             }
@@ -264,7 +264,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['organizer'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -272,11 +272,11 @@ class NoticeController extends Controller
             foreach ($volunteers as $key => $value) 
             {
                 $obj = new stdClass;
-                $obj->type = 'ボランティア情報';
+                $obj->type = 'ボランティア';
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+                $obj->date = '';
 
                 array_push($formattedData, $obj);
             }
@@ -309,7 +309,7 @@ class NoticeController extends Controller
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
 
             array_push($eventsResponce, $obj);
         }
@@ -317,11 +317,11 @@ class NoticeController extends Controller
         foreach ($volunteers as $key => $value) 
         {
             $obj = new stdClass;
-            $obj->type = 'ボランティア情報';
+            $obj->type = 'ボランティア';
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($volunteersResponce, $obj);
         }
@@ -333,7 +333,7 @@ class NoticeController extends Controller
             $obj->id =  $value['id'];
             $obj->subject = $value['organizer'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($membershipResponce, $obj);
         }
@@ -345,7 +345,7 @@ class NoticeController extends Controller
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
 
             array_push($allResponce, $obj);
         }
@@ -357,7 +357,7 @@ class NoticeController extends Controller
             $obj->id =  $value['id'];
             $obj->subject = $value['organizer'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($allResponce, $obj);
         }
@@ -365,11 +365,11 @@ class NoticeController extends Controller
         foreach ($volunteers as $key => $value) 
         {
             $obj = new stdClass;
-            $obj->type = 'ボランティア情報';
+            $obj->type = 'ボランティア';
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = \Carbon\Carbon::parse($value['created_at'])->format('Y-m-d');
+            $obj->date = '';
 
             array_push($allResponce, $obj);
         }
