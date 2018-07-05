@@ -450,8 +450,8 @@
             fillFormWithRecievedModel(volunteer) {
                 this.pullAttachments(volunteer);
 
-                this.range[0] = new Date(volunteer.start_date);
-                this.range[1] = new Date(volunteer.end_date);
+                this.range = [new Date(volunteer.start_date), new Date(volunteer.end_date)]
+                
                 console.log(this.categories.find(x => x.id === volunteer.activity_category))
 
                 this.selectedActivityCategory = this.categories.find(x => x.id === volunteer.activity_category.toString())

@@ -483,6 +483,7 @@
 .datepicker {
   display: inline-block;
   position: relative;
+  width: 100% !important;
 }
 
 .datepicker:before {
@@ -592,11 +593,11 @@
 }
 
 .datepicker-range {
-  min-width: 325px;
+  min-width: 100% !important;
 }
 
 .datepicker-range .datepicker-popup {
-  width: 403px;
+  width: 415px !important;
 }
 
 .datepicker-bottom {

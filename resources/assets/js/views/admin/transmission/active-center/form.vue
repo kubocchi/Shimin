@@ -149,6 +149,7 @@
                             </div>
                         </fieldset>
                     </form>
+                    {{range}}
                 </div>
             </div>
         </div>
@@ -157,11 +158,12 @@
 
 
 <script>
-    import VueDatepickerLocal from 'vue-datepicker-local'
+    import VueDatepickerLocal from "vue-datepicker-local";
+    import Multiselect from "vue-multiselect";
     import moment from 'moment'
 
     export default {
-        components: { VueDatepickerLocal },
+        components: {  Multiselect, VueDatepickerLocal },
         data() {
             return {
                 activeCenter: {
@@ -172,7 +174,7 @@
                     content: "",
                     file: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
                     created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 id: "",

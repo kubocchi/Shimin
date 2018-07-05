@@ -404,10 +404,9 @@
             // Edit new, sends model to API
             fillFormWithRecievedModel(membership) {
                 
-                this.pullAttachments(membership);
+                this.pullAttachments(membership)
 
-                this.range[0] = new Date(membership.start_date);
-                this.range[1] = new Date(membership.end_date);
+                this.range = [new Date(membership.start_date), new Date(membership.end_date)]
                 this.selectedActivityCategory = this.categories.find(x => x.id === membership.activity_category.toString())
                 
                 this.membership.id = membership.id;
