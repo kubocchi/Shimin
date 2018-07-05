@@ -163,6 +163,11 @@
                             <dt>内容詳細</dt>
                             <dd v-html="event.detail"></dd>
                         </dl>
+                        <!-- dd=>start_date ~ end_date -->
+                        <dl>
+                            <dt>開催期間</dt>
+                            <dd>{{event.event_start_date}} ～ {{event.event_end_date}}</dd>
+                        </dl>
                         <!-- dd=>activity_date -->
                         <dl>
                             <dt>活動日時</dt>
