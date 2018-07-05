@@ -4,7 +4,10 @@
         <hr>
         <div class="row mt-4">
             <div class="col-md-4 topmidashi">
-                <h5>団体情報登録</h5>
+                <h5><strong>
+						<span>
+							<i class="fas fa-feather"></i>
+						</span> 団体情報登録</strong></h5>
             </div>
             <div class="col-md-8">
                 <h5>
@@ -22,7 +25,10 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-4 topmidashi">
-                <h5>情報発信</h5>
+                <h5><strong>
+						<span>
+							<i class="fas fa-dove"></i>
+						</span> 情報発信</strong></h5>
             </div>
             <div class="col-md-8">
                 <h5>
@@ -57,7 +63,10 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-4 topmidashi">
-                <h5>ファイル公開</h5>
+                <h5><strong>
+						<span>
+							<i class="fas fa-file"></i>
+						</span> ファイル公開</strong></h5>
             </div>
             <div class="col-md-8">
                 <h5>
