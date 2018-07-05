@@ -149,7 +149,7 @@
                             </div>
                         </fieldset>
                     </form>
-                    {{range}}
+                    {{uploadedData}}
                 </div>
             </div>
         </div>
@@ -161,6 +161,7 @@
     import VueDatepickerLocal from "vue-datepicker-local";
     import Multiselect from "vue-multiselect";
     import moment from 'moment'
+    import ErrorHandler from '../../../../external/error-handler'
 
     export default {
         components: {  Multiselect, VueDatepickerLocal },
@@ -279,8 +280,14 @@
                                 });
                         })
                         .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                if (error.response.status === 401) {
+                                    window.location.href = '/login'
+                                }
 
-                        })
+                            }
+                        });
                 } else {
 
                     // Update
@@ -362,6 +369,9 @@
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
+
+                 this.uploadedData = new FormData()
+                this.prepareFields()
             },
 
             // This function will be called every time you add a file
@@ -382,6 +392,8 @@
             // Adding attachment, Sends request to Attachment API
             addAttachment() {
                 this.prepareFields()
+
+                console.log('upload',this.uploadedData)
 
                 var config = {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -405,12 +417,18 @@
                             this.addActiveCenter()
                             $("#progressModal").modal('hide')
                         } else {
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(100, this)
                             console.log('Unsuccessful Upload')
                         }
                     }
                         .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log('Attachment catch', error)
+                   .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
                     });
                 console.log(attachments)
             },
@@ -490,8 +508,8 @@
                         console.log('true')
                     }
                     else {
-                        this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                        this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        this.activeCenter.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
+                        this.activeCenter.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
                         $("#confirmationModal").modal('show')
                     }
                 });
