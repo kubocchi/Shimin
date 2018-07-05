@@ -196,7 +196,7 @@ class GroupInformationController extends Controller
                     
                     $groupInformation->number= $column[7]; //   1
                     //$groupInformation->type= $column[8]; //   2
-                    $groupInformation->type= ($column[8]=='団体')?"1":"0"; //   2
+                    $groupInformation->type= ($column[8]=='団体')?"0":"1"; //   2
     
                     for($index=1; $index<7; $index++){
                         if($column[$index]=='TRUE')break;

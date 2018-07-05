@@ -112,7 +112,7 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
     state: {
-        user: {} // default value
+        user: null // default value
     },
     getters: {
         fruitsCount () {
