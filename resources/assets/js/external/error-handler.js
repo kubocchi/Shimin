@@ -7,7 +7,7 @@ class ErrorHandler {
                 message = 'Too large upload'
                 break;
             case 401:
-                message = 'Unauthorized'
+                message = 'セッションの有効時間が切れました。作業を続けるにはもう一度ログインしてください。'
                 window.location.href = '/login'
                 break;
             case 100:
