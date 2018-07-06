@@ -146,10 +146,10 @@
                                             <span class="icon"></span>全て</label>
                                         <label class="checkbox individual">
                                             <input type="radio" name="type" v-model="params.type" value="0">
-                                            <span class="icon"></span>個人</label>
+                                            <span class="icon"></span>団体</label>
                                         <label class="checkbox oraganization">
                                             <input type="radio" name="type" v-model="params.type" value="1">
-                                            <span class="icon"></span>団体</label>
+                                            <span class="icon"></span>個人</label>
                                     </dd>
                                 </dl>
                                 <!-- cate -->
