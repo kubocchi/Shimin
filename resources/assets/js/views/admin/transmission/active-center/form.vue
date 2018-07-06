@@ -39,8 +39,10 @@
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
 
                                         <div class="form-group files">
@@ -149,7 +151,6 @@
                             </div>
                         </fieldset>
                     </form>
-                    {{uploadedData}}
                 </div>
             </div>
         </div>

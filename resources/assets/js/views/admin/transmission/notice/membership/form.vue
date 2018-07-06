@@ -49,8 +49,10 @@
                                 <label for="inputFile">【イメージ画像】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" accept="image/*" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
 
                                         <div class="form-group files">
@@ -114,7 +116,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="membership.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="membership.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: '非公開', unchecked: '公開' }"
                                     />
                                 </div>
                             </div>
