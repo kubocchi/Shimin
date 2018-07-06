@@ -257,7 +257,7 @@
             getDetail(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || `/api/disaster/${this.disaster.id}`
+                page_url = page_url || `/api/disaster-frontend/${this.disaster.id}`
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {

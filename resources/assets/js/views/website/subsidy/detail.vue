@@ -251,7 +251,7 @@
             getDetail(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || `/api/subsidy/${this.subsidy.id}`
+                page_url = page_url || `/api/subsidy-frontend/${this.subsidy.id}`
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {

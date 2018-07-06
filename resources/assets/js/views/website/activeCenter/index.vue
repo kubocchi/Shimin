@@ -148,7 +148,7 @@
                     <nav class="pager">
                         <ul>
                             <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
-                                <a href="#" @click.prevent="fetchactiveCenter(pagination.prev_page_url)">前のページ</a>
+                                <a href="#" @click.prevent="fetchActiveCenter(pagination.prev_page_url)">前のページ</a>
                             </li>
 
                             <li class="page-item disabled">
@@ -156,7 +156,7 @@
                             </li>
 
                             <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
-                                <a href="#" @click.prevent="fetchactiveCenter(pagination.next_page_url)">次のページ</a>
+                                <a href="#" @click.prevent="fetchActiveCenter(pagination.next_page_url)">次のページ</a>
                             </li>
                         </ul>
                     </nav>
@@ -178,14 +178,15 @@
         },
 
         created() {
-            this.fetchactiveCenter()
+            this.fetchActiveCenter()
         },
 
         methods: {
-            fetchactiveCenter(page_url) {
+            fetchActiveCenter(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || "/api/active-centers"
+                page_url = page_url || "/api/active-centers-frontend"
+
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
@@ -193,11 +194,9 @@
                         console.log(this.activeCenters)
 
                         this.activeCenters.forEach(activeCenter => {
-                            if(new Date(activeCenter.start_date) > new Date(this.newTagDate))
+                            if(new Date(activeCenter.start_date) >  new Date(this.newTagDate))
                                 this.newTagDate = activeCenter.start_date
                         });
-
-                        console.log(this.newTagDate)
                         vm.makePagination(res.meta, res.links);
                         loader.hide()
                     })

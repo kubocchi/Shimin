@@ -293,19 +293,16 @@
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("/api/active-center", {
-                        method: "put",
-                        body: JSON.stringify(this.activeCenter),
+                    axios.put("/api/active-center", this.activeCenter, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             loader.hide()
                             self.$swal({
-                                title: "成功!",
-                                text: "活動センターが追加されました!",
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
                                 type: "success",
                                 confirmButtonText: 'OK'
                             })
@@ -315,7 +312,15 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                if (error.response.status === 401) {
+                                    window.location.href = '/login'
+                                }
+
+                            }
+                        });
                 }
             },
 

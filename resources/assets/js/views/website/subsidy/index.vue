@@ -193,7 +193,7 @@
             fetchsubsidy(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
-                page_url = page_url || "/api/subsidies"
+                page_url = page_url || "/api/subsidies-frontend"
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {

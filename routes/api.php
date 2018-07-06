@@ -24,24 +24,59 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 
 Route::group(['middleware' => 'jwt.auth'], function ($router) {
 
+    # 1.1 active-center routes
+    // List active-center
+    //Route::get('active-centers', 'ActiveCenterController@index');
+    // List single active-center
+    Route::get('active-center/{id}', 'ActiveCenterController@show');
     // Create new active-center
     Route::post('active-center', 'ActiveCenterController@store');
+    // Update active-center
+    Route::put('active-center', 'ActiveCenterController@store');
+    // Delete active-center
+    Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
+    // List single active-center
+    Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
+
+    # 1.3 Subsidy routes
+    // List Subsidy
+    Route::get('subsidies', 'SubsidyController@index');
+    // List single Subsidy
+    Route::get('subsidy/{id}', 'SubsidyController@show');
+    // Create new Subsidy
+    Route::post('subsidy', 'SubsidyController@store');
+    // Update Subsidy
+    Route::put('subsidy', 'SubsidyController@store');
+    // Delete Subsidy
+    Route::delete('subsidy/{id}', 'SubsidyController@destroy');
+    // List single active-center
+    Route::post('subsidies', 'SubsidyController@getSubsidyData');
+
+    # 1.4 Disaster routes
+    // List active-center
+    Route::get('disasters', 'DisasterController@index');
+    // List Disaster
+    Route::post('getDisasterData', 'DisasterController@index');
+    // List single Disaster
+    Route::get('disaster/{id}', 'DisasterController@show');
+    // Create new Disaster
+    Route::post('disaster', 'DisasterController@store');
+    // Update Disaster
+    Route::put('disaster', 'DisasterController@store');
+    // Delete Disaster
+    Route::delete('disaster/{id}', 'DisasterController@destroy');
+    // List single active-center
+    Route::post('disasters', 'DisasterController@getDisasterData');
 
 });
 
+// 
+
 # 1.1 active-center routes
 // List active-center
-Route::get('active-centers', 'ActiveCenterController@index');
+Route::get('active-centers-frontend', 'ActiveCenterController@index');
 // List single active-center
-Route::get('active-center/{id}', 'ActiveCenterController@show');
-// Create new active-center
-//Route::post('active-center', 'ActiveCenterController@store');
-// Update active-center
-Route::put('active-center', 'ActiveCenterController@store');
-// Delete active-center
-Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
-// List single active-center
-Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
+Route::get('active-center-frontend/{id}', 'ActiveCenterController@show');
 
 
 # Attachment routes
@@ -116,33 +151,15 @@ Route::post('memberships', 'MembershipController@getEventData');
 
 # 1.3 Subsidy routes
 // List Subsidy
-Route::get('subsidies', 'SubsidyController@index');
+Route::get('subsidies-frontend', 'SubsidyController@index');
 // List single Subsidy
-Route::get('subsidy/{id}', 'SubsidyController@show');
-// Create new Subsidy
-Route::post('subsidy', 'SubsidyController@store');
-// Update Subsidy
-Route::put('subsidy', 'SubsidyController@store');
-// Delete Subsidy
-Route::delete('subsidy/{id}', 'SubsidyController@destroy');
-// List single active-center
-Route::post('subsidies', 'SubsidyController@getSubsidyData');
+Route::get('subsidy-frontend/{id}', 'SubsidyController@show');
 
 # 1.4 Disaster routes
 // List active-center
-Route::get('disasters', 'DisasterController@index');
-// List Disaster
-Route::post('getDisasterData', 'DisasterController@index');
+Route::get('disasters-frontend', 'DisasterController@index');
 // List single Disaster
-Route::get('disaster/{id}', 'DisasterController@show');
-// Create new Disaster
-Route::post('disaster', 'DisasterController@store');
-// Update Disaster
-Route::put('disaster', 'DisasterController@store');
-// Delete Disaster
-Route::delete('disaster/{id}', 'DisasterController@destroy');
-// List single active-center
-Route::post('disasters', 'DisasterController@getDisasterData');
+Route::get('disaster-frontend/{id}', 'DisasterController@show');
 
 # 2.1 Various routes
 // List various

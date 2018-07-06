@@ -161,6 +161,7 @@
 <script>
     import VueDatepickerLocal from 'vue-datepicker-local'
     import moment from 'moment'
+    import ErrorHandler from '../../../../external/error-handler'
 
     export default {
         components: { VueDatepickerLocal },
@@ -233,15 +234,36 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("/api/disaster", {
-                        method: "post",
-                        body: JSON.stringify(this.disaster),
+                    // fetch("/api/disaster", {
+                    //     method: "post",
+                    //     body: JSON.stringify(this.disaster),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    //     .then(res => res.json())
+                    //     .then(data => {
+                    //         loader.hide()
+                    //         self.$swal({
+                    //             title: "登録完了!",
+                    //             text: "登録が完了しました!",
+                    //             type: "success",
+                    //             confirmButtonText: 'OK'
+                    //         })
+                    //             .then(function () {
+                    //                 self.$router.push({
+                    //                     name: 'disasterList'
+                    //                 })
+                    //             });
+                    //     })
+                    //     .catch(err => console.log(err))
+
+                    axios.post("/api/disaster", this.disaster, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             loader.hide()
                             self.$swal({
                                 title: "登録完了!",
@@ -255,24 +277,51 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                 } else {
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("/api/disaster", {
-                        method: "put",
-                        body: JSON.stringify(this.disaster),
+                    // fetch("/api/disaster", {
+                    //     method: "put",
+                    //     body: JSON.stringify(this.disaster),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    //     .then(res => res.json())
+                    //     .then(data => {
+                    //         loader.hide()
+                    //         self.$swal({
+                    //             title: "成功!",
+                    //             text: "活動センターが追加されました!",
+                    //             type: "success",
+                    //             confirmButtonText: 'OK'
+                    //         })
+                    //             .then(function () {
+                    //                 self.$router.push({
+                    //                     name: 'disasterList'
+                    //                 })
+                    //             });
+                    //     })
+                    //     .catch(err => console.log(err))
+
+                    axios.put("/api/disaster", this.disaster, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             loader.hide()
                             self.$swal({
-                                title: "成功!",
-                                text: "活動センターが追加されました!",
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
                                 type: "success",
                                 confirmButtonText: 'OK'
                             })
@@ -282,7 +331,13 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                 }
             },
 

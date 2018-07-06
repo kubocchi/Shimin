@@ -97,6 +97,7 @@
 </template>
 
 <script>
+    import ErrorHandler from '../../../../external/error-handler'
     export default {
         data() {
             return {
@@ -121,21 +122,41 @@
                 let vm = this;
                 page_url = page_url || "/api/disasters";
 
-                fetch(page_url, {
-                    method: "post",
-                    body: JSON.stringify(this.params),
+                // fetch(page_url, {
+                //     method: "post",
+                //     body: JSON.stringify(this.params),
+                //     headers: {
+                //         "content-type": "application/json"
+                //     }
+                // })
+                //     .then(res => res.json())
+                //     .then(res => {
+                //         this.disasters = res.data;
+                //         console.log(this.disasters);
+                //         vm.makePagination(res.meta, res.links);
+                //         loader.hide()
+                //     })
+                //     .catch(err => console.log(err))
+
+
+                axios.post(page_url, this.params, {
                     headers: {
-                        "content-type": "application/json"
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 })
-                    .then(res => res.json())
-                    .then(res => {
-                        this.disasters = res.data;
-                        console.log(this.disasters);
-                        vm.makePagination(res.meta, res.links);
-                        loader.hide()
-                    })
-                    .catch(err => console.log(err))
+                .then(response => {
+                    this.disasters = response.data.data;
+                    console.log(this.subsidies);
+                    vm.makePagination(response.data.meta, response.data.links);
+                    loader.hide()
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response);
+                        $("#progressModal").modal('hide')
+                        ErrorHandler.handle(error.response.status, this)
+                    }
+                });
             },
 
             // Paginating the table data

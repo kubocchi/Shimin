@@ -97,6 +97,7 @@
 </template>
 
 <script>
+    import ErrorHandler from '../../../../external/error-handler'
     export default {
         data() {
             return {
@@ -129,21 +130,40 @@
                 let vm = this;
                 page_url = page_url || "/api/active-centers";
 
-                fetch(page_url, {
-                    method: "post",
-                    body: JSON.stringify(this.params),
-                    headers: {
-                        "content-type": "application/json"
-                    }
-                })
-                    .then(res => res.json())
-                    .then(res => {
-                        this.activeCenters = res.data;
+                // fetch(page_url, {
+                //     method: "post",
+                //     body: JSON.stringify(this.params),
+                //     headers: {
+                //         "content-type": "application/json"
+                //     }
+                // })
+                //     .then(res => res.json())
+                //     .then(res => {
+                //         this.activeCenters = res.data;
+                //         console.log(this.activeCenters);
+                //         vm.makePagination(res.meta, res.links);
+                //         loader.hide()
+                //     })
+                //     .catch(err => console.log(err))
+
+                axios.post(page_url, this.params, {
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        }
+                    })
+                    .then(response => {
+                        this.activeCenters = response.data.data;
                         console.log(this.activeCenters);
-                        vm.makePagination(res.meta, res.links);
+                        vm.makePagination(response.data.meta, response.data.links);
                         loader.hide()
                     })
-                    .catch(err => console.log(err))
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    });
             },
 
             // Paginating the table data

@@ -159,6 +159,7 @@
 <script>
     import VueDatepickerLocal from 'vue-datepicker-local'
     import moment from 'moment'
+    import ErrorHandler from '../../../../external/error-handler'
 
     export default {
         components: { VueDatepickerLocal },
@@ -233,56 +234,109 @@
                 if (this.edit === false) {
                     // Add
                     let loader = this.$loading.show()
-                    fetch("/api/subsidy", {
-                        method: "post",
-                        body: JSON.stringify(this.subsidy),
+
+                     axios.post("/api/subsidy", this.subsidy, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        loader.hide()
-                        self.$swal({
-                            title: "登録完了!",
-                            text: "登録が完了しました!",
-                            type: "success",
-                            confirmButtonText : 'OK'
-                        })
-                        .then(function() {
-                            self.$router.push({
-                                name: 'subsidyList'
+                        .then(response => {
+                            loader.hide()
+                            self.$swal({
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
+                                type: "success",
+                                confirmButtonText: 'OK'
                             })
+                                .then(function () {
+                                    self.$router.push({
+                                        name: 'subsidyList'
+                                    })
+                                });
+                        })
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
                         });
-                    })
-                    .catch(err => console.log(err))
+                    // fetch("/api/subsidy", {
+                    //     method: "post",
+                    //     body: JSON.stringify(this.subsidy),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    // .then(res => res.json())
+                    // .then(data => {
+                    //     loader.hide()
+                    //     self.$swal({
+                    //         title: "登録完了!",
+                    //         text: "登録が完了しました!",
+                    //         type: "success",
+                    //         confirmButtonText : 'OK'
+                    //     })
+                    //     .then(function() {
+                    //         self.$router.push({
+                    //             name: 'subsidyList'
+                    //         })
+                    //     });
+                    // })
+                    // .catch(err => console.log(err))
                 } else {
 
                     // Update
                     let loader = this.$loading.show()
-                    fetch("/api/subsidy", {
-                        method: "put",
-                        body: JSON.stringify(this.subsidy),
+                    axios.put("/api/subsidy", this.subsidy, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        loader.hide()
-                        self.$swal({
-                            title: "成功!",
-                            text: "活動センターが追加されました!",
-                            type: "success",
-                            confirmButtonText : 'OK'
-                        })
-                        .then(function() {
-                            self.$router.push({
-                                name: 'subsidyList'
+                        .then(response => {
+                            loader.hide()
+                            self.$swal({
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
+                                type: "success",
+                                confirmButtonText: 'OK'
                             })
-                        });
-                    })
-                    .catch(err => console.log(err))
+                                .then(function () {
+                                    self.$router.push({
+                                        name: 'subsidyList'
+                                    })
+                                });
+                        })
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                    });
+                    // fetch("/api/subsidy", {
+                    //     method: "put",
+                    //     body: JSON.stringify(this.subsidy),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    // .then(res => res.json())
+                    // .then(data => {
+                    //     loader.hide()
+                    //     self.$swal({
+                    //         title: "成功!",
+                    //         text: "活動センターが追加されました!",
+                    //         type: "success",
+                    //         confirmButtonText : 'OK'
+                    //     })
+                    //     .then(function() {
+                    //         self.$router.push({
+                    //             name: 'subsidyList'
+                    //         })
+                    //     });
+                    // })
+                    // .catch(err => console.log(err))
                 }
             },
 

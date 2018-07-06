@@ -30,7 +30,7 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click.prevent="fetchsubsidy()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchSubsidy()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
@@ -79,7 +79,7 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#!" @click.prevent="fetchsubsidy(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchSubsidy(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
@@ -87,7 +87,7 @@
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#!" @click.prevent="fetchsubsidy(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchSubsidy(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+    import ErrorHandler from '../../../../external/error-handler'
     export default {
         data() {
             return {
@@ -111,32 +112,54 @@
         },
 
         created() {
-            this.fetchsubsidy();
+            this.fetchSubsidy();
         },
 
         methods: {
             // Pulling data from API, its a post request with search-term, type
-            fetchsubsidy(page_url) {
+            fetchSubsidy(page_url) {
                 let loader = this.$loading.show();
                 let vm = this;
                 page_url = page_url || "/api/subsidies";
 
-                fetch(page_url, {
-                    method: "post",
-                    body: JSON.stringify(this.params),
-                    headers: {
-                        "content-type": "application/json"
-                    }
-                })
-                    .then(res => res.json())
-                    .then(res => {
-                        this.subsidies = res.data;
+                // fetch(page_url, {
+                //     method: "post",
+                //     body: JSON.stringify(this.params),
+                //     headers: {
+                //         "content-type": "application/json"
+                //     }
+                // })
+                //     .then(res => res.json())
+                //     .then(res => {
+                //         this.subsidies = res.data;
+                //         console.log(this.subsidies);
+                //         vm.makePagination(res.meta, res.links);
+                //         loader.hide()
+                //     })
+                //     .catch(err => console.log(err))
+
+                
+                axios.post(page_url, this.params, {
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
+                        }
+                    })
+                    .then(response => {
+                        this.subsidies = response.data.data;
                         console.log(this.subsidies);
-                        vm.makePagination(res.meta, res.links);
+                        vm.makePagination(response.data.meta, response.data.links);
                         loader.hide()
                     })
-                    .catch(err => console.log(err))
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    });
             },
+
+            
 
             // Paginating the table data
             makePagination(meta, links) {
@@ -175,7 +198,7 @@
                                 'success'
                             )
                             loader.hide()
-                            this.fetchsubsidy()
+                            this.fetchSubsidy()
                         })
                         .catch(err => console.log(err))
                     }
@@ -192,13 +215,13 @@
             // Loads table data on changing 
             onTypeChanged: function (e) {
                 this.params.type = event.srcElement.value
-                this.fetchsubsidy()
+                this.fetchSubsidy()
             },
 
             // Clearing the user typed search term
             clearSearch() {
                 this.params.search = ""
-                this.fetchsubsidy()
+                this.fetchSubsidy()
             }
         }
     };
