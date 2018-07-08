@@ -311,7 +311,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
                  fetch('/api/notices', {
                     method: "post",
@@ -332,7 +332,7 @@
                         });
 
                         console.log(this.newTagDate)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

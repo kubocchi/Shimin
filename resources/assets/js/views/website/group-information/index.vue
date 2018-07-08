@@ -291,7 +291,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchGroupInformation(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || '/api/group-informations-frontend'
                 fetch(page_url, {
@@ -307,7 +307,7 @@
                         console.log(res.data);
                         vm.makePagination(res.meta, res.links);
 
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

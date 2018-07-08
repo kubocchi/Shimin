@@ -180,10 +180,17 @@
         created() {
             this.fetchActiveCenter()
         },
+        mounted () {
+            
+            
+        
+            // Use setTimeout for demo
+           
+        },
 
         methods: {
             fetchActiveCenter(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/active-centers-frontend"
 
@@ -198,7 +205,7 @@
                                 this.newTagDate = activeCenter.start_date
                         });
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

@@ -393,7 +393,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/volunteer", {
                         method: "post",
                         body: JSON.stringify(this.volunteer),
@@ -403,7 +403,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -420,7 +420,7 @@
                         .catch(err => console.log(err));
                 } else {
                     // Update
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/volunteer", {
                         method: "put",
                         body: JSON.stringify(this.volunteer),
@@ -430,7 +430,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -677,14 +677,14 @@
                 }
             },
             fetchVolunteer(model) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
                 fetch(`/api/volunteer/${model.id}`)
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithRecievedModel(res.data);
                         console.log(res.data);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

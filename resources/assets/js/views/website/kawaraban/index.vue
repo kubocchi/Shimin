@@ -186,7 +186,7 @@
 
         methods: {
             fetchkawarabi(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/kawarabis-frontend"
                 fetch(page_url)
@@ -195,20 +195,20 @@
                         this.kawarabi = res.data
                         console.log(this.kawarabi)
 
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             pullAttachments(kawarabi) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${kawarabi.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }

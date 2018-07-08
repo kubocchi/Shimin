@@ -815,7 +815,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/group-information", {
                         method: "post",
                         body: JSON.stringify(this.groupInformation),
@@ -825,7 +825,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -842,7 +842,7 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/group-information", {
                         method: "put",
                         body: JSON.stringify(this.groupInformation),
@@ -852,7 +852,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "成功!",
                                 text: "活動センターが追加されました!",
@@ -1006,7 +1006,7 @@
                             this.currentAddedFileIs.push(response.data.data)
                             this.resetData()
                             this.addGroupInformation()
-                            $("#progressModal").modal('hide')
+                            NProgress.done()
                         } else {
                             console.log('Unsuccessful Upload')
                         }

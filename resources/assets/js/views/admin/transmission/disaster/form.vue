@@ -233,7 +233,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     // fetch("/api/disaster", {
                     //     method: "post",
                     //     body: JSON.stringify(this.disaster),
@@ -243,7 +243,7 @@
                     // })
                     //     .then(res => res.json())
                     //     .then(data => {
-                    //         loader.hide()
+                    //         NProgress.done()
                     //         self.$swal({
                     //             title: "登録完了!",
                     //             text: "登録が完了しました!",
@@ -264,7 +264,7 @@
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -287,7 +287,7 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     // fetch("/api/disaster", {
                     //     method: "put",
                     //     body: JSON.stringify(this.disaster),
@@ -297,7 +297,7 @@
                     // })
                     //     .then(res => res.json())
                     //     .then(data => {
-                    //         loader.hide()
+                    //         NProgress.done()
                     //         self.$swal({
                     //             title: "成功!",
                     //             text: "活動センターが追加されました!",
@@ -318,7 +318,7 @@
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",

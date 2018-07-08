@@ -285,14 +285,14 @@
             },
             pullAttachments(object) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${object.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }
@@ -310,7 +310,7 @@
                 this.$forceUpdate();
             },
             getDetail(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || `/api/membership/${this.membership.id}`
                 fetch(page_url)
@@ -318,7 +318,7 @@
                     .then(res => {
                         this.fillFormWithData(res.data)
                         console.log(res.data)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

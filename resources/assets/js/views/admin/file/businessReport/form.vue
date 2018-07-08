@@ -263,7 +263,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/business-report", {
                         method: "post",
                         body: JSON.stringify(this.businessReport),
@@ -273,7 +273,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        loader.hide()
+                        NProgress.done()
                         self.$swal({
                             title: "登録完了!",
                             text: "登録が完了しました!",
@@ -290,7 +290,7 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/business-report", {
                         method: "put",
                         body: JSON.stringify(this.businessReport),
@@ -300,7 +300,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        loader.hide()
+                        NProgress.done()
                         self.$swal({
                             title: "成功!",
                             text: "活動センターが追加されました!",
@@ -516,7 +516,7 @@
                 }
             },
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/years";
 
@@ -529,12 +529,12 @@
                             this.fetchBusiness()
                         }
                         console.log(this.years)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             fetchBusiness(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || `/api/business/year/${this.businessReport.year_id}`;
 
@@ -547,7 +547,7 @@
                         }
                         
                         console.log(this.businesses);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

@@ -210,7 +210,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchGroupInformation(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/group-informations";
 
@@ -226,7 +226,7 @@
                         this.groupInformations = res.data;
                         console.log(this.groupInformations);
                         vm.makePagination(res.meta, res.links);
-                        loader.hide();
+                        NProgress.done();
                     })
                     .catch(err => console.log(err));
             },
@@ -256,7 +256,7 @@
                     cancelButtonText: "キャンセル"
                 }).then(result => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         fetch(`/api/group-information/${id}`, {
                             method: "delete"
                         })
@@ -267,7 +267,7 @@
                                     "選択したデータが削除されました",
                                     "success"
                                 );
-                                loader.hide();
+                                NProgress.done();
                                 this.fetchGroupInformation();
                             })
                             .catch(err => console.log(err));

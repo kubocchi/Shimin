@@ -134,7 +134,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchBusinessReport(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/business-reports";
 
@@ -150,7 +150,7 @@
                         this.businessReports = res.data;
                         console.log(this.businessReports);
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -180,7 +180,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         fetch(`/api/business-report/${id}`, {
                             method: "delete"
                         })
@@ -191,7 +191,7 @@
                                     '選択したデータが削除されました',
                                     'success'
                                 )
-                                loader.hide()
+                                NProgress.done()
                                 this.fetchBusinessReport()
                             })
                             .catch(err => console.log(err))
@@ -219,7 +219,7 @@
             },
             // Pulling data from API, its a post request with search-term, type
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/years";
 
@@ -231,7 +231,7 @@
                         let fakeOption = { 'id': null, 'year': 'すべて' }
                         this.years.unshift(fakeOption)
                         this.selectedYear = fakeOption
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

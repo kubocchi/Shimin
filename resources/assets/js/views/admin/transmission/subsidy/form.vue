@@ -233,7 +233,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
 
                      axios.post("/api/subsidy", this.subsidy, {
                         headers: {
@@ -241,7 +241,7 @@
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -270,7 +270,7 @@
                     // })
                     // .then(res => res.json())
                     // .then(data => {
-                    //     loader.hide()
+                    //     NProgress.done()
                     //     self.$swal({
                     //         title: "登録完了!",
                     //         text: "登録が完了しました!",
@@ -287,14 +287,14 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     axios.put("/api/subsidy", this.subsidy, {
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -323,7 +323,7 @@
                     // })
                     // .then(res => res.json())
                     // .then(data => {
-                    //     loader.hide()
+                    //     NProgress.done()
                     //     self.$swal({
                     //         title: "成功!",
                     //         text: "活動センターが追加されました!",

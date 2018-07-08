@@ -118,7 +118,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchSubsidy(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/subsidies";
 
@@ -134,7 +134,7 @@
                 //         this.subsidies = res.data;
                 //         console.log(this.subsidies);
                 //         vm.makePagination(res.meta, res.links);
-                //         loader.hide()
+                //         NProgress.done()
                 //     })
                 //     .catch(err => console.log(err))
 
@@ -148,12 +148,12 @@
                         this.subsidies = response.data.data;
                         console.log(this.subsidies);
                         vm.makePagination(response.data.meta, response.data.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(error => {
                         if (error.response) {
                             console.log(error.response);
-                            $("#progressModal").modal('hide')
+                            NProgress.done()
                             ErrorHandler.handle(error.response.status, this)
                         }
                     });
@@ -186,21 +186,28 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
-                        fetch(`/api/subsidy/${id}`, {
-                            method: "delete"
+                        NProgress.start()
+                        axios.delete(`/api/subsidy/${id}`, {
+                            headers: {
+                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                            }
                         })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             this.$swal(
                                 '削除しました!',
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchSubsidy()
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                NProgress.done()
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                     }
                     else {
                         this.$swal(

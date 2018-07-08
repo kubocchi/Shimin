@@ -130,7 +130,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchVarious(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/variouses";
 
@@ -146,7 +146,7 @@
                         this.variouses = res.data;
                         console.log(this.variouses);
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -176,7 +176,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         fetch(`/api/various/${id}`, {
                             method: "delete"
                         })
@@ -187,7 +187,7 @@
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchVarious()
                         })
                         .catch(err => console.log(err))

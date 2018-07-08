@@ -246,14 +246,14 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchVarious(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 fetch("/api/variouses-frontend")
                     .then(res => res.json())
                     .then(res => {
                         this.variouses = res.data;
                         console.log(this.variouses);
                         
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

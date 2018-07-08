@@ -191,7 +191,7 @@
 
         methods: {
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/frontpage-business-reports";
 
@@ -200,7 +200,7 @@
                     .then(res => {
                         this.businessReports = res.data;
                         console.log(this.businessReports);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

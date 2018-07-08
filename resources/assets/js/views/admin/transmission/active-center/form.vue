@@ -236,7 +236,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     // fetch("/api/active-center", {
                     //     method: "post",
                     //     body: JSON.stringify(this.activeCenter),
@@ -246,7 +246,7 @@
                     // })
                     //     .then(res => res.json())
                     //     .then(data => {
-                    //         loader.hide()
+                    //         NProgress.done()
                     //         self.$swal({
                     //             title: "登録完了!",
                     //             text: "登録が完了しました!",
@@ -267,7 +267,7 @@
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -292,14 +292,14 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     axios.put("/api/active-center", this.activeCenter, {
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",

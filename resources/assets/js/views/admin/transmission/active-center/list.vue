@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- <Spinner name="pulse" color="#2E92E8"/> -->
+        <Spinner name="pulse" color="#2E92E8"/>
         <h4>
             <span>
                 <i class="fas fa-dove"></i>
@@ -126,7 +126,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchActiveCenter(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/active-centers";
 
@@ -142,7 +142,7 @@
                 //         this.activeCenters = res.data;
                 //         console.log(this.activeCenters);
                 //         vm.makePagination(res.meta, res.links);
-                //         loader.hide()
+                //         NProgress.done()
                 //     })
                 //     .catch(err => console.log(err))
 
@@ -155,12 +155,12 @@
                         this.activeCenters = response.data.data;
                         console.log(this.activeCenters);
                         vm.makePagination(response.data.meta, response.data.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(error => {
                         if (error.response) {
                             console.log(error.response);
-                            $("#progressModal").modal('hide')
+                            NProgress.done()
                             ErrorHandler.handle(error.response.status, this)
                         }
                     });
@@ -191,21 +191,42 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
-                        fetch(`/api/active-center/${id}`, {
-                            method: "delete"
+                        NProgress.start()
+                        axios.delete(`/api/active-center/${id}`, {
+                            headers: {
+                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                            }
                         })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             this.$swal(
                                 '削除しました!',
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchActiveCenter()
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                NProgress.done()
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
+                        // fetch(`/api/active-center/${id}`, {
+                        //     method: "delete"
+                        // })
+                        // .then(res => res.json())
+                        // .then(data => {
+                        //     this.$swal(
+                        //         '削除しました!',
+                        //         '選択したデータが削除されました',
+                        //         'success'
+                        //     )
+                        //     NProgress.done()
+                        //     this.fetchActiveCenter()
+                        // })
+                        // .catch(err => console.log(err))
                     }
                     else {
                         this.$swal(

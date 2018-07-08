@@ -145,7 +145,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
                  fetch('/api/notices', {
                     method: "post",
@@ -159,7 +159,7 @@
                         this.notices = res.data;
                         console.log(res.data);
                         //vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -189,7 +189,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         let routeName = ''
                         
                         switch (object.type) {
@@ -214,7 +214,7 @@
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchNotice()
                         })
                         .catch(err => console.log(err))

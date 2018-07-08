@@ -27,9 +27,6 @@ import PopperJs from 'popper.js'
 //Vue.use(PopperJs)
 window.jQuery = require('jquery')
 
-import vueTopprogress from 'vue-top-progress'
-
-Vue.use(vueTopprogress)
 /*************************END FRONTEND**************************/
 
 
@@ -127,6 +124,7 @@ const store = new Vuex.Store({
     },
     plugins: [vuexLocal.plugin]
 })
+
 
 
 

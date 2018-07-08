@@ -190,7 +190,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/business", {
                         method: "post",
                         body: JSON.stringify(this.business),
@@ -200,7 +200,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        loader.hide()
+                        NProgress.done()
                         self.$swal({
                             title: "登録完了!",
                             text: "登録が完了しました!",
@@ -217,7 +217,7 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/business", {
                         method: "put",
                         body: JSON.stringify(this.business),
@@ -227,7 +227,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        loader.hide()
+                        NProgress.done()
                         self.$swal({
                             title: "成功!",
                             text: "活動センターが追加されました!",
@@ -280,7 +280,7 @@
             },
             // Pulling data from API, its a post request with search-term, type
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/years";
 
@@ -289,7 +289,7 @@
                     .then(res => {
                         this.years = res.data;
                         console.log(this.years);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

@@ -191,7 +191,7 @@
 
         methods: {
             fetchsubsidy(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/subsidies-frontend"
                 fetch(page_url)
@@ -207,7 +207,7 @@
 
                         console.log(this.newTagDate)
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

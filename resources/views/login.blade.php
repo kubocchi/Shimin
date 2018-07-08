@@ -17,6 +17,7 @@
     <body>
         <div id="app">
         </div>
+        <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
         <script src="{{ elixir('/js/app.js') }}"></script>
     </body>
 </html>
