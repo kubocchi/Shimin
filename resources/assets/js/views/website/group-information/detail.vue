@@ -399,7 +399,7 @@
             getDetail(page_url) {
                 NProgress.start()
                 let vm = this;
-                page_url = page_url || `/api/group-information/${this.groupInformation.id}`
+                page_url = page_url || `/api/group-information-frontend/${this.groupInformation.id}`
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {

@@ -71,13 +71,15 @@
                         <tbody>
                             <tr v-for="( groupInformation, rowNumber) in groupInformations" :key=rowNumber>
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ getManagement(parseInt(groupInformation.regist_management)) }}</td>  <!-- ==> groupInformation.management -->
-                                <td>{{ getStatus(parseInt(groupInformation.open_situation)) }}</td>  <!-- ==> groupInformation.statuses -->
+                                <td>{{ getManagement(parseInt(groupInformation.regist_management)) }}</td>
+                                <!-- ==> groupInformation.management -->
+                                <td>{{ getStatus(parseInt(groupInformation.active_status)) }}</td>
+                                <!-- ==> groupInformation.statuses -->
                                 <td>{{ getType(parseInt(groupInformation.type)) }}</td>
                                 <td>{{ getActivityCategoryName(groupInformation.activity_category) }}</td>
                                 <td>{{ groupInformation.name }}</td>
                                 <td>
-                                    <router-link :to="{ name: ' groupInformationForm', params: { model:  groupInformation, requestType: 'edit' }}">
+                                    <router-link :to="{ name: 'groupInformationForm', params: { model:  groupInformation, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>
                                     </router-link>
                                 </td>
@@ -88,26 +90,16 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="bs-component">
+                <div class="bs-component">
                     <div class="row">
                         <div class="col-md-2 mt-4">
                             <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV出力</a>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-2 mt-4 mb-4">
-                            <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV入力</a>
-                            <label>File
-                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" />
-                            </label>
-                            <button v-on:click="submitFile()">Submit</button>
+                            <a class="btn btn-outline-primary  btn-block" @click.prevent="submitFile()" href="#!" role="button">CSV入力</a>
                         </div>
-                    </div>
-                </div> -->
-                <div class="bs-component">
-                    <div class="row">
-                        <div class="col-md-2 mt-4"> <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV出力</a> </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 mt-4 mb-4"> <a class="btn btn-outline-primary  btn-block" v-on:click="submitFile()" href="#!" role="button">CSV入力</a> </div>
                         <div class="form-group">
                             <div class="form-inline">
                                 <div class="form-group mt-4">
@@ -137,6 +129,7 @@
 
 <script>
     import Multiselect from "vue-multiselect";
+    import ErrorHandler from '../../../external/error-handler';
     export default {
         components: { Multiselect },
         data() {
@@ -162,7 +155,7 @@
                 ],
                 selectedManagement: { id: null, label: "すべて" },
                 activityCategories: [
-                    { id: null, name: "すべて"},
+                    { id: null, name: "すべて" },
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
                     { id: "300", name: "障害者福祉" },
@@ -200,6 +193,7 @@
                     { id: 1, label: '個人' },
                 ],
                 selectedType: { 'id': null, 'label': 'すべて' },
+                uploadedCSV : null
             };
         },
 
@@ -214,21 +208,25 @@
                 let vm = this;
                 page_url = page_url || "/api/group-informations";
 
-                fetch(page_url, {
-                    method: "post",
-                    body: JSON.stringify(this.params),
+
+                axios.post(page_url, this.params, {
                     headers: {
-                        "content-type": "application/json"
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 })
-                    .then(res => res.json())
-                    .then(res => {
-                        this.groupInformations = res.data;
+                    .then(response => {
+                        this.groupInformations = response.data.data;
                         console.log(this.groupInformations);
-                        vm.makePagination(res.meta, res.links);
+                        vm.makePagination(response.data.meta, response.data.links);
                         NProgress.done();
                     })
-                    .catch(err => console.log(err));
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            NProgress.done()
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    });
             },
 
             // Paginating the table data
@@ -257,20 +255,27 @@
                 }).then(result => {
                     if (result.value) {
                         NProgress.start()
-                        fetch(`/api/group-information/${id}`, {
-                            method: "delete"
+                        axios.delete(`/api/group-information/${id}`, {
+                            headers: {
+                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                            }
                         })
-                            .then(res => res.json())
-                            .then(data => {
+                            .then(response => {
                                 this.$swal(
-                                    "削除しました!",
-                                    "選択したデータが削除されました",
-                                    "success"
-                                );
-                                NProgress.done();
-                                this.fetchGroupInformation();
+                                    '削除しました!',
+                                    '選択したデータが削除されました',
+                                    'success'
+                                )
+                                NProgress.done()
+                                this.fetchGroupInformation()
                             })
-                            .catch(err => console.log(err));
+                            .catch(error => {
+                                if (error.response) {
+                                    console.log(error.response);
+                                    NProgress.done()
+                                    ErrorHandler.handle(error.response.status, this)
+                                }
+                            });
                     } else {
                         this.$swal(
                             "キャンセルしました",
@@ -296,6 +301,16 @@
                 Submits the file to the server
             */
             submitFile() {
+                if(!this.uploadedCSV)
+                {
+                    this.$swal({
+                        title: "警告!",
+                        text: 'No file selected!',
+                        type: "warning",
+                        confirmButtonText: "OK"
+                    });
+                    return
+                }
                 /*
                     Initialize the form data
                 */
@@ -303,23 +318,51 @@
                 /*
                     Add the form data we need to submit
                 */
-                formData.append('file', this.file);
+                formData.append('file', this.uploadedCSV);
+
+                // Display the key/value pairs
+                let count = 0
+                for (var pair of formData.entries()) 
+                {
+                    count++ 
+                }
+
+                console.log(count)
 
                 /*
                 Make the request to the POST /single-file URL
                 */
+                NProgress.start()
                 axios.post('/api/uploadCSV',
                     formData,
                     {
                         headers: {
-                            'Content-Type': 'multipart/form-data'
+                            'Content-Type': 'multipart/form-data',
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     }
-                ).then(function () {
-                    console.log('SUCCESS!!');
-                })
-                    .catch(function () {
-                        console.log('FAILURE!!');
+                )
+                .then(response => {
+                        NProgress.done()
+                        this.fetchGroupInformation()
+                        this.$swal({
+                            title: "警告!",
+                            text: 'Uploaded!',
+                            type: "success",
+                            confirmButtonText: "OK"
+                        });
+
+                        this.uploadedCSV = null
+                        const input = this.$refs.file;
+                        input.type = 'text';
+                        input.type = 'file';
+                    })
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            NProgress.done()
+                            ErrorHandler.handle(error.response.status, this)
+                        }
                     });
             },
 
@@ -327,7 +370,7 @@
                 Handles a change on the file upload
             */
             handleFileUpload() {
-                this.file = this.$refs.file.files[0];
+                this.uploadedCSV = this.$refs.file.files[0];
             },
             onSelectManagement(selectedOption, id) {
                 if (selectedOption) {
@@ -338,7 +381,7 @@
             },
             onSelectActivityCategory(selectedOption, id) {
                 if (selectedOption) {
-                    this.params.activity_category = selectedOption.id
+                    this.params.activityCategory = selectedOption.id
                     console.log(selectedOption.id)
                     this.fetchGroupInformation()
                 }
@@ -358,7 +401,7 @@
                 }
             },
             getActivityCategoryName(id) {
-                return this.activityCategories.find(x => x.id === id).name
+                return this.activityCategories.find(x => x.id === id) ? this.activityCategories.find(x => x.id === id).name : ''
             },
             getType(id) {
                 return this.types.find(x => x.id === id) ? this.types.find(x => x.id === id).label : ''

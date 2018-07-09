@@ -68,6 +68,22 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     // List single active-center
     Route::post('disasters', 'DisasterController@getDisasterData');
 
+    # 3 Group-information routes
+    // List group-information
+    Route::get('group-informations', 'GroupInformationController@index');
+    // List single group-information
+    Route::get('group-information/{id}', 'GroupInformationController@show');
+    // Create new group-information
+    Route::post('group-information', 'GroupInformationController@store');
+    // Update group-information
+    Route::put('group-information', 'GroupInformationController@store');
+    // Delete group-information
+    Route::delete('group-information/{id}', 'GroupInformationController@destroy');
+    // List membership with parameters
+    Route::post('group-informations', 'GroupInformationController@getGroupInformationData');
+    // List membership with parameters
+    Route::post('uploadCSV', 'GroupInformationController@getCSV');
+
 });
 
 // 
@@ -260,19 +276,7 @@ Route::get('business/year/{id}', 'BusinessController@yearWiseBusiness');
 
 
 # 3 Group-information routes
-// List group-information
-Route::get('group-informations', 'GroupInformationController@index');
-// List single group-information
-Route::get('group-information/{id}', 'GroupInformationController@show');
-// Create new group-information
-Route::post('group-information', 'GroupInformationController@store');
-// Update group-information
-Route::put('group-information', 'GroupInformationController@store');
-// Delete group-information
-Route::delete('group-information/{id}', 'GroupInformationController@destroy');
-// List membership with parameters
-Route::post('group-informations', 'GroupInformationController@getGroupInformationData');
 // List membership with parameters
 Route::post('group-informations-frontend', 'GroupInformationController@getGroupInformationFrontData');
-// List membership with parameters
-Route::post('uploadCSV', 'GroupInformationController@getCSV');
+// List single group-information
+Route::get('group-information-frontend/{id}', 'GroupInformationController@show');

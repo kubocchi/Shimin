@@ -26,6 +26,8 @@ require('./external/script')
 import PopperJs from 'popper.js'
 //Vue.use(PopperJs)
 window.jQuery = require('jquery')
+import ErrorHandler from './external/error-handler'
+// Vue.use(ErrorHandler)
 
 /*************************END FRONTEND**************************/
 

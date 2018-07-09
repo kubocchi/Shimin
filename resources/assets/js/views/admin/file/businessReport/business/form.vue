@@ -127,7 +127,7 @@
                     name: "",
                     year_id: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
                     created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 id: "",

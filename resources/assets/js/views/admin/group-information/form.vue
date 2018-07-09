@@ -12,7 +12,8 @@
                         <fieldset>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_no">【団体番号】（必須）</label>
-                                <input v-model="groupInformation.number" class="form-control" id="organizer" type="text" v-validate="'required'" name="number" data-vv-as="団体番号">
+                                <input v-model="groupInformation.number" class="form-control" id="organizer" type="text" v-validate="'required'" name="number"
+                                    data-vv-as="団体番号">
                                 <span class="is-danger">{{ errors.first('number') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -28,19 +29,9 @@
                             </div>
                             <div class="form-group col-lg-12">
                                 <label class="col-form-label" for="subject">【登録場所】（必須）</label>
-                                <multiselect 
-                                    v-model="selectedManagement" 
-                                    :options="managements" 
-                                    @select="onSelectManagement"  
-                                    track-by="id" 
-                                    label="label" 
-                                    placeholder="選んでください" 
-                                    selectLabel="" 
-                                    deselectLabel="" 
-                                    selectedLabel="選ばれた" 
-                                    v-validate="'required'" 
-                                    name="business" 
-                                    data-vv-as="登録場所">
+                                <multiselect v-model="selectedManagement" :options="managements" @select="onSelectManagement" track-by="id" label="label"
+                                    placeholder="選んでください" selectLabel="" deselectLabel="" selectedLabel="選ばれた" v-validate="'required'"
+                                    name="business" data-vv-as="登録場所">
                                 </multiselect>
                                 <span class="is-danger">{{ errors.first('business') }}</span>
                             </div>
@@ -48,10 +39,10 @@
                                 <label class="col-form-label">【公開状況】（必須）</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.open_situation" value="0" color="primary-o" checked>公開</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.active_status" value="0" color="primary-o" checked>公開</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.open_situation" value="1" color="primary-o">非公開</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.active_status" value="1" color="primary-o">非公開</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -59,13 +50,13 @@
                                 <label class="col-form-label">【活動状況】（必須）</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.active_status" value="0" color="primary-o" checked>活動中</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.open_situation" value="0" color="primary-o" checked>活動中</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.active_status" value="1" color="primary-o">休止中</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.open_situation" value="1" color="primary-o">休止中</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.active_status" value="2" color="primary-o">抹消</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.open_situation" value="2" color="primary-o">抹消</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +64,8 @@
                                 <div class="form-group col-sm-12 col-lg-6">
                                     <label class="col-form-label">休止年月日 / 抹消年月日</label>
                                     <div class="row">
-                                        <vue-datepicker-local v-model="groupInformation.pause_date" :local="local" :disabled="groupInformation.active_status == '0' ? true : false" :format="dateFormat"></vue-datepicker-local>
+                                        <vue-datepicker-local v-model="groupInformation.pause_date" :local="local" :disabled="groupInformation.active_status == '0' ? true : false"
+                                            :format="dateFormat"></vue-datepicker-local>
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-6">
@@ -99,12 +91,14 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_name">【団体名】（必須）（漢字または全角ひらがな・カタカナ　例：旭入浴サービス ）</label>
-                                <input class="form-control" v-model="groupInformation.name" id="dantai_name" type="text" v-validate="'required'" name="name" data-vv-as="団体名">
+                                <input class="form-control" v-model="groupInformation.name" id="dantai_name" type="text" v-validate="'required'" name="name"
+                                    data-vv-as="団体名">
                                 <span class="is-danger">{{ errors.first('name') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_name_f">【団体名ふりがな】（必須）（ひらがな　例：あさひにゅうよくさーびす ）</label>
-                                <input class="form-control" v-model="groupInformation.name_phonetic" id="dantai_name_f" required="" type="text" v-validate="'required'" name="name_phonetic" data-vv-as="団体名ふりがな">
+                                <input class="form-control" v-model="groupInformation.name_phonetic" id="dantai_name_f" required="" type="text" v-validate="'required'"
+                                    name="name_phonetic" data-vv-as="団体名ふりがな">
                                 <span class="is-danger">{{ errors.first('name_phonetic') }}</span>
                             </div>
                             <hr>
@@ -120,7 +114,7 @@
                                 <label class="col-form-label">【代表者氏名の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="0" color="primary-o" >公開しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="0" color="primary-o">公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_name" value="1" color="primary-o">公開する</p-radio>
@@ -131,11 +125,12 @@
                                 <label class="col-form-label" for="representative_tel1">【代表者電話番号】 （半角数字　例：03 - 0123 - 4567 ）</label>
                                 <input class="form-control" v-model="groupInformation.representative_phone" id="representative_tel1" type="tel">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【代表者電話番号の開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone" value="0" color="primary-o" checked>開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone" value="0" color="primary-o"
+                                            checked>開示しない</p-radio>
                                     </div>
                                     <div class="form-group row">
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone" value="1" color="primary-o">開示する</p-radio>
@@ -146,11 +141,11 @@
                                 <label class="col-form-label" for="representative_tel2">【代表者携帯番号】 （半角数字　例：03 - 0123 - 4567 ）</label>
                                 <input class="form-control" v-model="groupInformation.representative_phone_2" id="representative_tel2" type="tel">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【代表者携帯番号の開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="0" color="primary-o" >開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="0" color="primary-o">開示しない</p-radio>
                                     </div>
                                     <div class="form-group row">
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_representative_phone_2" value="1" color="primary-o">開示する</p-radio>
@@ -159,9 +154,9 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="representative_fax">【代表者FAX】 （半角数字　例：03 - 0123 - 4567 ）</label>
-                                <input class="form-control"  v-model="groupInformation.representative_fax" id="representative_fax" type="tel">
+                                <input class="form-control" v-model="groupInformation.representative_fax" id="representative_fax" type="tel">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【代表者FAXの開示有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
@@ -181,11 +176,11 @@
                                 <label class="col-form-label" for="contact_name_f">【連絡先・事務所・事務局ふりがな】（ひらがな　例：あさひ　たろう、または○○だんたいじむきょく ）</label>
                                 <input class="form-control" v-model="groupInformation.contact_name_phonetic" id="contact_name_f" type="text">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【連絡先・事務所・事務局の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="0" color="primary-o" checked>公開しない  </p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="0" color="primary-o" checked>公開しない </p-radio>
                                     </div>
                                     <div class="form-group row">
                                         <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_name" value="1" color="primary-o">公開する</p-radio>
@@ -199,7 +194,8 @@
                             <div class="col-lg-12 form-group"> 【住所（所在地）】（必須）
                                 <br>
                                 <div class="form-group mt-3">
-                                    <input class="form-control" v-model="groupInformation.contact_address" id="m_address" type="text" v-validate="'required'" name="contact_address" data-vv-as="住所">
+                                    <input class="form-control" v-model="groupInformation.contact_address" id="m_address" type="text" v-validate="'required'"
+                                        name="contact_address" data-vv-as="住所">
                                     <span class="is-danger">{{ errors.first('contact_address') }}</span>
                                 </div>
                                 <div class="form-inline">
@@ -213,7 +209,7 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【所在地の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
@@ -243,7 +239,7 @@
                                 <label class="col-form-label" for="contact_tel2">【連絡先携帯番号】 （半角数字　例：03 - 0123 - 4567 ）</label>
                                 <input class="form-control" v-model="groupInformation.contact_phone_2" id="contact_tel2" type="tel">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【連絡先携帯番号の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
@@ -258,7 +254,7 @@
                                 <label class="col-form-label" for="contact_fax">【連絡先FAX】 （半角数字　例：03 - 0123 - 4567 ）</label>
                                 <input class="form-control" v-model="groupInformation.contact_fax" id="contact_fax" type="tel">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【連絡先FAXの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
@@ -271,9 +267,9 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="contact_mail">【e-mail】 （半角数字　例：taro@genki365.com ）</label>
-                                <input class="form-control"  v-model="groupInformation.contact_mail" id="contact_mail" type="email">
+                                <input class="form-control" v-model="groupInformation.contact_mail" id="contact_mail" type="email">
                             </div>
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【e-mailの公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
@@ -286,7 +282,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="contact_url">【URL】 （半角数字　例：http://www.genki365.com/ ）</label>
-                                <input class="form-control"  v-model="groupInformation.contact_url" id="contact_url" type="url">
+                                <input class="form-control" v-model="groupInformation.contact_url" id="contact_url" type="url">
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【URLの公開有無】</label>
@@ -303,21 +299,22 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【活動分類】（必須）</label>
                                 <div class="col-lg-12 form-group">
-                                    <div v-for="activityCategory in activityCategories" v-bind:key="activityCategory.id" class="form-group row" >
-                                        <p-check class="p-default p-curve p-thick p-smooth" 
+                                    <div v-for="activityCategory in activityCategories" v-bind:key="activityCategory.id" class="form-group row">
+                                        <p-check 
+                                            class="p-default p-curve p-thick p-smooth" 
                                             v-model="groupInformation.activity_category" 
-                                            :id="'category_' + activityCategory.id" 
+                                            :id="'category_' + activityCategory.id"
                                             :value="activityCategory.id" 
                                             color="primary-o" 
                                             v-validate="'required'" 
-                                            name="activity_category" 
+                                            name="activity_category"
                                             data-vv-as="活動分類">
                                             {{activityCategory.name}}
                                         </p-check>
                                     </div>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                     <div class="form-group">
-                                        <input class="form-control"  v-model="groupInformation.active_category_supplement" id="active_category23_supplement" type="text">
+                                        <input class="form-control" v-model="groupInformation.active_category_supplement" id="active_category23_supplement" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -337,20 +334,12 @@
                                 【活動回数】
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
-                                        <label class="col-form-label" for="activity_frequency"></label> 
+                                        <label class="col-form-label" for="activity_frequency"></label>
                                         <input class="form-control" v-model="groupInformation.activity_frequency" id="activity_frequency" type="text">&nbsp; 回 / &nbsp;
                                     </div>
                                     <div class="form-group form-inline text-right">
-                                        <multiselect 
-                                            v-model="selectedActivityDay" 
-                                            :options="activityDays" 
-                                            @select="onSelectActivityDay" 
-                                            track-by="id" 
-                                            label="label"
-                                            placeholder="活動回数" 
-                                            selectLabel="" 
-                                            deselectLabel="" 
-                                            selectedLabel="選ばれた" >
+                                        <multiselect v-model="selectedActivityDay" :options="activityDays" @select="onSelectActivityDay" track-by="id" label="label"
+                                            placeholder="活動回数" selectLabel="" deselectLabel="" selectedLabel="選ばれた">
                                         </multiselect>
                                     </div>
                                 </div>
@@ -368,7 +357,8 @@
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="dues_price"></label>
-                                        <input class="form-control"  v-model="groupInformation.dues_price" :disabled="groupInformation.dues == '0' ? true : false" id="dues_price" type="text">
+                                        <input class="form-control" v-model="groupInformation.dues_price" :disabled="groupInformation.dues == '0' ? true : false"
+                                            id="dues_price" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -392,248 +382,249 @@
                                 <label for="dantai_supplement">【備考】（全角1000字以内）※非公開。ここに入力された内容はコーディネイター以外には公開されません。</label>
                                 <textarea class="form-control" v-model="groupInformation.supplement" id="dantai_supplement" rows="3"></textarea>
                             </div>
+                            <div class="col-lg-12 form-group">
+                                <label for="inputFile">【添付ファイル】</label>
+                                <div class="file-upload">
+                                    <div class="form-group">
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 4 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
+                                        </label>
 
-                             <router-link :to="{ name: 'groupInformationList' }">
-                                <button class="btn btn-outline-primary">戻る</button>
-                            </router-link> 
-
-
-                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
-                                確認に進む
-                            </button>   
-
-                            <!-- Confirmation Modal -->
-                            <div class="modal" id="confirmationModal">
-                                <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                    <h4 class="modal-subject">
-                                        <span>
-                                            <i class="fas fa-dove"></i>
-                                        </span>団体情報 登録確認画面
-                                    </h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <div class="row mt-4">
-                                            <div class="col-lg-12">
-                                                <div class="bs-component">
-                                                    <div style="overflow:hidden;">
-                                                        <form action="" method="post">
-                                                            <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
-                                                            <div>
-                                                                <div>
-                                                                    <label>【団体番号】</label>
-                                                                    <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【団体種類】</label>
-                                                                     <p>{{groupInformation.type === '0'? '一般団体' : '個人登録ボランティア'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【登録場所】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【公開状況】</label>
-                                                                    <p>公開</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【活動状況】</label>
-                                                                    <p>休止中</p>
-                                                                    <p>{{groupInformation.pause_date}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【申請年月日】</label>
-                                                                    <p>{{groupInformation.application_date}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【登録年月日】</label>
-                                                                    <p>{{groupInformation.registration_date}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【設立年月日】</label>
-                                                                    <p>{{groupInformation.establishment_date}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【団体名】</label>
-                                                                     <p>{{groupInformation.name}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【団体名ふりがな】</label>
-                                                                     <p>{{groupInformation.name_phonetic}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者氏名】</label>
-                                                                     <p>{{groupInformation.representative_name}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者氏名ふりがな】</label>
-                                                                     <p>{{groupInformation.representative_name_phonetic}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者氏名の公開有無】</label>
-                                                                     <p>{{groupInformation.representative_phone}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者電話番号】</label>
-                                                                     <p>{{groupInformation.disclosure_representative_phone}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者電話番号】</label>
-                                                                    <p>開示しない</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者携帯番号】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者携帯番号の開示有無】</label>
-                                                                    <p>開示しない</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者FAX】</label>
-                                                                     <p>{{groupInformation.representative_fax}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【代表者FAXの開示有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先・事務所・事務局】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先・事務所・事務局ふりがな】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先・事務所・事務局の公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先・事務所・事務局郵便番号】</label>
-                                                                    <p>100-8440</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【住所（所在地）】</label>
-                                                                    <p>宮崎県宮崎市</p>
-                                                                    <p>施策太郎</p>
-                                                                    <p>様</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【所在地の公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先電話番号（１）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先電話番号（１）の公開有無】</label>
-                                                                    <p>市民活動センターへ問い合わせ</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先電話番号（２）】</label>
-                                                                    <p>03 - 0123 - 4567</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先電話番号（２）の公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先FAX】</label>
-                                                                    <p>03 - 0123 - 5555</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【連絡先FAXの公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_representative_fax === '0'? '公開しない' : '公開する'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【e-mail】</label>
-                                                                    <p>{{groupInformation.contact_mail}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【e-mailの公開有無】</label>
-                                                                    <p>{{groupInformation.disclosure_contact_mail === '0'? '公開しない' : '公開する'}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【URL】</label>
-                                                                    <p>{{groupInformation.contact_url}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【活動分類】</label>
-                                                                    <p>高齢者福祉</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【会員数（男性）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【会員数（女性）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【会員数（合計）】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【活動回数】</label>
-                                                                    <p>1回　/　月</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【会費】</label>
-                                                                    <p>有</p>
-                                                                    <p>年会費3,000円</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【活動内容・事業内容】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【ロッカー】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【メールBOX】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【方法】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【備考】</label>
-                                                                     <p>{{groupInformation.number}}</p>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                        <div class="form-group files">
+                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                <div class="form-group">
+                                                    <button class="btn btn-outline-danger btn-sm" @click.prevent="removeAttachment(attachment)">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1))
+                                                        + 'MB)'}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                        <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked" >登録</button>
-                                    </div>
                                 </div>
+                            </div>
+
+                            <router-link :to="{ name: 'groupInformationList' }">
+                                <button class="btn btn-outline-primary">戻る</button>
+                            </router-link>
+
+
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
+                                確認に進む
+                            </button>
+
+                            <!-- Confirmation Modal -->
+                            <div class="modal" id="confirmationModal">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-subject">
+                                                <span>
+                                                    <i class="fas fa-dove"></i>
+                                                </span>団体情報 登録確認画面
+                                            </h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <div class="row mt-4">
+                                                <div class="col-lg-12">
+                                                    <div class="bs-component">
+                                                        <div style="overflow:hidden;">
+                                                            <form action="" method="post">
+                                                                <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
+                                                                <div>
+                                                                    <div>
+                                                                        <label>【団体番号】</label>
+                                                                        <p>{{groupInformation.number}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【団体種類】</label>
+                                                                        <p>{{groupInformation.type === '0'? '一般団体' : '個人登録ボランティア'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【登録場所】</label>
+                                                                        <p>{{this.managements.find(x => x.id === groupInformation.regist_management)?
+                                                                            this.managements.find(x => x.id === groupInformation.regist_management).label
+                                                                            : ''}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【公開状況】</label>
+                                                                        <p>{{groupInformation.open_situation === '0'? '公開' :
+                                                                            '非公開'}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【活動状況】</label>
+                                                                        <p>休止中</p>
+                                                                        <p>{{groupInformation.pause_date}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【申請年月日】</label>
+                                                                        <p>{{groupInformation.application_date}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【登録年月日】</label>
+                                                                        <p>{{groupInformation.registration_date}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【設立年月日】</label>
+                                                                        <p>{{groupInformation.establishment_date}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【団体名】</label>
+                                                                        <p>{{groupInformation.name}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【団体名ふりがな】</label>
+                                                                        <p>{{groupInformation.name_phonetic}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者氏名】</label>
+                                                                        <p>{{groupInformation.representative_name}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者氏名ふりがな】</label>
+                                                                        <p>{{groupInformation.representative_name_phonetic}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者氏名の公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_name
+                                                                            === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者電話番号】</label>
+                                                                        <p>{{groupInformation.representative_phone}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者電話番号の開示有無】</label>
+                                                                        <p>{{groupInformation.disclosure_representative_phone
+                                                                            === '0'? '開示しない' : '開示する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者携帯番号】</label>
+                                                                        <p>{{groupInformation.representative_phone_2}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者携帯番号の開示有無】</label>
+                                                                        <p>{{groupInformation.disclosure_representative_phone_2
+                                                                            === '0'? '開示しない' : '開示する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者FAX】</label>
+                                                                        <p>{{groupInformation.representative_fax}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【代表者FAXの開示有無】</label>
+                                                                        <p>{{groupInformation.disclosure_representative_fax
+                                                                            === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【e-mail】</label>
+                                                                        <p>{{groupInformation.contact_mail}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【e-mailの公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_mail === '0'?
+                                                                            '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【URL】</label>
+                                                                        <p>{{groupInformation.contact_url}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【活動分類】</label>
+                                                                        <p>{{getSelectedActivityCategoriesName}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【会員数（男性）】</label>
+                                                                        <p>{{groupInformation.membership_male}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【会員数（女性）】</label>
+                                                                        <p>{{groupInformation.membership_female}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【会員数（合計）】</label>
+                                                                        <p>{{groupInformation.all_member}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【活動回数】</label>
+                                                                        <p>{{groupInformation.activity_frequency}}　/　 
+                                                                            {{this.activityDays.find(x=> x.id === groupInformation.activity_day) ?
+                                                                            this.activityDays.find(x => x.id === groupInformation.activity_day).label: ''}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【会費】</label>
+                                                                        <p>{{groupInformation.dues === '0'? '無' : '有（例：年会費3,000円、月額200円）'}}</p>
+                                                                        <p>{{groupInformation.dues_price}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【活動内容・事業内容】</label>
+                                                                        <p>{{groupInformation.content}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【ロッカー】</label>
+                                                                        <p>{{groupInformation.rocker}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【メールBOX】</label>
+                                                                        <p>{{groupInformation.mail_box}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【方法】</label>
+                                                                        <p>{{groupInformation.method}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【備考】</label>
+                                                                        <p>{{groupInformation.supplement}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【添付ファイル】</label>
+                                                                        <div class="form-group files">
+                                                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                                <ul class="form-group">
+                                                                                    <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                        / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!--Progress Modal -->
-                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
+                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" 
-                                                aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                    aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -651,6 +642,7 @@
 <script>
     import VueDatepickerLocal from 'vue-datepicker-local'
     import Multiselect from "vue-multiselect"
+    import moment from "moment";
 
     export default {
         components: { Multiselect, VueDatepickerLocal },
@@ -701,7 +693,8 @@
                     membership_male: "",
                     membership_female: "",
                     all_member: "",
-
+                    activity_frequency: "",
+                    activity_day: null,
                     dues: "0",
                     dues_price: "",
                     content: "",
@@ -710,8 +703,8 @@
                     method: "",
                     supplement: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
-                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
+                    updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null ? this.$store.state.user.id : 0
                 },
                 id: "",
                 pagination: {},
@@ -787,12 +780,22 @@
                     { 'id': 3, 'label': '週' },
                     { 'id': 4, 'label': '-' },
                 ],
-                selectedActivityDay:  { 'id': 1, 'label': '年' },
+                selectedActivityDay: { 'id': 1, 'label': '年' },
             };
         },
         computed: {
             computedWidth: function () {
                 return this.width;
+            },
+            getSelectedActivityCategoriesName: function () {
+                if(!Array.isArray(this.groupInformation.activity_category)) return
+                console.log(this.groupInformation.activity_category)
+                let activityCategoriesName = []
+                this.groupInformation.activity_category.forEach(element => {
+                    console.log(element)
+                    activityCategoriesName.push(this.activityCategories.find(x => x.id === element) ? this.activityCategories.find(x => x.id === element).name : '')
+                });
+                return activityCategoriesName.join(', ')
             }
         },
 
@@ -809,22 +812,19 @@
             // Add new, sends model to API
             addGroupInformation() {
                 this.groupInformation.activity_category = this.groupInformation.activity_category.join(',')
-
+                this.groupInformation.file = this.currentAddedFileIs.join(',')
                 let self = this
                 console.log(this.groupInformation)
 
                 if (this.edit === false) {
                     // Add
                     NProgress.start()
-                    fetch("/api/group-information", {
-                        method: "post",
-                        body: JSON.stringify(this.groupInformation),
+                    axios.post("/api/group-information", this.groupInformation, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
@@ -838,24 +838,74 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                NProgress.done()
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
+                    // fetch("/api/group-information", {
+                    //     method: "post",
+                    //     body: JSON.stringify(this.groupInformation),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    //     .then(res => res.json())
+                    //     .then(data => {
+                    //         NProgress.done()
+                    //         self.$swal({
+                    //             title: "登録完了!",
+                    //             text: "登録が完了しました!",
+                    //             type: "success",
+                    //             confirmButtonText: 'OK'
+                    //         })
+                    //             .then(function () {
+                    //                 self.$router.push({
+                    //                     name: 'groupInformationList'
+                    //                 })
+                    //             });
+                    //     })
+                    //     .catch(err => console.log(err))
                 } else {
 
                     // Update
                     NProgress.start()
-                    fetch("/api/group-information", {
-                        method: "put",
-                        body: JSON.stringify(this.groupInformation),
+                    // fetch("/api/group-information", {
+                    //     method: "put",
+                    //     body: JSON.stringify(this.groupInformation),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    //     .then(res => res.json())
+                    //     .then(data => {
+                    //         NProgress.done()
+                    //         self.$swal({
+                    //             title: "成功!",
+                    //             text: "活動センターが追加されました!",
+                    //             type: "success",
+                    //             confirmButtonText: 'OK'
+                    //         })
+                    //             .then(function () {
+                    //                 self.$router.push({
+                    //                     name: 'groupInformationList'
+                    //                 })
+                    //             });
+                    //     })
+                    //     .catch(err => console.log(err))
+
+                    axios.put("/api/group-information", this.groupInformation, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             NProgress.done()
                             self.$swal({
-                                title: "成功!",
-                                text: "活動センターが追加されました!",
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
                                 type: "success",
                                 confirmButtonText: 'OK'
                             })
@@ -865,7 +915,13 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                 }
             },
 
@@ -874,62 +930,66 @@
                 console.log(groupInformation)
                 this.pullAttachments(groupInformation)
 
-                this.groupInformation.id= groupInformation.id,
-                this.groupInformation.number= groupInformation.number,
-                this.groupInformation.type= groupInformation.type,
-                this.groupInformation.regist_management= groupInformation.regist_management,
-                this.groupInformation.open_situation= groupInformation.open_situation,
-                this.groupInformation.active_status= groupInformation.active_status,
-                this.groupInformation.pause_date= groupInformation.pause_date,
-                this.groupInformation.application_date= groupInformation.application_date,
-                this.groupInformation.registration_date= groupInformation.registration_date,
-                this.groupInformation.establishment_date= groupInformation.establishment_date,
-                this.groupInformation.name= groupInformation.name,
-                this.groupInformation.name_phonetic= groupInformation.name_phonetic,
-                this.groupInformation.representative_name= groupInformation.representative_name,
-                this.groupInformation.representative_name_phonetic= groupInformation.representative_name_phonetic,
-                this.groupInformation.disclosure_name= groupInformation.disclosure_name,
-                this.groupInformation.representative_phone= groupInformation.representative_phone,
-                this.groupInformation.disclosure_representative_phone= groupInformation.disclosure_representative_phone,
-                this.groupInformation.representative_phone_2= groupInformation.representative_phone_2,
-                this.groupInformation.disclosure_representative_phone_2= groupInformation.disclosure_representative_phone_2,
-                this.groupInformation.representative_fax= groupInformation.representative_fax,
-                this.groupInformation.disclosure_representative_fax= groupInformation.disclosure_representative_fax,
-                this.groupInformation.contact_name= groupInformation.contact_name,
-                this.groupInformation.contact_name_phonetic= groupInformation.contact_name_phonetic,
-                this.groupInformation.disclosure_contact_name= groupInformation.disclosure_contact_name,
-                this.groupInformation.postal_code= groupInformation.postal_code,
-                this.groupInformation.contact_address= groupInformation.contact_address,
-                this.groupInformation.contact_address_name= groupInformation.contact_address_name,
-                this.groupInformation.contact_address_title= groupInformation.contact_address_title,
-                this.groupInformation.disclosure_contact_address= groupInformation.disclosure_contact_address,
-                this.groupInformation.contact_phone= groupInformation.contact_phone,
-                this.groupInformation.disclosure_contact_phone= groupInformation.disclosure_contact_phone,
-                this.groupInformation.contact_phone_2= groupInformation.contact_phone_2,
-                this.groupInformation.disclosure_contact_phone_2= groupInformation.disclosure_contact_phone_2,
-                this.groupInformation.contact_fax= groupInformation.contact_fax,
-                this.groupInformation.disclosure_contact_fax= groupInformation.disclosure_contact_fax,
-                this.groupInformation.contact_mail= groupInformation.contact_mail,
-                this.groupInformation.disclosure_contact_mail= groupInformation.disclosure_contact_mail,
-                this.groupInformation.contact_url= groupInformation.contact_url,
-                this.groupInformation.disclosure_contact_url= groupInformation.disclosure_contact_url,
-                this.groupInformation.activity_category= groupInformation.activity_category,
-                this.groupInformation.active_category_supplement= groupInformation.active_category_supplement,
-                this.groupInformation.membership_male= groupInformation.membership_male,
-                this.groupInformation.membership_female= groupInformation.membership_female,
-                this.groupInformation.all_member= groupInformation.all_member,
-                this.groupInformation.dues= groupInformation.dues,
-                this.groupInformation.activity_frequency= groupInformation.activity_frequency,
-                this.groupInformation.dues= groupInformation.dues,
-                this.groupInformation.dues_price= groupInformation.dues_price,
-                this.groupInformation.content= groupInformation.content,
-                this.groupInformation.rocker= groupInformation.rocker,
-                this.groupInformation.mail_box= groupInformation.mail_box,
-                this.groupInformation.method= groupInformation.method,
-                this.groupInformation.supplement= groupInformation.supplement,
-                this.groupInformation.deactivate = !!groupInformation.deactivate == 1 ? true : false
+                this.groupInformation.id = groupInformation.id,
+                    this.groupInformation.number = groupInformation.number,
+                    this.groupInformation.type = groupInformation.type,
+                    this.groupInformation.regist_management = groupInformation.regist_management,
+                    this.groupInformation.open_situation = groupInformation.open_situation,
+                    this.groupInformation.active_status = groupInformation.active_status,
+                    this.groupInformation.pause_date = new Date(groupInformation.pause_date),
+                    this.groupInformation.application_date = new Date(groupInformation.application_date),
+                    this.groupInformation.registration_date = new Date(groupInformation.registration_date),
+                    this.groupInformation.establishment_date = new Date(groupInformation.establishment_date),
+                    this.groupInformation.name = groupInformation.name,
+                    this.groupInformation.name_phonetic = groupInformation.name_phonetic,
+                    this.groupInformation.representative_name = groupInformation.representative_name,
+                    this.groupInformation.representative_name_phonetic = groupInformation.representative_name_phonetic,
+                    this.groupInformation.disclosure_name = groupInformation.disclosure_name,
+                    this.groupInformation.representative_phone = groupInformation.representative_phone,
+                    this.groupInformation.disclosure_representative_phone = groupInformation.disclosure_representative_phone,
+                    this.groupInformation.representative_phone_2 = groupInformation.representative_phone_2,
+                    this.groupInformation.disclosure_representative_phone_2 = groupInformation.disclosure_representative_phone_2,
+                    this.groupInformation.representative_fax = groupInformation.representative_fax,
+                    this.groupInformation.disclosure_representative_fax = groupInformation.disclosure_representative_fax,
+                    this.groupInformation.contact_name = groupInformation.contact_name,
+                    this.groupInformation.contact_name_phonetic = groupInformation.contact_name_phonetic,
+                    this.groupInformation.disclosure_contact_name = groupInformation.disclosure_contact_name,
+                    this.groupInformation.postal_code = groupInformation.postal_code,
+                    this.groupInformation.contact_address = groupInformation.contact_address,
+                    this.groupInformation.contact_address_name = groupInformation.contact_address_name,
+                    this.groupInformation.contact_address_title = groupInformation.contact_address_title,
+                    this.groupInformation.disclosure_contact_address = groupInformation.disclosure_contact_address,
+                    this.groupInformation.contact_phone = groupInformation.contact_phone,
+                    this.groupInformation.disclosure_contact_phone = groupInformation.disclosure_contact_phone,
+                    this.groupInformation.contact_phone_2 = groupInformation.contact_phone_2,
+                    this.groupInformation.disclosure_contact_phone_2 = groupInformation.disclosure_contact_phone_2,
+                    this.groupInformation.contact_fax = groupInformation.contact_fax,
+                    this.groupInformation.disclosure_contact_fax = groupInformation.disclosure_contact_fax,
+                    this.groupInformation.contact_mail = groupInformation.contact_mail,
+                    this.groupInformation.disclosure_contact_mail = groupInformation.disclosure_contact_mail,
+                    this.groupInformation.contact_url = groupInformation.contact_url,
+                    this.groupInformation.disclosure_contact_url = groupInformation.disclosure_contact_url,
+                    this.groupInformation.activity_category = groupInformation.activity_category.split(","),
+                    this.groupInformation.active_category_supplement = groupInformation.active_category_supplement,
+                    this.groupInformation.membership_male = groupInformation.membership_male,
+                    this.groupInformation.membership_female = groupInformation.membership_female,
+                    this.groupInformation.all_member = groupInformation.all_member,
+                    this.groupInformation.activity_frequency = groupInformation.activity_frequency,
+                    this.groupInformation.activity_day = groupInformation.activity_day,
+                    this.groupInformation.dues = groupInformation.dues,
+                    this.groupInformation.dues_price = groupInformation.dues_price,
+                    this.groupInformation.content = groupInformation.content,
+                    this.groupInformation.rocker = groupInformation.rocker,
+                    this.groupInformation.mail_box = groupInformation.mail_box,
+                    this.groupInformation.method = groupInformation.method,
+                    this.groupInformation.supplement = groupInformation.supplement,
+                    this.groupInformation.deactivate = !!groupInformation.deactivate == 1 ? true : false
                 this.groupInformation.created_by = groupInformation.created_by
                 this.groupInformation.updated_by = groupInformation.updated_by
+
+                this.selectedManagement = this.managements.find(x => x.id === groupInformation.regist_management)
+                this.selectedActivityDay = this.activityDays.find(x => x.id === groupInformation.activity_day)
+                console.log(this.selectedActivityDay)
 
                 // For Files
                 if (groupInformation.file)
@@ -957,7 +1017,7 @@
                 }
             },
 
-            // Removing attachment on button click
+             // Removing attachment on button click
             removeAttachment(attachment) {
                 console.log(attachment)
                 if (attachment.id)
@@ -965,6 +1025,9 @@
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
+
+                 this.uploadedData = new FormData()
+                this.prepareFields()
             },
 
             // This function will be called every time you add a file
@@ -1003,17 +1066,24 @@
                         console.log(response);
                         if (response.data.success) {
                             console.log('Successfull upload')
+                            this.currentAddedFileIs = []
                             this.currentAddedFileIs.push(response.data.data)
                             this.resetData()
                             this.addGroupInformation()
                             NProgress.done()
+                            $("#progressModal").modal('hide')
                         } else {
                             console.log('Unsuccessful Upload')
+                            $("#progressModal").modal('hide')
                         }
                     }
-                        .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log('Attachment catch', error)
+                    .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
                     });
                 console.log(attachments)
             },
@@ -1075,11 +1145,12 @@
                 $("#confirmationModal").modal('hide')
                 if (this.tempRemovedFileIds.length) {
                     this.tempRemovedFileIds.forEach(id => {
+                        console.log('Server Remove file', id)
                         this.removeServerAttachment(id)
                         this.currentAddedFileIs.filter(item => item !== id)
                     })
                 }
-
+                console.log(this.attachments.length)
                 if (this.attachments.length)
                     this.addAttachment()
                 else
@@ -1093,28 +1164,28 @@
                         console.log('true')
                     }
                     else {
-                        this.groupInformation.pause_date = this.groupInformation.pause_date.toISOString().slice(0, 10)
-                        this.groupInformation.application_date = this.groupInformation.application_date.toISOString().slice(0, 10)
-                        this.groupInformation.registration_date = this.groupInformation.registration_date.toISOString().slice(0, 10)
-                        this.groupInformation.establishment_date = this.groupInformation.establishment_date.toISOString().slice(0, 10)
+                        this.groupInformation.pause_date = moment(String(this.groupInformation.pause_date)).format("YYYY-MM-DD")
+                        this.groupInformation.application_date =  moment(String(this.groupInformation.application_date)).format("YYYY-MM-DD")
+                        this.groupInformation.registration_date =  moment(String(this.groupInformation.registration_date)).format("YYYY-MM-DD")
+                        this.groupInformation.establishment_date =  moment(String(this.groupInformation.establishment_date)).format("YYYY-MM-DD")
                         $("#confirmationModal").modal('show')
                     }
                 });
             },
             onSelectManagement(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.groupInformation.regist_management = selectedOption.id
                     console.log(selectedOption.id)
                 }
             },
             onSelectActivityCategory(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.groupInformation.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                 }
             },
             onSelectActivityDay(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.groupInformation.activity_day = selectedOption.id
                     console.log(selectedOption.id)
                 }

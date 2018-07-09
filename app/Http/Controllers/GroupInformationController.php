@@ -73,6 +73,8 @@ class GroupInformationController extends Controller
         $groupInformation->membership_male= $request->input('membership_male');
         $groupInformation->membership_female= $request->input('membership_female');
         $groupInformation->all_member= $request->input('all_member');
+        $groupInformation->activity_frequency= $request->input('activity_frequency');
+        $groupInformation->activity_day= $request->input('activity_day');
         $groupInformation->dues= $request->input('dues');
         $groupInformation->dues_price= $request->input('dues_price');
         $groupInformation->content= $request->input('content');
@@ -80,6 +82,7 @@ class GroupInformationController extends Controller
         $groupInformation->mail_box= $request->input('mail_box');
         $groupInformation->method= $request->input('method');
         $groupInformation->supplement= $request->input('supplement');
+        $groupInformation->file= $request->input('file');
         $groupInformation->deactivate= $request->input('deactivate');
         $groupInformation->created_by= $request->input('created_by');
         $groupInformation->updated_by= $request->input('updated_by');
@@ -243,7 +246,7 @@ class GroupInformationController extends Controller
                     $groupInformation->disclosure_contact_mail= ($column[42]=='TRUE')?"1":"0"; //   36
                     $groupInformation->contact_url= $column[43]; //   37
                     $groupInformation->disclosure_contact_url= ($column[44]=='TRUE')?"1":"0"; //   38
-    
+                    
                     for($index=52; $index<75; $index++){
                         if($column[$index]=='TRUE')break;
                     }
@@ -253,6 +256,10 @@ class GroupInformationController extends Controller
                     $groupInformation->membership_female= $column[46]; //   42
                     $groupInformation->all_member= $column[47]; //   43
                     $groupInformation->activity_frequency= $column[51]; //   44
+
+                    if('50361'==$column[7]){
+                        $check =  strval(($index-51)*100);
+                    }
 
                     // $groupInformation->activity_day= $column[50]; //   45
                     $groupInformation->activity_day= ($column[50]=='週')?"1":(($column[50]=='月')?"2":(($column[50]=='年')?"3":"4")); //   45
