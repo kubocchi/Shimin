@@ -134,8 +134,7 @@ class GroupInformationController extends Controller
          $status = $request->input('status');
          $type = $request->input('type');
          
-         $groupInformations = GroupInformation::
-                                    Where('name', 'like', '%' . $search . '%')
+         $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
                                     ->where(function($query) use ($management)  {
                                         if(isset($management)) {
                                             $query->where('regist_management', $management);
@@ -143,7 +142,7 @@ class GroupInformationController extends Controller
                                     })
                                     ->where(function($query) use ($activityCategory)  {
                                         if(isset($activityCategory)) {
-                                            $query->where('activity_category', $activityCategory);
+                                            $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);
                                         }
                                     })
                                     ->where(function($query) use ($status)  {
@@ -247,7 +246,7 @@ class GroupInformationController extends Controller
                     $groupInformation->contact_url= $column[43]; //   37
                     $groupInformation->disclosure_contact_url= ($column[44]=='TRUE')?"1":"0"; //   38
                     
-                    for($index=52; $index<75; $index++){
+                    for($index=52; $index<74; $index++){
                         if($column[$index]=='TRUE')break;
                     }
                     $groupInformation->activity_category= strval(($index-51)*100); //   39
@@ -304,7 +303,7 @@ class GroupInformationController extends Controller
          $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
                                     ->where(function($query) use ($activityCategory)  {
                                         if(isset($activityCategory)) {
-                                            $query->where('activity_category', $activityCategory);
+                                            $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);
                                         }
                                     })
                                     ->where(function($query) use ($type)  {

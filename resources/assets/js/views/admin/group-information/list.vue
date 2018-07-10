@@ -62,7 +62,7 @@
                                 <th class="col-xs-1 wide_d" scope="col">登録場所</th>
                                 <th class="col-xs-1 wide_d" scope="col">公開状況</th>
                                 <th class="col-xs-1 wide_d" scope="col">種類</th>
-                                <th class="col-xs-2 wide_d" scope="col">活動分類</th>
+                                <!-- <th class="col-xs-2 wide_d" scope="col">活動分類</th> -->
                                 <th class="col-xs-4 wide_s" scope="col">団体名</th>
                                 <th class="col-xs-1" scope="col">変更</th>
                                 <th class="col-xs-1" scope="col">削除</th>
@@ -76,7 +76,7 @@
                                 <td>{{ getStatus(parseInt(groupInformation.active_status)) }}</td>
                                 <!-- ==> groupInformation.statuses -->
                                 <td>{{ getType(parseInt(groupInformation.type)) }}</td>
-                                <td>{{ getActivityCategoryName(groupInformation.activity_category) }}</td>
+                                <!-- <td>{{ getActivityCategoryName(groupInformation.activity_category) }}</td> -->
                                 <td>{{ groupInformation.name }}</td>
                                 <td>
                                     <router-link :to="{ name: 'groupInformationForm', params: { model:  groupInformation, requestType: 'edit' }}">

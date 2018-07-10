@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Spinner name="pulse" color="#2E92E8"/>
+        <!-- <Spinner name="pulse" color="#2E92E8"/> -->
         <h4>
             <span>
                 <i class="fas fa-dove"></i>

@@ -364,7 +364,7 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contents">【活動内容・事業内容】（全角1000字以内）</label>
-                                <textarea class="form-control" v-model="groupInformation.content" id="contents" rows="3"></textarea>
+                                <wysiwyg v-model="groupInformation.content" />
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="rocker">【ロッカー】</label>
