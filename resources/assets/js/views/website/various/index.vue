@@ -72,7 +72,8 @@
                                 </li>
                                 <li>
                                     <router-link :to="{ name: 'volunteerRecruitment' }">
-                                        <span>ボランティアを<br>募集したい</span>
+                                        <span>ボランティアを
+                                            <br>募集したい</span>
                                     </router-link>
                                 </li>
                             </ul>
@@ -98,7 +99,7 @@
             </div>
         </div>
 
-        
+
         <!-- pagetitle -->
 
         <div id="pagetitle" class="format">
@@ -252,14 +253,33 @@
                     .then(res => {
                         this.variouses = res.data;
                         console.log(this.variouses);
-                        
+
                         NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             downloadFile(attachment) {
                 console.log(attachment)
-                window.location.href = `/api/download/${attachment.path}`
+                //window.location.href = `/api/download/${attachment.path}`
+
+                axios({
+                    url: `/api/download/${attachment.path}`,
+                    method: 'GET',
+                    responseType: 'blob', // important
+                }).then((response) => {
+                    if (!window.navigator.msSaveOrOpenBlob) {
+                        // BLOB NAVIGATOR
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', attachment.name);
+                        document.body.appendChild(link);
+                        link.click();
+                    } else {
+                        // BLOB FOR EXPLORER 11
+                        const url = window.navigator.msSaveOrOpenBlob(new Blob([response.data]), attachment.name);
+                    }
+                });
             },
         }
     };

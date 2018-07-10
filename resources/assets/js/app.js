@@ -22,12 +22,13 @@ import App from './components/App'
 require('./external/bootstrap')
 require('./external/jquery.sliderPro')
 require('./external/script')
-//require('./external/scrol-fixed')
+require('./external/scrol-fixed')
 import PopperJs from 'popper.js'
 //Vue.use(PopperJs)
 window.jQuery = require('jquery')
 import ErrorHandler from './external/error-handler'
 // Vue.use(ErrorHandler)
+Vue.use(require('./external/common'))
 
 /*************************END FRONTEND**************************/
 
@@ -78,9 +79,6 @@ import VeeValidate, { Validator } from 'vee-validate';
 Validator.localize('ja', ja);
 Vue.use(VeeValidate);
 
-// Vue-select
-import vSelect from 'vue-select'
-Vue.component('v-select', vSelect)
 
 // Pretty Checkbox
 import PrettyCheckbox from 'pretty-checkbox-vue';

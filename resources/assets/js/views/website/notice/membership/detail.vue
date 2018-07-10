@@ -326,12 +326,11 @@
                 console.log(attachment)
                 window.location.href = `/api/download/${attachment.path}`
             },
-            getActivityCategoryName(id) {
-                return this.categories.find(x => x.id === id).name
+            getActivityCategoryName(id){
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).name : ''
             },
-            getCategoryWiseClass(id) {
-                console.log(id)
-                return this.categories.find(x => x.id === id).class
+            getCategoryWiseClass(id){
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).class : ''
             },
             openInNewTab(url) {
                 var win = window.open(url, '_blank');

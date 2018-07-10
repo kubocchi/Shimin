@@ -374,12 +374,10 @@
             this.loadFacebookPlugin()
             this.loadSlider()
             this.fetchNotice()
-            console.log('ref', this.$root.$refs.topProgress)
         },
 
         methods: {
             fetchActiveCenter(page_url) {
-                //NProgress.start()
                 NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/active-centers-frontend"
@@ -394,7 +392,6 @@
                             if (new Date(activeCenter.start_date) > new Date(this.newTagDate))
                                 this.newTagDate = activeCenter.start_date
                         });
-                        //NProgress.done()
                         NProgress.done()
                     })
                     .catch(err => console.log(err))
@@ -450,7 +447,7 @@
                 return className
             },
             getCategoryWiseClass(id) {
-                return this.categories.find(x => x.id === id).class
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).class : ''
             },
             gotoDetail(object) {
                 let routeName = ''

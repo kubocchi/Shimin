@@ -228,7 +228,6 @@ class NoticeController extends Controller
         }
         else if($type == 2)
         {
-           
             foreach ($volunteers as $key => $value) 
             {
                 $obj = new stdClass;
@@ -238,6 +237,7 @@ class NoticeController extends Controller
                 $obj->activityCategory = $value['activity_category'];
                 $obj->date = '';
                 $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
+                
                 array_push($formattedData, $obj);
             }
         }
@@ -252,6 +252,7 @@ class NoticeController extends Controller
                 $obj->activityCategory = $value['activity_category'];
                 $obj->date = '';
                 $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
+                
                 array_push($formattedData, $obj);
             }
         }
@@ -307,7 +308,6 @@ class NoticeController extends Controller
 
     public function getNoticeHomePageData()
     {
-
         $events = Event::take(6)->get()->toArray();
         $volunteers = Volunteer::take(6)->get()->toArray();
         $memberships = Membership::take(6)->get()->toArray();
@@ -317,6 +317,7 @@ class NoticeController extends Controller
         $membershipResponce = [];
         $allResponce = [];
 
+        # Getting Events for Home page 
         foreach ($events as $key => $value) 
         {
             $obj = new stdClass;
@@ -325,10 +326,12 @@ class NoticeController extends Controller
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
             $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
+            $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($eventsResponce, $obj);
         }
 
+        # Getting Volunteer for Home page 
         foreach ($volunteers as $key => $value) 
         {
             $obj = new stdClass;
@@ -337,10 +340,12 @@ class NoticeController extends Controller
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
             $obj->date = '';
+            $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($volunteersResponce, $obj);
         }
 
+        # Getting Memberships for Home page 
         foreach ($memberships as $key => $value) 
         {
             $obj = new stdClass;
@@ -349,10 +354,12 @@ class NoticeController extends Controller
             $obj->subject = $value['organizer'];
             $obj->activityCategory = $value['activity_category'];
             $obj->date = '';
+            $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($membershipResponce, $obj);
         }
 
+        # Getting First 6 items order by update date from Events, vounteers,memberships for Home page 
         foreach ($events as $key => $value) 
         {
             $obj = new stdClass;
@@ -361,6 +368,7 @@ class NoticeController extends Controller
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
             $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
+            $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($allResponce, $obj);
         }
@@ -373,6 +381,7 @@ class NoticeController extends Controller
             $obj->subject = $value['organizer'];
             $obj->activityCategory = $value['activity_category'];
             $obj->date = '';
+            $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($allResponce, $obj);
         }
@@ -385,13 +394,14 @@ class NoticeController extends Controller
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
             $obj->date = '';
+            $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($allResponce, $obj);
         }
         
         usort($allResponce, function($a, $b)
         {
-            return strcmp($b->date, $a->date);
+            return strcmp($b->updateDate, $a->updateDate);
         }); 
         $allResponce = array_slice($allResponce, 0, 6);
 
