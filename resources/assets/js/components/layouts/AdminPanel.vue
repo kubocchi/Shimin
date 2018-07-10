@@ -153,15 +153,15 @@
 
         methods: {
             openDropdown(domElement){
-                $(domElement).dropdown('dispose')
                 $(domElement).dropdown('toggle')
+                $(domElement).dropdown('update')
+                $(domElement).dropdown('dispose')
             },
             logout(){
                 localStorage.removeItem("token");
                 localStorage.removeItem("login");
                 window.location.href = '/login'
                 this.$store.commit('changeUser', null)
-
             }
         },
         computed: {
