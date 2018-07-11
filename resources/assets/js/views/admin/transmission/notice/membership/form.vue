@@ -103,11 +103,11 @@
                                 </div>
                                   <span class="is-danger">{{ errors.first('membership_fee') }}</span>
                             </div>
-							<div class="form-group  col-lg-12">
-								【関連URL】
-								<br>
-								<input v-model="membership.linkname" class="form-control" id="linkname" type="text">
-							</div>
+                            <div class="col-lg-12 form-group">
+                                <label for="contents">【関連URL】</label>
+                                <input v-model="membership.linkname" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
+                            </div>
 							<div class="form-group  col-lg-12">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
                                 <wysiwyg v-model="membership.contact"  name="content" data-vv-as="掲載内容" type="text" />

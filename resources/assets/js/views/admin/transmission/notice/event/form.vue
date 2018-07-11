@@ -114,9 +114,9 @@
                                 <wysiwyg v-model="event.detail" type="text" />
                             </div>
                             <div class="col-lg-12 form-group">
-                                【関連URL】
-                                <br>
-                                <input v-model="event.url" class="form-control" id="linkname" type="text">
+                                <label for="contents">【関連URL】</label>
+                                <input v-model="event.url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>

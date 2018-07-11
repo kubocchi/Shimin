@@ -117,7 +117,7 @@ Route::get('notices', 'NoticeController@index');
 // List with parameters
 Route::post('notices', 'NoticeController@getNoticeData');
 // List with parameters
-Route::post('notices', 'NoticeController@getNoticeFrontData');
+Route::post('notices-frontend', 'NoticeController@getNoticeFrontData');
 // List notice
 Route::get('notices-homepage', 'NoticeController@getNoticeHomePageData');
 

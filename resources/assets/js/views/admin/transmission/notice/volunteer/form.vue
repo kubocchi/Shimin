@@ -110,11 +110,11 @@
 								<label for="content">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
                                 <wysiwyg v-model="volunteer.content"  type="text" />
 							</div>
-							<div class="col-lg-12 form-group">
-								【関連URL】
-								<br>
-								<input v-model="volunteer.linkname" class="form-control" id="linkname" type="text">
-							</div>
+                            <div class="col-lg-12 form-group">
+                                <label for="contents">【関連URL】</label>
+                                <input v-model="volunteer.linkname" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
+                            </div>
 							<div class=" col-lg-12 form-group">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
 								<!-- <textarea v-model="volunteer.contact" class="form-control" id="contact" required="" rows="3"></textarea> -->

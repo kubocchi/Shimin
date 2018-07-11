@@ -313,7 +313,7 @@
             fetchNotice(page_url) {
                 NProgress.start()
 
-                 fetch('/api/notices', {
+                 fetch('/api/notices-frontend', {
                     method: "post",
                     body: JSON.stringify(this.params),
                     headers: {
