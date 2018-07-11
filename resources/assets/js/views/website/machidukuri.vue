@@ -927,7 +927,7 @@
 			</div>
 			
 			<!-- Modal 01 -->
-			<div class="modal" id="modal-01" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-01" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -969,7 +969,7 @@
 			</div>
 			
 			<!-- Modal 02 -->
-			<div class="modal" id="modal-02" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-02" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1010,7 +1010,7 @@
 			</div>
 			
 			<!-- Modal 03 -->
-			<div class="modal" id="modal-03" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-03" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1051,7 +1051,7 @@
 			</div>
 			
 			<!-- Modal 04 -->
-			<div class="modal" id="modal-04" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-04" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1092,7 +1092,7 @@
 			</div>
 			
 			<!-- Modal 05 -->
-			<div class="modal" id="modal-05" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-05" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1132,7 +1132,7 @@
 				</div>
 			</div>
 			<!-- Modal 06 -->
-			<div class="modal" id="modal-06" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-06" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1173,7 +1173,7 @@
 			</div>
 			
 			<!-- Modal 07 -->
-			<div class="modal" id="modal-07" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-07" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1214,7 +1214,7 @@
 			</div>
 			
 			<!-- Modal 08 -->
-			<div class="modal" id="modal-08" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-08" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1255,7 +1255,7 @@
 			</div>
 			
 			<!-- Modal 09 -->
-			<div class="modal" id="modal-06" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-06" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1296,7 +1296,7 @@
 			</div>
 			
 			<!-- Modal 10 -->
-			<div class="modal" id="modal-10" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-10" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1337,7 +1337,7 @@
 			</div>
 			
 			<!-- Modal 11 -->
-			<div class="modal" id="modal-11" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-11" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1378,7 +1378,7 @@
 			</div>
 			
 			<!-- Modal 12 -->
-			<div class="modal" id="modal-12" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-12" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1419,7 +1419,7 @@
 			</div>
 			
 			<!-- Modal 13 -->
-			<div class="modal" id="modal-13" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-13" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1460,7 +1460,7 @@
 			</div>
 			
 			<!-- Modal 14 -->
-			<div class="modal" id="modal-14" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-14" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1501,7 +1501,7 @@
 			</div>
 			
 			<!-- Modal 15 -->
-			<div class="modal" id="modal-15" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-15" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1542,7 +1542,7 @@
 			</div>
 			
 			<!-- Modal 16 -->
-			<div class="modal" id="modal-16" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-16" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1583,7 +1583,7 @@
 			</div>
 			
 			<!-- Modal 17 -->
-			<div class="modal" id="modal-17" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-17" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1624,7 +1624,7 @@
 			</div>
 			
 			<!-- Modal 18 -->
-			<div class="modal" id="modal-18" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-18" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1665,7 +1665,7 @@
 			</div>
 			
 			<!-- Modal 19 -->
-			<div class="modal" id="modal-19" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-19" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1786,7 +1786,7 @@
 			</div>
 			
 			<!-- Modal 20 -->
-			<div class="modal" id="modal-20" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-20" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1827,7 +1827,7 @@
 			</div>
 			
 			<!-- Modal 21 -->
-			<div class="modal" id="modal-21" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-21" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
@@ -1868,7 +1868,7 @@
 			</div>
 			
 			<!-- Modal 22 -->
-			<div class="modal" id="modal-22" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modal-22" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="header">
