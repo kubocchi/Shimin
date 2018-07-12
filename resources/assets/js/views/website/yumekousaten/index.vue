@@ -133,7 +133,7 @@
                         <div class="links">
                             <dl v-for="(dream) in dreams" v-bind:key="dream.id">
                                 <!-- title -->
-                                <dt v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                <dt v-cloak v-bind:key="attachment.id" v-for="attachment in dream.attachments">
                                     <a class="label label-primary" @click.prevent="downloadFile(attachment)">
                                         {{dream.subject}}
                                     </a>

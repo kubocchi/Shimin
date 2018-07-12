@@ -131,9 +131,9 @@
                     <div class="book_contents">
                         
                         <div class="links">
-                            <dl v-for="attachment in kawarabi.attachment" :key="attachment.id">
-                                <dt><a @click.prevent="downloadFile(attachment)" href="#!">{{attachment.name}}</a></dt>
-                                <dd>{{kawarabi.subject}}</dd>
+                            <dl v-for="attachment in attachments" :key="attachment.id">
+                                <dt><a @click.prevent="downloadFile(attachment)" href="#!">{{kawarabi.subject}}</a></dt>
+                                <dd>{{kawarabi.detail}}</dd>
                             </dl>
                         </div>
                         <div class="other_info">
@@ -192,14 +192,15 @@
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
-                        this.kawarabi = res.data
+                        this.kawarabi = res.data[0]
                         console.log(this.kawarabi)
-
+                        this.pullAttachments(this.kawarabi)
                         NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             pullAttachments(kawarabi) {
+                
                 // Make HTTP request to store announcement
                 NProgress.start()
                 axios.get(`/api/asset/attachments/${kawarabi.file}`).then(function (response) {

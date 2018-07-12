@@ -19,6 +19,7 @@ class DreamResource extends JsonResource
             'subject' => $this->subject,
             'detail' => $this->detail,
             'file' => $this->file,
+            'attachments' => $this->attachments,
             'deactivate'=>$this->deactivate,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,

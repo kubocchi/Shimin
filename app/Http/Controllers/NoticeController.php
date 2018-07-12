@@ -12,6 +12,7 @@ use Illuminate\Pagination\Paginator;
 use Response;
 use \stdClass;
 use Carbon\Carbon;
+use App\Support\Collection;
 
 class NoticeController extends Controller
 {
@@ -154,6 +155,8 @@ class NoticeController extends Controller
         {
             return strcmp($b->updateDate, $a->updateDate);
         });
+
+        $collection = (new Collection($formattedData))->paginate(20);
 
         return Response::json(['data' => $formattedData], 201);
     }
@@ -381,5 +384,19 @@ class NoticeController extends Controller
 
         
         return Response::json(['data' => ['events'=> $eventsResponce, 'volunteers'=> $volunteersResponce, 'memberships'=> $membershipResponce, 'all'=> $allResponce]], 201);
+    }
+
+    function paginate($items, $per_page)
+    {
+        $page   = 1;
+        $offset = ($page * $per_page) - $per_page;
+
+        return new Illuminate\Pagination\LengthAwarePaginator(
+            $items->forPage($page, $per_page)->values(),
+            $items->count(),
+            $per_page,
+            Illuminate\Pagination\Paginator::resolveCurrentPage(),
+            ['path' => Illuminate\Pagination\Paginator::resolveCurrentPath()]
+        );
     }
 }

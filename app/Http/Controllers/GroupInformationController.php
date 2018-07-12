@@ -301,6 +301,7 @@ class GroupInformationController extends Controller
          $type = $request->input('type');
          
          $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
+                                    ->where('active_status', '0')
                                     ->where(function($query) use ($activityCategory)  {
                                         if(isset($activityCategory)) {
                                             $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);

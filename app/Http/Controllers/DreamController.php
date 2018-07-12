@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Dream;
 use App\Http\Resources\DreamResource;
+use App\Attachment;
 class DreamController extends Controller
 {
      /**
@@ -93,8 +94,14 @@ class DreamController extends Controller
      */
      public function getDreamDataFront()
      {
-         // Get Dreams
-         $dreams = Dream::orderBy('created_at', 'desc')->Where('deactivate', 0)->take(4)->get();
+        // Get Dreams
+        $dreams = Dream::orderBy('created_at', 'desc')->Where('deactivate', 0)->take(4)->get();
+
+        foreach($dreams as $dream)
+        {
+            $files = explode(",", $dream['file']);
+            $dream['attachments'] =  Attachment::WhereIn('id', $files)->get();
+        }
  
          // Return collection of Dreams as a resource
          return DreamResource::collection($dreams);

@@ -462,7 +462,6 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動状況】</label>
-                                                                        <p>休止中</p>
                                                                         <p>{{groupInformation.open_situation === '0'? '活動中' :
                                                                             groupInformation.open_situation === '‘1'? '休止中' :
                                                                             '抹消'}}
