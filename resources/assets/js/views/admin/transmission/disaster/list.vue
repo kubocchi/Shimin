@@ -30,12 +30,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchDisaster()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchDisaster()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -71,7 +71,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteDisaster(disaster.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteDisaster(disaster.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -79,15 +79,15 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchDisaster(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchDisaster(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchDisaster(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchDisaster(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+    import ErrorHandler from '../../../../external/error-handler'
     export default {
         data() {
             return {
@@ -117,25 +118,45 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchDisaster(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/disasters";
 
-                fetch(page_url, {
-                    method: "post",
-                    body: JSON.stringify(this.params),
+                // fetch(page_url, {
+                //     method: "post",
+                //     body: JSON.stringify(this.params),
+                //     headers: {
+                //         "content-type": "application/json"
+                //     }
+                // })
+                //     .then(res => res.json())
+                //     .then(res => {
+                //         this.disasters = res.data;
+                //         console.log(this.disasters);
+                //         vm.makePagination(res.meta, res.links);
+                //         NProgress.done()
+                //     })
+                //     .catch(err => console.log(err))
+
+
+                axios.post(page_url, this.params, {
                     headers: {
-                        "content-type": "application/json"
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 })
-                    .then(res => res.json())
-                    .then(res => {
-                        this.disasters = res.data;
-                        console.log(this.disasters);
-                        vm.makePagination(res.meta, res.links);
-                        loader.hide()
-                    })
-                    .catch(err => console.log(err))
+                .then(response => {
+                    this.disasters = response.data.data;
+                    console.log(this.subsidies);
+                    vm.makePagination(response.data.meta, response.data.links);
+                    NProgress.done()
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response);
+                        NProgress.done()
+                        ErrorHandler.handle(error.response.status, this)
+                    }
+                });
             },
 
             // Paginating the table data
@@ -163,21 +184,28 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
-                        fetch(`/api/disaster/${id}`, {
-                            method: "delete"
+                        NProgress.start()
+                        axios.delete(`/api/disaster/${id}`, {
+                            headers: {
+                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                            }
                         })
-                        .then(res => res.json())
-                        .then(data => {
+                        .then(response => {
                             this.$swal(
                                 '削除しました!',
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchDisaster()
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                NProgress.done()
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                     }
                     else {
                         this.$swal(

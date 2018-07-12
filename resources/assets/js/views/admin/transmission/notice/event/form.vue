@@ -23,25 +23,15 @@
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-4">
                                     <label for="active_category">【活動カテゴリ】（必須）</label>
-                                    <multiselect 
-                                        v-model="selectedActivityCategory" 
-                                        :options="categories" 
-                                        @select="onSelect"  
-                                        track-by="id" 
-                                        label="name" 
-                                        placeholder="選んでください" 
-                                        selectLabel="クリックして選択する" 
-                                        deselectLabel="クリックして選択を解除する" 
-                                        selectedLabel="選ばれた" 
-                                        v-validate="'required'" 
-                                        name="activity_category" 
-                                        data-vv-as="活動カテゴリ">
+                                    <multiselect v-model="selectedActivityCategory" :options="categories" @select="onSelect" track-by="id" label="name" placeholder="選んでください"
+                                        selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" v-validate="'required'"
+                                        name="activity_category" data-vv-as="活動カテゴリ">
                                     </multiselect>
                                     <span class="is-danger">{{ errors.first('activity_category') }}</span>
                                 </div>
                                 <div class="form-group col-sm-12 col-lg-4">
                                     <label class="col-form-label">【掲載期間】（必須）</label>
-                                      <div class="row">
+                                    <div class="row">
                                         <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
                                     </div>
                                 </div>
@@ -51,7 +41,7 @@
                                         <vue-datepicker-local v-model="eventDateRange" :local="local" :format="dateFormat"></vue-datepicker-local>
                                     </div>
                                 </div>
-                                 <div class="col-lg-12 form-group">
+                                <div class="col-lg-12 form-group">
                                     <label class="col-form-label" for="sponsor">【開催日時】</label>
                                     <input v-model="event.datetime" class="form-control" id="sponsor" type="text" v-validate="'required'" name="datetime" data-vv-as="開催日時">
                                     <span class="is-danger">{{ errors.first('datetime') }}</span>
@@ -75,8 +65,10 @@
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" accept="image/*" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
 
                                         <div class="form-group files">
@@ -122,20 +114,20 @@
                                 <wysiwyg v-model="event.detail" type="text" />
                             </div>
                             <div class="col-lg-12 form-group">
-                                【関連URL】
-                                <br>
-                                <input v-model="event.url" class="form-control" id="linkname" type="text">
+                                <label for="contents">【関連URL】</label>
+                                <input v-model="event.url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
                                 <!-- <textarea v-model="event.phone" class="form-control" id="contact" required="" rows="3"></textarea> -->
-                                <wysiwyg v-model="event.phone"  name="content" data-vv-as="掲載内容" type="text" />
+                                <wysiwyg v-model="event.phone" name="content" data-vv-as="掲載内容" type="text" />
                             </div>
 
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="event.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="event.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: '非公開', unchecked: '公開' }"
                                     />
                                 </div>
                             </div>
@@ -144,7 +136,7 @@
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link>
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>
 
@@ -181,8 +173,9 @@
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動カテゴリ】</label>
-                                                                        <p>{{selectedActivityCategory? selectedActivityCategory.name : ''}}</p>
-                                                                        
+                                                                        <p>{{selectedActivityCategory? selectedActivityCategory.name
+                                                                            : ''}}</p>
+
                                                                     </div>
                                                                     <div>
                                                                         <label>【子供の参加】</label>
@@ -205,7 +198,7 @@
                                                                         <p>{{event.organizer}}</p>
                                                                     </div>
                                                                     <div>
-                                                                       <label>【イメージ画像】</label>
+                                                                        <label>【イメージ画像】</label>
                                                                         <div class="form-group files">
                                                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                                                                 <ul class="form-group">
@@ -262,7 +255,7 @@
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +289,7 @@
     import moment from 'moment'
 
     export default {
-        components: { VueDatepickerLocal, Multiselect },
+        components: { Multiselect, VueDatepickerLocal },
         data() {
             return {
                 event: {
@@ -321,9 +314,9 @@
                     url: "",
                     phone: "",
                     deactivate: false,
-                    created_by: this.$store.state.user.id,
-                    updated_by: this.$store.state.user.id
-                    
+                    created_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0
+
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -357,7 +350,7 @@
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
                 width: "0%",
-                categories:[
+                categories: [
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
                     { id: "300", name: "障害者福祉" },
@@ -396,7 +389,7 @@
             if (this.$route.params.model)
                 this.fetchEvent(this.$route.params.model)
 
-            if (this.$route.params.requestType === "edit") 
+            if (this.$route.params.requestType === "edit")
                 this.edit = true
         },
 
@@ -410,7 +403,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/event", {
                         method: "post",
                         body: JSON.stringify(this.event),
@@ -420,7 +413,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -437,7 +430,7 @@
                         .catch(err => console.log(err));
                 } else {
                     // Update
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/event", {
                         method: "put",
                         body: JSON.stringify(this.event),
@@ -447,7 +440,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -469,11 +462,9 @@
             fillFormWithRecievedModel(event) {
                 this.pullAttachments(event);
 
-                this.range[0] = new Date(event.start_date);
-                this.range[1] = new Date(event.end_date);
+                this.range = [new Date(event.start_date), new Date(event.end_date)]
+                this.eventDateRange = [new Date(event.event_start_date), new Date(event.event_end_date)]
 
-                this.eventDateRange[0] = new Date(event.event_start_date);
-                this.eventDateRange[1] = new Date(event.event_end_date);
                 console.log(this.eventDateRange)
                 this.selectedActivityCategory = this.categories.find(x => x.id === event.activity_category.toString())
 
@@ -592,9 +583,9 @@
                     .catch(error => {
                         if (error.response) {
                             console.log(error.response);
-                            if(error.response.status === 413){
+                            if (error.response.status === 413) {
                                 $("#progressModal").modal("hide");
-                                 this.$swal({
+                                this.$swal({
                                     title: "警告!",
                                     text: "必須フィールドに記入してください",
                                     type: "warning",
@@ -603,7 +594,7 @@
                                     confirmButtonText: "OK"
                                 });
                             }
-                                
+
                         }
                     });
                 console.log(attachments);
@@ -693,32 +684,32 @@
                         // });
                     } else {
 
-                        this.event.event_start_date = !!this.eventDateRange ? this.eventDateRange[0].toISOString().slice(0,10) : "";
-                        this.event.event_end_date = !!this.eventDateRange ? this.eventDateRange[1].toISOString().slice(0,10) : "";
-                        
-                        this.event.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                        this.event.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
-                        // this.event.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
-                        // this.event.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
+                        this.event.event_start_date = !!this.eventDateRange ? this.eventDateRange[0].toISOString().slice(0, 10) : "";
+                        this.event.event_end_date = !!this.eventDateRange ? this.eventDateRange[1].toISOString().slice(0, 10) : "";
+
+                        // this.event.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
+                        // this.event.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        this.event.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
+                        this.event.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
                         $("#confirmationModal").modal("show");
                     }
                 });
             },
             onSelect(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.event.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                 }
             },
             fetchEvent(model) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
                 fetch(`/api/event/${model.id}`)
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithRecievedModel(res.data);
                         console.log(res.data);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

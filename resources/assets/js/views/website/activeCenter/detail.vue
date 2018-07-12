@@ -151,10 +151,10 @@
                         <dl class="file">
                             <dt>添付ファイル</dt>
                             <dd>
-                                <!-- <a href="#">ドネーション説明会表.pdf</a> -->
+                                <!-- <a href="#!">ドネーション説明会表.pdf</a> -->
                                 <div v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                     <div class="form-group">
-                                        <a class="label label-primary" @click="downloadFile(attachment)">
+                                        <a class="label label-primary" @click.prevent="downloadFile(attachment)">
                                             {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
                                         </a>
                                     </div>
@@ -165,7 +165,7 @@
                         <!-- <dl class="url">
                             <dt>URL</dt>
                             <dd>
-                                <a href="#">https://XXXXXXXXXXXXXXXXXXXX</a>
+                                <a href="#!">https://XXXXXXXXXXXXXXXXXXXX</a>
                             </dd>
                         </dl> -->
                     </div>
@@ -194,8 +194,8 @@
                     content: "",
                     file: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 attachments: [],
             };
@@ -225,14 +225,14 @@
             },
             pullAttachments(activeCenter) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${activeCenter.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }
@@ -250,15 +250,15 @@
                 this.$forceUpdate();
             },
             getDetail(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
-                page_url = page_url || `/api/active-center/${this.activeCenter.id}`
+                page_url = page_url || `/api/active-center-frontend/${this.activeCenter.id}`
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithData(res.data)
                         console.log(res.data)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

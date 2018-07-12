@@ -49,8 +49,10 @@
                                 <label for="inputFile">【イメージ画像】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" accept="image/*" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
 
                                         <div class="form-group files">
@@ -101,11 +103,11 @@
                                 </div>
                                   <span class="is-danger">{{ errors.first('membership_fee') }}</span>
                             </div>
-							<div class="form-group  col-lg-12">
-								【関連URL】
-								<br>
-								<input v-model="membership.linkname" class="form-control" id="linkname" type="text">
-							</div>
+                            <div class="col-lg-12 form-group">
+                                <label for="contents">【関連URL】</label>
+                                <input v-model="membership.linkname" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
+                            </div>
 							<div class="form-group  col-lg-12">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
                                 <wysiwyg v-model="membership.contact"  name="content" data-vv-as="掲載内容" type="text" />
@@ -114,7 +116,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="membership.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="membership.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: '非公開', unchecked: '公開' }"
                                     />
                                 </div>
                             </div>
@@ -123,7 +125,7 @@
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link>
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>
 
@@ -208,7 +210,7 @@
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
                                         </div>
                                     </div>
                                 </div>
@@ -258,8 +260,8 @@
                     linkname: "",
                     contact: "",
                     deactivate: false,
-                    created_by: this.$store.state.user.id,
-                    updated_by: this.$store.state.user.id,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -346,7 +348,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/membership", {
                         method: "post",
                         body: JSON.stringify(this.membership),
@@ -356,7 +358,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -373,7 +375,7 @@
                         .catch(err => console.log(err));
                 } else {
                     // Update
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/membership", {
                         method: "put",
                         body: JSON.stringify(this.membership),
@@ -383,7 +385,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "成功!",
@@ -404,10 +406,9 @@
             // Edit new, sends model to API
             fillFormWithRecievedModel(membership) {
                 
-                this.pullAttachments(membership);
+                this.pullAttachments(membership)
 
-                this.range[0] = new Date(membership.start_date);
-                this.range[1] = new Date(membership.end_date);
+                this.range = [new Date(membership.start_date), new Date(membership.end_date)]
                 this.selectedActivityCategory = this.categories.find(x => x.id === membership.activity_category.toString())
                 
                 this.membership.id = membership.id;
@@ -632,14 +633,14 @@
                 isDisabled = value
             },
             fetchMembership(model) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
                 fetch(`/api/membership/${model.id}`)
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithRecievedModel(res.data);
                         console.log(res.data);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

@@ -38,12 +38,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchBusinessReport()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchBusinessReport()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -84,7 +84,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteBusinessReport(businessReport.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteBusinessReport(businessReport.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -92,15 +92,15 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchBusinessReport(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchBusinessReport(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchBusinessReport(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchBusinessReport(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -134,7 +134,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchBusinessReport(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/business-reports";
 
@@ -150,7 +150,7 @@
                         this.businessReports = res.data;
                         console.log(this.businessReports);
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -180,7 +180,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         fetch(`/api/business-report/${id}`, {
                             method: "delete"
                         })
@@ -191,7 +191,7 @@
                                     '選択したデータが削除されました',
                                     'success'
                                 )
-                                loader.hide()
+                                NProgress.done()
                                 this.fetchBusinessReport()
                             })
                             .catch(err => console.log(err))
@@ -219,7 +219,7 @@
             },
             // Pulling data from API, its a post request with search-term, type
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/years";
 
@@ -231,7 +231,7 @@
                         let fakeOption = { 'id': null, 'year': 'すべて' }
                         this.years.unshift(fakeOption)
                         this.selectedYear = fakeOption
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

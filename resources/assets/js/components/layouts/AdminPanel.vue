@@ -5,7 +5,7 @@
         <div class="masthead">
             <div class="header_logo">
                 <h1>
-                    <a href="#">
+                    <a href="#!">
                         <img src="../../../sass/themes/msikatsu_admin/img/logo.png" class="img-fluid">
                     </a>
                 </h1>
@@ -27,7 +27,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" @click.prevent="openDropdown('#dropdown01')" data-toggle="dropdown" aria-haspopup="true"
+                            <a class="nav-link dropdown-toggle" href="#!" id="dropdown01" @click.prevent="openDropdown('#dropdown01')" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <span>
                                     <i class="fas fa-dove"></i>
@@ -48,7 +48,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" @click.prevent="openDropdown('#dropdown02')" data-toggle="dropdown" aria-haspopup="true"
+                            <a class="nav-link dropdown-toggle" href="#!" id="dropdown02" @click.prevent="openDropdown('#dropdown02')" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <span>
                                     <i class="fas fa-file"></i>
@@ -78,7 +78,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" @click.prevent="logout()">
+                            <a class="nav-link" href="#!" @click.prevent="logout()">
                                 <span >
                                     <i class="fas fa-power-off"></i>
                                 </span> ログアウト</a>
@@ -153,15 +153,15 @@
 
         methods: {
             openDropdown(domElement){
-                $(domElement).dropdown('dispose')
                 $(domElement).dropdown('toggle')
+                $(domElement).dropdown('update')
+                $(domElement).dropdown('dispose')
             },
             logout(){
                 localStorage.removeItem("token");
                 localStorage.removeItem("login");
                 window.location.href = '/login'
                 this.$store.commit('changeUser', null)
-
             }
         },
         computed: {

@@ -171,7 +171,7 @@
                         <!-- dd=>activity_date -->
                         <dl>
                             <dt>活動日時</dt>
-                            <dd>{{event.event_date}}</dd>
+                            <dd>{{event.datetime}}</dd>
                         </dl>
                         <!-- dd=>Deadline -->
                         <dl>
@@ -187,6 +187,11 @@
                         <dl>
                             <dt>定員</dt>
                             <dd>{{event.capacity}}</dd>
+                        </dl>
+                        <!-- dd=> Number of people -->
+                        <dl>
+                            <dt>対象者</dt>
+                            <dd>{{event.target}}</dd>
                         </dl>
                         <!-- dd=>child -->
                         <dl>
@@ -248,9 +253,12 @@
                     subject: "",
                     activity_category: "",
                     children: true,
+                    event_start_date: "",
+                    event_end_date: "",
                     event_date: "",
                     start_date: "",
                     end_date: "",
+                    datetime: "",
                     organizer: "",
                     file: "",
                     deadline: "",
@@ -309,9 +317,11 @@
                 this.event.subject = event.subject;
                 this.event.activity_category = event.activity_category;
                 this.event.children = event.children;
-                this.event.event_date = event.event_date;
+                this.event.event_start_date = event.event_start_date;
+                this.event.event_end_date = event.event_end_date;
                 this.event.start_date = event.start_date;
                 this.event.end_date = event.end_date;
+                this.event.datetime = event.datetime;
                 this.event.organizer = event.organizer;
                 this.event.file = event.file;
                 this.event.deadline = event.deadline;
@@ -330,14 +340,14 @@
             },
             pullAttachments(event) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${event.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }
@@ -355,7 +365,7 @@
                 this.$forceUpdate();
             },
             getDetail(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || `/api/event/${this.event.id}`
                 fetch(page_url)
@@ -363,7 +373,7 @@
                     .then(res => {
                         this.fillFormWithData(res.data)
                         console.log(res.data)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -372,11 +382,10 @@
                 window.location.href = `/api/download/${attachment.path}`
             },
             getActivityCategoryName(id){
-                return this.categories.find(x => x.id === id).name
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).name : ''
             },
             getCategoryWiseClass(id){
-                console.log(id)
-                return this.categories.find(x => x.id === id).class
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).class : ''
             },
             openInNewTab(url) {
                 var win = window.open(url, '_blank');

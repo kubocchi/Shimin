@@ -151,7 +151,7 @@
                                         <p class="title">{{business.name}}</p>
                                         <ul>
                                             <li v-for="attachment in business.attachments" v-bind:key="attachment.id">
-                                                <a href="#" @click.prevent="downloadFile(attachment)" target="_blank">
+                                                <a href="#!" @click.prevent="downloadFile(attachment)" target="_blank">
                                                    {{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}
                                                 </a>
                                             </li>
@@ -170,6 +170,7 @@
 </template>
 
 <script>
+   
     export default {
         name: "home",
         data() {
@@ -191,7 +192,7 @@
 
         methods: {
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/frontpage-business-reports";
 
@@ -200,13 +201,32 @@
                     .then(res => {
                         this.businessReports = res.data;
                         console.log(this.businessReports);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             downloadFile(attachment) {
                 console.log(attachment)
-                window.location.href = `/api/download/${attachment.path}`
+                //window.location.href = `/api/download/${attachment.path}`
+
+                axios({
+                    url: `/api/download/${attachment.path}`,
+                    method: 'GET',
+                    responseType: 'blob', // important
+                }).then((response) => {
+                    if (!window.navigator.msSaveOrOpenBlob) {
+                        // BLOB NAVIGATOR
+                        const url = window.URL.createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', attachment.name);
+                        document.body.appendChild(link);
+                        link.click();
+                    } else {
+                        // BLOB FOR EXPLORER 11
+                        const url = window.navigator.msSaveOrOpenBlob(new Blob([response.data]), attachment.name);
+                    }
+                });
             },
         }
     };

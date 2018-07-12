@@ -124,7 +124,8 @@
                                 </li>
                                 <li>
                                     <router-link :to="{ name: 'volunteerRecruitment' }">
-                                        <span>ボランティアを<br>募集したい</span>
+                                        <span>ボランティアを
+                                            <br>募集したい</span>
                                     </router-link>
                                 </li>
                             </ul>
@@ -163,11 +164,11 @@
                         <div class="h2">
                             <h2>センターからのお知らせ</h2>
                         </div>
-                       <div class="news_contents">
+                        <div class="news_contents">
                             <dl v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
                                 <dt>{{activeCenter.start_date}}</dt>
                                 <dd>
-                                     <router-link :to="{ path: `/active-center/${activeCenter.id}/detail`}">
+                                    <router-link :to="{ path: `/active-center/${activeCenter.id}/detail`}">
                                         <span v-if="activeCenter.start_date === newTagDate">
                                             <span class="new"></span>
                                         </span> {{activeCenter.title}}
@@ -346,9 +347,9 @@
                     </div>
                     <!-- admmin btn -->
                     <div class="btn_admin">
-                        <router-link :to="{ name: 'login' }">
+                        <a href="/login">
                             <span>管理者ログイン</span>
-                        </router-link>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -377,45 +378,23 @@
 
         methods: {
             fetchActiveCenter(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
-                const token = localStorage.getItem('token')
-                console.log('token', token)
+                page_url = page_url || "/api/active-centers-frontend"
 
-                page_url = page_url || "/api/active-centers"
-                axios.get(page_url, {
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('token')
-                    }
-                })
-                .then(response => {
-                    this.activeCenters = response.data.data
-                    //this.activeCenters = res.data
-                        console.log(this.activeCenters)
+                fetch(page_url)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.activeCenters = res.data
+                        console.log('fetchActiveCenter', this.activeCenters)
 
                         this.activeCenters.forEach(activeCenter => {
-                            if(new Date(activeCenter.start_date) >  new Date(this.newTagDate))
+                            if (new Date(activeCenter.start_date) > new Date(this.newTagDate))
                                 this.newTagDate = activeCenter.start_date
                         });
-                        loader.hide()
-                })
-                .catch(error => {
-
-                })
-                
-                // fetch(page_url)
-                //     .then(res => res.json())
-                //     .then(res => {
-                //         this.activeCenters = res.data
-                //         console.log(this.activeCenters)
-
-                //         this.activeCenters.forEach(activeCenter => {
-                //             if(new Date(activeCenter.start_date) >  new Date(this.newTagDate))
-                //                 this.newTagDate = activeCenter.start_date
-                //         });
-                //         loader.hide()
-                //     })
-                //     .catch(err => console.log(err))
+                        NProgress.done()
+                    })
+                    .catch(err => console.log(err))
             },
             loadFacebookPlugin() {
                 (function (d, s, id) {
@@ -440,25 +419,25 @@
                 });
             },
             fetchNotice(page_url) {
-                let loader = this.$loading.show();
-
-                 fetch(`/api/notices-homepage`)
-                .then(res => res.json())
-                .then(res => {
-                    this.notices = res.data;
-                    console.log(res.data);
-                    loader.hide()
-                })
-                .catch(err => console.log(err))
+                //NProgress.start()
+                NProgress.start()
+                fetch(`/api/notices-homepage`)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.notices = res.data;
+                        console.log('fetchNotice', res.data);
+                        //NProgress.done()
+                        NProgress.done()
+                    })
+                    .catch(err => console.log(err))
             },
-            getType(object){
-                console.log('type', object)
+            getType(object) {
                 let className = ''
                 switch (object.type) {
                     case 'イベント':
                         className = 'item event'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         className = 'item volunteer'
                         break;
                     case '会員募集':
@@ -467,25 +446,26 @@
                 }
                 return className
             },
-            getCategoryWiseClass(id){
-                return this.categories.find(x => x.id === id).class
+            getCategoryWiseClass(id) {
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).class : ''
             },
-            gotoDetail(object){
-                console.log(object)
+            gotoDetail(object) {
                 let routeName = ''
                 switch (object.type) {
                     case 'イベント':
                         routeName = 'event'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         routeName = 'volunteer'
                         break;
                     case '会員募集':
                         routeName = 'member'
                         break;
                 }
-                console.log(`notice/${routeName}/${object.id}/detail`)
                 return `notice/${routeName}/${object.id}/detail`
+            },
+            gotoLogin() {
+                window.location.href = '/login'
             },
         }
     };

@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <router-link :to="{ name: 'activeCenterList' }">
-                            <button class="btn btn-primary btn-lg btn-block topmenu">宮崎市民可動センターからのお知らせ</button>
+                            <button class="btn btn-primary btn-lg btn-block topmenu">宮崎市民活動センターからのお知らせ</button>
                         </router-link>
                     </div>
                     <div class="col-md-6">

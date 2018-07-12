@@ -134,7 +134,7 @@
                             <dl v-for="(dream) in dreams" v-bind:key="dream.id">
                                 <!-- title -->
                                 <dt v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                    <a class="label label-primary" @click="downloadFile(attachment)">
+                                    <a class="label label-primary" @click.prevent="downloadFile(attachment)">
                                         {{dream.subject}}
                                     </a>
                                 </dt>
@@ -191,7 +191,7 @@
 
         methods: {
             fetchdream(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/dreams-frontend"
                 fetch(page_url)
@@ -201,20 +201,20 @@
                         console.log(this.dreams)
 
                         console.log(this.newTagDate)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             pullAttachments(dream) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${dream.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }

@@ -52,7 +52,7 @@
                             </router-link> 
 
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>   
 
@@ -109,7 +109,7 @@
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                        <button type="button" class="btn btn-outline-primary" @click="submitClicked" >登録</button>
+                                        <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked" >登録</button>
                                     </div>
                                 </div>
                                 </div>
@@ -151,8 +151,8 @@
                     detail: "",
                     file: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 id: "",
                 pagination: {},
@@ -211,7 +211,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/kawarabi", {
                         method: "post",
                         body: JSON.stringify(this.kawarabi),
@@ -221,7 +221,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        loader.hide()
+                        NProgress.done()
                         self.$swal({
                             title: "登録完了!",
                             text: "登録が完了しました!",
@@ -238,7 +238,7 @@
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     fetch("/api/kawarabi", {
                         method: "put",
                         body: JSON.stringify(this.kawarabi),
@@ -248,7 +248,7 @@
                     })
                     .then(res => res.json())
                     .then(data => {
-                        loader.hide()
+                        NProgress.done()
                         self.$swal({
                             title: "成功!",
                             text: "活動センターが追加されました!",

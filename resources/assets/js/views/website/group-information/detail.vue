@@ -129,7 +129,6 @@
         </div>
 
         <!-- main contents -->
-
         <div id="o_detail" class="maincontents">
             <div class="container">
                 <div class="o_detail_head">
@@ -138,14 +137,8 @@
                     <!-- category -->
                     <dl class="cate">
                         <dt>活動分野</dt>
-                        <dd>
-                            <span class="type05">社会教育</span>
-                            <span class="type06">まちづくり</span>
-                            <span class="type09">文化・芸術</span>
-                            <span class="type10">環境保全</span>
-                            <span class="type11">災害救助</span>
-                            <span class="type12">地域安全</span>
-                            <span class="type16">子供育成</span>
+                        <dd >
+                            <span v-for="(activityCategory, index) in currentActivityCategories" :key='index' v-bind:class="activityCategory.class">{{activityCategory.name}}</span>
                         </dd>
                     </dl>
                 </div>
@@ -169,7 +162,7 @@
                                 <!-- Activity content -->
                                 <dl>
                                     <dt>活動内容</dt>
-                                    <dd>{{groupInformation.content}}</dd>
+                                    <dd v-html="groupInformation.content"></dd>
                                 </dl>
                                 <!-- dd=>csv02  -->
                                 <dl>
@@ -179,7 +172,7 @@
                                 <!-- dd=>csv02  -->
                                 <dl>
                                     <dt>団体種類</dt>
-                                    <dd>{{groupInformation.type == 0? '個人登録ボランティア' :  '一般団体' }}</dd>
+                                    <dd>{{groupInformation.type == 1? '個人登録ボランティア' :  '一般団体' }}</dd>
                                 </dl>
                                 <!-- dd=>csv08  -->
                                 <dl>
@@ -217,7 +210,7 @@
                                 <!-- dd=>csv44 , csv45  -->
                                 <dl>
                                     <dt>活動回数</dt>
-                                    <dd>{{groupInformation.activity_frequency}}回/ {{groupInformation.activityDays}}</dd>
+                                    <dd>{{groupInformation.activity_frequency}}/ {{groupInformation.activity_day}}</dd>
                                 </dl>
                                 <!-- dd=>csv46  -->
                                 <dl>
@@ -230,16 +223,18 @@
                                     <dd>{{groupInformation.method}}</dd>
                                 </dl>
                                 <!-- dd=>csv37  -->
-                                <dl>
+                                <!-- <dl>
                                     <dt>Webサイト</dt>
-                                    <dd><a href="#" target="_blank">{{groupInformation.contact_url}}</a></dd>
-                                </dl>
+                                    <dd>
+                                        <a @click="openInNewTab(groupInformation.contact_url)">{{groupInformation.contact_url}}</a>
+                                    </dd>
+                                </dl> -->
                                 <!-- dd=>53(not csv)  -->
                                 <!-- <dl class="report">
                                     <dt>活動報告書</dt>
                                     <dd>
-                                        <a href="#"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
-                                        <a href="#"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
+                                        <a href="#!"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
+                                        <a href="#!"><span class="pdf"></span>平成XX年◯◯◯◯◯◯◯◯◯◯◯◯</a>
                                     </dd>
                                 </dl> -->
                             </div>
@@ -281,7 +276,9 @@
                                 <!-- dd=>csv37  -->
                                 <dl>
                                     <dt>URL</dt>
-                                    <dd><a href="#">{{groupInformation.disclosure_contact_url == 0 ? '': groupInformation.contact_url}}</a></dd>
+                                    <dd v-if="groupInformation.disclosure_contact_url == 1">
+                                        <a @click="openInNewTab(groupInformation.contact_url)">{{groupInformation.contact_url}}</a>
+                                    </dd>
                                 </dl>
                             </div>
                         </div>
@@ -294,7 +291,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -306,7 +302,42 @@
             return {
                 groupInformation: {},
                 attachments: [],
+                activityDays: [
+                    { 'id': 1, 'label': '年' },
+                    { 'id': 2, 'label': '月' },
+                    { 'id': 3, 'label': '週' },
+                    { 'id': 4, 'label': '-' },
+                ],
+                activityCategories: [
+                    { id: 100, name: "保健・医療", class: "type01" },
+                    { id: 200, name: "高齢者福祉", class: "type02" },
+                    { id: 300, name: "障害者福祉", class: "type03" },
+                    { id: 400, name: "児童福祉", class: "type04" },
+                    { id: 500, name: "社会教育", class: "type05" },
+                    { id: 600, name: "まちづくり", class: "type06" },
+                    { id: 700, name: "観光", class: "type07" },
+                    { id: 800, name: "農山漁村", class: "type08" },
+                    { id: 900, name: "文化芸術", class: "type09" },
+                    { id: 1000, name: "環境保全", class: "type10" },
+                    { id: 1100, name: "災害救援", class: "type11" },
+                    { id: 1200, name: "地域安全", class: "type12" },
+                    { id: 1300, name: "人権・平和", class: "type13" },
+                    { id: 1400, name: "国際協力", class: "type14" },
+                    { id: 1500, name: "男女共同", class: "type15" },
+                    { id: 1600, name: "子供育成", class: "type16" },
+                    { id: 1700, name: "情報社会", class: "type17" },
+                    { id: 1800, name: "科学技術", class: "type18" },
+                    { id: 1900, name: "経済活動", class: "type19" },
+                    { id: 2000, name: "職業・雇用", class: "type20" },
+                    { id: 2100, name: "消費者保護", class: "type21" },
+                    { id: 2200, name: "NPO支援", class: "type22" },
+                    { id: 2300, name: "その他区分", class: "type23" }
+                ],
+                currentActivityCategories : []
             };
+        },
+        computed: {
+            
         },
 
         created() {
@@ -359,11 +390,15 @@
                 this.groupInformation.disclosure_contact_mail= groupInformation.disclosure_contact_mail,
                 this.groupInformation.contact_url= groupInformation.contact_url,
                 this.groupInformation.disclosure_contact_url= groupInformation.disclosure_contact_url,
-                this.groupInformation.activity_category= groupInformation.activity_category,
+                this.groupInformation.activity_category= groupInformation.activity_category.split(','),
                 this.groupInformation.active_category_supplement= groupInformation.active_category_supplement,
                 this.groupInformation.membership_male= groupInformation.membership_male,
                 this.groupInformation.membership_female= groupInformation.membership_female,
                 this.groupInformation.all_member= groupInformation.all_member,
+                this.groupInformation.activity_frequency= groupInformation.activity_frequency,
+                this.groupInformation.activity_day = this.activityDays.find(x => x.id === groupInformation.activity_day) ? 
+                this.activityDays.find(x => x.id === groupInformation.activity_day).label : '',
+
                 this.groupInformation.dues= groupInformation.dues,
                 this.groupInformation.dues_price= groupInformation.dues_price,
                 this.groupInformation.content= groupInformation.content,
@@ -371,17 +406,19 @@
                 this.groupInformation.mail_box= groupInformation.mail_box,
                 this.groupInformation.method= groupInformation.method,
                 this.groupInformation.supplement= groupInformation.supplement
+
+                this.getSelectedActivityCategoriesName()
             },
             pullAttachments(groupInformation) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${groupInformation.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }
@@ -399,15 +436,15 @@
                 this.$forceUpdate();
             },
             getDetail(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
-                page_url = page_url || `/api/group-information/${this.groupInformation.id}`
+                page_url = page_url || `/api/group-information-frontend/${this.groupInformation.id}`
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithData(res.data)
                         console.log(res.data)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -415,6 +452,19 @@
                 console.log(attachment)
                 window.location.href = `/api/download/${attachment.path}`
             },
+            getSelectedActivityCategoriesName() {
+                if(!Array.isArray(this.groupInformation.activity_category)) return
+                
+                this.groupInformation.activity_category.forEach(element => {
+                    let item = this.activityCategories.find(x => x.id === parseInt(element))
+                    if(item)
+                        this.currentActivityCategories.push(item)
+                });
+            },
+            openInNewTab(url) {
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
         }
     };
 </script>

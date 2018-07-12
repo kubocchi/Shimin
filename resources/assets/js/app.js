@@ -22,14 +22,16 @@ import App from './components/App'
 require('./external/bootstrap')
 require('./external/jquery.sliderPro')
 require('./external/script')
-//require('./external/scrol-fixed')
+require('./external/scrol-fixed')
 import PopperJs from 'popper.js'
 //Vue.use(PopperJs)
 window.jQuery = require('jquery')
+import ErrorHandler from './external/error-handler'
+// Vue.use(ErrorHandler)
+Vue.use(require('./external/common'))
 
-import vueTopprogress from 'vue-top-progress'
 
-Vue.use(vueTopprogress)
+
 /*************************END FRONTEND**************************/
 
 
@@ -52,7 +54,7 @@ import { ServerTable, ClientTable, Event } from 'vue-tables-2';
 Vue.use(ClientTable);
 Vue.component('delete', {
     props: ['data', 'index', 'column'],
-    template: `<a class='delete' @click='erase'></a>`,
+    template: `<a class='delete' @click.prevent='erase'></a>`,
     methods: {
         erase() {
             let id = this.data.id; // delete the item
@@ -79,9 +81,6 @@ import VeeValidate, { Validator } from 'vee-validate';
 Validator.localize('ja', ja);
 Vue.use(VeeValidate);
 
-// Vue-select
-import vSelect from 'vue-select'
-Vue.component('v-select', vSelect)
 
 // Pretty Checkbox
 import PrettyCheckbox from 'pretty-checkbox-vue';
@@ -112,7 +111,7 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
     state: {
-        user: {} // default value
+        user: null // default value
     },
     getters: {
         fruitsCount () {
@@ -131,6 +130,7 @@ const store = new Vuex.Store({
 
 
 
+
 const app = new Vue({
     el: '#app',
     store,
@@ -140,3 +140,23 @@ const app = new Vue({
 
 
 
+Vue.prototype.$mollah = function(attachment){
+    axios({
+        url: `/api/download/${attachment.path}`,
+        method: 'GET',
+        responseType: 'blob', // important
+    }).then((response) => {
+        if (!window.navigator.msSaveOrOpenBlob) {
+            // BLOB NAVIGATOR
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', attachment.name);
+            document.body.appendChild(link);
+            link.click();
+        } else {
+            // BLOB FOR EXPLORER 11
+            const url = window.navigator.msSaveOrOpenBlob(new Blob([response.data]), attachment.name);
+        }
+    });
+}

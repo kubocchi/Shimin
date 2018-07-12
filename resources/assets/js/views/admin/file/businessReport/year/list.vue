@@ -25,12 +25,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchYear()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchYear()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -72,7 +72,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteYear(year.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteYear(year.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -83,15 +83,15 @@
                 </router-link> 
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchYear(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchYear(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchYear(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchYear(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -121,7 +121,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchYear(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/years";
 
@@ -137,7 +137,7 @@
                         this.years = res.data;
                         console.log(this.years);
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -167,7 +167,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         fetch(`/api/year/${id}`, {
                             method: "delete"
                         })
@@ -178,7 +178,7 @@
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchYear()
                         })
                         .catch(err => console.log(err))

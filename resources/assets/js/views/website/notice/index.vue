@@ -186,7 +186,7 @@
                                 </dl>
                                 <!-- enter -->
                                 <div class="btn_search">
-                                    <button @click="fetchNotice()">検 索</button>
+                                    <button @click.prevent="fetchNotice()">検 索</button>
                                 </div>
                             </div>
                         </div>
@@ -311,9 +311,9 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
-                 fetch('/api/notices', {
+                 fetch('/api/notices-frontend', {
                     method: "post",
                     body: JSON.stringify(this.params),
                     headers: {
@@ -332,7 +332,7 @@
                         });
 
                         console.log(this.newTagDate)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },

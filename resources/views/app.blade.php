@@ -8,6 +8,7 @@
         <!-- favicon -->
 	    <link rel="shortcut icon" href="../images/favicon.ico">
         <title>宮崎市民活動センター</title>
+        <!-- <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" /> -->
         <link type="text/css" rel="stylesheet" href="{{ elixir('/css/app.css') }}" />
 
         <script>
@@ -17,6 +18,8 @@
     <body>
         <div id="app">
         </div>
+        <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
         <script src="{{ elixir('/js/app.js') }}"></script>
+
     </body>
 </html>

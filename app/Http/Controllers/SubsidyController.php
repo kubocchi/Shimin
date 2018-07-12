@@ -17,7 +17,7 @@ class SubsidyController extends Controller
     public function index()
     {
         // Get ActiveCenters
-        $activeCenters = Subsidy::orderBy('start_date', 'desc')->Where('deactivate', 0)->paginate(10);
+        $activeCenters = Subsidy::orderBy('updated_at', 'desc')->Where('deactivate', 0)->paginate(10);
 
         // Return collection of ActiveCenters as a resource
         return SubsidyResource::collection($activeCenters);
@@ -91,26 +91,26 @@ class SubsidyController extends Controller
             # All type
             case '0':
                 $subsidies = Subsidy::Where('title', 'like', '%' . $search . '%')
-                            ->orderBy('created_at', 'desc')->paginate(10);
+                            ->orderBy('updated_at', 'desc')->paginate(10);
                 break;
             # Running type
             case '1':
                 $subsidies = Subsidy::Where('title', 'like', '%' . $search . '%')
                             ->whereDate('start_date', '<=', date("Y-m-d"))
                             ->whereDate('end_date', '>=', date("Y-m-d"))
-                            ->orderBy('created_at', 'desc')->paginate(10);
+                            ->orderBy('updated_at', 'desc')->paginate(10);
                 break;
             # Future type
             case '2':
                 $subsidies = Subsidy::Where('title', 'like', '%' . $search . '%')
-                    ->whereDate('start_date', '>', date("Y-m-d"))
-                    ->orderBy('created_at', 'desc')->paginate(10);
+                            ->whereDate('start_date', '>', date("Y-m-d"))
+                            ->orderBy('updated_at', 'desc')->paginate(10);
                 break;
             # Previous type
             case '3':
                 $subsidies = Subsidy::Where('title', 'like', '%' . $search . '%')
-                    ->whereDate('end_date', '<', date("Y-m-d"))
-                    ->orderBy('created_at', 'desc')->paginate(10);
+                            ->whereDate('end_date', '<', date("Y-m-d"))
+                            ->orderBy('updated_at', 'desc')->paginate(10);
                 break;
         }
 

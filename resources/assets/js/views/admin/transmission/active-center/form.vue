@@ -39,8 +39,10 @@
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
 
                                         <div class="form-group files">
@@ -63,7 +65,7 @@
                             </router-link>
 
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>
 
@@ -128,7 +130,7 @@
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
                                         </div>
                                     </div>
                                 </div>
@@ -157,11 +159,13 @@
 
 
 <script>
-    import VueDatepickerLocal from 'vue-datepicker-local'
+    import VueDatepickerLocal from "vue-datepicker-local";
+    import Multiselect from "vue-multiselect";
     import moment from 'moment'
+    import ErrorHandler from '../../../../external/error-handler'
 
     export default {
-        components: { VueDatepickerLocal },
+        components: {  Multiselect, VueDatepickerLocal },
         data() {
             return {
                 activeCenter: {
@@ -172,8 +176,8 @@
                     content: "",
                     file: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 id: "",
                 pagination: {},
@@ -232,7 +236,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
+                    NProgress.start()
                     // fetch("/api/active-center", {
                     //     method: "post",
                     //     body: JSON.stringify(this.activeCenter),
@@ -242,7 +246,7 @@
                     // })
                     //     .then(res => res.json())
                     //     .then(data => {
-                    //         loader.hide()
+                    //         NProgress.done()
                     //         self.$swal({
                     //             title: "登録完了!",
                     //             text: "登録が完了しました!",
@@ -263,7 +267,7 @@
                         }
                     })
                         .then(response => {
-                            loader.hide()
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -277,25 +281,28 @@
                                 });
                         })
                         .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                if (error.response.status === 401) {
+                                    window.location.href = '/login'
+                                }
 
-                        })
+                            }
+                        });
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
-                    fetch("/api/active-center", {
-                        method: "put",
-                        body: JSON.stringify(this.activeCenter),
+                    NProgress.start()
+                    axios.put("/api/active-center", this.activeCenter, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
-                            loader.hide()
+                        .then(response => {
+                            NProgress.done()
                             self.$swal({
-                                title: "成功!",
-                                text: "活動センターが追加されました!",
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
                                 type: "success",
                                 confirmButtonText: 'OK'
                             })
@@ -305,7 +312,15 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                if (error.response.status === 401) {
+                                    window.location.href = '/login'
+                                }
+
+                            }
+                        });
                 }
             },
 
@@ -360,6 +375,9 @@
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
+
+                 this.uploadedData = new FormData()
+                this.prepareFields()
             },
 
             // This function will be called every time you add a file
@@ -380,6 +398,8 @@
             // Adding attachment, Sends request to Attachment API
             addAttachment() {
                 this.prepareFields()
+
+                console.log('upload',this.uploadedData)
 
                 var config = {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -403,12 +423,18 @@
                             this.addActiveCenter()
                             $("#progressModal").modal('hide')
                         } else {
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(100, this)
                             console.log('Unsuccessful Upload')
                         }
                     }
                         .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log('Attachment catch', error)
+                   .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
                     });
                 console.log(attachments)
             },
@@ -488,8 +514,8 @@
                         console.log('true')
                     }
                     else {
-                        this.activeCenter.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                        this.activeCenter.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
+                        this.activeCenter.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
+                        this.activeCenter.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
                         $("#confirmationModal").modal('show')
                     }
                 });

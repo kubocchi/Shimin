@@ -53,12 +53,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchNotice()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchNotice()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -86,13 +86,13 @@
                                 <td>{{ notice.subject }}</td>
                                 <td>{{ notice.date }}</td>
                                 <td>
-                                    <button class="btn btn-outline-primary btn-block" role="button" @click="copyOrEdit(notice, 'copy')">複製</button>
+                                    <button class="btn btn-outline-primary btn-block" role="button" @click.prevent="copyOrEdit(notice, 'copy')">複製</button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-outline-success btn-block" role="button"  @click="copyOrEdit(notice, 'edit')">変更</button>
+                                    <button class="btn btn-outline-success btn-block" role="button"  @click.prevent="copyOrEdit(notice, 'edit')">変更</button>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteNotice(notice)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteNotice(notice)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -100,15 +100,15 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchNotice(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchNotice(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchNotice(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchNotice(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -145,9 +145,9 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
-                 fetch('/api/notices', {
+                fetch('/api/notices', {
                     method: "post",
                     body: JSON.stringify(this.params),
                     headers: {
@@ -159,7 +159,7 @@
                         this.notices = res.data;
                         console.log(res.data);
                         //vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -189,14 +189,14 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         let routeName = ''
                         
                         switch (object.type) {
                             case 'イベント':
                                 routeName = 'event'
                                 break;
-                            case 'ボランティア情報':
+                            case 'ボランティア':
                                 routeName = 'volunteer'
                                 break;
                             case '会員募集':
@@ -214,7 +214,7 @@
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchNotice()
                         })
                         .catch(err => console.log(err))
@@ -247,7 +247,7 @@
                     case 'イベント':
                         routeName = 'noticeEventForm'
                         break;
-                    case 'ボランティア情報':
+                    case 'ボランティア':
                         routeName = 'noticeVolunteerForm'
                         break;
                     case '会員募集':

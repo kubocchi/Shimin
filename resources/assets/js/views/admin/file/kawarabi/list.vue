@@ -25,12 +25,12 @@
                         <div class="input-group">
                             <input type="text" v-model="params.search" class="form-control">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="fetchKawarabi()">
+                                <button class="btn btn-outline-primary" @click.prevent="fetchKawarabi()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-primary" @click="clearSearch()">
+                                <button class="btn btn-outline-primary" @click.prevent="clearSearch()">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </span>
@@ -64,7 +64,7 @@
                                     </router-link>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-danger btn-block" @click="deleteKawarabi(kawarabi.id)" role="button">削除</a>
+                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteKawarabi(kawarabi.id)" role="button">削除</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -72,15 +72,15 @@
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchKawarabi(pagination.prev_page_url)">前へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchKawarabi(pagination.prev_page_url)">前へ</button>
                     </li>
 
                     <li class="page-item disabled">
-                        <button class="page-link text-dark" href="#">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
+                        <button class="page-link text-dark" href="#!">{{ pagination.current_page }} / {{ pagination.last_page }}</button>
                     </li>
 
                     <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
-                        <button class="page-link" href="#" @click="fetchKawarabi(pagination.next_page_url)">次へ</button>
+                        <button class="page-link" href="#!" @click.prevent="fetchKawarabi(pagination.next_page_url)">次へ</button>
                     </li>
                 </ul>
             </div>
@@ -117,7 +117,7 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchKawarabi(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/kawarabis";
 
@@ -133,7 +133,7 @@
                         this.kawarabis = res.data;
                         console.log(this.kawarabis);
                         vm.makePagination(res.meta, res.links);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -163,7 +163,7 @@
                     cancelButtonText: 'キャンセル'
                 }).then((result) => {
                     if (result.value) {
-                        let loader = this.$loading.show();
+                        NProgress.start()
                         fetch(`/api/kawarabi/${id}`, {
                             method: "delete"
                         })
@@ -174,7 +174,7 @@
                                 '選択したデータが削除されました',
                                 'success'
                             )
-                            loader.hide()
+                            NProgress.done()
                             this.fetchKawarabi()
                         })
                         .catch(err => console.log(err))

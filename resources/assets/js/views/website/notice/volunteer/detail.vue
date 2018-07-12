@@ -203,7 +203,7 @@
                         <!-- dd=>URL -->
                         <dl>
                             <dt>URL</dt>
-                            <dd><a @click="openInNewTab(volunteer.linkname)">{{volunteer.linkname}}</a></dd>
+                            <dd><a @click.prevent="openInNewTab(volunteer.linkname)">{{volunteer.linkname}}</a></dd>
                         </dl>
                         <!-- dd=>contact information -->
                         <dl>
@@ -328,14 +328,14 @@
             },
             pullAttachments(object) {
                 // Make HTTP request to store announcement
-                let loader = this.$loading.show();
+                NProgress.start()
                 axios.get(`/api/asset/attachments/${object.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
-                        loader.hide()
+                        NProgress.done()
                     } else {
                         console.log(response.data.errors)
                     }
@@ -353,7 +353,7 @@
                 this.$forceUpdate();
             },
             getDetail(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 let vm = this;
                 page_url = page_url || `/api/volunteer/${this.volunteer.id}`
                 fetch(page_url)
@@ -361,7 +361,7 @@
                     .then(res => {
                         this.fillFormWithData(res.data)
                         console.log(res.data)
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
@@ -369,12 +369,11 @@
                 console.log(attachment)
                 window.location.href = `/api/download/${attachment.path}`
             },
-            getActivityCategoryName(id) {
-                return this.categories.find(x => x.id === id).name
+            getActivityCategoryName(id){
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).name : ''
             },
-            getCategoryWiseClass(id) {
-                console.log(id)
-                return this.categories.find(x => x.id === id).class
+            getCategoryWiseClass(id){
+                return this.categories.find(x => x.id === id) ? this.categories.find(x => x.id === id).class : ''
             },
             openInNewTab(url) {
                 var win = window.open(url, '_blank');

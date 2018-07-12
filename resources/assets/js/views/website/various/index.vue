@@ -72,7 +72,8 @@
                                 </li>
                                 <li>
                                     <router-link :to="{ name: 'volunteerRecruitment' }">
-                                        <span>ボランティアを<br>募集したい</span>
+                                        <span>ボランティアを
+                                            <br>募集したい</span>
                                     </router-link>
                                 </li>
                             </ul>
@@ -98,7 +99,7 @@
             </div>
         </div>
 
-        
+
         <!-- pagetitle -->
 
         <div id="pagetitle" class="format">
@@ -143,7 +144,7 @@
                             <dl v-for="citizen in variouses.citizens" :key="citizen.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(citizen.attachments[0])">{{citizen.subject}}</a>
+                                    <a @click.prevent="downloadFile(citizen.attachments[0])">{{citizen.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="citizen.detail"></dd>
@@ -158,7 +159,7 @@
                             <dl v-for="personal in variouses.personals" :key="personal.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(personal.attachments[0])">{{personal.subject}}</a>
+                                    <a @click.prevent="downloadFile(personal.attachments[0])">{{personal.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="personal.detail"></dd>
@@ -173,7 +174,7 @@
                             <dl v-for="kawarabi in variouses.kawarabis" :key="kawarabi.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(kawarabi.attachments[0])">{{kawarabi.subject}}</a>
+                                    <a @click.prevent="downloadFile(kawarabi.attachments[0])">{{kawarabi.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="kawarabi.detail"></dd>
@@ -188,7 +189,7 @@
                             <dl v-for="various in variouses.variouses" :key="various.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click="downloadFile(various.attachments[0])">{{various.subject}}</a>
+                                    <a @click.prevent="downloadFile(various.attachments[0])">{{various.subject}}</a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="various.detail"></dd>
@@ -246,20 +247,41 @@
         methods: {
             // Pulling data from API, its a post request with search-term, type
             fetchVarious(page_url) {
-                let loader = this.$loading.show();
+                NProgress.start()
                 fetch("/api/variouses-frontend")
                     .then(res => res.json())
                     .then(res => {
                         this.variouses = res.data;
                         console.log(this.variouses);
-                        
-                        loader.hide()
+
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
             downloadFile(attachment) {
                 console.log(attachment)
-                window.location.href = `/api/download/${attachment.path}`
+                //window.location.href = `/api/download/${attachment.path}`
+
+                // axios({
+                //     url: `/api/download/${attachment.path}`,
+                //     method: 'GET',
+                //     responseType: 'blob', // important
+                // }).then((response) => {
+                //     if (!window.navigator.msSaveOrOpenBlob) {
+                //         // BLOB NAVIGATOR
+                //         const url = window.URL.createObjectURL(new Blob([response.data]));
+                //         const link = document.createElement('a');
+                //         link.href = url;
+                //         link.setAttribute('download', attachment.name);
+                //         document.body.appendChild(link);
+                //         link.click();
+                //     } else {
+                //         // BLOB FOR EXPLORER 11
+                //         const url = window.navigator.msSaveOrOpenBlob(new Blob([response.data]), attachment.name);
+                //     }
+                // });
+
+                this.$mollah(attachment)
             },
         }
     };

@@ -8,7 +8,7 @@
             <div class="container clearfix">
                 <div class="head_left">
                     <h1>
-                        <a href="#" class="clearfix">
+                        <a href="#!" class="clearfix">
                             <p class="logo">
                                 <img src="/images/h1_logo.png" alt="宮崎市民活動センター">
                             </p>
@@ -254,8 +254,6 @@
         },
 
         created() {
-            //
-            console.log('reload', localStorage.getItem("reload"))
 
             // if(localStorage.getItem("reload") == null){
             //     localStorage.setItem("reload", 'website');
@@ -267,6 +265,8 @@
             // }
 
             this.loadNav()
+
+            
         },
         watch: {
             '$route': function(from, to) {
@@ -276,7 +276,6 @@
 
         methods: {
             loadNav(){
-                console.log('nav')
                 $(function () {
                     var nav = $('nav.global_nav');
                     $('li', nav)
@@ -312,6 +311,13 @@
                         });
                 });
             }
-        }
+        },
+        mounted () {
+            // let script = document.createElement('script')
+            // script.setAttribute('src', 'https://unpkg.com/nprogress@0.2.0/nprogress.js')
+            // script.async = true
+            // document.head.appendChild(script)
+            
+        },
     };
 </script>

@@ -31,7 +31,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="disaster.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="disaster.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: '非公開', unchecked: '公開' }"
                                     />
                                 </div>
                             </div>
@@ -39,8 +39,10 @@
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange"> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
 
                                         <div class="form-group files">
@@ -62,7 +64,7 @@
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link>
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>
 
@@ -128,7 +130,7 @@
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
                                         </div>
                                     </div>
                                 </div>
@@ -159,6 +161,7 @@
 <script>
     import VueDatepickerLocal from 'vue-datepicker-local'
     import moment from 'moment'
+    import ErrorHandler from '../../../../external/error-handler'
 
     export default {
         components: { VueDatepickerLocal },
@@ -172,8 +175,8 @@
                     content: "",
                     file: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 edit: false,
                 dateFormat: 'YYYY-MM-DD',
@@ -230,17 +233,38 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show()
-                    fetch("/api/disaster", {
-                        method: "post",
-                        body: JSON.stringify(this.disaster),
+                    NProgress.start()
+                    // fetch("/api/disaster", {
+                    //     method: "post",
+                    //     body: JSON.stringify(this.disaster),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    //     .then(res => res.json())
+                    //     .then(data => {
+                    //         NProgress.done()
+                    //         self.$swal({
+                    //             title: "登録完了!",
+                    //             text: "登録が完了しました!",
+                    //             type: "success",
+                    //             confirmButtonText: 'OK'
+                    //         })
+                    //             .then(function () {
+                    //                 self.$router.push({
+                    //                     name: 'disasterList'
+                    //                 })
+                    //             });
+                    //     })
+                    //     .catch(err => console.log(err))
+
+                    axios.post("/api/disaster", this.disaster, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
-                            loader.hide()
+                        .then(response => {
+                            NProgress.done()
                             self.$swal({
                                 title: "登録完了!",
                                 text: "登録が完了しました!",
@@ -253,24 +277,51 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                 } else {
 
                     // Update
-                    let loader = this.$loading.show()
-                    fetch("/api/disaster", {
-                        method: "put",
-                        body: JSON.stringify(this.disaster),
+                    NProgress.start()
+                    // fetch("/api/disaster", {
+                    //     method: "put",
+                    //     body: JSON.stringify(this.disaster),
+                    //     headers: {
+                    //         "content-type": "application/json"
+                    //     }
+                    // })
+                    //     .then(res => res.json())
+                    //     .then(data => {
+                    //         NProgress.done()
+                    //         self.$swal({
+                    //             title: "成功!",
+                    //             text: "活動センターが追加されました!",
+                    //             type: "success",
+                    //             confirmButtonText: 'OK'
+                    //         })
+                    //             .then(function () {
+                    //                 self.$router.push({
+                    //                     name: 'disasterList'
+                    //                 })
+                    //             });
+                    //     })
+                    //     .catch(err => console.log(err))
+
+                    axios.put("/api/disaster", this.disaster, {
                         headers: {
-                            "content-type": "application/json"
+                            Authorization: 'Bearer ' + localStorage.getItem('token')
                         }
                     })
-                        .then(res => res.json())
-                        .then(data => {
-                            loader.hide()
+                        .then(response => {
+                            NProgress.done()
                             self.$swal({
-                                title: "成功!",
-                                text: "活動センターが追加されました!",
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
                                 type: "success",
                                 confirmButtonText: 'OK'
                             })
@@ -280,7 +331,13 @@
                                     })
                                 });
                         })
-                        .catch(err => console.log(err))
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response);
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        });
                 }
             },
 

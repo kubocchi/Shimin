@@ -60,8 +60,10 @@
                                 <label for="inputFile">【添付ファイル】</label>
                                 <div class="file-upload">
                                     <div class="form-group">
-                                        <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                            <input type="file" multiple="multiple" id="attachments" style="display: none" @change="uploadFieldChange" accept='image/*'> 参照
+                                        <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
+                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
+                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
+                                            参照
                                         </label>
                                         <div class="form-group files">
                                             <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
@@ -108,11 +110,11 @@
 								<label for="content">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
                                 <wysiwyg v-model="volunteer.content"  type="text" />
 							</div>
-							<div class="col-lg-12 form-group">
-								【関連URL】
-								<br>
-								<input v-model="volunteer.linkname" class="form-control" id="linkname" type="text">
-							</div>
+                            <div class="col-lg-12 form-group">
+                                <label for="contents">【関連URL】</label>
+                                <input v-model="volunteer.linkname" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
+                            </div>
 							<div class=" col-lg-12 form-group">
 								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
 								<!-- <textarea v-model="volunteer.contact" class="form-control" id="contact" required="" rows="3"></textarea> -->
@@ -122,7 +124,7 @@
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
                                 <div class="form-group row">
-                                    <toggle-button v-model="volunteer.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: 'はい', unchecked: 'いいえ' }"
+                                    <toggle-button v-model="volunteer.deactivate" :width="60" :value="true" :color="switchColorDeactivate" :sync="true" :labels="{ checked: '非公開', unchecked: '公開' }"
                                     />
                                 </div>
                             </div>
@@ -131,7 +133,7 @@
                                 <button class="btn btn-outline-primary">戻る</button>
                             </router-link>
 
-                            <button type="button" class="btn btn-primary" @click="confirm">
+                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
                                 確認に進む
                             </button>
 
@@ -248,7 +250,7 @@
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click="submitClicked">登録</button>
+                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
                                         </div>
                                     </div>
                                 </div>
@@ -305,8 +307,8 @@
                     linkname: "",
                     contact: "",
                     deactivate: false,
-                   updated_by: this.$store.state.user.id,
-                    created_by: this.$store.state.user.id
+                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -391,7 +393,7 @@
 
                 if (this.edit === false) {
                     // Add
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/volunteer", {
                         method: "post",
                         body: JSON.stringify(this.volunteer),
@@ -401,7 +403,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -418,7 +420,7 @@
                         .catch(err => console.log(err));
                 } else {
                     // Update
-                    let loader = this.$loading.show();
+                    NProgress.start()
                     fetch("/api/volunteer", {
                         method: "put",
                         body: JSON.stringify(this.volunteer),
@@ -428,7 +430,7 @@
                     })
                         .then(res => res.json())
                         .then(data => {
-                            loader.hide();
+                            NProgress.done();
                             self
                                 .$swal({
                                     title: "登録完了!",
@@ -450,8 +452,8 @@
             fillFormWithRecievedModel(volunteer) {
                 this.pullAttachments(volunteer);
 
-                this.range[0] = new Date(volunteer.start_date);
-                this.range[1] = new Date(volunteer.end_date);
+                this.range = [new Date(volunteer.start_date), new Date(volunteer.end_date)]
+                
                 console.log(this.categories.find(x => x.id === volunteer.activity_category))
 
                 this.selectedActivityCategory = this.categories.find(x => x.id === volunteer.activity_category.toString())
@@ -675,14 +677,14 @@
                 }
             },
             fetchVolunteer(model) {
-                let loader = this.$loading.show();
+                NProgress.start()
 
                 fetch(`/api/volunteer/${model.id}`)
                     .then(res => res.json())
                     .then(res => {
                         this.fillFormWithRecievedModel(res.data);
                         console.log(res.data);
-                        loader.hide()
+                        NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
