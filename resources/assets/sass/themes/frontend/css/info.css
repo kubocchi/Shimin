@@ -626,6 +626,10 @@ dl.url dt::before{
 	top: -3px ;
 	left: 0 ;
 }
+.book_contents .links dl dd img{
+	max-width: 450px ;
+	width: 100% ;
+}
 .book_contents .links dl li a.latest::before{
 	content: url(../images/ico_latest.png) ;
 	position: absolute ;
