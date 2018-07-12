@@ -133,7 +133,7 @@
                         <div class="links">
                             <dl v-for="attachment in attachments" :key="attachment.id">
                                 <dt><a @click.prevent="downloadFile(attachment)" href="#!">{{kawarabi.subject}}</a></dt>
-                                <dd>{{kawarabi.detail}}</dd>
+                                <dd v-html="kawarabi.detail"></dd>
                             </dl>
                         </div>
                         <div class="other_info">
