@@ -64,7 +64,7 @@
                                 <div class="form-group col-sm-12 col-lg-6">
                                     <label class="col-form-label">休止年月日 / 抹消年月日</label>
                                     <div class="row">
-                                        <vue-datepicker-local v-model="groupInformation.pause_date" :local="local" :disabled="groupInformation.active_status == '0' ? true : false"
+                                        <vue-datepicker-local v-model="groupInformation.pause_date" :local="local" :disabled="groupInformation.open_situation == '0' ? true : false"
                                             :format="dateFormat"></vue-datepicker-local>
                                     </div>
                                 </div>
@@ -213,10 +213,10 @@
                                 <label class="col-form-label">【所在地の公開有無】</label>
                                 <div class="col-lg-12 form-group">
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_address" value="0" color="primary-o" checked>開示しない</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_address" value="0" color="primary-o" checked>公開しない</p-radio>
                                     </div>
                                     <div class="form-group row">
-                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_address" value="1" color="primary-o">開示する</p-radio>
+                                        <p-radio class="p-default p-curve" v-model="groupInformation.disclosure_contact_address" value="1" color="primary-o">公開する</p-radio>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +282,8 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="contact_url">【URL】 （半角数字　例：http://www.genki365.com/ ）</label>
-                                <input class="form-control" v-model="groupInformation.contact_url" id="contact_url" type="url">
+                                <input v-model="groupInformation.contact_url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="URL">
+                                <span class="is-danger">{{ errors.first('url') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【URLの公開有無】</label>
@@ -462,6 +463,10 @@
                                                                     <div>
                                                                         <label>【活動状況】</label>
                                                                         <p>休止中</p>
+                                                                        <p>{{groupInformation.open_situation === '0'? '活動中' :
+                                                                            groupInformation.open_situation === '‘1'? '休止中' :
+                                                                            '抹消'}}
+                                                                        </p>
                                                                         <p>{{groupInformation.pause_date}}
                                                                         </p>
                                                                     </div>
@@ -529,6 +534,55 @@
                                                                             === '0'? '公開しない' : '公開する'}}</p>
                                                                     </div>
                                                                     <div>
+                                                                        <label>【連絡先・事務所・事務局名】</label>
+                                                                        <p>{{groupInformation.contact_name}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先・事務所・事務局ふりがな】</label>
+                                                                        <p>{{groupInformation.contact_name_phonetic}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先・事務所・事務局の公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_name === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先・事務所・事務局郵便番号】</label>
+                                                                        <p>{{groupInformation.postal_code}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【住所（所在地）】</label>
+                                                                        <p>{{groupInformation.contact_address}}</p>
+                                                                       <p>{{groupInformation.contact_address_name}} {{groupInformation.contact_address_title}}</p>                                                                    
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【所在地の公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_address === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先電話番号】</label>
+                                                                        <p>{{groupInformation.contact_phone}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先電話番号の公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_phone === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先携帯番号】</label>
+                                                                        <p>{{groupInformation.contact_phone_2}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先携帯番号の公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_phone_2 === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先FAX】</label>
+                                                                        <p>{{groupInformation.contact_fax}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【連絡先FAXの公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_fax === '0'? '公開しない' : '公開する'}}</p>
+                                                                    </div>
+                                                                    <div>
                                                                         <label>【e-mail】</label>
                                                                         <p>{{groupInformation.contact_mail}}</p>
                                                                     </div>
@@ -540,6 +594,10 @@
                                                                     <div>
                                                                         <label>【URL】</label>
                                                                         <p>{{groupInformation.contact_url}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【URLの公開有無】</label>
+                                                                        <p>{{groupInformation.disclosure_contact_url === '0'? '公開しない' : '公開する'}}</p>
                                                                     </div>
                                                                     <div>
                                                                         <label>【活動分類】</label>
