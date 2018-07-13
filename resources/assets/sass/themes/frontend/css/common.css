@@ -1078,6 +1078,10 @@ nav.pager ul li.next a::after{
 	line-height: 1.4em ;
 	margin-bottom: 0 ;
 }
+.detail_body .information dl dd img{
+	width: 100% ;
+	max-width: 500px ;
+}
 .detail_body .information dl dd a{
 	color: #1b89e7 ;
 	text-decoration: underline ;
@@ -1094,7 +1098,8 @@ nav.pager ul li.next a::after{
 	font-weight: normal ;
 }
 .detail_body p.text_moredetail img{
-	max-width: 100% ;
+	width: 100% ;
+	max-width: 500px ;
 }
 .detail_body .information .attachment_img{
 	padding-top: 30px ;
