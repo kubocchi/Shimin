@@ -466,13 +466,6 @@ dl.url dt::before{
 .format_body .group .list dl dt a{
 	text-decoration: underline ;
 }
-.format_body .group .list dl dt a::before{
-	font-family: 'Font Awesome 5 Free' ;
-	content: "\f15c" ;
-	margin-right: 3px ;
-	color: #1b89e7 ;
-}
-/*
 .format_body .group .list dl dt a span{
 	display: inline-block ;
 	position: relative ;
@@ -484,25 +477,28 @@ dl.url dt::before{
 	top: -2px ;
 	left: 0 ;
 }
-*/
+
 /* pdf */
-/*
 .format_body .group .list dl dt a span.pdf::before{
 	content: url(../images/ico_pdf.png) ;
 }
-*/
 /* word */
-/*
 .format_body .group .list dl dt a span.word::before{
 	content: url(../images/ico_word.png) ;
 }
-*/
 /* excel */
-/*
 .format_body .group .list dl dt a span.xls::before{
 	content: url(../images/ico_xls.png) ;
 }
-*/
+/* other */
+.format_body .group .list dl dt a span.other::before{
+	font-family: 'Font Awesome 5 Free' ;
+	content: "\f15c" ;
+	color: #1b89e7 ;
+	font-size: 1.1em ;
+	left: 5px ;
+	top: 2px ;
+}
 .format_body .group .list dl dt a:hover{
 	text-decoration: none ;
 }
