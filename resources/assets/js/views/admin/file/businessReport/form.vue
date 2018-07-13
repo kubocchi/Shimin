@@ -171,6 +171,7 @@
                             </div>
                     </fieldset>
                 </form>
+                {{businessReport}}
                 </div>
             </div>
         </div>
@@ -193,7 +194,7 @@
                     detail: null,
                     file: null,
                     deactivate: false,
-                   updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
                     created_by: this.$store.state.user != null? this.$store.state.user.id : 0
                 },
                 id: "",
@@ -256,7 +257,7 @@
         methods: {
             // Add new, sends model to API
             addbusinessReport() {
-                this.businessReport.file = this.currentAddedFileIs.join(',')
+                //this.businessReport.file = this.currentAddedFileIs.join(',')
 
                 let self = this
                 console.log(this.businessReport)
@@ -332,8 +333,8 @@
                 this.businessReport.updated_by = businessReport.updated_by
 
                 // For Files
-                if(businessReport.file)
-                    this.currentAddedFileIs = businessReport.file.split(',')
+                // if(businessReport.file)
+                //     this.currentAddedFileIs = businessReport.file.split(',')
             },
 
             // Analyzing attachmet file size
@@ -346,15 +347,13 @@
 
             // Preparing files 
             prepareFields() {
-                for (var i = this.attachments.length - 1; i >= 0; i--) {
-                    console.log(this.attachments[i].category_id);
-                    this.uploadedData.append("attachments[][0]", this.attachments[i]);
-                    this.uploadedData.append("attachments[][1]", this.attachments[i].category_id);
-                }
+                this.attachments.forEach(element => {
+                    this.uploadedData.append("attachments[][0]", element)
+                })
 
-                for (var i = this.attachment_labels.length - 1; i >= 0; i--) {
-                    this.uploadedData.append("attachment_labels[]", JSON.stringify(this.attachment_labels[i]));
-                }
+                this.attachments.forEach(element => {
+                    this.uploadedData.append("attachment_labels[]", JSON.stringify(element))
+                })
             },
 
             // Removing attachment on button click
@@ -365,6 +364,7 @@
 
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
+                this.businessReport.file = this.attachments.map(e => e.id).join(",");
             },
 
             // This function will be called every time you add a file
@@ -403,8 +403,18 @@
                         console.log(response);
                         if (response.data.success) {
                             console.log('Successfull upload')
-                            this.currentAddedFileIs.push(response.data.data)
+                            //this.currentAddedFileIs.push(response.data.data)
                             this.resetData()
+
+                            if(response.data.data){
+                                if(this.businessReport.file.length)
+                                    this.businessReport.file = this.businessReport.file + ',' + response.data.data.join(',')
+                                else{
+                                    this.businessReport.file = response.data.data.join(',')
+                                }
+                            }
+
+                            console.log(this.businessReport.file)
                             this.addbusinessReport()
                             $("#progressModal").modal('hide')
                         } else {
@@ -459,6 +469,7 @@
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
+                        this.businessReport.file = this.attachments.map(e => e.id).join(",")
                     } else {
                         console.log(response.data.errors)
                     }
@@ -477,7 +488,7 @@
                 if(this.tempRemovedFileIds.length){
                     this.tempRemovedFileIds.forEach(id => {
                         this.removeServerAttachment(id)
-                        this.currentAddedFileIs.filter(item => item !== id)
+                        //this.currentAddedFileIs.filter(item => item !== id)
                     })
                 }
 

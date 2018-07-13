@@ -74,7 +74,8 @@ class AttachmentController extends Controller
             // $user_id = Auth::user()->id;
             //dd($ids); die();
 
-            $attachments = $this->attachmentRepo->whereIn('id', explode(',', $ids))->orderBy('created_at', 'DESC')->all();
+            //$attachments = $this->attachmentRepo->whereIn('id', explode(',', $ids))->orderBy('created_at', 'DESC')->all();
+            $attachments = $this->attachmentRepo->whereIn('id', explode(',', $ids))->all();
 
             return response()->json(array(
                 'success' => true,

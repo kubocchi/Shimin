@@ -36,8 +36,13 @@
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
                                              <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
-                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
-                                            参照
+                                             accept="application/pdf,
+                                                    application/msword,
+                                                    application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                                                    .zip,
+                                                    application/zip,
+                                                    application/x-zip,
+                                                    application/x-zip-compressed"> 参照
                                         </label>
                                          <div class="row">
                                              <span class="is-danger" :hidden="attachments.length > 0 ? true : false">添付ファイルが指定されていません</span>

@@ -144,7 +144,11 @@
                             <dl v-for="citizen in variouses.citizens" :key="citizen.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click.prevent="downloadFile(citizen.attachments[0])">{{citizen.subject}}</a>
+                                    <a @click.prevent="downloadFile(citizen.attachments[0])">
+                                        <span  v-bind:class="getType(citizen.attachments[0])"></span>
+                                        {{citizen.subject}}
+                                    </a>
+
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="citizen.detail"></dd>
@@ -159,7 +163,10 @@
                             <dl v-for="personal in variouses.personals" :key="personal.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click.prevent="downloadFile(personal.attachments[0])">{{personal.subject}}</a>
+                                    <a @click.prevent="downloadFile(personal.attachments[0])">
+                                        <span  v-bind:class="getType(personal.attachments[0])"></span>
+                                        {{personal.subject}}
+                                    </a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="personal.detail"></dd>
@@ -174,7 +181,10 @@
                             <dl v-for="kawarabi in variouses.kawarabis" :key="kawarabi.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click.prevent="downloadFile(kawarabi.attachments[0])">{{kawarabi.subject}}</a>
+                                    <a @click.prevent="downloadFile(kawarabi.attachments[0])">
+                                        <span  v-bind:class="getType(kawarabi.attachments[0])"></span>
+                                        {{kawarabi.subject}}
+                                    </a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="kawarabi.detail"></dd>
@@ -189,7 +199,10 @@
                             <dl v-for="various in variouses.variouses" :key="various.id">
                                 <!-- format name .pdf -->
                                 <dt>
-                                    <a @click.prevent="downloadFile(various.attachments[0])">{{various.subject}}</a>
+                                    <a @click.prevent="downloadFile(various.attachments[0])">
+                                        <span  v-bind:class="getType(various.attachments[0])"></span>
+                                        {{various.subject}}
+                                    </a>
                                 </dt>
                                 <!-- description -->
                                 <dd v-html="various.detail"></dd>
@@ -282,6 +295,23 @@
                 // });
 
                 this.$mollah(attachment)
+            },
+            getType(object) {
+                let className = 'other'
+                switch (object.type) {
+                    case 'application/pdf':
+                        className = 'pdf'
+                        break;
+                    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    case 'application/msword':
+                        className = 'word'
+                        break;
+                    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                    case 'application/vnd.ms-excel':
+                        className = 'xls'
+                        break;
+                }
+                return className
             },
         }
     };
