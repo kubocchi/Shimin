@@ -130,11 +130,11 @@
                 <div class="news_contents">
                     <dl v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
                         <!-- day -->
-                        <dt>{{activeCenter.start_date}}</dt>
+                        <dt>{{activeCenter.updated_at}}</dt>
                         <!-- title -->
                         <dd>
                             <router-link :to="{ path: `/active-center/${activeCenter.id}/detail`}">
-                                <span v-if="activeCenter.start_date === newTagDate">
+                                <span v-if="activeCenter.updated_at === newTagDate">
                                     <span class="new"></span>
                                 </span>
                                {{activeCenter.title}}
@@ -201,8 +201,8 @@
                         console.log(this.activeCenters)
 
                         this.activeCenters.forEach(activeCenter => {
-                            if(new Date(activeCenter.start_date) >  new Date(this.newTagDate))
-                                this.newTagDate = activeCenter.start_date
+                            if(new Date(activeCenter.updated_at) >  new Date(this.newTagDate))
+                                this.newTagDate = activeCenter.updated_at
                         });
                         vm.makePagination(res.meta, res.links);
                         NProgress.done()

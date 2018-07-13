@@ -48,8 +48,7 @@ class NoticeController extends Controller
                                 if(isset($activityCategory)) {
                                     $query->where('activity_category', $activityCategory);
                                 }
-                            })
-                            ->get()->toArray();
+                            })->get()->toArray();
         $volunteers = Volunteer::Where('subject', 'like', '%' . $search . '%')
                             ->where(function($query) use ($activityCategory)  {
                                 if(isset($activityCategory)) {
@@ -88,7 +87,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = '';
+                $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];
                 $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
                 
                 array_push($formattedData, $obj);
@@ -144,7 +143,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = '';
+                $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];;
                 $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
                 array_push($formattedData, $obj);
@@ -167,20 +166,23 @@ class NoticeController extends Controller
         $search = $request->input('search');
         $activityCategory = $request->input('activityCategory');
 
-        $events = Event::Where('deactivate', 0)->Where('subject', 'like', '%' . $search . '%')
+        $events = Event::Where('deactivate', 0)
+                            ->Where('subject', 'like', '%' . $search . '%')
                             ->where(function($query) use ($activityCategory)  {
                                 if(isset($activityCategory)) {
                                     $query->where('activity_category', $activityCategory);
                                 }
                             })
                             ->get()->toArray();
-        $volunteers = Volunteer::Where('deactivate', 0)->Where('subject', 'like', '%' . $search . '%')
+        $volunteers = Volunteer::Where('deactivate', 0)
+                            ->Where('subject', 'like', '%' . $search . '%')
                             ->where(function($query) use ($activityCategory)  {
                                 if(isset($activityCategory)) {
                                     $query->where('activity_category', $activityCategory);
                                 }
                             })->get()->toArray();
-        $memberships = Membership::Where('deactivate', 0)->Where('organizer', 'like', '%' . $search . '%') 
+        $memberships = Membership::Where('deactivate', 0)
+                            ->Where('organizer', 'like', '%' . $search . '%') 
                             ->where(function($query) use ($activityCategory)  {
                                 if(isset($activityCategory)) {
                                     $query->where('activity_category', $activityCategory);
@@ -212,7 +214,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = '';
+                $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];;
                 $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
                 
                 array_push($formattedData, $obj);
@@ -268,7 +270,7 @@ class NoticeController extends Controller
                 $obj->id =  $value['id'];
                 $obj->subject = $value['subject'];
                 $obj->activityCategory = $value['activity_category'];
-                $obj->date = '';
+                $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];;
                 $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
                 array_push($formattedData, $obj);
@@ -285,9 +287,9 @@ class NoticeController extends Controller
 
     public function getNoticeHomePageData()
     {
-        $events = Event::Where('deactivate', 0)->take(6)->get()->toArray();
-        $volunteers = Volunteer::Where('deactivate', 0)->take(6)->get()->toArray();
-        $memberships = Membership::Where('deactivate', 0)->take(6)->get()->toArray();
+        $events = Event::orderBy('updated_at', 'desc')->Where('deactivate', 0)->take(6)->get()->toArray();
+        $volunteers = Volunteer::orderBy('updated_at', 'desc')->Where('deactivate', 0)->take(6)->get()->toArray();
+        $memberships = Membership::orderBy('updated_at', 'desc')->Where('deactivate', 0)->take(6)->get()->toArray();
 
         $eventsResponce = [];
         $volunteersResponce = [];
@@ -316,7 +318,7 @@ class NoticeController extends Controller
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = '';
+            $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];;
             $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($volunteersResponce, $obj);
@@ -370,7 +372,7 @@ class NoticeController extends Controller
             $obj->id =  $value['id'];
             $obj->subject = $value['subject'];
             $obj->activityCategory = $value['activity_category'];
-            $obj->date = '';
+            $obj->date = $value['event_start_date'] .' ~ '. $value['event_end_date'];;
             $obj->updateDate = Carbon::parse($value['updated_at'])->format('Y-m-d H:i:s');
 
             array_push($allResponce, $obj);

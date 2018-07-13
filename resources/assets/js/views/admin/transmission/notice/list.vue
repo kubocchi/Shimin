@@ -72,7 +72,7 @@
                                <th class="col-xs-1" scope="col">No.</th>
 								<th class="col-xs-2 wide_d" scope="col">種別</th>
 								<th class="col-xs-4 wide_s" scope="col">件名</th>
-								<th class="col-xs-2 wide_d" scope="col">更新日</th>
+								<th class="col-xs-2 wide_d" scope="col">開催期間</th>
 								<th class="col-xs-1" scope="col">複製</th>
 								<th class="col-xs-1" scope="col">変更</th>
 								<th class="col-xs-1" scope="col">削除</th>

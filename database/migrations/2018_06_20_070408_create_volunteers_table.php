@@ -18,6 +18,8 @@ class CreateVolunteersTable extends Migration
             $table->string('subject');
             $table->integer('activity_category');
             $table->boolean('children');
+            $table->date('event_start_date');
+            $table->date('event_end_date');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('sponsor')->nullable();

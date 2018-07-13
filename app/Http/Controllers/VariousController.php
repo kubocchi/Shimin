@@ -85,7 +85,8 @@ class VariousController extends Controller
         $search = $request->input('search');
         $group = $request->input('group');
          
-        $variouses = Various::where('subject', 'like', '%' . $search . '%')
+        $variouses = Various::orderBy('updated_at', 'desc')
+                            ->where('subject', 'like', '%' . $search . '%')
                             ->where(function($query) use ($group)  {
                                 if(isset($group)) {
                                     $query->where('group', $group);
@@ -105,10 +106,10 @@ class VariousController extends Controller
      */
     public function getVariousFrontData(Request $request)
     {
-        $citizens = Various::where('group', 1)->get();
-        $personals = Various::where('group', 2)->get();
-        $kawarabis = Various::where('group', 3)->get();
-        $variouses = Various::where('group', 4)->get();
+        $citizens = Various::orderBy('updated_at', 'desc')->where('group', 1)->get();
+        $personals = Various::orderBy('updated_at', 'desc')->where('group', 2)->get();
+        $kawarabis = Various::orderBy('updated_at', 'desc')->where('group', 3)->get();
+        $variouses = Various::orderBy('updated_at', 'desc')->where('group', 4)->get();
  
          // Return collection of Variouss as a resource
         return Response::json( ['data' => ['citizens' => $this->getAttachment($citizens), 

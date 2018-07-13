@@ -68,7 +68,7 @@
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ groups.find(x => x.id === various.group).label }}</td>
                                 <td>{{ various.subject }}</td>
-                                <td>{{ various.created_at }}</td>
+                                <td>{{ various.updated_at }}</td>
                                 <td>
                                     <router-link :to="{ name: 'variousForm', params: { model: various, requestType: 'edit' }}">
                                         <button class="btn btn-outline-success btn-block" role="button">変更</button>

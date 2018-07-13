@@ -683,12 +683,8 @@
                         //     confirmButtonText: "OK"
                         // });
                     } else {
-
                         this.event.event_start_date = !!this.eventDateRange ? this.eventDateRange[0].toISOString().slice(0, 10) : "";
                         this.event.event_end_date = !!this.eventDateRange ? this.eventDateRange[1].toISOString().slice(0, 10) : "";
-
-                        // this.event.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD") : ""
-                        // this.event.end_date = !!this.range ? moment(String(this.range[1])).format("YYYY-MM-DD") : ""
                         this.event.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
                         this.event.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
                         $("#confirmationModal").modal("show");

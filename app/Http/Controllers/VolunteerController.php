@@ -34,6 +34,8 @@ class VolunteerController extends Controller
         $volunteer->subject= $request->input('subject');
         $volunteer->activity_category= $request->input('activity_category');
         $volunteer->children= $request->input('children');
+        $volunteer->event_start_date = $request->input('event_start_date');
+        $volunteer->event_end_date = $request->input('event_end_date');
         $volunteer->start_date= $request->input('start_date');
         $volunteer->end_date= $request->input('end_date');
         $volunteer->sponsor= $request->input('sponsor');

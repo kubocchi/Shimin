@@ -95,7 +95,7 @@ class DreamController extends Controller
      public function getDreamDataFront()
      {
         // Get Dreams
-        $dreams = Dream::orderBy('created_at', 'desc')->Where('deactivate', 0)->take(4)->get();
+        $dreams = Dream::orderBy('updated_at', 'desc')->Where('deactivate', 0)->take(4)->get();
 
         foreach($dreams as $dream)
         {

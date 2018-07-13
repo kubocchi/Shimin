@@ -160,6 +160,11 @@
                             <dd v-html="volunteer.content">
                             </dd>
                         </dl>
+                        <!-- dd=>start_date ~ end_date -->
+                        <dl>
+                            <dt>開催期間</dt>
+                            <dd>{{volunteer.event_start_date}} ～ {{volunteer.event_end_date}}</dd>
+                        </dl>
                         <!-- dd=>activity_date -->
                         <dl>
                             <dt>活動日時</dt>
@@ -242,6 +247,8 @@
                     subject: "",
                     activity_category: "",
                     children: true,
+                    event_start_date: "",
+                    event_end_date: "",
                     start_date: "",
                     end_date: "",
                     sponsor: "",
@@ -304,6 +311,8 @@
                 this.volunteer.subject = volunteer.subject;
                 this.volunteer.activity_category = volunteer.activity_category;
                 this.volunteer.children = volunteer.children;
+                this.volunteer.event_start_date = volunteer.event_start_date;
+                this.volunteer.event_end_date = volunteer.event_end_date;
                 this.volunteer.start_date = volunteer.start_date;
                 this.volunteer.end_date = volunteer.end_date;
                 this.volunteer.sponsor = volunteer.sponsor;

@@ -46,10 +46,24 @@
                                     />
                                 </div>
                             </div>
-                            <div class="form-group col-sm-12 col-lg-12">
+                            <!-- <div class="form-group col-sm-12 col-lg-12">
                                 <label class="col-form-label">【掲載開始日】（必須）</label>
                                 <div class="row">
                                     <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-lg-6">
+                                    <label class="col-form-label">【掲載期間】（必須）</label>
+                                    <div class="row">
+                                        <vue-datepicker-local v-model="range" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12 col-lg-6">
+                                    <label class="col-form-label">【開催期間】（必須）</label>
+                                    <div class="row">
+                                        <vue-datepicker-local v-model="eventDateRange" :local="local" :format="dateFormat"></vue-datepicker-local>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -184,6 +198,14 @@
                                                                         <label>【掲載終了日】</label>
                                                                         <p>{{volunteer.end_date}}</p>
                                                                     </div>
+                                                                     <div>
+                                                                        <label>【開催開始日】</label>
+                                                                        <p>{{volunteer.event_start_date}}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>【開催終了日】</label>
+                                                                        <p>{{volunteer.event_end_date}}</p>
+                                                                    </div>
                                                                     <div>
                                                                         <label>【募集団体】</label>
                                                                         <p>{{volunteer.sponsor}}</p>
@@ -316,6 +338,7 @@
                 switchColorOther: "#0066CC",
                 volunteerDate: new Date(),
                 range: [new Date(), new Date()],
+                eventDateRange: [new Date(), new Date()],
                 emptyTime: "",
                 emptyRange: [],
                 local: {
@@ -453,9 +476,9 @@
                 this.pullAttachments(volunteer);
 
                 this.range = [new Date(volunteer.start_date), new Date(volunteer.end_date)]
-                
-                console.log(this.categories.find(x => x.id === volunteer.activity_category))
+                this.eventDateRange = [new Date(volunteer.event_start_date), new Date(volunteer.event_end_date)]
 
+                console.log(this.categories.find(x => x.id === volunteer.activity_category))
                 this.selectedActivityCategory = this.categories.find(x => x.id === volunteer.activity_category.toString())
                 
                 this.volunteer.id = volunteer.id;
@@ -659,9 +682,11 @@
                         //     confirmButtonText: "OK"
                         // });
                     } else {
+                        this.volunteer.event_start_date = this.eventDateRange ? this.eventDateRange[0].toISOString().slice(0, 10) : "";
+                        this.volunteer.event_end_date = this.eventDateRange ? this.eventDateRange[1].toISOString().slice(0, 10) : "";
+
                         this.volunteer.volunteer_date = moment(String(this.volunteerDate)).format("YYYY-MM-DD");
-                        this.volunteer.start_date = !!this.range
-                            ? moment(String(this.range[0])).format("YYYY-MM-DD")
+                        this.volunteer.start_date = !!this.range ? moment(String(this.range[0])).format("YYYY-MM-DD")
                             : "";
                         this.volunteer.end_date = !!this.range
                             ? moment(String(this.range[1])).format("YYYY-MM-DD")

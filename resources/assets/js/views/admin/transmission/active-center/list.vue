@@ -59,7 +59,7 @@
                             <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
                                 <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                 <td>{{ activeCenter.title }}</td>
-                                <td>{{ activeCenter.start_date }}</td>
+                                <td>{{ activeCenter.updated_at }}</td>
                                 <td>
                                     <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
                                         <button class="btn btn-outline-primary btn-block" role="button">複製</button>

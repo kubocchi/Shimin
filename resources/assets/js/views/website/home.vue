@@ -166,10 +166,10 @@
                         </div>
                         <div class="news_contents">
                             <dl v-for="(activeCenter) in activeCenters" v-bind:key="activeCenter.id">
-                                <dt>{{activeCenter.start_date}}</dt>
+                                <dt>{{activeCenter.updated_at}}</dt>
                                 <dd>
                                     <router-link :to="{ path: `/active-center/${activeCenter.id}/detail`}">
-                                        <span v-if="activeCenter.start_date === newTagDate">
+                                        <span v-if="activeCenter.updated_at === newTagDate">
                                             <span class="new"></span>
                                         </span> {{activeCenter.title}}
                                     </router-link>
@@ -389,8 +389,8 @@
                         console.log('fetchActiveCenter', this.activeCenters)
 
                         this.activeCenters.forEach(activeCenter => {
-                            if (new Date(activeCenter.start_date) > new Date(this.newTagDate))
-                                this.newTagDate = activeCenter.start_date
+                            if (new Date(activeCenter.updated_at) > new Date(this.newTagDate))
+                                this.newTagDate = activeCenter.updated_at
                         });
                         NProgress.done()
                     })

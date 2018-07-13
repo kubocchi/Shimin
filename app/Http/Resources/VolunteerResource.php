@@ -21,6 +21,8 @@ class VolunteerResource extends JsonResource
             'subject' => $this->subject,
             'activity_category' => $this->activity_category,
             'children' => $this->children,
+            'event_start_date' => $this->event_start_date,
+            'event_end_date' => $this->event_end_date,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'sponsor' => $this->sponsor,
