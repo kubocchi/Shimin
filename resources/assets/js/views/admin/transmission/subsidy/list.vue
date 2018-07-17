@@ -138,7 +138,7 @@
                 },
                 dateStatuses:[
                     { id: null, name: "すべて" },
-                    { id: 1, name: "現在公開期間" },
+                    { id: 1, name: "現在公開中" },
                     { id: 2, name: "公開前" },
                     { id: 3, name: "公開終了" },
                 ],

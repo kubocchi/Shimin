@@ -805,11 +805,11 @@
   color: silver;
 }
 .multiselect__option--selected.multiselect__option--highlight {
-  background: #c4001d;
+  background: #e53935;
   color: #fff;
 }
 .multiselect__option--selected.multiselect__option--highlight:after {
-  background: #c4001d;
+  background: #e53935;
   content: attr(data-deselect);
   color: #fff;
 }
@@ -842,11 +842,11 @@
   background: #dedede;
 }
 .multiselect__option--group-selected.multiselect__option--highlight {
-  background: #c4001d;
+  background: #e53935;
   color: #fff;
 }
 .multiselect__option--group-selected.multiselect__option--highlight:after {
-  background: #c4001d;
+  background: #e53935;
   content: attr(data-deselect);
   color: #fff;
 }
