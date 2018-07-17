@@ -28,30 +28,48 @@
 					</div>
 				</div>
                 <div class="row mt-4">
-                    <!-- <div class="form-group col-md-2 mb-4">
-                        <select v-model="params.type" v-on:change="onTypeChanged" class="form-control" id="attribute_shikatsu">
-                            <option value="0">すべて</option>
-                            <option value="1">公開中</option>
-                            <option value="2">登録作業中</option>
-                            <option value="3">終了</option>
-                        </select>
-                    </div> -->
-                    <div class="form-group col-md-3 mb-4">
+                    <div class="form-group col-md-2 mb-4">
+                        <multiselect 
+                            v-model="selectedDisabledStatus" 
+                            :options="disabledStatuses" 
+                            @select="onSelectDisabledStatus"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="公開／非公開" 
+                            selectedLabel="" 
+                            selectLabel="" 
+                            deselectLabel="" >
+                        </multiselect>
+                    </div>
+                    <div class="form-group col-md-2 mb-4">
+                        <multiselect 
+                            v-model="selectedDateStatus" 
+                            :options="dateStatuses" 
+                            @select="onSelectDateStatus"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="公開期間" 
+                            selectedLabel="" 
+                            selectLabel="" 
+                            deselectLabel="" >
+                        </multiselect>
+                    </div>
+                    <div class="form-group col-md-2 mb-4">
                         <multiselect 
                             v-model="selectedNoticeType" 
                             :options="noticeTypes" 
                             @select="onSelectNoticeType"  
                             track-by="id" 
                             label="name" 
-                            placeholder="選んでください" 
-                            selectedLabel="選ばれた" 
+                            placeholder="種別" 
+                            selectedLabel="" 
                             selectLabel="" 
                             deselectLabel="" >
                         </multiselect>
                     </div>
-                    <div class="form-group col-md-4 offset-sm-5">
+                    <div class="form-group col-md-4 offset-sm-2">
                         <div class="input-group">
-                            <input type="text" v-model="params.search" class="form-control">
+                            <input type="text" v-model="params.search" class="form-control" @keyup.enter="fetchNotice()">
                             <span class="input-group-btn">
                                 <button class="btn btn-outline-primary" @click.prevent="fetchNotice()">
                                     <i class="fas fa-search"></i>
@@ -126,15 +144,30 @@
                 pagination: {},
                 params: {
                     search: "",
-                    noticeType: 0
+                    noticeType: 0,
+                    disabled: null,
+                    dateStatus: null
                 },
                 noticeTypes:[
                     { id: 0, name: "すべて" },
                     { id: 1, name: "イベント" },
-                    { id: 2, name: "ボランテイア情報" },
+                    { id: 2, name: "ボランティア" },
                     { id: 3, name: "会員募集" },
                 ],
-                selectedNoticeType :  { id: 0, name: "すべて" }
+                dateStatuses:[
+                    { id: null, name: "すべて" },
+                    { id: 1, name: "現在公開中" },
+                    { id: 2, name: "公開前" },
+                    { id: 3, name: "公開終了" },
+                ],
+                disabledStatuses:[
+                    { id: null, name: "すべて" },
+                    { id: 0, name: "公開" },
+                    { id: 1, name: "非公開" },
+                ],
+                selectedNoticeType :  { id: 0, name: "すべて" },
+                selectedDateStatus :  { id: null, name: "すべて" },
+                selectedDisabledStatus :  { id: null, name: "すべて" },
             };
         },
 
@@ -256,10 +289,24 @@
                 }
                 this.$router.push({name: routeName, params: {model: object, requestType: type }})
             },
-             onSelectNoticeType(selectedOption, id) {
+            onSelectNoticeType(selectedOption, id) {
                 if(selectedOption){
                     console.log(selectedOption.id)
                     this.params.noticeType = selectedOption.id
+                    this.fetchNotice()
+                }
+            },
+            onSelectDateStatus(selectedOption, id) {
+                if(selectedOption){
+                    console.log(selectedOption.id)
+                    this.params.dateStatus = selectedOption.id
+                    this.fetchNotice()
+                }
+            },
+            onSelectDisabledStatus(selectedOption, id) {
+                if(selectedOption){
+                    console.log(selectedOption.id)
+                    this.params.disabled = selectedOption.id
                     this.fetchNotice()
                 }
             },

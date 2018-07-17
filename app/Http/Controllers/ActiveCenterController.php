@@ -19,7 +19,11 @@ class ActiveCenterController extends Controller
     public function index()
     {
         // Get ActiveCenters
-        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')->Where('deactivate', 0)->paginate(10);
+        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+                                        ->Where('deactivate', 0)
+                                        ->whereDate('start_date', '<=', date("Y-m-d"))
+                                        ->whereDate('end_date', '>=', date("Y-m-d"))
+                                        ->paginate(10);
 
         // Return collection of ActiveCenters as a resource
         return ActiveCenterResource::collection($activeCenters);
@@ -78,37 +82,41 @@ class ActiveCenterController extends Controller
 
     public function getActiveCenterData(Request $request)
     {
-         // Get ActiveCenters
-         $activeCenters;
-         $type = $request->input('type');
-         $search = $request->input('search');
-         switch ($type) 
-         {
-             # All type
-             case '0':
-                 $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
-                             ->orderBy('updated_at', 'desc')->paginate(10);
-                 break;
-             # Running type
-             case '1':
-                 $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
-                             ->whereDate('start_date', '<=', date("Y-m-d"))
-                             ->whereDate('end_date', '>=', date("Y-m-d"))
-                             ->orderBy('updated_at', 'desc')->paginate(10);
-                 break;
-             # Future type
-             case '2':
-                 $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
-                     ->whereDate('start_date', '>', date("Y-m-d"))
-                     ->orderBy('updated_at', 'desc')->paginate(10);
-                 break;
-             # Previous type
-             case '3':
-                 $activeCenters = ActiveCenter::Where('title', 'like', '%' . $search . '%')
-                     ->whereDate('end_date', '<', date("Y-m-d"))
-                     ->orderBy('updated_at', 'desc')->paginate(10);
-                 break;
-         }
+        // Get ActiveCenters
+        $activeCenters;
+        $type = $request->input('type');
+        $search = $request->input('search');
+        $disabled = $request->input('disabled');
+        $dateStatus = $request->input('dateStatus');
+
+
+        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+                        ->where('title', 'like', '%' . $search . '%')
+                        ->where(function($query) use ($disabled)  {
+                            if(isset($disabled)) {
+                                $query->where('deactivate', $disabled);
+                            }
+                        })
+                        ->where(function($query) use ($dateStatus)  {
+                            if(isset($dateStatus)) {
+                                switch ($dateStatus) {
+                                    # Running type
+                                    case '1':
+                                        $query->whereDate('start_date', '<=', date("Y-m-d"))
+                                                ->whereDate('end_date', '>=', date("Y-m-d"));
+                                        break;
+                                    # Future type
+                                    case '2':
+                                        $query->whereDate('start_date', '>', date("Y-m-d"));
+                                        break;
+                                    # Previous type
+                                    case '3':
+                                        $query->whereDate('end_date', '<', date("Y-m-d"));
+                                        break;
+                                }
+                            }
+                        })
+                        ->paginate(10);
  
          // Return collection of ActiveCenters as a resource
          return ActiveCenterResource::collection($activeCenters);

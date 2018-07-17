@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group col-md-4 offset-sm-6">
                         <div class="input-group">
-                            <input type="text" v-model="params.search" class="form-control">
+                            <input type="text" v-model="params.search" class="form-control" @keyup.enter="fetchKawarabi()">
                             <span class="input-group-btn">
                                 <button class="btn btn-outline-primary" @click.prevent="fetchKawarabi()">
                                     <i class="fas fa-search"></i>

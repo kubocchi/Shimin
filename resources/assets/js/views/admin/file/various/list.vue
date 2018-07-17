@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group col-md-4 offset-sm-4">
                         <div class="input-group">
-                            <input type="text" v-model="params.search" class="form-control">
+                            <input type="text" v-model="params.search" class="form-control" @keyup.enter="fetchVarious()">
                             <span class="input-group-btn">
                                 <button class="btn btn-outline-primary" @click.prevent="fetchVarious()">
                                     <i class="fas fa-search"></i>

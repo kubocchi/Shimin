@@ -171,7 +171,6 @@
                             </div>
                     </fieldset>
                 </form>
-                {{businessReport}}
                 </div>
             </div>
         </div>
@@ -331,10 +330,6 @@
                 this.businessReport.deactivate = businessReport.deactivate == 1 ? true:false
                 this.businessReport.created_by = businessReport.created_by
                 this.businessReport.updated_by = businessReport.updated_by
-
-                // For Files
-                // if(businessReport.file)
-                //     this.currentAddedFileIs = businessReport.file.split(',')
             },
 
             // Analyzing attachmet file size
@@ -403,7 +398,6 @@
                         console.log(response);
                         if (response.data.success) {
                             console.log('Successfull upload')
-                            //this.currentAddedFileIs.push(response.data.data)
                             this.resetData()
 
                             if(response.data.data){
@@ -488,7 +482,6 @@
                 if(this.tempRemovedFileIds.length){
                     this.tempRemovedFileIds.forEach(id => {
                         this.removeServerAttachment(id)
-                        //this.currentAddedFileIs.filter(item => item !== id)
                     })
                 }
 

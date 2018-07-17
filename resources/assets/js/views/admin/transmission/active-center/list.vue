@@ -18,17 +18,43 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="form-group col-md-2 mb-4">
+                    <!-- <div class="form-group col-md-2 mb-4">
                         <select v-model="params.type" v-on:change="onTypeChanged" class="form-control" id="attribute_shikatsu">
                             <option value="0">すべて</option>
                             <option value="1">公開中</option>
                             <option value="2">登録作業中</option>
                             <option value="3">終了</option>
                         </select>
+                    </div> -->
+                    <div class="form-group col-md-2 mb-4">
+                        <multiselect 
+                            v-model="selectedDisabledStatus" 
+                            :options="disabledStatuses" 
+                            @select="onSelectDisabledStatus"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="公開／非公開" 
+                            selectedLabel="" 
+                            selectLabel="" 
+                            deselectLabel="" >
+                        </multiselect>
                     </div>
-                    <div class="form-group col-md-4 offset-sm-6">
+                    <div class="form-group col-md-2 mb-4">
+                        <multiselect 
+                            v-model="selectedDateStatus" 
+                            :options="dateStatuses" 
+                            @select="onSelectDateStatus"  
+                            track-by="id" 
+                            label="name" 
+                            placeholder="公開期間" 
+                            selectedLabel="" 
+                            selectLabel="" 
+                            deselectLabel="" >
+                        </multiselect>
+                    </div>
+                    <div class="form-group col-md-4 offset-sm-4">
                         <div class="input-group">
-                            <input type="text" v-model="params.search" class="form-control">
+                            <input type="text" v-model="params.search" class="form-control" @keyup.enter="fetchActiveCenter()">
                             <span class="input-group-btn">
                                 <button class="btn btn-outline-primary" @click.prevent="fetchActiveCenter()">
                                     <i class="fas fa-search"></i>
@@ -97,8 +123,10 @@
 </template>
 
 <script>
+    import Multiselect from "vue-multiselect"
     import ErrorHandler from '../../../../external/error-handler'
     export default {
+        components: { Multiselect},
         data() {
             return {
                 selectedActiveCenter: "",
@@ -114,8 +142,23 @@
                 edit: false,
                 params: {
                     search: "",
-                    type: 0
-                }
+                    type: 0,
+                    dateStatus: null,
+                    disabled: null
+                },
+                dateStatuses:[
+                    { id: null, name: "すべて" },
+                    { id: 1, name: "現在公開期間" },
+                    { id: 2, name: "公開前" },
+                    { id: 3, name: "公開終了" },
+                ],
+                disabledStatuses:[
+                    { id: null, name: "すべて" },
+                    { id: 0, name: "公開" },
+                    { id: 1, name: "非公開" },
+                ],
+                selectedDateStatus :  { id: null, name: "すべて" },
+                selectedDisabledStatus :  { id: null, name: "すべて" },
             };
         },
 
@@ -129,22 +172,6 @@
                 NProgress.start()
                 let vm = this;
                 page_url = page_url || "/api/active-centers";
-
-                // fetch(page_url, {
-                //     method: "post",
-                //     body: JSON.stringify(this.params),
-                //     headers: {
-                //         "content-type": "application/json"
-                //     }
-                // })
-                //     .then(res => res.json())
-                //     .then(res => {
-                //         this.activeCenters = res.data;
-                //         console.log(this.activeCenters);
-                //         vm.makePagination(res.meta, res.links);
-                //         NProgress.done()
-                //     })
-                //     .catch(err => console.log(err))
 
                 axios.post(page_url, this.params, {
                         headers: {
@@ -213,20 +240,6 @@
                                 ErrorHandler.handle(error.response.status, this)
                             }
                         });
-                        // fetch(`/api/active-center/${id}`, {
-                        //     method: "delete"
-                        // })
-                        // .then(res => res.json())
-                        // .then(data => {
-                        //     this.$swal(
-                        //         '削除しました!',
-                        //         '選択したデータが削除されました',
-                        //         'success'
-                        //     )
-                        //     NProgress.done()
-                        //     this.fetchActiveCenter()
-                        // })
-                        // .catch(err => console.log(err))
                     }
                     else {
                         this.$swal(
@@ -248,7 +261,21 @@
             clearSearch() {
                 this.params.search = ""
                 this.fetchActiveCenter()
-            }
+            },
+            onSelectDateStatus(selectedOption, id) {
+                if(selectedOption){
+                    console.log(selectedOption.id)
+                    this.params.dateStatus = selectedOption.id
+                    this.fetchActiveCenter()
+                }
+            },
+            onSelectDisabledStatus(selectedOption, id) {
+                if(selectedOption){
+                    console.log(selectedOption.id)
+                    this.params.disabled = selectedOption.id
+                    this.fetchActiveCenter()
+                }
+            },
         }
     };
 </script>
