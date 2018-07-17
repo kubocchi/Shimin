@@ -193,42 +193,6 @@
                                         {{groupInformation.disclosure_name == 0? '':groupInformation.representative_name_phonetic}}
                                     </dd>
                                 </dl>
-                                <!-- dd=>csv09  -->
-                                <dl>
-                                    <dt>設立年月日</dt>
-                                    <dd>{{groupInformation.establishment_date}}</dd>
-                                </dl>
-                                <!-- dd span.man=>csv41  --><!-- dd span.lady=>csv42  --><!-- dd span.all=>csv43  -->
-                                <dl class="member">
-                                    <dt>会員数</dt>
-                                    <dd>
-                                        <span class="man">男性 {{groupInformation.membership_male}}人</span>
-                                        <span class="lady">女性 {{groupInformation.membership_female}}人</span>
-                                        <span class="total">合計 {{groupInformation.all_member}}人</span>
-                                    </dd>
-                                </dl>
-                                <!-- dd=>csv44 , csv45  -->
-                                <dl>
-                                    <dt>活動回数</dt>
-                                    <dd>{{groupInformation.activity_frequency}}/ {{groupInformation.activity_day}}</dd>
-                                </dl>
-                                <!-- dd=>csv46  -->
-                                <dl>
-                                    <dt>会費</dt>
-                                    <dd>{{groupInformation.dues == 0? '無し': groupInformation.dues_price}}</dd>
-                                </dl>
-                                <!-- dd=>csv51  -->
-                                <dl>
-                                    <dt>入会</dt>
-                                    <dd>{{groupInformation.method}}</dd>
-                                </dl>
-                                <!-- dd=>csv37  -->
-                                <!-- <dl>
-                                    <dt>Webサイト</dt>
-                                    <dd>
-                                        <a @click="openInNewTab(groupInformation.contact_url)">{{groupInformation.contact_url}}</a>
-                                    </dd>
-                                </dl> -->
                                 <!-- dd=>53(not csv)  -->
                                 <!-- <dl class="report">
                                     <dt>活動報告書</dt>
@@ -247,11 +211,6 @@
                                 <dl>
                                     <dt>連絡先・事務所・事務局名 ふりがな</dt>
                                     <dd>{{groupInformation.disclosure_contact_name == 0 ? '': groupInformation.contact_name_phonetic}}</dd>
-                                </dl>
-                                <!-- dd=>csv26 csv27  -->
-                                <dl>
-                                    <dt>宛名</dt>
-                                    <dd>{{groupInformation.contact_address_name}} {{groupInformation.contact_address_title}}</dd>
                                 </dl>
                                 <!-- dd=>csv29  -->
                                 <dl>

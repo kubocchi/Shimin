@@ -804,6 +804,7 @@ address{
 @media (max-width: 991px){
 	#center_info{
 		max-width: 680px ;
+		padding: 25px ;
 	}
 	#center_info .left,
 	#center_info .right{
@@ -825,6 +826,9 @@ address{
 @media (max-width: 767px){
 	#footer{
 		padding-top: 40px ;
+	}
+	#center_info .left p.l{
+		font-size: 2.3rem ;
 	}
 	#center_info .right p br{
 		display: block ;
@@ -1071,11 +1075,12 @@ nav.pager ul li.next a::after{
 	width: 180px ;
 	min-width: 180px ;
 	max-width: 180px ;
+	line-height: 1.8em;
 }
 .detail_body .information dl dd{
 	/* font-family: "游ゴシック Medium" , "Yu Gothic Medium" , "游ゴシック体", YuGothic ;
 	font-weight: normal ; */
-	line-height: 1.4em ;
+	line-height: 1.8em ;
 	margin-bottom: 0 ;
 }
 .detail_body .information dl dd img{

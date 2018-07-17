@@ -197,21 +197,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Software DownloadPage -->
-                <div class="format_software">
-                    <dl>
-                        <dt>
-                            <a href="https://get.adobe.com/jp/reader/" target="_blank">Adobe Reader ダウンロードページ</a>
-                        </dt>
-                        <dd>PDFデータを参照するには、Adobe Readerが必要です。</dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <a href="https://www.microsoft.com/ja-jp/download/office.aspx" target="_blank">Microsoft Office　ダウンロードページ</a>
-                        </dt>
-                        <dd>Microsoft Word、Microsoft Excel、Microsoft Power Point等のビューワソフトウェアやWindows Media Playerのダウンロードサイトです。</dd>
-                    </dl>
-                </div>
             </div>
         </div>
     </div>
