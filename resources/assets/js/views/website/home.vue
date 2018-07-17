@@ -408,7 +408,7 @@
             loadSlider() {
                 $(document).ready(function () {
                     $('#slider-main').sliderPro({
-                        width: 1040,
+                        width: 920,
                         height: 470,
                         arrows: true, //矢印の有無
                         buttons: true, //ページャーの有無

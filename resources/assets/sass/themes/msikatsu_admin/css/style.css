@@ -316,3 +316,8 @@ address {
   .is-danger{
 	color: red;
   }
+
+/* 画像はみ出し修正 */
+.modal-dialog img{
+	max-width: 100%;
+}
