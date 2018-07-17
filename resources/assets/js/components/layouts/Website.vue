@@ -83,7 +83,7 @@
                         <dt>センター案内</dt>
                         <dd>
                             <router-link :to="{ name: 'information' }">
-                                <span>市民活動団体センターとは</span>
+                                <span>市民活動センターとは</span>
                             </router-link>
                         </dd>
                         <dd>
