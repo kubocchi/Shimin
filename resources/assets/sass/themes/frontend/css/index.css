@@ -473,10 +473,11 @@
 .topic-list .item a p.day{
 	padding: 30px 13px 0 13px ;
 	margin-bottom: 10px ;
-	color: #999 ;
+	font-size: 0.95em ;
+	font-weight: 400 ;
 }
 .topic-list .item a p.title{
-	font-size: 1.6rem ;
+	font-size: 1.08em ;
 	padding: 0 13px ;
 	margin-bottom: 10px ;
 	line-height: 1.4em ;
