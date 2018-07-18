@@ -27,29 +27,13 @@
                         </select>
                     </div> -->
                     <div class="form-group col-md-2 mb-4">
-                        <multiselect 
-                            v-model="selectedDisabledStatus" 
-                            :options="disabledStatuses" 
-                            @select="onSelectDisabledStatus"  
-                            track-by="id" 
-                            label="name" 
-                            placeholder="公開／非公開" 
-                            selectedLabel="" 
-                            selectLabel="" 
-                            deselectLabel="" >
+                        <multiselect v-model="selectedDisabledStatus" :options="disabledStatuses" @select="onSelectDisabledStatus" track-by="id"
+                            label="name" placeholder="公開／非公開" selectedLabel="" selectLabel="" deselectLabel="">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-2 mb-4">
-                        <multiselect 
-                            v-model="selectedDateStatus" 
-                            :options="dateStatuses" 
-                            @select="onSelectDateStatus"  
-                            track-by="id" 
-                            label="name" 
-                            placeholder="公開期間" 
-                            selectedLabel="" 
-                            selectLabel="" 
-                            deselectLabel="" >
+                        <multiselect v-model="selectedDateStatus" :options="dateStatuses" @select="onSelectDateStatus" track-by="id" label="name"
+                            placeholder="公開期間" selectedLabel="" selectLabel="" deselectLabel="">
                         </multiselect>
                     </div>
                     <div class="form-group col-md-4 offset-sm-4">
@@ -68,41 +52,69 @@
                         </div>
                     </div>
                 </div>
-                <div class="row col-lg-12 table-responsive">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr class="table-primary">
-                                <th class="col-xs-1" scope="col">No.</th>
-								<th class="col-xs-3 wide_s" scope="col">件名</th>
-								<th class="col-xs-2 wide_d" scope="col">更新日</th>
-								<th class="col-xs-2" align="center">複製</th>
-								<th class="col-xs-2" scope="col">変更</th>
-								<th class="col-xs-2" scope="col">削除</th>
-                            </tr>
-                        </thead>
+                <div class="row">
+                     <div class="col-lg-6 table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th class="col-xs-1" scope="col">No.</th>
+                                    <th class="col-xs-3 wide_s" scope="col">件名</th>
+                                    <th class="col-xs-2 wide_d" scope="col">更新日</th>
+                                    <th class="col-xs-2" align="center">複製</th>
+                                    <th class="col-xs-2" scope="col">変更</th>
+                                    <th class="col-xs-2" scope="col">削除</th>
+                                </tr>
+                            </thead>
 
-                        <tbody>
-                            <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
-                                <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                <td>{{ activeCenter.title }}</td>
-                                <td>{{ activeCenter.updated_at }}</td>
-                                <td>
-                                    <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
-                                        <button class="btn btn-outline-primary btn-block" role="button">複製</button>
-                                    </router-link>
-                                </td>
-                                <td>
-                                    <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'edit' }}">
-                                        <button class="btn btn-outline-success btn-block" role="button">変更</button>
-                                    </router-link>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody id="sortable1" class="connectedSortable" style="min-height:500px">
+                                <tr >
+                                   <th scope="row"></th>
+                                    <td>2</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6 table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th class="col-xs-1" scope="col">No.</th>
+                                    <th class="col-xs-3 wide_s" scope="col">件名</th>
+                                    <th class="col-xs-2 wide_d" scope="col">更新日</th>
+                                    <th class="col-xs-2" align="center">複製</th>
+                                    <th class="col-xs-2" scope="col">変更</th>
+                                    <th class="col-xs-2" scope="col">削除</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="sortable2" >
+                                <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
+                                    <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
+                                    <td>{{ activeCenter.title }}</td>
+                                    <td>{{ activeCenter.updated_at }}</td>
+                                    <td>
+                                        <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
+                                            <button class="btn btn-outline-primary btn-block" role="button">複製</button>
+                                        </router-link>
+                                    </td>
+                                    <td>
+                                        <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'edit' }}">
+                                            <button class="btn btn-outline-success btn-block" role="button">変更</button>
+                                        </router-link>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <button class="page-link" href="#!" @click.prevent="fetchActiveCenter(pagination.prev_page_url)">前へ</button>
@@ -118,15 +130,17 @@
                 </ul>
             </div>
         </div>
-       
+
     </div>
 </template>
+
 
 <script>
     import Multiselect from "vue-multiselect"
     import ErrorHandler from '../../../../external/error-handler'
     export default {
-        components: { Multiselect},
+        components: { Multiselect },
+        loadJqueryUI: true,
         data() {
             return {
                 selectedActiveCenter: "",
@@ -146,24 +160,59 @@
                     dateStatus: null,
                     disabled: null
                 },
-                dateStatuses:[
+                dateStatuses: [
                     { id: null, name: "すべて" },
                     { id: 1, name: "現在公開中" },
                     { id: 2, name: "公開前" },
                     { id: 3, name: "公開終了" },
                 ],
-                disabledStatuses:[
+                disabledStatuses: [
                     { id: null, name: "すべて" },
                     { id: 0, name: "公開" },
                     { id: 1, name: "非公開" },
                 ],
-                selectedDateStatus :  { id: null, name: "すべて" },
-                selectedDisabledStatus :  { id: null, name: "すべて" },
+                selectedDateStatus: { id: null, name: "すべて" },
+                selectedDisabledStatus: { id: null, name: "すべて" },
             };
         },
 
         created() {
-            this.fetchActiveCenter();
+            this.fetchActiveCenter()
+
+            $(function () {
+                $("#sortable2").sortable({
+                    connectWith: ".connectedSortable",
+                    remove: function (event, ui) {
+                        ui.item.clone().appendTo('#sortable1');
+                        $(this).sortable('cancel');
+                    }
+                }).disableSelection();
+
+                $("#sortable1").sortable({
+                    connectWith: ".connectedSortable"
+                }).disableSelection();
+            });
+
+            // $("#sortable1, #sortable2").sortable({
+            //     connectWith: '.connectedSortable',
+            //     helper: fixHelper,
+            //     handle : '.handle',
+            //     update : function () {
+            //         var order = $('#sortable1 tbody').sortable('serialize');
+            //     }    
+            // }).disableSelection();
+
+            // $(function () {
+            //     $("#sortable2 tr").draggable({
+            //         helper: "clone"
+            //     }).disableSelection();
+
+            //     $(".connectedSortable").droppable({
+            //         drop: function (event, ui) {
+            //             $(this).append(ui.draggable.clone());
+            //         }
+            //     });
+            // });
         },
 
         methods: {
@@ -174,10 +223,10 @@
                 page_url = page_url || "/api/active-centers";
 
                 axios.post(page_url, this.params, {
-                        headers: {
-                            Authorization: 'Bearer ' + localStorage.getItem('token')
-                        }
-                    })
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
                     .then(response => {
                         this.activeCenters = response.data.data;
                         console.log(this.activeCenters);
@@ -224,22 +273,22 @@
                                 Authorization: 'Bearer ' + localStorage.getItem('token')
                             }
                         })
-                        .then(response => {
-                            this.$swal(
-                                '削除しました!',
-                                '選択したデータが削除されました',
-                                'success'
-                            )
-                            NProgress.done()
-                            this.fetchActiveCenter()
-                        })
-                        .catch(error => {
-                            if (error.response) {
-                                console.log(error.response);
+                            .then(response => {
+                                this.$swal(
+                                    '削除しました!',
+                                    '選択したデータが削除されました',
+                                    'success'
+                                )
                                 NProgress.done()
-                                ErrorHandler.handle(error.response.status, this)
-                            }
-                        });
+                                this.fetchActiveCenter()
+                            })
+                            .catch(error => {
+                                if (error.response) {
+                                    console.log(error.response);
+                                    NProgress.done()
+                                    ErrorHandler.handle(error.response.status, this)
+                                }
+                            });
                     }
                     else {
                         this.$swal(
@@ -263,14 +312,14 @@
                 this.fetchActiveCenter()
             },
             onSelectDateStatus(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     console.log(selectedOption.id)
                     this.params.dateStatus = selectedOption.id
                     this.fetchActiveCenter()
                 }
             },
             onSelectDisabledStatus(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     console.log(selectedOption.id)
                     this.params.disabled = selectedOption.id
                     this.fetchActiveCenter()
