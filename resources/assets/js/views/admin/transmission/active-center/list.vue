@@ -53,28 +53,18 @@
                     </div>
                 </div>
                 <div class="row">
-                     <div class="col-lg-6 table-responsive">
+                    <div class="col-lg-6 table-responsive">
                         <table class="table table-sm">
                             <thead>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">No.</th>
-                                    <th class="col-xs-3 wide_s" scope="col">件名</th>
+                                    <th class="col-xs-9 wide_s" scope="col">件名</th>
                                     <th class="col-xs-2 wide_d" scope="col">更新日</th>
-                                    <th class="col-xs-2" align="center">複製</th>
-                                    <th class="col-xs-2" scope="col">変更</th>
-                                    <th class="col-xs-2" scope="col">削除</th>
                                 </tr>
                             </thead>
 
-                            <tbody id="sortable1" class="connectedSortable" style="min-height:500px">
-                                <tr >
-                                   <th scope="row"></th>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                            <tbody id="tblFeatured" class="connectedSortable" style="min-height:500px">
+                                <tr>hell</tr>
                             </tbody>
                         </table>
                     </div>
@@ -91,10 +81,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="sortable2" >
-                                <tr v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
+                            <tbody id="tblMain" style="overflow:hidden;">
+                                <tr class="mainRow" v-for="(activeCenter, rowNumber) in activeCenters" v-bind:key="activeCenter.id">
                                     <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
-                                    <td>{{ activeCenter.title }}</td>
+                                    <td id="title">{{ activeCenter.title }}</td>
                                     <td>{{ activeCenter.updated_at }}</td>
                                     <td>
                                         <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
@@ -109,10 +99,14 @@
                                     <td>
                                         <a class="btn btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
                                     </td>
+                                    <td id="id" hidden>
+                                        {{activeCenter.id}}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    
                 </div>
                 
                 <ul class="pagination justify-content-end">
@@ -180,39 +174,54 @@
             this.fetchActiveCenter()
 
             $(function () {
-                $("#sortable2").sortable({
+                //sizeCheck($('#tblFeatured'))
+
+                $("#tblMain").sortable({
                     connectWith: ".connectedSortable",
                     remove: function (event, ui) {
-                        ui.item.clone().appendTo('#sortable1');
+                        ui.item.clone().appendTo('#tblFeatured');
                         $(this).sortable('cancel');
-                    }
+                    },
+                    beforeStop: function(ev, ui) {
+                        if ($(ui.placeholder).parent()[0] == this) {
+                            $(this).sortable('cancel');
+                        }
+                    },
                 }).disableSelection();
 
-                $("#sortable1").sortable({
-                    connectWith: ".connectedSortable"
+                $("#tblFeatured").sortable({
+                    connectWith: ".connectedSortable",
+                    receive: function(event, ui) {
+                        $('#tblFeatured tr.mainRow').remove();
+                        let id = ui.item.find('td#id').text().trim()
+                        let title = ui.item.find('td#title').text().trim()
+
+                        let flag = true
+                        $(this).find('tr').each(function() {
+                            if($(this).find('td.id').text().trim() == id){
+                                alert('same')
+                                flag = false
+                                return false
+                            }
+                        })
+
+                        if(!flag) return
+                       
+                        let newRow = `<tr id=id${id}>
+                                        <td class='id'>
+                                            ${id}
+                                        </td>
+                                        <td>
+                                            ${title}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
+                                        </td>
+                                    </tr>`
+                        $(this).append(newRow)
+                    },
                 }).disableSelection();
             });
-
-            // $("#sortable1, #sortable2").sortable({
-            //     connectWith: '.connectedSortable',
-            //     helper: fixHelper,
-            //     handle : '.handle',
-            //     update : function () {
-            //         var order = $('#sortable1 tbody').sortable('serialize');
-            //     }    
-            // }).disableSelection();
-
-            // $(function () {
-            //     $("#sortable2 tr").draggable({
-            //         helper: "clone"
-            //     }).disableSelection();
-
-            //     $(".connectedSortable").droppable({
-            //         drop: function (event, ui) {
-            //             $(this).append(ui.draggable.clone());
-            //         }
-            //     });
-            // });
         },
 
         methods: {
@@ -325,6 +334,11 @@
                     this.fetchActiveCenter()
                 }
             },
+            sizeCheck(item){
+                if($(item).height() == 0){
+                    $(item).append('<tr class="sort-disabled"><td></td></tr>');
+                }
+            }
         }
     };
 </script>
