@@ -571,7 +571,7 @@ ul.banner::after{
     line-height: 0;/* 隙間対応 */
 }
 ul.banner li{
-	padding: 5px ;
+	padding: 5px 3px ;
 	display: inline-block ;
 }
 ul.banner li a{
