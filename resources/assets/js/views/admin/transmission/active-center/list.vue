@@ -53,22 +53,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 table-responsive">
+                    <div class="col-lg-5 table-responsive">
                         <table class="table table-sm">
                             <thead>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">No.</th>
-                                    <th class="col-xs-9 wide_s" scope="col">件名</th>
-                                    <th class="col-xs-2 wide_d" scope="col">更新日</th>
+                                    <th class="col-xs-9" scope="col">件名</th>
+                                    <th class="col-xs-2" scope="col">削除</th>
                                 </tr>
                             </thead>
 
-                            <tbody id="tblFeatured" class="connectedSortable" style="min-height:500px">
-                                <tr>hell</tr>
+                            <tbody id="tblFeatured" class="connectedSortable">
+
                             </tbody>
                         </table>
+                        <div class="row text-center">
+                            <button class="btn btn-outline-success btn-block" @click.prevent="saveFeatured()" role="button">変更</button>
+                        </div>
                     </div>
-                    <div class="col-lg-6 table-responsive">
+                    <div class="col-lg-7 table-responsive">
                         <table class="table table-sm">
                             <thead>
                                 <tr class="table-primary">
@@ -105,10 +108,11 @@
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
-                    
+
                 </div>
-                
+
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <button class="page-link" href="#!" @click.prevent="fetchActiveCenter(pagination.prev_page_url)">前へ</button>
@@ -174,39 +178,47 @@
             this.fetchActiveCenter()
 
             $(function () {
-                //sizeCheck($('#tblFeatured'))
+                console.log('Length: ', $('#tblFeatured').find('tr').length)
 
+                if (!$('#tblFeatured').find('tr').length) {
+                    console.log(true)
+                    $('#tblFeatured').append(`<tr class='mainRow'><td></td><td>No data!</td><td></td></tr>`)
+                }
+
+                // Draggable
                 $("#tblMain").sortable({
                     connectWith: ".connectedSortable",
                     remove: function (event, ui) {
                         ui.item.clone().appendTo('#tblFeatured');
                         $(this).sortable('cancel');
                     },
-                    beforeStop: function(ev, ui) {
+                    beforeStop: function (ev, ui) {
                         if ($(ui.placeholder).parent()[0] == this) {
                             $(this).sortable('cancel');
                         }
                     },
+                    axis: 'y'
                 }).disableSelection();
 
+                // Droppable
                 $("#tblFeatured").sortable({
                     connectWith: ".connectedSortable",
-                    receive: function(event, ui) {
+                    receive: function (event, ui) {
                         $('#tblFeatured tr.mainRow').remove();
                         let id = ui.item.find('td#id').text().trim()
                         let title = ui.item.find('td#title').text().trim()
 
                         let flag = true
-                        $(this).find('tr').each(function() {
-                            if($(this).find('td.id').text().trim() == id){
+                        $(this).find('tr').each(function () {
+                            if ($(this).find('td.id').text().trim() == id) {
                                 alert('same')
                                 flag = false
                                 return false
                             }
                         })
 
-                        if(!flag) return
-                       
+                        if (!flag) return
+
                         let newRow = `<tr id=id${id}>
                                         <td class='id'>
                                             ${id}
@@ -215,13 +227,19 @@
                                             ${title}
                                         </td>
                                         <td>
-                                            <a class="btn btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
+                                            <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${id}').remove();" role="button">削除</a>
                                         </td>
                                     </tr>`
                         $(this).append(newRow)
+
                     },
+                    axis: 'y'
                 }).disableSelection();
+
+
             });
+
+
         },
 
         methods: {
@@ -334,10 +352,12 @@
                     this.fetchActiveCenter()
                 }
             },
-            sizeCheck(item){
-                if($(item).height() == 0){
-                    $(item).append('<tr class="sort-disabled"><td></td></tr>');
-                }
+            saveFeatured() {
+                let ids = []
+                $('#tblFeatured').find('tr').each(function () {
+                    ids.push($(this).find('td.id').text().trim())
+                })
+                console.log(ids)
             }
         }
     };
