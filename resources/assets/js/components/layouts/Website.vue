@@ -63,6 +63,11 @@
                             <img src="/images/banner_mynpo.png" alt="宮崎県NPOポータルサイト">
                         </a>
                     </li>
+                    <li>
+                        <a href="https://peraichi.com/landing_pages/view/miyazakinpocenter" target="_blank">
+                            <img src="/images/banner_peraichi.png" alt="特定非営利活動法人NPOみやざき">
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="bg-wave">
