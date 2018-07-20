@@ -135,6 +135,7 @@ class GroupInformationController extends Controller
          $type = $request->input('type');
          
          $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
+                                    ->orWhere('name_phonetic', 'like', '%' . $search . '%')
                                     ->where(function($query) use ($management)  {
                                         if(isset($management)) {
                                             $query->where('regist_management', $management);
@@ -301,6 +302,7 @@ class GroupInformationController extends Controller
          $type = $request->input('type');
          
          $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
+                                    ->orWhere('name_phonetic', 'like', '%' . $search . '%')
                                     ->where('active_status', '0')
                                     ->where(function($query) use ($activityCategory)  {
                                         if(isset($activityCategory)) {

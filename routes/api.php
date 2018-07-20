@@ -37,6 +37,10 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::delete('active-center/{id}', 'ActiveCenterController@destroy');
     // List single active-center
     Route::post('active-centers', 'ActiveCenterController@getActiveCenterData');
+    // List single active-center
+    Route::post('active-center-featured', 'ActiveCenterController@updateFeatured');
+    // List single active-center
+    Route::get('active-center-featured', 'ActiveCenterController@getFeatured');
 
     # 1.3 Subsidy routes
     // List Subsidy

@@ -23,6 +23,10 @@ class ErrorHandler {
             confirmButtonText: "OK"
         });
     }
+
+    static checkMethod(){
+        alert('WHY')
+    }
 }
 
 export default  ErrorHandler;

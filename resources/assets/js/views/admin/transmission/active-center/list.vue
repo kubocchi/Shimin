@@ -64,7 +64,13 @@
                             </thead>
 
                             <tbody id="tblFeatured" class="connectedSortable">
-
+                                <!-- <tr v-for="featuredItem in featuredItems" v-bind:key="featuredItem.id">
+                                    <td :id="`id${featuredItem.id}`">{{ featuredItem.id }}</td>
+                                    <td id="title">{{ featuredItem.title }}</td>
+                                    <td>
+                                        <a class="btn btn-outline-danger btn-block" onClick="window.checkMethod()" role="button">削除</a>
+                                    </td>
+                                </tr> -->
                             </tbody>
                         </table>
                         <div class="row text-center">
@@ -77,7 +83,8 @@
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">No.</th>
                                     <th class="col-xs-3 wide_s" scope="col">件名</th>
-                                    <th class="col-xs-2 wide_d" scope="col">更新日</th>
+                                    <th class="col-xs-1 wide_d" scope="col">更新日</th>
+                                    <th class="col-xs-1 " scope="col">更</th>
                                     <th class="col-xs-2" align="center">複製</th>
                                     <th class="col-xs-2" scope="col">変更</th>
                                     <th class="col-xs-2" scope="col">削除</th>
@@ -89,6 +96,11 @@
                                     <th scope="row">{{((pagination.current_page - 1) * 10) + rowNumber + 1}}</th>
                                     <td id="title">{{ activeCenter.title }}</td>
                                     <td>{{ activeCenter.updated_at }}</td>
+                                    <td>
+                                        <div v-if="activeCenter.featured != null">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </td>
                                     <td>
                                         <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
                                             <button class="btn btn-outline-primary btn-block" role="button">複製</button>
@@ -143,6 +155,7 @@
             return {
                 selectedActiveCenter: "",
                 activeCenters: [],
+                featuredItems: [],
                 activeCenter: {
                     id: "",
                     name: "",
@@ -171,19 +184,19 @@
                 ],
                 selectedDateStatus: { id: null, name: "すべて" },
                 selectedDisabledStatus: { id: null, name: "すべて" },
+                featuredItems : []
             };
         },
 
         created() {
             this.fetchActiveCenter()
+            this.fetchFeaured()
 
+            let vm = this
             $(function () {
                 console.log('Length: ', $('#tblFeatured').find('tr').length)
 
-                if (!$('#tblFeatured').find('tr').length) {
-                    console.log(true)
-                    $('#tblFeatured').append(`<tr class='mainRow'><td></td><td>No data!</td><td></td></tr>`)
-                }
+                
 
                 // Draggable
                 $("#tblMain").sortable({
@@ -197,7 +210,6 @@
                             $(this).sortable('cancel');
                         }
                     },
-                    axis: 'y'
                 }).disableSelection();
 
                 // Droppable
@@ -210,10 +222,14 @@
 
                         let flag = true
                         $(this).find('tr').each(function () {
-                            if ($(this).find('td.id').text().trim() == id) {
-                                alert('same')
+                            if ($(this).find('td:first').text().trim() == id) {
+                                vm.$swal(
+                                    'ごめんなさい！',
+                                    'もう存在している！',
+                                    'warning'
+                                )
                                 flag = false
-                                return false
+                                return flag
                             }
                         })
 
@@ -232,14 +248,10 @@
                                     </tr>`
                         $(this).append(newRow)
 
+                        
                     },
-                    axis: 'y'
                 }).disableSelection();
-
-
             });
-
-
         },
 
         methods: {
@@ -355,10 +367,82 @@
             saveFeatured() {
                 let ids = []
                 $('#tblFeatured').find('tr').each(function () {
-                    ids.push($(this).find('td.id').text().trim())
+                    //ids.push($(this).find('td.id').text().trim())
+                    ids.push($(this).find("td:first").text().trim())
                 })
+
                 console.log(ids)
-            }
+                let detail = ids.join(',')
+
+                axios.post("/api/active-center-featured", {detail: detail}, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                    .then(response => {
+                        this.fetchActiveCenter()
+                        NProgress.done()
+                        self.$swal({
+                            title: "登録完了!",
+                            text: "登録が完了しました!",
+                            type: "success",
+                            confirmButtonText: 'OK'
+                        })
+                            
+                    })
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            if (error.response.status === 401) {
+                                window.location.href = '/login'
+                            }
+                        }
+                    });
+                console.log(ids)
+                
+            },
+            fetchFeaured() {
+                NProgress.start()
+
+                axios.get(`/api/active-center-featured`, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                    .then(response => {
+                        this.featuredItems = response.data.data;
+
+                        if(!this.featuredItems.length){
+                            $('#tblFeatured').append(`<tr class='mainRow'><td></td><td>No data!</td><td></td></tr>`)
+                        }
+
+                        this.featuredItems.forEach(element => {
+                            const newRow = `<tr id=id${element.id}>
+                                        <td class='id'>
+                                            ${element.id}
+                                        </td>
+                                        <td>
+                                            ${element.title}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${element.id}').remove();" role="button">削除</a>
+                                        </td>
+                                    </tr>`
+                            $('#tblFeatured').append(newRow)
+                        });
+
+
+                        console.log(response.data.data);
+                        NProgress.done()
+                    })
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response);
+                            NProgress.done()
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    });
+            },
         }
     };
 </script>

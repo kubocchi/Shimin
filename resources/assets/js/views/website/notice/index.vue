@@ -181,7 +181,7 @@
                                 <dl class="input-group">
                                     <dt>キーワード</dt>
                                     <dd>
-                                        <input type="text" v-model="params.search" placeholder="キーワードを入力...">
+                                        <input type="text" v-model="params.search" placeholder="キーワードを入力..."  @keyup.enter="fetchNotice()">
                                     </dd>
                                 </dl>
                                 <!-- enter -->

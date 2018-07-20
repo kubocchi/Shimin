@@ -8,6 +8,8 @@ use App\ActiveCenter;
 use App\FileManagement\Repositories\BaseRepository;
 use App\FileManagement\Repositories\AttachmentCategory\AttachmentCategoryRepository;
 use App\FileManagement\Repositories\Attachment\AttachmentRepository;
+use DB;
+use Response;
 
 class ActiveCenterController extends Controller
 {
@@ -90,7 +92,8 @@ class ActiveCenterController extends Controller
         $dateStatus = $request->input('dateStatus');
 
 
-        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+        $activeCenters = ActiveCenter::orderBy('featured', 'desc')
+                        ->orderBy('updated_at', 'desc')
                         ->where('title', 'like', '%' . $search . '%')
                         ->where(function($query) use ($disabled)  {
                             if(isset($disabled)) {
@@ -120,5 +123,39 @@ class ActiveCenterController extends Controller
  
          // Return collection of ActiveCenters as a resource
          return ActiveCenterResource::collection($activeCenters);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public static  function updateFeatured(Request $request)
+    {
+        $activeCenters = DB::SELECT(DB::RAW("UPDATE active_centers SET featured = :featured"), ['featured'=>null]);
+        $detail = $request->input('detail');
+        $ids = explode(',', $detail);
+
+        for ($i= 0; $i < count($ids); $i++) 
+        { 
+            $activeCenter = ActiveCenter::findOrFail($ids[$i]);
+            $activeCenter->featured = $i;
+            $activeCenter->save();
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getFeatured()
+    {
+        // Get ActiveCenters
+        $activeCenters = ActiveCenter::select('id', 'title')->whereNotNull('featured')->orderBy('featured', 'asc')->get();
+
+        // Return collection of ActiveCenters as a resource
+        return Response::json(['data' => $activeCenters]);
     }
 }

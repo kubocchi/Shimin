@@ -23,6 +23,7 @@ class ActiveCenterResource extends JsonResource
             'end_date' => $this->end_date,
             'content' => $this->content,
             'file' => $this->file,
+            'featured' => $this->featured,
             'end_date' => $this->end_date,
             'deactivate'=>$this->deactivate,
             'created_by' => $this->created_by,
