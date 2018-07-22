@@ -64,13 +64,13 @@
                             </thead>
 
                             <tbody id="tblFeatured" class="connectedSortable">
-                                <!-- <tr v-for="featuredItem in featuredItems" v-bind:key="featuredItem.id">
+                                <tr v-for="featuredItem in featuredItems" v-bind:key="featuredItem.id">
                                     <td :id="`id${featuredItem.id}`">{{ featuredItem.id }}</td>
                                     <td id="title">{{ featuredItem.title }}</td>
                                     <td>
-                                        <a class="btn btn-outline-danger btn-block" onClick="window.checkMethod()" role="button">削除</a>
+                                        <a class="btn btn-outline-danger btn-block" @click.prevent="deleteItem(featuredItem.id)" role="button">削除</a>
                                     </td>
-                                </tr> -->
+                                </tr>
                             </tbody>
                         </table>
                         <div class="row text-center">
@@ -120,7 +120,7 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        {{featuredItems}}
                     </div>
 
                 </div>
@@ -192,66 +192,7 @@
             this.fetchActiveCenter()
             this.fetchFeaured()
 
-            let vm = this
-            $(function () {
-                console.log('Length: ', $('#tblFeatured').find('tr').length)
-
-                
-
-                // Draggable
-                $("#tblMain").sortable({
-                    connectWith: ".connectedSortable",
-                    remove: function (event, ui) {
-                        ui.item.clone().appendTo('#tblFeatured');
-                        $(this).sortable('cancel');
-                    },
-                    beforeStop: function (ev, ui) {
-                        if ($(ui.placeholder).parent()[0] == this) {
-                            $(this).sortable('cancel');
-                        }
-                    },
-                }).disableSelection();
-
-                // Droppable
-                $("#tblFeatured").sortable({
-                    connectWith: ".connectedSortable",
-                    receive: function (event, ui) {
-                        $('#tblFeatured tr.mainRow').remove();
-                        let id = ui.item.find('td#id').text().trim()
-                        let title = ui.item.find('td#title').text().trim()
-
-                        let flag = true
-                        $(this).find('tr').each(function () {
-                            if ($(this).find('td:first').text().trim() == id) {
-                                vm.$swal(
-                                    'ごめんなさい！',
-                                    'もう存在している！',
-                                    'warning'
-                                )
-                                flag = false
-                                return flag
-                            }
-                        })
-
-                        if (!flag) return
-
-                        let newRow = `<tr id=id${id}>
-                                        <td class='id'>
-                                            ${id}
-                                        </td>
-                                        <td>
-                                            ${title}
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${id}').remove();" role="button">削除</a>
-                                        </td>
-                                    </tr>`
-                        $(this).append(newRow)
-
-                        
-                    },
-                }).disableSelection();
-            });
+            this.initDraggable()
         },
 
         methods: {
@@ -372,9 +313,9 @@
                 })
 
                 console.log(ids)
-                let detail = ids.join(',')
+                //let detail = ids.join(',')
 
-                axios.post("/api/active-center-featured", {detail: detail}, {
+                axios.post("/api/active-center-featured", {detail: ids}, {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
@@ -416,20 +357,20 @@
                             $('#tblFeatured').append(`<tr class='mainRow'><td></td><td>No data!</td><td></td></tr>`)
                         }
 
-                        this.featuredItems.forEach(element => {
-                            const newRow = `<tr id=id${element.id}>
-                                        <td class='id'>
-                                            ${element.id}
-                                        </td>
-                                        <td>
-                                            ${element.title}
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${element.id}').remove();" role="button">削除</a>
-                                        </td>
-                                    </tr>`
-                            $('#tblFeatured').append(newRow)
-                        });
+                        // this.featuredItems.forEach(element => {
+                        //     const newRow = `<tr id=id${element.id}>
+                        //                 <td class='id'>
+                        //                     ${element.id}
+                        //                 </td>
+                        //                 <td>
+                        //                     ${element.title}
+                        //                 </td>
+                        //                 <td>
+                        //                     <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${element.id}').remove();" role="button">削除</a>
+                        //                 </td>
+                        //             </tr>`
+                        //     $('#tblFeatured').append(newRow)
+                        // });
 
 
                         console.log(response.data.data);
@@ -443,6 +384,122 @@
                         }
                     });
             },
+            deleteItem(id){
+                 this.$swal({
+                    title: 'このデータを削除しますか？',
+                    text: "削除したデータは元に戻すことができません!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'キャンセル'
+                }).then((result) => {
+                    if (result.value) {
+                        this.featuredItems = this.featuredItems.filter(item =>{
+                            return item.id !== id;
+                        })
+                    }
+                    else {
+                        this.$swal(
+                            'キャンセルしました',
+                            'データは削除されていません',
+                            'error'
+                        )
+                    }
+                })
+            },
+            initDraggable(){
+                let vm = this
+                $(function () {
+                    console.log('Length: ', $('#tblFeatured').find('tr').length)
+
+                    // Draggable
+                    $("#tblMain").sortable({
+                        connectWith: ".connectedSortable",
+                        remove: function (event, ui) {
+                            ui.item.clone().insertAfter(ui.item);
+                            $(this).sortable('cancel');
+                        },
+                        beforeStop: function (ev, ui) {
+                            if ($(ui.placeholder).parent()[0] == this) {
+                                $(this).sortable('cancel');
+                            }
+                        },
+                        axis: 'y'
+                    }).disableSelection();
+
+                    // Droppable
+                    $("#tblFeatured").sortable({
+                        connectWith: ".connectedSortable",
+                        receive: function (event, ui) {
+                            $('#tblFeatured tr.mainRow').remove()
+
+                            // if($('#tblFeatured tr').length == 10){
+                            //     vm.$swal(
+                            //             'ごめんなさい！',
+                            //             '満ちている最大!',
+                            //             'warning'
+                            //         )
+                            //     return
+                            // } 
+
+                            if(vm.featuredItems.length == 10){
+                                vm.$swal(
+                                        'ごめんなさい！',
+                                        '満ちている最大!',
+                                        'warning'
+                                    )
+                                return
+                            } 
+
+                            let id = ui.item.find('td#id').text().trim()
+                            let title = ui.item.find('td#title').text().trim()
+
+                            //let flag = true
+                            // $(this).find('tr').each(function () {
+                            //     if ($(this).find('td:first').text().trim() == id) {
+                            //         vm.$swal(
+                            //             'ごめんなさい！',
+                            //             'もう存在している！',
+                            //             'warning'
+                            //         )
+                            //         flag = false
+                            //         return flag
+                            //     }
+                            // })
+
+                            if(vm.featuredItems.find(x => x.id === id)){
+                                vm.$swal(
+                                    'ごめんなさい！',
+                                    'もう存在している！',
+                                    'warning'
+                                )
+                                return
+                            } 
+
+                            //if (flag) return
+
+                            // let newRow = `<tr id=id${id}>
+                            //                 <td class='id'>
+                            //                     ${id}
+                            //                 </td>
+                            //                 <td>
+                            //                     ${title}
+                            //                 </td>
+                            //                 <td>
+                            //                     <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${id}').remove();" role="button">削除</a>
+                            //                 </td>
+                            //             </tr>`
+                            // $(this).append(newRow)
+
+                            let newItem = {id: id, title: title}
+                            vm.featuredItems.push(newItem)
+                        },
+                        axis: 'y'
+                    }).disableSelection()
+                })
+            }
         }
     };
 </script>

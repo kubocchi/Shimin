@@ -22,6 +22,7 @@ class ActiveCenterController extends Controller
     {
         // Get ActiveCenters
         $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+                                        ->orderBy('featured', 'asc')
                                         ->Where('deactivate', 0)
                                         ->whereDate('start_date', '<=', date("Y-m-d"))
                                         ->whereDate('end_date', '>=', date("Y-m-d"))
@@ -92,8 +93,8 @@ class ActiveCenterController extends Controller
         $dateStatus = $request->input('dateStatus');
 
 
-        $activeCenters = ActiveCenter::orderBy('featured', 'desc')
-                        ->orderBy('updated_at', 'desc')
+        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+                        ->orderBy('featured', 'asc')
                         ->where('title', 'like', '%' . $search . '%')
                         ->where(function($query) use ($disabled)  {
                             if(isset($disabled)) {
@@ -133,9 +134,8 @@ class ActiveCenterController extends Controller
      */
     public static  function updateFeatured(Request $request)
     {
-        $activeCenters = DB::SELECT(DB::RAW("UPDATE active_centers SET featured = :featured"), ['featured'=>null]);
-        $detail = $request->input('detail');
-        $ids = explode(',', $detail);
+        $activeCenters = DB::SELECT(DB::RAW("UPDATE active_centers SET featured = :featured"), ['featured' => null]);
+        $ids = $request->input('detail');
 
         for ($i= 0; $i < count($ids); $i++) 
         { 
