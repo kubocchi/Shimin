@@ -227,34 +227,23 @@
                     </div>
 
                     <!-- pagenation -->
-                    <!-- <div class="pagenation">
+                    <div class="pagenation">
                         <nav class="pager">
                             <ul>
-                                <li class="previous">
-                                    <a href="">前のページ</a>
+                                <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="previous">
+                                    <a href="#!" @click.prevent="fetchNotice(pagination.prev_page_url)">前のページ</a>
                                 </li>
-                                <li class="active">
-                                    <a href="">1</a>
+
+                                <li class="page-item disabled">
+                                    <span href="#!">{{ pagination.current_page }} の {{ pagination.last_page }}</span>
                                 </li>
-                                <li>
-                                    <a href="">2</a>
-                                </li>
-                                <li>
-                                    <a href="">3</a>
-                                </li>
-                                <li>
-                                    <a href="">4</a>
-                                </li>
-                                <li>
-                                    <a href="">5</a>
-                                </li>
-                                <li class="next">
-                                    <a href="">次のページ</a>
+
+                                <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="next">
+                                    <a href="#!" @click.prevent="fetchNotice(pagination.next_page_url)">次のページ</a>
                                 </li>
                             </ul>
                         </nav>
-                    </div> -->
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -300,7 +289,8 @@
                     noticeType: 0,
                     activityCategory : null
                 },
-                newTagDate: new Date('1900-01-01')
+                newTagDate: new Date('1900-01-01'),
+                pagination: {}
             }
         },
 
@@ -312,8 +302,9 @@
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
                 NProgress.start()
+                page_url = page_url || "/api/notices-frontend"
 
-                 fetch('/api/notices-frontend', {
+                fetch(page_url, {
                     method: "post",
                     body: JSON.stringify(this.params),
                     headers: {
@@ -322,19 +313,22 @@
                 })
                     .then(res => res.json())
                     .then(res => {
-                        this.notices = res.data;
-                        console.log(res.data);
-                        //vm.makePagination(res.meta, res.links);
+                        this.notices = res.data.data
+                        console.log(res.data)
+                        this.makePagination(res.data)
 
-                        res.data.forEach(notice => {
-                            if(new Date(notice.date) > new Date(this.newTagDate))
+                        res.data.data.forEach(notice => {
+                            if(new Date(notice.updateDate) > new Date(this.newTagDate))
                                 this.newTagDate = notice.date
-                        });
+                        })
 
                         console.log(this.newTagDate)
                         NProgress.done()
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        NProgress.done()
+                        console.log(err)
+                    })
             },
             onActivityCategorySelect(selectedOption, id) {
                 if(selectedOption){
@@ -386,6 +380,16 @@
                 console.log(`notice/${routeName}/${object.id}/detail`)
                 return `notice/${routeName}/${object.id}/detail`
             },
+            makePagination(data) {
+                let pagination = {
+                    current_page: data.current_page,
+                    last_page: data.last_page,
+                    next_page_url: data.next_page_url,
+                    prev_page_url: data.prev_page_url
+                }
+
+                this.pagination = pagination;
+            }
         }
     };
 </script>

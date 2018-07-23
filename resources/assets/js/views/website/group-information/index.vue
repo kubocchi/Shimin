@@ -309,7 +309,10 @@
 
                         NProgress.done()
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        NProgress.done()
+                        console.log(err)
+                    })
             },
             onActivityCategorySelect(selectedOption, id) {
                 if (selectedOption) {

@@ -163,9 +163,9 @@ class NoticeController extends Controller
 
         $formattedData = $this->sortByUpdateDate($formattedData);
 
-        //$collection = (new Collection($formattedData))->paginate(20);
+        $paginatedData = $this->paginate($request, $formattedData, 10);
 
-        return Response::json(['data' => $formattedData], 201);
+        return Response::json(['data' => $paginatedData], 201);
     }
 
     public function getNoticeFrontData(Request $request)
@@ -228,8 +228,9 @@ class NoticeController extends Controller
         }
 
         $formattedData = $this->sortByUpdateDate($formattedData);
+        $paginatedData = $this->paginate($request, $formattedData, 10);
 
-        return Response::json(['data' => $formattedData], 201);
+        return Response::json(['data' => $paginatedData], 201);
     }
 
     public function getNoticeHomePageData()
@@ -280,19 +281,22 @@ class NoticeController extends Controller
         return Response::json(['data' => ['events'=> $eventsResponce, 'volunteers'=> $volunteersResponce, 'memberships'=> $membershipResponce, 'all'=> $allResponce]], 201);
     }
 
-    // function paginate($items, $per_page)
-    // {
-    //     $page   = 1;
-    //     $offset = ($page * $per_page) - $per_page;
+    function paginate($request, $items, $perPage)
+    {
+        // Get the ?page=1 from the url
+        $page = isset($request->page) ? $request->page : 1; 
+        $offset = ($page * $perPage) - $perPage;
 
-    //     return new Illuminate\Pagination\LengthAwarePaginator(
-    //         $items->forPage($page, $per_page)->values(),
-    //         $items->count(),
-    //         $per_page,
-    //         Illuminate\Pagination\Paginator::resolveCurrentPage(),
-    //         ['path' => Illuminate\Pagination\Paginator::resolveCurrentPath()]
-    //     );
-    // }
+        $entries =  new LengthAwarePaginator(
+            array_slice($items, $offset, $perPage, true),
+            count($items), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+        );
+
+        return $entries;
+    }
 
     public function makeCustomCollection($collection, $type)
     {   

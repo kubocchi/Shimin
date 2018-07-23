@@ -99,7 +99,7 @@
 
                         <tbody>
                             <tr v-for="(notice, rowNumber) in notices" v-bind:key="rowNumber">
-                                <th scope="row">{{rowNumber + 1}}</th>
+                                <th scope="row">{{parseInt(rowNumber) + 1}}</th>
                                 <td>{{ notice.type }}</td>
                                 <td>{{ notice.subject }}</td>
                                 <td>{{ notice.date }}</td>
@@ -179,8 +179,9 @@
             // Pulling data from API, its a post request with search-term, type
             fetchNotice(page_url) {
                 NProgress.start()
+                page_url = page_url || "/api/notices";
 
-                fetch('/api/notices', {
+                fetch(page_url, {
                     method: "post",
                     body: JSON.stringify(this.params),
                     headers: {
@@ -189,24 +190,24 @@
                 })
                     .then(res => res.json())
                     .then(res => {
-                        this.notices = res.data;
-                        console.log(res.data);
-                        //vm.makePagination(res.meta, res.links);
+                        this.notices = res.data.data
+                        console.log(res.data)
+                        this.makePagination(res)
                         NProgress.done()
                     })
                     .catch(err => console.log(err))
             },
 
             // Paginating the table data
-            makePagination(meta, links) {
+            makePagination(res) {
                 let pagination = {
-                    current_page: meta.current_page,
-                    last_page: meta.last_page,
-                    next_page_url: links.next,
-                    prev_page_url: links.prev
-                };
+                    current_page: res.data.current_page,
+                    last_page: res.data.last_page,
+                    next_page_url: res.data.next_page_url,
+                    prev_page_url: res.data.prev_page_url
+                }
 
-                this.pagination = pagination;
+                this.pagination = pagination
             },
 
             // Deleting the selected data
