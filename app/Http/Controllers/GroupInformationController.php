@@ -134,29 +134,31 @@ class GroupInformationController extends Controller
          $status = $request->input('status');
          $type = $request->input('type');
          
-         $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
-                                    ->orWhere('name_phonetic', 'like', '%' . $search . '%')
-                                    ->where(function($query) use ($management)  {
-                                        if(isset($management)) {
-                                            $query->where('regist_management', $management);
-                                        }
-                                    })
-                                    ->where(function($query) use ($activityCategory)  {
-                                        if(isset($activityCategory)) {
-                                            $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);
-                                        }
-                                    })
-                                    ->where(function($query) use ($status)  {
-                                        if(isset($status)) {
-                                            $query->where('active_status', $status);
-                                        }
-                                    })
-                                    ->where(function($query) use ($type)  {
-                                        if(isset($type)) {
-                                            $query->where('type', $type);
-                                        }
-                                    })
-                                    ->paginate(10);
+         $groupInformations = GroupInformation::where(function ($query) use($search) {
+                                                    $query->where('name', 'like', '%' . $search . '%')
+                                                    ->orWhere('name_phonetic', 'like', '%' . $search . '%');
+                                                })
+                                                ->where(function($query) use ($management)  {
+                                                    if(isset($management)) {
+                                                        $query->where('regist_management', $management);
+                                                    }
+                                                })
+                                                ->where(function($query) use ($activityCategory)  {
+                                                    if(isset($activityCategory)) {
+                                                        $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);
+                                                    }
+                                                })
+                                                ->where(function($query) use ($status)  {
+                                                    if(isset($status)) {
+                                                        $query->where('active_status', $status);
+                                                    }
+                                                })
+                                                ->where(function($query) use ($type)  {
+                                                    if(isset($type)) {
+                                                        $query->where('type', $type);
+                                                    }
+                                                })
+                                                ->paginate(10);
          
          // Return collection of Kawarabis as a resource
          return GroupInformationResource::collection($groupInformations);
@@ -299,22 +301,19 @@ class GroupInformationController extends Controller
     {
          $search = $request->input('search');
          $activityCategory = $request->input('activityCategory');
-         $type = $request->input('type');
+         //$type = $request->input('type');
          
-         $groupInformations = GroupInformation::Where('name', 'like', '%' . $search . '%')
-                                    ->orWhere('name_phonetic', 'like', '%' . $search . '%')
-                                    ->where('active_status', '0')
-                                    ->where(function($query) use ($activityCategory)  {
-                                        if(isset($activityCategory)) {
-                                            $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);
-                                        }
-                                    })
-                                    ->where(function($query) use ($type)  {
-                                        if(isset($type)) {
-                                            $query->where('type', $type);
-                                        }
-                                    })
-                                    ->paginate(40);
+         $groupInformations = GroupInformation::where(function ($query) use($search) {
+                                                    $query->where('name', 'like', '%' . $search . '%')
+                                                    ->orWhere('name_phonetic', 'like', '%' . $search . '%');
+                                                })
+                                                ->where('active_status', '0')
+                                                ->where(function($query) use ($activityCategory)  {
+                                                    if(isset($activityCategory)) {
+                                                        $query->whereRaw('FIND_IN_SET(?, activity_category)', [$activityCategory]);
+                                                    }
+                                                })
+                                                ->paginate(40);
          
          // Return collection of Kawarabis as a resource
          return GroupInformationResource::collection($groupInformations);
