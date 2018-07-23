@@ -230,6 +230,9 @@ table.list_table td {
 .wide_d {
 	min-width: 100px;
 }
+.wide_t {
+	width: 70%;
+}
 .btn.btn-outline-success.btn-block{
 	min-width: 70px;;
 }

@@ -58,7 +58,7 @@
                             <thead>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">ID.</th>
-                                    <th class="col-xs-9 wide_d" scope="col">件名</th>
+                                    <th class="col-xs-9 wide_t" scope="col">件名</th>
                                     <th class="col-xs-2" scope="col">徐外</th>
                                 </tr>
                             </thead>
@@ -424,27 +424,25 @@
 
                             if(vm.featuredItems.length == 10){
                                 vm.$swal(
-                                        'ごめんなさい！',
-                                        '満ちている最大!',
+                                        '警告',
+                                        'これ以上項目は増やせません。',
                                         'warning'
                                     )
                                 return
                             } 
 
-                            let id = ui.item.find('td#id').text().trim()
+                            let id = parseInt(ui.item.find('td#id').text().trim())
                             let title = ui.item.find('td#title').text().trim()
 
                             if(vm.featuredItems.find(x => x.id === id)){
                                 vm.$swal(
-                                    'ごめんなさい！',
-                                    'もう存在している！',
+                                    '警告',
+                                    '既にリストにある項目です。',
                                     'warning'
                                 )
                                 return
                             }
-
-                            let newItem = {id: id, title: title}
-                            vm.featuredItems.push(newItem)
+                            vm.featuredItems.push({id, title})
                         },
                         axis: 'y'
                     }).disableSelection()
