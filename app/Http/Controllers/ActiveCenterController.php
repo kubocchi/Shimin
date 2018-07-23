@@ -10,6 +10,7 @@ use App\FileManagement\Repositories\AttachmentCategory\AttachmentCategoryReposit
 use App\FileManagement\Repositories\Attachment\AttachmentRepository;
 use DB;
 use Response;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ActiveCenterController extends Controller
 {
@@ -21,15 +22,24 @@ class ActiveCenterController extends Controller
     public function index()
     {
         // Get ActiveCenters
-        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+        $activeCentersFeatured = ActiveCenter::whereNotNull('featured')
                                         ->orderBy('featured', 'asc')
                                         ->Where('deactivate', 0)
                                         ->whereDate('start_date', '<=', date("Y-m-d"))
                                         ->whereDate('end_date', '>=', date("Y-m-d"))
-                                        ->paginate(10);
+                                        ->get();
+        // Get ActiveCenters
+        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+                                        ->where('featured', NULL)
+                                        ->Where('deactivate', 0)
+                                        ->whereDate('start_date', '<=', date("Y-m-d"))
+                                        ->whereDate('end_date', '>=', date("Y-m-d"))
+                                        ->get();
+
+        $result = $activeCentersFeatured->merge($activeCenters)->paginate(10);
 
         // Return collection of ActiveCenters as a resource
-        return ActiveCenterResource::collection($activeCenters);
+        return ActiveCenterResource::collection($result);
     }
     /**
      * Store a newly created resource in storage.
@@ -92,8 +102,7 @@ class ActiveCenterController extends Controller
         $disabled = $request->input('disabled');
         $dateStatus = $request->input('dateStatus');
 
-
-        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+        $activeCentersFeatured = ActiveCenter::whereNotNull('featured')
                         ->orderBy('featured', 'asc')
                         ->where('title', 'like', '%' . $search . '%')
                         ->where(function($query) use ($disabled)  {
@@ -119,11 +128,52 @@ class ActiveCenterController extends Controller
                                         break;
                                 }
                             }
+                        })->get();
+
+        $activeCenters = ActiveCenter::orderBy('updated_at', 'desc')
+                        ->where('featured', NULL)
+                        ->where('title', 'like', '%' . $search . '%')
+                        ->where(function($query) use ($disabled)  {
+                            if(isset($disabled)) {
+                                $query->where('deactivate', $disabled);
+                            }
                         })
-                        ->paginate(10);
+                        ->where(function($query) use ($dateStatus)  {
+                            if(isset($dateStatus)) {
+                                switch ($dateStatus) {
+                                    # Running type
+                                    case '1':
+                                        $query->whereDate('start_date', '<=', date("Y-m-d"))
+                                                ->whereDate('end_date', '>=', date("Y-m-d"));
+                                        break;
+                                    # Future type
+                                    case '2':
+                                        $query->whereDate('start_date', '>', date("Y-m-d"));
+                                        break;
+                                    # Previous type
+                                    case '3':
+                                        $query->whereDate('end_date', '<', date("Y-m-d"));
+                                        break;
+                                }
+                            }
+                        })->get();
+
+       
+
+        $result = $activeCentersFeatured->merge($activeCenters)->paginate(10);
+
+        //$resultSorted = $result->sortByDesc('expire_at');
+
+        // $count = $activeCenters->count() + $activeCenters2->count();
+        // $page = 2;
+        // $perPage = 10;
+
+        // $result = new LengthAwarePaginator(
+        //     $result->forPage($page, $perPage), $count, $perPage, $page
+        // );
  
          // Return collection of ActiveCenters as a resource
-         return ActiveCenterResource::collection($activeCenters);
+         return ActiveCenterResource::collection($result);
     }
 
     /**
@@ -134,7 +184,7 @@ class ActiveCenterController extends Controller
      */
     public static  function updateFeatured(Request $request)
     {
-        $activeCenters = DB::SELECT(DB::RAW("UPDATE active_centers SET featured = :featured"), ['featured' => null]);
+        $activeCenters = DB::SELECT(DB::RAW("UPDATE active_centers SET featured = :featured WHERE featured IS NOT NULL"), ['featured' => null]);
         $ids = $request->input('detail');
 
         for ($i= 0; $i < count($ids); $i++) 

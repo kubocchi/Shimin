@@ -53,22 +53,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-5 table-responsive">
+                    <div class="col-lg-4 table-responsive">
                         <table class="table table-sm">
                             <thead>
                                 <tr class="table-primary">
-                                    <th class="col-xs-1" scope="col">No.</th>
+                                    <th class="col-xs-1" scope="col">ID.</th>
                                     <th class="col-xs-9" scope="col">件名</th>
-                                    <th class="col-xs-2" scope="col">削除</th>
+                                    <th class="col-xs-2" scope="col">徐外</th>
                                 </tr>
                             </thead>
 
                             <tbody id="tblFeatured" class="connectedSortable">
                                 <tr v-for="featuredItem in featuredItems" v-bind:key="featuredItem.id">
-                                    <td :id="`id${featuredItem.id}`">{{ featuredItem.id }}</td>
+                                    <td id="id">{{ featuredItem.id }}</td>
                                     <td id="title">{{ featuredItem.title }}</td>
                                     <td>
-                                        <a class="btn btn-outline-danger btn-block" @click.prevent="deleteItem(featuredItem.id)" role="button">削除</a>
+                                        <a class="btn btn-outline-danger btn-block" @click.prevent="deleteItem(featuredItem.id)" role="button">除外</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -77,14 +77,14 @@
                             <button class="btn btn-outline-success btn-block" @click.prevent="saveFeatured()" role="button">変更</button>
                         </div>
                     </div>
-                    <div class="col-lg-7 table-responsive">
+                    <div class="col-lg-8 table-responsive">
                         <table class="table table-sm">
                             <thead>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">No.</th>
                                     <th class="col-xs-3 wide_s" scope="col">件名</th>
                                     <th class="col-xs-1 wide_d" scope="col">更新日</th>
-                                    <th class="col-xs-1 " scope="col">更</th>
+                                    <th class="col-xs-1 " scope="col">固定</th>
                                     <th class="col-xs-2" align="center">複製</th>
                                     <th class="col-xs-2" scope="col">変更</th>
                                     <th class="col-xs-2" scope="col">削除</th>
@@ -103,16 +103,16 @@
                                     </td>
                                     <td>
                                         <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'copy' }}">
-                                            <button class="btn btn-outline-primary btn-block" role="button">複製</button>
+                                            <button class="btn-sm btn-outline-primary btn-block" role="button">複製</button>
                                         </router-link>
                                     </td>
                                     <td>
                                         <router-link :to="{ name: 'activeCenterForm', params: { model: activeCenter, requestType: 'edit' }}">
-                                            <button class="btn btn-outline-success btn-block" role="button">変更</button>
+                                            <button class="btn-sm btn-outline-success btn-block" role="button">変更</button>
                                         </router-link>
                                     </td>
                                     <td>
-                                        <a class="btn btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
+                                        <a class="btn-sm btn-outline-danger btn-block" @click.prevent="deleteActiveCenter(activeCenter.id)" role="button">削除</a>
                                     </td>
                                     <td id="id" hidden>
                                         {{activeCenter.id}}
@@ -120,7 +120,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        {{featuredItems}}
                     </div>
 
                 </div>
@@ -191,7 +190,6 @@
         created() {
             this.fetchActiveCenter()
             this.fetchFeaured()
-
             this.initDraggable()
         },
 
@@ -261,6 +259,7 @@
                                 )
                                 NProgress.done()
                                 this.fetchActiveCenter()
+                                this.fetchFeaured()
                             })
                             .catch(error => {
                                 if (error.response) {
@@ -306,6 +305,7 @@
                 }
             },
             saveFeatured() {
+                NProgress.start()
                 let ids = []
                 $('#tblFeatured').find('tr').each(function () {
                     //ids.push($(this).find('td.id').text().trim())
@@ -332,6 +332,7 @@
                             
                     })
                     .catch(error => {
+                        NProgress.done()
                         if (error.response) {
                             console.log(error.response);
                             if (error.response.status === 401) {
@@ -344,7 +345,6 @@
             },
             fetchFeaured() {
                 NProgress.start()
-
                 axios.get(`/api/active-center-featured`, {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -352,26 +352,9 @@
                 })
                     .then(response => {
                         this.featuredItems = response.data.data;
-
                         if(!this.featuredItems.length){
                             $('#tblFeatured').append(`<tr class='mainRow'><td></td><td>No data!</td><td></td></tr>`)
                         }
-
-                        // this.featuredItems.forEach(element => {
-                        //     const newRow = `<tr id=id${element.id}>
-                        //                 <td class='id'>
-                        //                     ${element.id}
-                        //                 </td>
-                        //                 <td>
-                        //                     ${element.title}
-                        //                 </td>
-                        //                 <td>
-                        //                     <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${element.id}').remove();" role="button">削除</a>
-                        //                 </td>
-                        //             </tr>`
-                        //     $('#tblFeatured').append(newRow)
-                        // });
-
 
                         console.log(response.data.data);
                         NProgress.done()
@@ -399,6 +382,10 @@
                         this.featuredItems = this.featuredItems.filter(item =>{
                             return item.id !== id;
                         })
+
+                        if(!this.featuredItems.length){
+                            $('#tblFeatured').append(`<tr class='mainRow'><td></td><td>No data!</td><td></td></tr>`)
+                        }
                     }
                     else {
                         this.$swal(
@@ -435,15 +422,6 @@
                         receive: function (event, ui) {
                             $('#tblFeatured tr.mainRow').remove()
 
-                            // if($('#tblFeatured tr').length == 10){
-                            //     vm.$swal(
-                            //             'ごめんなさい！',
-                            //             '満ちている最大!',
-                            //             'warning'
-                            //         )
-                            //     return
-                            // } 
-
                             if(vm.featuredItems.length == 10){
                                 vm.$swal(
                                         'ごめんなさい！',
@@ -456,19 +434,6 @@
                             let id = ui.item.find('td#id').text().trim()
                             let title = ui.item.find('td#title').text().trim()
 
-                            //let flag = true
-                            // $(this).find('tr').each(function () {
-                            //     if ($(this).find('td:first').text().trim() == id) {
-                            //         vm.$swal(
-                            //             'ごめんなさい！',
-                            //             'もう存在している！',
-                            //             'warning'
-                            //         )
-                            //         flag = false
-                            //         return flag
-                            //     }
-                            // })
-
                             if(vm.featuredItems.find(x => x.id === id)){
                                 vm.$swal(
                                     'ごめんなさい！',
@@ -476,22 +441,7 @@
                                     'warning'
                                 )
                                 return
-                            } 
-
-                            //if (flag) return
-
-                            // let newRow = `<tr id=id${id}>
-                            //                 <td class='id'>
-                            //                     ${id}
-                            //                 </td>
-                            //                 <td>
-                            //                     ${title}
-                            //                 </td>
-                            //                 <td>
-                            //                     <a class="btn btn-outline-danger btn-block" onclick="$('#tblFeatured tr#id${id}').remove();" role="button">削除</a>
-                            //                 </td>
-                            //             </tr>`
-                            // $(this).append(newRow)
+                            }
 
                             let newItem = {id: id, title: title}
                             vm.featuredItems.push(newItem)
