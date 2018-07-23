@@ -185,16 +185,21 @@ font-size: 14px;
 .btn {
 	white-space: normal;
 }
+.btn-sm{
+	border-width: 1px ;
+	border-style: solid ;
+}
 .btn-primary {
 	color: #fff;
 	background-color: #1C89E7;
 	border-color: #007bff;
 }
 .btn-outline-danger {
-    color: #dc3545;
+    color: #dc3545  ;
     background-color: transparent;
     background-image: none;
-    border-color: #dc3545;
+	border-color: #dc3545 ;
+	text-align: center ;
 }
 /* トップページメインエリアボタン見出しとメニューボタン */
 .topmidashi {
@@ -287,13 +292,14 @@ table.list_table td {
 
 .footer {
 	background-color: #1C89E7;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	border-top: 1px solid #285c8a;
 }
 address {
 	text-align: center;
 	color: #FFF;
+	margin-bottom: 0 ;
 }
 
 

@@ -10,6 +10,7 @@
 }
 .maincontents.oraganization .container{
 	display: table ;
+	table-layout: fixed ;
 }
 .sidenav{
 	display: table-cell ;
@@ -57,22 +58,44 @@
 .oraganization_body{
 	margin-bottom: 30px ;
 	width: 100% ;
-	display: flex ;
-    flex-wrap: wrap ;
 }
 .oraganization_body .item{
-	width: 50% ;
-	padding: 5px ;
+	width: 100% ;
 }
 .oraganization_body .item a{
 	display: block ;
 	width: 100% ;
-	padding: 13px ;
-	border-radius: 3px ;
+	padding: 18px 13px ;
 	border: #e6e6e6 solid 1px ;
-	font-size: 1.6rem ;
 	position: relative ;
+	margin-top: -1px ;
+	z-index: 1 ;
+	overflow: hidden;
+}
+.oraganization_body .item a::before{
+	content: " " ;
+	position: absolute ;
+	left: 0 ;
+	top: 0 ;
+	border-top: 12px solid #1b89e7;
+	border-right: 12px solid transparent;
+}
+.oraganization_body .item a p.name{
+	font-size: 1.1em ;
 	line-height: 1.3em ;
+	display: block ;
+	margin-bottom: 3px ;
+}
+.oraganization_body .item a p.comment{
+	display: block ;
+	font-size: 0.95em ;
+	font-weight: normal ;
+	line-height: 1.2em ;
+	margin-bottom: 0 ;
+	overflow: hidden ;
+	text-overflow: ellipsis ;
+	white-space: nowrap ;
+	width: 100% ;
 }
 /* .oraganization_body .item a::after{
 	content: "\f138  詳細 " ;
@@ -87,6 +110,7 @@
 	border-color: #1b89e7 ;
 	color: #1b89e7 ;
 	box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.1) ;
+	z-index: 2 ;
 }
 .oraganization_body .item a:hover::after{
 	color: #1b89e7 ;
@@ -94,12 +118,20 @@
 
 
 @media (max-width: 767px){
-	.oraganization_body .item{
-		width: 50% ;
-	}
 	.oraganization_body .item a{
-		padding: 8px ;
+		padding: 13px 10px ;
 		font-size: 1.3rem ;
+	}
+	.oraganization_body .item a p.comment{
+		display: none ;
+	}
+	.oraganization_body .item a::before{
+		content: " " ;
+		position: absolute ;
+		left: 0 ;
+		top: 0 ;
+		border-top: 8px solid #1b89e7;
+		border-right: 8px solid transparent;
 	}
 }
 
@@ -119,6 +151,7 @@
 	font-size: 1.8em ;
 	margin-bottom: 20px ;
 	line-height: 1em ;
+	margin-bottom: 0 ;
 }
 .o_detail_head .pr{
 	font-size: 1.05em ;
