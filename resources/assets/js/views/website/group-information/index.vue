@@ -138,20 +138,6 @@
                                 <p>絞り込み検索</p>
                             </div>
                             <div class="body clearfix">
-                                <!-- type -->
-                                <dl class="input-group">
-                                    <dd class="clearfix">
-                                        <label class="checkbox individual">
-                                            <input type="radio" name="type" v-model="params.type">
-                                            <span class="icon"></span>全て</label>
-                                        <label class="checkbox individual">
-                                            <input type="radio" name="type" v-model="params.type" value="0">
-                                            <span class="icon"></span>団体</label>
-                                        <label class="checkbox oraganization">
-                                            <input type="radio" name="type" v-model="params.type" value="1">
-                                            <span class="icon"></span>個人</label>
-                                    </dd>
-                                </dl>
                                 <!-- cate -->
                                 <dl class="input-group">
                                     <dt>活動分野</dt>
@@ -210,7 +196,8 @@
                     <div class="oraganization_body">
                         <div v-for="groupInformation in groupInformations" :key="groupInformation.id" class="item">
                             <router-link :to="{ path: `group-information/${groupInformation.id}/detail` }">
-                                {{groupInformation.name}}
+                                <p class="name">{{groupInformation.name}}</p>
+                                <p class="comment" v-html="groupInformation.content"></p>
                             </router-link>
                         </div>
                     </div>

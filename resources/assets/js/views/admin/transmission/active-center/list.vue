@@ -58,7 +58,7 @@
                             <thead>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">ID.</th>
-                                    <th class="col-xs-9" scope="col">件名</th>
+                                    <th class="col-xs-9 wide_d" scope="col">件名</th>
                                     <th class="col-xs-2" scope="col">徐外</th>
                                 </tr>
                             </thead>
@@ -68,7 +68,7 @@
                                     <td id="id">{{ featuredItem.id }}</td>
                                     <td id="title">{{ featuredItem.title }}</td>
                                     <td>
-                                        <a class="btn btn-outline-danger btn-block" @click.prevent="deleteItem(featuredItem.id)" role="button">除外</a>
+                                        <a class="btn-sm btn-outline-danger btn-block" @click.prevent="deleteItem(featuredItem.id)" role="button">除外</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -84,8 +84,8 @@
                                     <th class="col-xs-1" scope="col">No.</th>
                                     <th class="col-xs-3 wide_s" scope="col">件名</th>
                                     <th class="col-xs-1 wide_d" scope="col">更新日</th>
-                                    <th class="col-xs-1 " scope="col">固定</th>
-                                    <th class="col-xs-2" align="center">複製</th>
+                                    <th class="col-xs-1" scope="col">固定</th>
+                                    <th class="col-xs-2" scope="col" align="center">複製</th>
                                     <th class="col-xs-2" scope="col">変更</th>
                                     <th class="col-xs-2" scope="col">削除</th>
                                 </tr>
