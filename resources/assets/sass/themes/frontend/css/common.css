@@ -486,7 +486,7 @@ nav.global_nav li ul.submenu li a:hover {
 	}
 	nav.global_nav li a,
 	#global_nav.scrol nav.global_nav li a{
-		padding: 18px 15px ;
+		padding: 20px 15px ;
 		text-align: left ;
 	}
 	nav.global_nav > ul > li >a::before{
@@ -526,7 +526,7 @@ nav.global_nav li ul.submenu li a:hover {
 	}
 	nav.global_nav li ul.submenu li a{
 		font-size: 1.3rem ;
-		padding: 10px 15px ;
+		padding: 13px 15px ;
 		position: relative ;
 	}
 	nav.global_nav li ul.submenu li a::after{
@@ -1142,19 +1142,46 @@ nav.pager ul li.next a::after{
 @media (max-width: 767px){
 	.detail_haed{
 		margin-bottom: 20px ;
+		margin-left: -20px ;
+		margin-right: -20px ;
+		padding: 0 7px ;
 	}
 	.detail_haed .title{
 		font-size: 1.8rem ;
 	}
+	.detail_body{
+		margin-left: -20px ;
+		margin-right: -20px ;
+		border-bottom: 1px solid #ddd ;
+	}
 	.detail_body .information{
-		padding: 15px ;
+		padding: 0 ;
+		border: 0 ;
+		box-shadow: none ;
 	}
 	.detail_body .information dl{
 		display: block ;
-		padding: 15px 0 ;
+		padding: 0 ;
+		border-bottom: 0 ;
 	}
 	.detail_body .information dl dt{
-		margin-bottom: 5px ;
+		margin-bottom: 0 ;
+		padding: 7px ;
+		background-color: #f1f1f1 ;
+		border-bottom: #ddd 1px solid ;
+		width: 100% ;
+		max-width: 100% ;
+		min-width: 100% ;
+	}
+	.detail_body .information dl dd{
+		margin-bottom: 0 ;
+		padding: 7px ;
+		min-height: 40px ;
+	}
+	.detail_body p.text_moredetail{
+		padding: 10px ;
+		margin-bottom: 20px ;
+		border-bottom: 0 ;
 	}
 }
 
