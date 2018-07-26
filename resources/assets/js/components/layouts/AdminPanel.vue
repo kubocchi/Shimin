@@ -158,8 +158,8 @@
                 $(domElement).dropdown('dispose')
             },
             logout(){
-                localStorage.removeItem("token");
-                localStorage.removeItem("login");
+                localStorage.removeItem("token")
+                localStorage.removeItem("login")
                 window.location.href = '/login'
                 this.$store.commit('changeUser', null)
             }

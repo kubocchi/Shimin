@@ -601,6 +601,7 @@ const routes = [
         component: Menseki,
         meta: 'home'
     },
+    
 ];
 
 export default routes

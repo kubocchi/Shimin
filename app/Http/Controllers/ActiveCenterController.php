@@ -11,6 +11,7 @@ use App\FileManagement\Repositories\Attachment\AttachmentRepository;
 use DB;
 use Response;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ActiveCenterController extends Controller
 {
@@ -37,8 +38,6 @@ class ActiveCenterController extends Controller
                                         ->get();
 
         $result = $activeCentersFeatured->merge($activeCenters)->paginate(10);
-
-        // Return collection of ActiveCenters as a resource
         return ActiveCenterResource::collection($result);
     }
     /**
@@ -207,5 +206,22 @@ class ActiveCenterController extends Controller
 
         // Return collection of ActiveCenters as a resource
         return Response::json(['data' => $activeCenters]);
+    }
+
+    function paginate($request, $items, $perPage)
+    {
+        // Get the ?page=1 from the url
+        $page = isset($request->page) ? $request->page : 1; 
+        $offset = ($page * $perPage) - $perPage;
+
+        $entries =  new LengthAwarePaginator(
+            array_slice($items, $offset, $perPage, true),
+            count($items), // Total items
+            $perPage, // Items per page
+            $page, // Current page
+            ['path' => $request->url(), 'query' => $request->query()] // We need this so we can keep all old query parameters from the url
+        );
+
+        return $entries;
     }
 }

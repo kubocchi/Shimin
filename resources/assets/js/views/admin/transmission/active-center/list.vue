@@ -56,6 +56,9 @@
                     <div class="col-lg-4 table-responsive">
                         <table class="table table-sm">
                             <thead>
+                                <tr class="table-secondary text-center">
+                                    <th colspan="3">上位固定（最大10件）</th>
+                                </tr>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">ID.</th>
                                     <th class="col-xs-9 wide_t" scope="col">件名</th>
@@ -80,6 +83,9 @@
                     <div class="col-lg-8 table-responsive">
                         <table class="table table-sm">
                             <thead>
+                                <tr class="table-secondary text-center">
+                                    <th colspan="7">お知らせ一覧</th>
+                                </tr>
                                 <tr class="table-primary">
                                     <th class="col-xs-1" scope="col">No.</th>
                                     <th class="col-xs-3 wide_s" scope="col">件名</th>
@@ -312,9 +318,6 @@
                     ids.push($(this).find("td:first").text().trim())
                 })
 
-                console.log(ids)
-                //let detail = ids.join(',')
-
                 axios.post("/api/active-center-featured", {detail: ids}, {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -369,8 +372,8 @@
             },
             deleteItem(id){
                  this.$swal({
-                    title: 'このデータを削除しますか？',
-                    text: "削除したデータは元に戻すことができません!",
+                    title: 'このデータを除外しますか？',
+                    text: "除外後、変更ボタンを押すと更新が反映されます",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

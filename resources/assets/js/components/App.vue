@@ -11,8 +11,11 @@
          <div v-else-if="isHome">
             <website></website>
         </div>
-        <div v-else>
+        <div v-else-if="isLogin">
             <login></login>
+        </div>
+        <div v-else>
+            <error></error>
         </div>
     </div>
 </template>
@@ -24,6 +27,7 @@
             'admin-panel': require('./layouts/AdminPanel'),
             'website': require('./layouts/Website'),
             'login': require('./layouts/Login'),
+            'error': require('./layouts/Error'),
         },
         data: function () {
             return {}
