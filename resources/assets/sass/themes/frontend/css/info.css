@@ -752,7 +752,7 @@ dl.url dt::before{
 }
 .fl_col .text{
 	padding: 15px 0 ;
-	line-height: 1.6em ;
+	line-height: 1.8em ;
 	font-weight: 500 ;
 }
 .fl_col .text .r{
@@ -813,7 +813,7 @@ dl.url dt::before{
 		display: block ;
 	}
 	.fl_col{
-		width: 100% ;
+		width: auto ;
 		padding: 0 ;
 		margin-bottom: 30px ;
 	}

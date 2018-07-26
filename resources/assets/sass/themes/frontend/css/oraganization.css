@@ -294,13 +294,24 @@
 	.o_detail_head .pr{
 		font-size: 0.9em ;
 	}
+	.o_detail_body .information{
+		padding: 0 ;
+	}
 	.o_detail_body .information dl{
 		display: block ;
+		border: 0 ;
+		padding: 0 ;
 	}
 	.o_detail_body .information dl dt{
-		margin-bottom: 5px ;
+		margin-bottom: 0 ;
+		background-color: #f1f1f1 ;
+		padding: 7px 5px ;
 		min-width: 100% ;
 		max-width: 100% ;
+	}
+	.o_detail_body .information dl dd{
+		padding: 7px ;
+		min-height: 30px ;
 	}
 	.nav-tabs.oraganization{
 		padding: 0 5px ;

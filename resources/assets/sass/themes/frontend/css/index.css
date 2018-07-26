@@ -465,6 +465,11 @@
 	position: absolute ;
 	top: -10px ;
 	left: -10px ;
+	height: 41px ;
+	width: 41px ;
+	content: " " ;
+	background-repeat: no-repeat ;
+	background-position: center ; 
 }
 .topic-list .item a p{
 	width: 100% ;
@@ -523,15 +528,15 @@
 
 /* volunteer */
 .topic-list .item.volunteer a::before{
-	content: url(../images/ico_vol.png) ;
+	background-image: url(../images/ico_vol.png) ;
 }
 /* event */
 .topic-list .item.event a::before{
-	content: url(../images/ico_event.png) ;
+	background-image: url(../images/ico_event.png) ;
 }
 /* member */
 .topic-list .item.member a::before{
-	content: url(../images/ico_kaiin.png) ;
+	background-image: url(../images/ico_kaiin.png) ;
 }
 
 @media (max-width: 991px){
@@ -592,6 +597,14 @@
 	.topic-list .item a{
 		min-height: auto ;
 		padding-bottom: 0 ;
+	}
+	.topic-list .item a::before{
+		height: 35px ;
+		width: 35px ;
+		background-size: 100% ;
+	}
+	.topic-list .item a p.day{
+		padding-top: 20px ;
 	}
 	.topic-list .item a p.detail{
 		display: none ;
