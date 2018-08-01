@@ -354,6 +354,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Facebook プラグイン -->
+        <div id="fb-root"></div>
     </div>
 </template>
 

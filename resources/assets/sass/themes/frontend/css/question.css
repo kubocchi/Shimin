@@ -15,6 +15,157 @@
 	font-size: 0.85em ;
 }
 
+/* main======================================================== */
+
+.container.question{
+	max-width: 1000px ;
+	margin-left: auto ;
+	margin-right: auto ;
+	padding-bottom: 80px ;
+}
+.question .card{
+	border: 0 ;
+	border-bottom: #ddd 1px solid ;
+}
+.question .card:first-child{
+	border-top: #ddd 1px solid ;
+}
+.question .card .card-header{
+	border-bottom: 0 ;
+	padding: 0 ;
+}
+.question .card .card-header a{
+	padding: 28px 25px 28px 65px ;
+	display: block ;
+	background-color: #fff ;
+	position: relative ;
+	line-height: 1.6em ;
+	font-size: 1.7rem ;
+}
+.question .card .card-header a:hover{
+	text-decoration: underline ;
+}
+.question .card .card-header a::before{
+	content: "" ;
+	position: absolute ;
+	background-image: url(../images/ico_question.png) ;
+	height: 42px ;
+	width: 42px ;
+	left: 12px ;
+	top: 50% ;
+	transform: translateY(-50%) ;
+	background-repeat: no-repeat ;
+	background-position: center ;
+}
+.question .card .card-header a::after{
+	position: absolute ;
+	content: "\f106 " ;
+	font-family: 'Font Awesome 5 Free' ;
+	right: 20px ;
+	top: 50% ;
+	transform: translateY(-50%) ;
+	color: #ddd ;
+	font-size: 1.5em ;
+}
+.question .card .card-header a.collapsed::after{
+	content: "\f107 " ;
+}
+.question .card .card-header a span{
+	color: #f55d80 ;
+}
+.question .card .card-body{
+	background-color: #f5f5f5 ;
+	padding: 25px 15px 10px 65px;
+}
+.question .card .card-body p.l{
+	position: relative ;
+	font-size: 1.7rem ;
+	padding-bottom: 10px ;
+	margin-bottom: 5px ;
+	line-height: 1.6em ;
+}
+.question .card .card-body p.l::before{
+	content: "" ;
+	position: absolute ;
+	background-image: url(../images/ico_anser.png) ;
+	height: 42px ;
+	width: 42px ;
+	left: -50px ;
+	top: -12px ;
+	background-repeat: no-repeat ;
+	background-position: center ;
+}
+.question .card .card-body p.s{
+	font-size: 1.4rem ;
+	line-height: 1.6em ;
+}
+.question .card .card-body p.link{
+	text-align: left ;
+	padding-left: 20px ;
+}
+.question .card .card-body p.link a{
+	color: #1b89e7;
+    text-decoration: underline;
+    font-weight: bold;
+    position: relative;
+}
+.question .card .card-body p.link a::before{
+	position: absolute;
+    font-family: 'Font Awesome 5 Free';
+    left: -20px;
+	content: "\f138" ;
+}
+.question .card .card-body p.link a:hover{
+	text-decoration: none ;
+}
+@media (max-width: 767px){
+	.container.question .accordion{
+		margin-left: -20px ;
+		margin-right: -20px ;
+		width: auto ;
+	}
+	.question .card .card-header a{
+		padding-top: 18px ;
+		padding-bottom: 18px ;
+		padding-left: 40px ;
+		font-size: 1.5rem ;
+	}
+	.question .card .card-header a::before{
+		height: 30px ;
+		width: 30px ;
+		background-size: 100% ;
+		left: 5px ;
+		top: 50% ;
+	}
+	.question .card .card-header a::after{
+		right: 5px ;
+	}
+	.question .card .card-body{
+		padding-top: 15px ;
+		padding-bottom: 5px ;
+		padding-left: 40px ;
+	}
+	.question .card .card-body p.l{
+		font-size: 1.5rem ;
+	}
+	.question .card .card-body p.l::before{
+		height: 30px ;
+		width: 30px ;
+		left: -33px ;
+		top: -2px ;
+		background-size: 100% ;
+	}
+	.question .card .card-body p.s{
+		font-size: 0.9em ;
+	}
+}
+
+/*==================================================
+
+準備中
+
+================================================== */
+
 .comingsoon.container{
 	height: 400px ;
 	text-align: center ;

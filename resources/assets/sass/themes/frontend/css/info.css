@@ -741,6 +741,9 @@ dl.url dt::before{
 	text-align: center ;
 	position: relative ;
 }
+.fl_col .name .s{
+	font-size: 0.8em ;
+}
 .fl_col .name::after{
 	content: " ";
     position: absolute;
@@ -753,7 +756,6 @@ dl.url dt::before{
 .fl_col .text{
 	padding: 15px 0 ;
 	line-height: 1.8em ;
-	font-weight: 500 ;
 }
 .fl_col .text .r{
 	color: #ea2028 ;
@@ -786,7 +788,6 @@ dl.url dt::before{
 }
 .fl_col dl.spl dd{
 	line-height: 1.4em ;
-	font-weight: 500 ;
 	padding-left: 18px ;
 	position: relative ;
 	margin-bottom: 5px ;

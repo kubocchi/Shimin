@@ -8,13 +8,15 @@
             <div class="container clearfix">
                 <div class="head_left">
                     <h1>
-                        <a href="#!" class="clearfix">
-                            <p class="logo">
-                                <img src="/images/h1_logo.png" alt="宮崎市民活動センター">
-                            </p>
-                            <p class="s_text">私たちは宮崎市民の市民活動・ボランティアを支援します。</p>
-                            <p class="l_text"></p>
-                        </a>
+                        <router-link :to="{ name: 'home' }">
+                            <span class="clearfix">
+                                <p class="logo">
+                                    <img src="/images/h1_logo.png" alt="宮崎市民活動センター">
+                                </p>
+                                <p class="s_text">私たちは宮崎市民の市民活動・ボランティアを支援します。</p>
+                                <p class="l_text"></p>
+                            </span>
+                        </router-link>
                     </h1>
                 </div>
                 <div class="head_right">
@@ -228,9 +230,6 @@
                 <address>Copyright(C)Miyazaki NPO Center All Rights Reserved.</address>
             </div>
         </div>
-
-        <!-- Facebook プラグイン -->
-        <div id="fb-root"></div>
     </div>
 </template>
 <style>

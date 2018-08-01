@@ -20,7 +20,7 @@ body{
     font-size: 1.5rem ;
     color: #5f4533 ;
     line-height: 1em ;
-    font-family: YuGothic , "游ゴシック", "Yu Gothic Medium" , "游ゴシック体", 'Hiragino Kaku Gothic Pro', Meiryo , sans-serif ;
+    font-family: "Hiragino Sans","Hiragino Kaku Gothic Pro","YuGothic","Yu Gothic","游ゴシック","メイリオ","Meiryo",erdana,Osaka,"MS Pゴシック","MS PGothic",Sans-Serif ;
 	font-weight: 600 ;
 	position: relative ;
 	padding-top: 10px ;
@@ -101,7 +101,6 @@ ul,li{
 	color: #333 ;
 	position: relative ;
 	display: block ;
-	padding-top: 5px ;
 }
 .head_left h1 a p.logo{
 	position: absolute ;
@@ -272,6 +271,7 @@ nav.global_nav li a.toggle::after{
 	font-size: 0.85em ;
 	z-index: 100 ;
 	margin-left: 3px ;
+	position: relative ;
 }
 nav.global_nav li a span.t{
 	font-size: 1.6rem ;

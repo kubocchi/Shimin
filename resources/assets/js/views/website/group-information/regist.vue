@@ -155,7 +155,7 @@
                         </ul>
                         <p>＊電話番号は記載不要。住所は「宮崎市●●町」まで記載されていれば可。</p>
                         <p>＊イベントや写真などの活動の様子がわかる資料があれば、添付する。</p>
-                        <div class="btn_blue subp">
+                        <div class="link">
                             <router-link :to="{ name: 'various' }">
                                 <span>各申請書ダウンロードページへ</span>
                             </router-link>
