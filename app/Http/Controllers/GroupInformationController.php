@@ -190,7 +190,8 @@ class GroupInformationController extends Controller
                     if($row==1)continue;
 
                     // convert to array
-                    $column = explode(",", $line);
+                    //$column = explode(",", $line);
+                    $column = str_getcsv($line);
                     
                     // checking if empty then exit 
                     if(empty($column[7])){
