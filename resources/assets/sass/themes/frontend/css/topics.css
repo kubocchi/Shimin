@@ -28,7 +28,7 @@
 	.sidenav,
 	.topics_list{
 		display: block ;
-		width: 100% ;
+		width: auto ;
 	}
 	.sidenav{
 		height: auto ;
@@ -151,12 +151,9 @@
 .topics_body .item a .sinfo .day{
 	width: 350px ;
 	padding-left: 10px ;
-	font-weight: normal ;
 }
 .topics_body .item a .sinfo .cate{
 	padding-left: 10px ;
-	font-weight: normal ;
-	color: #888 ;
 }
 .topics_body .item a .sinfo .cate span{
 	padding-left: 20px ;
@@ -165,7 +162,7 @@
 	font-size: 1.2em ;
 }
 .topics_body .item a .title{
-	font-size: 1.1em ;
+	font-size: 1.15em ;
 	transition: all 0.3s ;
 	line-height: 1.3em ;
 	/* padding-left: 25px ;
@@ -209,7 +206,7 @@
 		display: block ;
 	}
 	.topics_body .item a .sinfo{
-		margin-bottom: 0 ;
+		margin-bottom: 0;
 	}
 	.topics_body .item a .sinfo .type,
 	.topics_body .item a .sinfo .day,
@@ -219,6 +216,9 @@
 	}
 	.topics_body .item a .sinfo .day{
 		width: 100% ;
+	}
+	.topics_body .item a .title{
+		font-size: 1.2em ;
 	}
 }
 
@@ -250,11 +250,31 @@
 	flex: 1 ;
 	display: -ms-flex;
 	display: flex ;
+	line-height: 1.8em ;
 }
 .detail_body .topinformation dl dt{
-	min-width: 75px ;
+	min-width: 80px ;
+	height: 26px ;
+	background-color: #f3e9d5 ;
+	padding: 0 0 5px 5px ;
+	border-radius: 5px 0 0 5px ;
+	text-align: center ;
+	position: relative ;
+}
+.detail_body .topinformation dl dt::after{
+	position: absolute ;
+	content: " ";
+    top: 0 ;
+    right: -25px ;
+    border: 13px solid transparent;
+    border-left: 13px solid #f3e9d5 ;
+}
+.detail_body .topinformation dl dd{
+	margin-bottom: 0 ;
+	padding-left: 15px ;
 }
 .detail_body .topinformation dl dd span{
+	line-height: 1em ;
 	padding-left: 22px ;
 }
 .detail_body .topinformation dl dd span::before{
@@ -268,5 +288,11 @@
 	}
 	.detail_body .topinformation dl dt{
 		min-width: 65px ;
+		height: 23px ;
+	}
+	.detail_body .topinformation dl dt::after{
+		right: -22px ;
+		border: 11px solid transparent;
+		border-left: 11px solid #f3e9d5 ;
 	}
 }

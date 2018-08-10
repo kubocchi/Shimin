@@ -120,6 +120,24 @@ g#colormap path:hover{
 	padding-left: 15px ;
 	border-top: rgba(163, 120, 89, 0.3) dotted 1px ;
 }
+.machi_list button{
+	display: block ;
+	border: 0 ;
+	background-color: #fff ;
+	width: 100% ;
+	text-align: left ;
+	font-weight: bold ;
+}
+.machi_list button,
+.machi_list button:focus{
+	outline: 0 ;
+}
+.machi_list button:hover{
+	cursor: pointer ;
+}
+.machi_list button:hover dt{
+	text-decoration: none ;
+}
 .machi_list dl{
 	width: 100% ;
 	margin-bottom: 0 ;
@@ -128,10 +146,6 @@ g#colormap path:hover{
 	position: relative ;
 	border-bottom: rgba(163, 120, 89, 0.3) dotted 1px ;
 }
-.machi_list dl:hover{
-	cursor: pointer ;
-	background-color: rgba(214, 187, 112, 0.15) ;
-}
 .machi_list dl dt{
 	margin-bottom: 5px ;
 	text-decoration: underline ;
@@ -139,9 +153,6 @@ g#colormap path:hover{
 	color: #1b89e7 ;
 	letter-spacing: 0.2em ;
 	font-size: 1.05em ;
-}
-.machi_list dl:hover dt{
-	text-decoration: none ;
 }
 .machi_list dl dt span{
 	color: #fff ;
@@ -179,8 +190,12 @@ g#colormap path:hover{
 
 /* modal============================== */
 
+.modal-backdrop.show {
+	opacity: 0.15 ;
+}
 .modal-dialog{
-	margin-top: 80px ;
+	margin-top: 60px ;
+	max-width: 650px ;
 }
 .modal .modal-content{
 	border-radius: 15px ;
@@ -236,23 +251,23 @@ g#colormap path:hover{
 }
 
 .modal .body {
-	padding: 10px 0 ;
+	padding: 15px 0 ;
 }
 .modal .body .group{
-	padding: 10px 20px ;
+	padding: 15px 25px ;
 }
 .modal .body .name{
-	font-size: 1.25em ;
+	font-size: 1.4em ;
 	margin-bottom: 10px ;
 	line-height: 1em ;
 	border-bottom: rgba(95, 69, 51, 0.4) dotted 2px ;
-	padding-bottom: 5px ;
+	padding-bottom: 8px ;
 }
 .modal .body .name::before{
 	font-family: 'Font Awesome 5 Free' ;
 	content: "\f015" ;
 	margin-right: 5px ;
-	color: rgba(27, 137, 231, 0.6) ;
+	color: #1b89e7 ;
 }
 .modal .body .copy{
 	display: none ;
@@ -279,7 +294,7 @@ g#colormap path:hover{
 	content: "\f095" ;
 }
 .modal .body dl dd{
-	line-height: 1.5em ;
+	line-height: 1.8em ;
 	font-size: 0.95em ;
 	padding-left: 10px ;
 }
@@ -305,7 +320,7 @@ g#colormap path:hover{
 	text-align: center ;
 }
 .close_btm button{
-	padding: 10px ;
+	padding: 15px ;
 	width: 150px ;
 	text-align: center ;
 	color: #fff ;

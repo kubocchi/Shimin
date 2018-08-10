@@ -222,10 +222,11 @@
                         <div class="right">
                         
                             <div class="address">
-                                <p><span class="title">住所</span>: 〒880-0001 宮崎市橘通西1丁目1番2号　宮崎市民プラザ3階<a href="https://www.google.co.jp/maps/search/%E5%AE%AE%E5%B4%8E%E5%B8%82%E6%B0%91%E6%B4%BB%E5%8B%95%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC/@31.908371,131.4181083,17z/data=!3m1!4b1" target="_blank">マップ</a></p>
-                                <p><span class="title">TEL</span>: (0985) 20-8777 　FAX : (0985) 20-8411</p>
-                                <p><span class="title">利用時間</span>: <span class="red">午前9時～午後10時 (日曜は午後6時閉館)</span></p>
-                                <p><span class="title">休館日</span>:<span class="red"> 12月29日～1月3日および市民プラザ保守点検日等</span></p>
+                                <p><span class="title">住 所</span>〒880-0001 宮崎市橘通西1丁目1番2号<br>　　　　　宮崎市民プラザ3階<a href="https://www.google.co.jp/maps/search/%E5%AE%AE%E5%B4%8E%E5%B8%82%E6%B0%91%E6%B4%BB%E5%8B%95%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC/@31.908371,131.4181083,17z/data=!3m1!4b1" target="_blank">マップ</a></p>
+                                <p><span class="title">TEL</span>(0985) 20-8777 </p>
+                                <p><span class="title">FAX</span>(0985) 20-8411</p>
+                                <p><span class="title">利用時間</span><span class="red">午前9時～午後10時 (日曜は午後6時閉館)</span></p>
+                                <p><span class="title">休館日</span><span class="red"> 12月29日～1月3日および市民プラザ保守点検日等</span></p>
                             </div>
                             <div class="moyori">
                                 <p>最寄り駅　　：宮崎駅(徒歩約25分)</p>

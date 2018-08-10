@@ -145,7 +145,7 @@
                     <div class="topinformation">
                         <!-- category -->
                         <dl class="cate">
-                            <dt>活動分野：</dt>
+                            <dt>活動分野</dt>
                             <dd>
                                 <span v-bind:class="getCategoryWiseClass(event.activity_category)"> {{getActivityCategoryName(event.activity_category)}}</span>
                             </dd>
@@ -153,7 +153,7 @@
                         </dl>
                         <!-- dd=>sponsor -->
                         <dl class="group">
-                            <dt>募集団体：</dt>
+                            <dt>募集団体</dt>
                             <dd>{{event.organizer}}</dd>
                         </dl>
                     </div>

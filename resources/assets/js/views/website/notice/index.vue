@@ -131,11 +131,13 @@
                 <div class="sidenav">
                     <div id="sidenav_affix">
                         <!-- sort  -->
-                        <div class="sort_panel">
+                        <div class="sort_panel navbar-expand-lg">
                             <div class="head">
                                 <p>絞り込み検索</p>
+                                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#sort_body" aria-controls="sort_body"
+                                aria-expanded="false" aria-label="Toggle navigation"></button>
                             </div>
-                            <div class="body clearfix">
+                            <div class="body clearfix collapse navbar-collapse" id="sort_body">
                                 <!-- format -->
                                 <dl class="input-group">
                                     <dt>カテゴリー</dt>
@@ -171,7 +173,7 @@
                                             v-validate="'required'" 
                                             name="activity_category" 
                                             data-vv-as="活動カテゴリ"
-                                            :max-height="150"
+                                            :max-height="200"
                                             @remove="onActivityCategoryRemove"
                                             >
                                         </multiselect>
@@ -296,6 +298,7 @@
 
         created() {
             this.fetchNotice()
+            // this.smoothScroll()
         },
 
         methods: {
@@ -330,6 +333,18 @@
                         console.log(err)
                     })
             },
+            // smoothScroll(){
+            //     $(function() {
+            //         $(".previous a").on('click touchstart', function () {
+            //             $('html,body').animate({ scrollTop: 250 }, 'fast');
+            //             return false;
+            //             });
+            //         $(".next a").on('click touchstart', function () {
+            //             $('html,body').animate({ scrollTop: 250 }, 'fast');
+            //             return false;
+            //             });
+            //         });
+            // },
             onActivityCategorySelect(selectedOption, id) {
                 if(selectedOption){
                     this.params.activityCategory = selectedOption.id

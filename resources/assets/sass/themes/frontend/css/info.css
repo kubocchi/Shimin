@@ -14,7 +14,7 @@
 /* common */
 
 .section.maininfo{
-	margin-bottom: 70px ;
+	margin-bottom: 80px ;
 	width: 100% ;
 }
 .color_b{
@@ -211,8 +211,26 @@
 	border-bottom: rgba(95, 69, 51, 0.4) dotted 2px ;
 }
 .maininfo.sec04 .right .address p{
-	margin-bottom: 5px ;
-	line-height: 1.5em ;
+	margin-bottom: 10px ;
+	line-height: 1.8em ;
+}
+.maininfo.sec04 .right .address p span.title{
+	min-width: 80px ;
+	height: 26px ;
+	background-color: #f3e9d5 ;
+	padding: 3px 8px ;
+	border-radius: 5px 0 0 5px ;
+	margin-right: 18px ;
+	text-align: center ;
+	position: relative ;
+}
+.maininfo.sec04 .right .address p span.title::after{
+	position: absolute ;
+	content: " ";
+    top: 0 ;
+    right: -26px ;
+    border: 13px solid transparent;
+    border-left: 13px solid #f3e9d5 ;
 }
 .maininfo.sec04 .right .address a{
 	text-decoration: underline ;
@@ -231,6 +249,7 @@
 	padding-bottom: 15px ;
 	border-bottom: rgba(95, 69, 51, 0.4) dotted 2px ;
 	margin-bottom: 20px ;
+	line-height: 1.8em ;
 }
 .maininfo.sec04 .right .moyori p:first-child::before{
 	content: "\f239" ;
@@ -249,7 +268,13 @@
 	font-size: 0.95em ;
 }
 @media (max-width: 991px){
+	.section.maininfo{
+		margin-bottom: 60px ;
+	}
 	/* sec01 */
+	.maininfo.sec01{
+		margin-bottom: 40px ;
+	}
 	.maininfo.sec01 h3{
 		text-align: center ;
 	}
@@ -261,8 +286,11 @@
 		margin-bottom: 20px ;
 	}
 	.maininfo.sec01 p{
-		line-height: 1.3em ;
+		line-height: 1.6em ;
 		text-align: center ;
+	}
+	.maininfo.sec01 p br{
+		display: none ;
 	}
 	.maininfo.sec01 .right .img{
 		position: relative ;
@@ -306,6 +334,11 @@
 		padding: 0 ;
 		margin-top: 0 ;
 	}
+	.maininfo.sec04 .right .address p span.title::after{
+		border: 11px solid transparent;
+		border-left: 11px solid #f3e9d5 ;
+		right: -22px ;
+	}
 }
 
 
@@ -347,7 +380,6 @@
 	background: url(../images/bg_brown.png) repeat center ;
 	padding: 5px ;
 	border-radius: 3px ;
-	font-weight: normal ;
 	font-size: 1.3rem ;
 	text-align: center ;
 }
@@ -380,12 +412,13 @@
 		display: block ;
 		border: 0 ;
 	}
-	.news_contents dl{
-		padding: 10px 0 ;
+	#titlelist .news_contents dl{
+		padding: 5px 0 ;
 	}
 	.news_contents dl dt{
 		margin-bottom: 8px ;
-		width: auto ;
+		margin-right: auto ;
+		width: 90px ;
 	}
 	.news_contents dl dd{
 		padding: 0 ;
@@ -421,9 +454,10 @@ dl.url dt::before{
 /* top============================= */
 .formattop{
 	text-align: center ;
-	font-size: 1.2em ;
-	line-height: 1.6em ;
+	font-size: 1.25em ;
+	line-height: 1.8em ;
 	margin-bottom: 15px ;
+	padding: 10px 0 ;
 }
 /* body============================= */
 .format_body{
@@ -540,6 +574,9 @@ dl.url dt::before{
 }
 
 @media (max-width: 767px){
+	.formattop{
+		font-size: 1em ;
+	}
 	.format_body{
 		display: block ;
 	}

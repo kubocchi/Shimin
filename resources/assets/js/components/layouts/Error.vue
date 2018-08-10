@@ -42,10 +42,10 @@
         width: 100% ;
         top: 0 ;
         content: " " ;
-        background: url(/image/bg_blue.png) repeat center ;
+        background: url(/images/bg_blue.png) repeat center ;
     }
     .container{
-        background: url(/image/bg_404.jpg) no-repeat center 100px ;
+        background: url(/images/bg_404.jpg) no-repeat center 100px ;
         width: 100% ;
         max-width: 1000px ;
         margin-left: auto ;
@@ -63,9 +63,10 @@
     }
     p.btn{
         text-align: center ;
+        margin-bottom: 20px ;
     }
     p.btn a{
-        background: url(/image/bg_blue.png) repeat center ;
+        background: url(/images/bg_blue.png) repeat center ;
         border-radius: 25px ;
         box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.13) ;
         color: #fff ;
@@ -79,8 +80,6 @@
     address{
         color: #1b89e7 ;
         text-align: center ;
-        position: absolute ;
-        bottom: 0 ;
         width: 100% ;
         padding: 15px 0 ;
     }

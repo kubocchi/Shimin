@@ -202,7 +202,12 @@
 	position: absolute ;
 	top: -10px ;
 	left: -10px ;
-	content: url(../images/ico_toph2_news.png) ;
+	width: 60px ;
+	height: 50px ;
+	content: " " ;
+	background-image: url(../images/ico_toph2_news.png) ;
+	background-repeat: no-repeat ;
+	background-position: center ;
 }
 #news .h2 h2{
 	color: #5f4533 ;
@@ -227,7 +232,6 @@
 	background: url(../images/bg_brown.png) repeat center ;
 	padding: 5px ;
 	border-radius: 3px ;
-	font-weight: normal ;
 	font-size: 1.3rem ;
 	text-align: center ;
 }
@@ -256,16 +260,22 @@
 @media (max-width: 767px){
 	#news .h2{
 		padding-left: 0 ;
+		text-align: center ;
 	}
 	#news .h2::before{
 		position: static ;
 		width: 100% ;
 		display: block ;
-		text-align: center ;
+		background-size: 40px ;
+		height: 40px ;
 	}
 	#news .h2 h2{
+		display: inline-block ;
 		text-align: center ;
 		font-size: 2rem ;
+		border-bottom: rgba(95, 69, 51, 0.4) dotted 2px;
+		margin-bottom: 0 ;
+		padding-bottom: 5px ;
 	}
 	.news_contents dl,
 	.news_contents dl dt,
@@ -274,11 +284,12 @@
 		border: 0 ;
 	}
 	.news_contents dl{
-		padding: 10px 0 ;
+		padding: 5px 0 ;
 	}
 	.news_contents dl dt{
 		margin-bottom: 8px ;
-		width: auto ;
+		margin-right: auto ;
+		width: 90px ;
 	}
 	.news_contents dl dd{
 		padding: 0 ;
@@ -344,8 +355,7 @@
 }
 @media (max-width: 767px){
 	.btn_blue a{
-		width: 80% ;
-		max-width: 300px ;
+		width: 100% ;
 	}
 }
 
@@ -364,7 +374,12 @@
 	position: absolute ;
 	top: -10px ;
 	left: -10px ;
-	content: url(../images/ico_toph2_topic.png) ;
+	width: 60px ;
+	height: 50px ;
+	content: " " ;
+	background-image: url(../images/ico_toph2_topic.png) ;
+	background-repeat: no-repeat ;
+	background-position: center ;
 }
 #topic .h2 h2{
 	color: #5f4533 ;
@@ -479,10 +494,9 @@
 	padding: 30px 13px 0 13px ;
 	margin-bottom: 10px ;
 	font-size: 0.95em ;
-	font-weight: 400 ;
 }
 .topic-list .item a p.title{
-	font-size: 1.08em ;
+	font-size: 1.1em ;
 	padding: 0 13px ;
 	margin-bottom: 10px ;
 	line-height: 1.4em ;
@@ -518,7 +532,8 @@
 	border-color: #1b89e7 ;
 	box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1) ;
 }
-.topic-list .item a:hover p.title{
+.topic-list .item a:hover p.title,
+.topic-list .item a:hover p.day{
 	color: #1b89e7 ;
 }
 .topic-list .item a:hover p.detail{
@@ -546,25 +561,31 @@
 }
 @media (max-width: 767px){
 	#topic{
-		border-top: rgba(27, 137, 231, 0.25) 6px dotted ;
+		
 	}
 	#topic .h2{
 		padding-left: 0 ;
 		margin-bottom: 20px ;
-		padding-top: 40px ;
+		padding-top: 10px ;
+		text-align: center ;
 	}
 	#topic .h2::before{
 		position: static ;
 		width: 100% ;
 		display: block ;
-		text-align: center ;
+		background-size: 40px ;
+		height: 40px ;
 	}
 	#topic .h2 h2{
+		display: inline-block ;
 		text-align: center ;
 		font-size: 2rem ;
+		border-bottom: rgba(95, 69, 51, 0.4) dotted 2px;
+		margin-bottom: 0 ;
+		padding-bottom: 5px ;
 	}
 	.topic_tabs li{
-		padding: 0 3px ;
+		padding: 0 ;
 		display: table ;
 		border: 0 ;
 	}
@@ -576,6 +597,13 @@
 		vertical-align: middle ;
 		position: relative ;
 		color: #888 ;
+		border-radius: 0 ;
+	}
+	.topic_tabs li:first-child a{
+		border-radius: 5px 0 0 5px ;
+	}
+	.topic_tabs li:last-child a{
+		border-radius: 0 5px 5px 0 ;
 	}
 	.topic_tabs li a::before{
 		position: absolute ;
@@ -585,7 +613,7 @@
 		left: 50% ;
 		transform: translateX(-50%) ;
 		font-size: 3.8rem ;
-		opacity: 0.35 ;
+		opacity: 0.2 ;
 		z-index: -1 ;
 		margin-right: 0 ;
 	}

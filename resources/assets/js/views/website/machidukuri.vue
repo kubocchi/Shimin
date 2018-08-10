@@ -830,99 +830,143 @@
 			
 			<div class="col-right">
 				<div class="machi_list">
-					<dl data-toggle="modal" data-target="#modal-01">
-						<dt><span>1</span>中央東</dt>
-						<dd>中央東まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-02">
-						<dt><span>2</span>中央西</dt>
-						<dd>中央西まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-03">
-						<dt><span>3</span>小戸</dt>
-						<dd>小戸まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-04">
-						<dt><span>4</span>大宮</dt>
-						<dd>大宮地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-05">
-						<dt><span>5</span>東大宮</dt>
-						<dd>東大宮まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-06">
-						<dt><span>6</span>大淀</dt>
-						<dd>大淀地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-07">
-						<dt><span>7</span>大塚</dt>
-						<dd>大塚地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-08">
-						<dt><span>8</span>檍</dt>
-						<dd>檍地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-09">
-						<dt><span>9</span>大塚台</dt>
-						<dd>大塚台地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-10">
-						<dt><span>10</span>生目台</dt>
-						<dd>生目台まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-11">
-						<dt><span>11</span>小松台</dt>
-						<dd>小松台まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-12">
-						<dt><span>12</span>赤江</dt>
-						<dd>赤江地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-13">
-						<dt><span>13</span>本郷</dt>
-						<dd>本郷地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-14">
-						<dt><span>14</span>木花</dt>
-						<dd>木花地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-15">
-						<dt><span>15</span>青島</dt>
-						<dd>青島地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-16">
-						<dt><span>16</span>住吉</dt>
-						<dd>住吉地域まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-17">
-						<dt><span>17</span>生目</dt>
-						<dd>生目地区振興会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-18">
-						<dt><span>18</span>北地区</dt>
-						<dd>北地区振興会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-19">
-						<dt><span>19</span>佐土原</dt>
-						<dd>佐土原小学校地区まちづくり推進員会</dd>
-						<dd>那珂小学校地区まちづくり推進員会</dd>
-						<dd>広瀬小学校地区まちづくり推進員会</dd>
-						<dd>広瀬北小学校地区まちづくり推進員会</dd>
-						<dd>広瀬西小学校地区まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-20">
-						<dt><span>20</span>田野</dt>
-						<dd>田野まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-21">
-						<dt><span>21</span>高岡</dt>
-						<dd>高岡まちづくり推進員会</dd>
-					</dl>
-					<dl data-toggle="modal" data-target="#modal-22">
-						<dt><span>22</span>清武</dt>
-						<dd>清武地域まちづくり推進員会</dd>
-						<dd>加納地域まちづくり推進員会</dd>
-					</dl>
+					<button data-toggle="modal" data-target="#modal-01">
+						<dl>
+							<dt><span>1</span>中央東</dt>
+							<dd>中央東まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-02">
+						<dl>
+							<dt><span>2</span>中央西</dt>
+							<dd>中央西まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-03">
+						<dl>
+							<dt><span>3</span>小戸</dt>
+							<dd>小戸まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-04">
+						<dl>
+							<dt><span>4</span>大宮</dt>
+							<dd>大宮地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-05">
+						<dl>
+							<dt><span>5</span>東大宮</dt>
+							<dd>東大宮まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-06">
+						<dl>
+							<dt><span>6</span>大淀</dt>
+							<dd>大淀地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-07">
+						<dl>
+							<dt><span>7</span>大塚</dt>
+							<dd>大塚地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-08">
+						<dl>
+							<dt><span>8</span>檍</dt>
+							<dd>檍地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-09">
+						<dl>
+							<dt><span>9</span>大塚台</dt>
+							<dd>大塚台地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-10">
+						<dl>
+							<dt><span>10</span>生目台</dt>
+							<dd>生目台まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-11">
+						<dl>
+							<dt><span>11</span>小松台</dt>
+							<dd>小松台まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-12">
+						<dl>
+							<dt><span>12</span>赤江</dt>
+							<dd>赤江地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-13">
+						<dl>
+							<dt><span>13</span>本郷</dt>
+							<dd>本郷地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-14">
+						<dl>
+							<dt><span>14</span>木花</dt>
+							<dd>木花地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-15">
+						<dl>
+							<dt><span>15</span>青島</dt>
+							<dd>青島地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-16">
+						<dl>
+							<dt><span>16</span>住吉</dt>
+							<dd>住吉地域まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-17">
+						<dl>
+							<dt><span>17</span>生目</dt>
+							<dd>生目地区振興会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-18">
+						<dl>
+							<dt><span>18</span>北地区</dt>
+							<dd>北地区振興会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-19">
+						<dl>
+							<dt><span>19</span>佐土原</dt>
+							<dd>佐土原小学校地区まちづくり推進員会</dd>
+							<dd>那珂小学校地区まちづくり推進員会</dd>
+							<dd>広瀬小学校地区まちづくり推進員会</dd>
+							<dd>広瀬北小学校地区まちづくり推進員会</dd>
+							<dd>広瀬西小学校地区まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-20">
+						<dl>
+							<dt><span>20</span>田野</dt>
+							<dd>田野まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-21">
+						<dl>
+							<dt><span>21</span>高岡</dt>
+							<dd>高岡まちづくり推進員会</dd>
+						</dl>
+					</button>
+					<button data-toggle="modal" data-target="#modal-22">
+						<dl>
+							<dt><span>22</span>清武</dt>
+							<dd>清武地域まちづくり推進員会</dd>
+							<dd>加納地域まちづくり推進員会</dd>
+						</dl>
+					</button>
 				</div>
 			</div>
 			
@@ -1631,7 +1675,7 @@
 							<div class="h5">
 								<h5>
 									<p class="num">18</p>
-									<p class="erea">北</p>
+									<p class="erea">北 地 区</p>
 								</h5>
 							</div>
 						</div>
