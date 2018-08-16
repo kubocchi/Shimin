@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="bs-component">
-                    <form action="" method="post">
+                    <form @submit.prevent="confirm">
                         <fieldset>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="dantai_no">【団体番号】（必須）</label>
@@ -282,7 +282,8 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label" for="contact_url">【URL】 （半角数字　例：http://www.genki365.com/ ）</label>
-                                <input v-model="groupInformation.contact_url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="URL">
+                                <input v-model="groupInformation.contact_url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'"
+                                    name="url" data-vv-as="URL">
                                 <span class="is-danger">{{ errors.first('url') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -301,14 +302,8 @@
                                 <label class="col-form-label">【活動分類】（必須）</label>
                                 <div class="col-lg-12 form-group">
                                     <div v-for="activityCategory in activityCategories" v-bind:key="activityCategory.id" class="form-group row">
-                                        <p-check 
-                                            class="p-default p-curve p-thick p-smooth" 
-                                            v-model="groupInformation.activity_category" 
-                                            :id="'category_' + activityCategory.id"
-                                            :value="activityCategory.id" 
-                                            color="primary-o" 
-                                            v-validate="'required'" 
-                                            name="activity_category"
+                                        <p-check class="p-default p-curve p-thick p-smooth" v-model="groupInformation.activity_category" :id="'category_' + activityCategory.id"
+                                            :value="activityCategory.id" color="primary-o" v-validate="'required'" name="activity_category"
                                             data-vv-as="活動分類">
                                             {{activityCategory.name}}
                                         </p-check>
@@ -388,9 +383,7 @@
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 4 ? true : false">
-                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
-                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
-                                            参照
+                                            <input type="file" id="attachments" style="display: none" @change="uploadFieldChange" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed"> 参照
                                         </label>
 
                                         <div class="form-group files">
@@ -407,288 +400,290 @@
                                     </div>
                                 </div>
                             </div>
+                        </fieldset>
+                    </form>
 
-                            <router-link :to="{ name: 'groupInformationList' }">
-                                <button class="btn btn-outline-primary">戻る</button>
-                            </router-link>
+                    <router-link :to="{ name: 'groupInformationList' }">
+                        <button class="btn btn-outline-primary">戻る</button>
+                    </router-link>
 
+                    <button type="button" class="btn btn-primary" @click.prevent="confirm">
+                        確認に進む
+                    </button>
 
-                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
-                                確認に進む
-                            </button>
+                    <!-- Confirmation Modal -->
+                    <div class="modal" id="confirmationModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-subject">
+                                        <span>
+                                            <i class="fas fa-dove"></i>
+                                        </span>団体情報 登録確認画面
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                            <!-- Confirmation Modal -->
-                            <div class="modal" id="confirmationModal">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-subject">
-                                                <span>
-                                                    <i class="fas fa-dove"></i>
-                                                </span>団体情報 登録確認画面
-                                            </h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <div class="row mt-4">
-                                                <div class="col-lg-12">
-                                                    <div class="bs-component">
-                                                        <div style="overflow:hidden;">
-                                                            <form action="" method="post">
-                                                                <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
-                                                                <div>
-                                                                    <div>
-                                                                        <label>【団体番号】</label>
-                                                                        <p>{{groupInformation.number}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【団体種類】</label>
-                                                                        <p>{{groupInformation.type === '0'? '一般団体' : '個人登録ボランティア'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【登録場所】</label>
-                                                                        <p>{{this.managements.find(x => x.id === groupInformation.regist_management)?
-                                                                            this.managements.find(x => x.id === groupInformation.regist_management).label
-                                                                            : ''}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【公開状況】</label>
-                                                                        <p>{{groupInformation.open_situation === '0'? '公開' :
-                                                                            '非公開'}}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【活動状況】</label>
-                                                                        <p>{{groupInformation.open_situation === '0'? '活動中' :
-                                                                            groupInformation.open_situation === '‘1'? '休止中' :
-                                                                            '抹消'}}
-                                                                        </p>
-                                                                        <p>{{groupInformation.pause_date}}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【申請年月日】</label>
-                                                                        <p>{{groupInformation.application_date}}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【登録年月日】</label>
-                                                                        <p>{{groupInformation.registration_date}}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【設立年月日】</label>
-                                                                        <p>{{groupInformation.establishment_date}}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【団体名】</label>
-                                                                        <p>{{groupInformation.name}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【団体名ふりがな】</label>
-                                                                        <p>{{groupInformation.name_phonetic}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者氏名】</label>
-                                                                        <p>{{groupInformation.representative_name}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者氏名ふりがな】</label>
-                                                                        <p>{{groupInformation.representative_name_phonetic}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者氏名の公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_name
-                                                                            === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者電話番号】</label>
-                                                                        <p>{{groupInformation.representative_phone}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者電話番号の開示有無】</label>
-                                                                        <p>{{groupInformation.disclosure_representative_phone
-                                                                            === '0'? '開示しない' : '開示する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者携帯番号】</label>
-                                                                        <p>{{groupInformation.representative_phone_2}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者携帯番号の開示有無】</label>
-                                                                        <p>{{groupInformation.disclosure_representative_phone_2
-                                                                            === '0'? '開示しない' : '開示する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者FAX】</label>
-                                                                        <p>{{groupInformation.representative_fax}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【代表者FAXの開示有無】</label>
-                                                                        <p>{{groupInformation.disclosure_representative_fax
-                                                                            === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先・事務所・事務局名】</label>
-                                                                        <p>{{groupInformation.contact_name}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先・事務所・事務局ふりがな】</label>
-                                                                        <p>{{groupInformation.contact_name_phonetic}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先・事務所・事務局の公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_name === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先・事務所・事務局郵便番号】</label>
-                                                                        <p>{{groupInformation.postal_code}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【住所（所在地）】</label>
-                                                                        <p>{{groupInformation.contact_address}}</p>
-                                                                       <p>{{groupInformation.contact_address_name}} {{groupInformation.contact_address_title}}</p>                                                                    
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【所在地の公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_address === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先電話番号】</label>
-                                                                        <p>{{groupInformation.contact_phone}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先電話番号の公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_phone === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先携帯番号】</label>
-                                                                        <p>{{groupInformation.contact_phone_2}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先携帯番号の公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_phone_2 === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先FAX】</label>
-                                                                        <p>{{groupInformation.contact_fax}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【連絡先FAXの公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_fax === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【e-mail】</label>
-                                                                        <p>{{groupInformation.contact_mail}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【e-mailの公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_mail === '0'?
-                                                                            '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【URL】</label>
-                                                                        <p>{{groupInformation.contact_url}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【URLの公開有無】</label>
-                                                                        <p>{{groupInformation.disclosure_contact_url === '0'? '公開しない' : '公開する'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【活動分類】</label>
-                                                                        <p>{{getSelectedActivityCategoriesName}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会員数（男性）】</label>
-                                                                        <p>{{groupInformation.membership_male}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会員数（女性）】</label>
-                                                                        <p>{{groupInformation.membership_female}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会員数（合計）】</label>
-                                                                        <p>{{groupInformation.all_member}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【活動回数】</label>
-                                                                        <p>{{groupInformation.activity_frequency}}　/　 
-                                                                            {{this.activityDays.find(x=> x.id === groupInformation.activity_day) ?
-                                                                            this.activityDays.find(x => x.id === groupInformation.activity_day).label: ''}}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会費】</label>
-                                                                        <p>{{groupInformation.dues === '0'? '無' : '有（例：年会費3,000円、月額200円）'}}</p>
-                                                                        <p>{{groupInformation.dues_price}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【活動内容・事業内容】</label>
-                                                                        <p>{{groupInformation.content}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【ロッカー】</label>
-                                                                        <p>{{groupInformation.rocker}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【メールBOX】</label>
-                                                                        <p>{{groupInformation.mail_box}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【方法】</label>
-                                                                        <p>{{groupInformation.method}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【備考】</label>
-                                                                        <p>{{groupInformation.supplement}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【添付ファイル】</label>
-                                                                        <div class="form-group files">
-                                                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                                                                <ul class="form-group">
-                                                                                    <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
-                                                                                        / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            <div class="bs-component">
+                                                <div style="overflow:hidden;">
+                                                    <form action="" method="post">
+                                                        <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
+                                                        <div>
+                                                            <div>
+                                                                <label>【団体番号】</label>
+                                                                <p>{{groupInformation.number}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【団体種類】</label>
+                                                                <p>{{groupInformation.type === '0'? '一般団体' : '個人登録ボランティア'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【登録場所】</label>
+                                                                <p>{{this.managements.find(x => x.id === groupInformation.regist_management)?
+                                                                    this.managements.find(x => x.id === groupInformation.regist_management).label
+                                                                    : ''}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【公開状況】</label>
+                                                                <p>{{groupInformation.open_situation === '0'? '公開' : '非公開'}}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【活動状況】</label>
+                                                                <p>{{groupInformation.open_situation === '0'? '活動中' : groupInformation.open_situation
+                                                                    === '‘1'? '休止中' : '抹消'}}
+                                                                </p>
+                                                                <p>{{groupInformation.pause_date}}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【申請年月日】</label>
+                                                                <p>{{groupInformation.application_date}}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【登録年月日】</label>
+                                                                <p>{{groupInformation.registration_date}}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【設立年月日】</label>
+                                                                <p>{{groupInformation.establishment_date}}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【団体名】</label>
+                                                                <p>{{groupInformation.name}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【団体名ふりがな】</label>
+                                                                <p>{{groupInformation.name_phonetic}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者氏名】</label>
+                                                                <p>{{groupInformation.representative_name}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者氏名ふりがな】</label>
+                                                                <p>{{groupInformation.representative_name_phonetic}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者氏名の公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_name === '0'? '公開しない' : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者電話番号】</label>
+                                                                <p>{{groupInformation.representative_phone}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者電話番号の開示有無】</label>
+                                                                <p>{{groupInformation.disclosure_representative_phone === '0'?
+                                                                    '開示しない' : '開示する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者携帯番号】</label>
+                                                                <p>{{groupInformation.representative_phone_2}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者携帯番号の開示有無】</label>
+                                                                <p>{{groupInformation.disclosure_representative_phone_2 ===
+                                                                    '0'? '開示しない' : '開示する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者FAX】</label>
+                                                                <p>{{groupInformation.representative_fax}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【代表者FAXの開示有無】</label>
+                                                                <p>{{groupInformation.disclosure_representative_fax === '0'?
+                                                                    '公開しない' : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先・事務所・事務局名】</label>
+                                                                <p>{{groupInformation.contact_name}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先・事務所・事務局ふりがな】</label>
+                                                                <p>{{groupInformation.contact_name_phonetic}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先・事務所・事務局の公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_name === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先・事務所・事務局郵便番号】</label>
+                                                                <p>{{groupInformation.postal_code}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【住所（所在地）】</label>
+                                                                <p>{{groupInformation.contact_address}}</p>
+                                                                <p>{{groupInformation.contact_address_name}} {{groupInformation.contact_address_title}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【所在地の公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_address === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先電話番号】</label>
+                                                                <p>{{groupInformation.contact_phone}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先電話番号の公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_phone === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先携帯番号】</label>
+                                                                <p>{{groupInformation.contact_phone_2}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先携帯番号の公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_phone_2 === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先FAX】</label>
+                                                                <p>{{groupInformation.contact_fax}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【連絡先FAXの公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_fax === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【e-mail】</label>
+                                                                <p>{{groupInformation.contact_mail}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【e-mailの公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_mail === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【URL】</label>
+                                                                <p>{{groupInformation.contact_url}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【URLの公開有無】</label>
+                                                                <p>{{groupInformation.disclosure_contact_url === '0'? '公開しない'
+                                                                    : '公開する'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【活動分類】</label>
+                                                                <p>{{getSelectedActivityCategoriesName}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【会員数（男性）】</label>
+                                                                <p>{{groupInformation.membership_male}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【会員数（女性）】</label>
+                                                                <p>{{groupInformation.membership_female}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【会員数（合計）】</label>
+                                                                <p>{{groupInformation.all_member}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【活動回数】</label>
+                                                                <p>{{groupInformation.activity_frequency}}　/　 {{this.activityDays.find(x=>
+                                                                    x.id === groupInformation.activity_day) ? this.activityDays.find(x=> x.id === groupInformation.activity_day).label: ''}}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【会費】</label>
+                                                                <p>{{groupInformation.dues === '0'? '無' : '有（例：年会費3,000円、月額200円）'}}</p>
+                                                                <p>{{groupInformation.dues_price}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【活動内容・事業内容】</label>
+                                                                <p>{{groupInformation.content}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【ロッカー】</label>
+                                                                <p>{{groupInformation.rocker}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【メールBOX】</label>
+                                                                <p>{{groupInformation.mail_box}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【方法】</label>
+                                                                <p>{{groupInformation.method}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【備考】</label>
+                                                                <p>{{groupInformation.supplement}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【添付ファイル】</label>
+                                                                <div class="form-group files">
+                                                                    <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                        <ul class="form-group">
+                                                                            <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                        </ul>
                                                                     </div>
                                                                 </div>
-                                                            </form>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
-                                        </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                    <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Progress Modal -->
+                    <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <!--Progress Modal -->
-                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                                    aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
                 </div>
             </div>
         </div>
@@ -845,7 +840,7 @@
                 return this.width;
             },
             getSelectedActivityCategoriesName: function () {
-                if(!Array.isArray(this.groupInformation.activity_category)) return
+                if (!Array.isArray(this.groupInformation.activity_category)) return
                 console.log(this.groupInformation.activity_category)
                 let activityCategoriesName = []
                 this.groupInformation.activity_category.forEach(element => {
@@ -1074,7 +1069,7 @@
                 }
             },
 
-             // Removing attachment on button click
+            // Removing attachment on button click
             removeAttachment(attachment) {
                 console.log(attachment)
                 if (attachment.id)
@@ -1083,7 +1078,7 @@
                 this.attachments.splice(this.attachments.indexOf(attachment), 1);
                 this.getAttachmentSize();
 
-                 this.uploadedData = new FormData()
+                this.uploadedData = new FormData()
                 this.prepareFields()
             },
 
@@ -1134,7 +1129,7 @@
                             $("#progressModal").modal('hide')
                         }
                     }
-                    .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
+                        .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
                     .catch(error => {
                         if (error.response) {
                             console.log(error.response);
@@ -1222,9 +1217,9 @@
                     }
                     else {
                         this.groupInformation.pause_date = moment(String(this.groupInformation.pause_date)).format("YYYY-MM-DD")
-                        this.groupInformation.application_date =  moment(String(this.groupInformation.application_date)).format("YYYY-MM-DD")
-                        this.groupInformation.registration_date =  moment(String(this.groupInformation.registration_date)).format("YYYY-MM-DD")
-                        this.groupInformation.establishment_date =  moment(String(this.groupInformation.establishment_date)).format("YYYY-MM-DD")
+                        this.groupInformation.application_date = moment(String(this.groupInformation.application_date)).format("YYYY-MM-DD")
+                        this.groupInformation.registration_date = moment(String(this.groupInformation.registration_date)).format("YYYY-MM-DD")
+                        this.groupInformation.establishment_date = moment(String(this.groupInformation.establishment_date)).format("YYYY-MM-DD")
                         $("#confirmationModal").modal('show')
                     }
                 });

@@ -9,32 +9,23 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="bs-component">
-                    <form action="" method="post">
+                     <form @submit.prevent="confirm">
                         <fieldset>
                             <div class="form-group col-lg-12">
-								<label class="col-form-label" for="organizer">【団体名】（必須）</label>
-								<input v-model="membership.organizer" class="form-control" id="organizer" type="text" v-validate="'required'" name="organizer" data-vv-as="団体名">
+                                <label class="col-form-label" for="organizer">【団体名】（必須）</label>
+                                <input v-model="membership.organizer" class="form-control" id="organizer" type="text" v-validate="'required'" name="organizer"
+                                    data-vv-as="団体名">
                                 <span class="is-danger">{{ errors.first('organizer') }}</span>
-							</div>
-							<div  class="form-group col-lg-12">
-								<label>【フォーマット】</label>
-								<p>会員募集</p>
-							</div>
-							 <div class="form-group col-sm-12 col-lg-12">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>【フォーマット】</label>
+                                <p>会員募集</p>
+                            </div>
+                            <div class="form-group col-sm-12 col-lg-12">
                                 <label for="active_category">【活動カテゴリ】（必須）</label>
-                                <multiselect 
-                                    v-model="selectedActivityCategory" 
-                                    :options="categories" 
-                                    @select="onActivityCategorySelect"
-                                    placeholder="選んでください" 
-                                    selectLabel="クリックして選択する" 
-                                    deselectLabel="クリックして選択を解除する"
-                                    selectedLabel="選ばれた"  
-                                    track-by="id" 
-                                    label="name" 
-                                    v-validate="'required'" 
-                                    name="activity_category" 
-                                    data-vv-as="活動カテゴリ">
+                                <multiselect v-model="selectedActivityCategory" :options="categories" @select="onActivityCategorySelect" placeholder="選んでください"
+                                    selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" track-by="id"
+                                    label="name" v-validate="'required'" name="activity_category" data-vv-as="活動カテゴリ">
                                 </multiselect>
                                 <span class="is-danger">{{ errors.first('activity_category') }}</span>
                             </div>
@@ -50,9 +41,7 @@
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
-                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
-                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
-                                            参照
+                                            <input type="file" id="attachments" style="display: none" @change="uploadFieldChange" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed"> 参照
                                         </label>
 
                                         <div class="form-group files">
@@ -69,13 +58,13 @@
                                     </div>
                                 </div>
                             </div>
-							
+
                             <div class="form-group  col-lg-12">
-								<label for="contents">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
-                                <wysiwyg v-model="membership.content"  name="content" data-vv-as="掲載内容" type="text" />
-							</div>
-                            
-                            
+                                <label for="contents">【内容詳細】活動内容、上記の記入内容についての詳細・補足や、ボランティア保険について、持ち物、当日のスケジュール、雨天時の扱い、車での来場に関する扱い等をお書きください。</label>
+                                <wysiwyg v-model="membership.content" name="content" data-vv-as="掲載内容" type="text" />
+                            </div>
+
+
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【会費】</label>
                                 <div class="col-lg-12 form-group">
@@ -87,31 +76,35 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-lg-12  form-group" >
+                            <div class="col-lg-12  form-group">
                                 <div class="form-inline">
                                     <div class="form-group form-inline text-right">
                                         <label class="col-form-label" for="dues_price">
                                         </label>
-                                        <input class="form-control " v-model="membership.membership_fee" :disabled="membership.is_payment == '0' ? true : false"  id="dues_price" type="text"  v-validate="'decimal'" name="membership_fee" data-vv-as="会費">&nbsp; 円  &nbsp; &nbsp;
-                                      
+                                        <input class="form-control " v-model="membership.membership_fee" :disabled="membership.is_payment == '0' ? true : false"
+                                            id="dues_price" type="text" v-validate="'decimal'" name="membership_fee" data-vv-as="会費">&nbsp; 円 &nbsp; &nbsp;
+
                                     </div>
                                     <div class="form-check">
-                                        <p-radio class="p-default p-curve" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" name="" value="月" color="primary-o" checked>月</p-radio>
-                                        <p-radio class="p-default p-curve" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type" value="年" color="primary-o">年</p-radio>
+                                        <p-radio class="p-default p-curve" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type"
+                                            name="" value="月" color="primary-o" checked>月</p-radio>
+                                        <p-radio class="p-default p-curve" :disabled="membership.is_payment == '0' ? true : false" v-model="membership.payment_type"
+                                            value="年" color="primary-o">年</p-radio>
                                     </div>
-                                    
+
                                 </div>
-                                  <span class="is-danger">{{ errors.first('membership_fee') }}</span>
+                                <span class="is-danger">{{ errors.first('membership_fee') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contents">【関連URL】</label>
-                                <input v-model="membership.linkname" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <input v-model="membership.linkname" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'"
+                                    name="url" data-vv-as="関連URL">
                                 <span class="is-danger">{{ errors.first('url') }}</span>
                             </div>
-							<div class="form-group  col-lg-12">
-								<label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
-                                <wysiwyg v-model="membership.contact"  name="content" data-vv-as="掲載内容" type="text" />
-							</div>
+                            <div class="form-group  col-lg-12">
+                                <label for="contact">【問い合わせ先】電話番号、ファックス番号、メールアドレス、など。</label>
+                                <wysiwyg v-model="membership.contact" name="content" data-vv-as="掲載内容" type="text" />
+                            </div>
 
                             <div class="col-lg-12 form-group">
                                 <label class="col-form-label">【サイトに公開する】</label>
@@ -120,117 +113,116 @@
                                     />
                                 </div>
                             </div>
+                        </fieldset>
+                    </form>
+                    <router-link :to="{ name: 'noticeList' }">
+                        <button class="btn btn-outline-primary">戻る</button>
+                    </router-link>
 
-                            <router-link :to="{ name: 'noticeList' }">
-                                <button class="btn btn-outline-primary">戻る</button>
-                            </router-link>
+                    <button type="button" class="btn btn-primary" @click.prevent="confirm">
+                        確認に進む
+                    </button>
 
-                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
-                                確認に進む
-                            </button>
+                    <!-- Confirmation Modal -->
+                    <div class="modal" id="confirmationModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        <span>
+                                            <i class="fas fa-dove"></i>
+                                        </span>イベント情報 登録確認画面
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                            <!-- Confirmation Modal -->
-                            <div class="modal" id="confirmationModal">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">
-                                                <span>
-                                                    <i class="fas fa-dove"></i>
-                                                </span>イベント情報 登録確認画面
-                                            </h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <div class="row mt-4">
-                                                <div class="col-lg-12">
-                                                    <div class="bs-component">
-                                                        <div style="overflow:hidden;">
-                                                            <form action="" method="post">
-                                                                <p>会員募集 情報登録確認画面</p>
-                                                                <div>
-                                                                    <div>
-                                                                        <label>【件名】</label>
-                                                                        <p>{{membership.organizer}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【フォーマット】</label>
-                                                                        <p>会員募集</p>
-                                                                    </div>
-                                                                     <div>
-                                                                        <label>【掲載開始日】</label>
-                                                                        <p>{{membership.start_date}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【掲載終了日】</label>
-                                                                        <p>{{membership.end_date}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                       <label>【イメージ画像】</label>
-                                                                        <div class="form-group files">
-                                                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                                                                <ul class="form-group">
-                                                                                    <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
-                                                                                        / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【内容詳細】</label>
-                                                                        <p v-html="membership.content"></p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会費】</label>
-                                                                        <p>{{membership.is_payment === "0"? '無' : '有'}}</p>
-                                                                    </div>
-                                                                     <div v-if="membership.is_payment === '1'   ">
-                                                                        <p>{{membership.membership_fee}}円 / {{membership.payment_type}}</p>
-                                                                    </div>
-                                                                    
-                                                                    <div>
-                                                                        <label>【関連URL】</label>
-                                                                        <p>{{membership.linkname}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【問い合わせ先】</label>
-                                                                        <p v-html="membership.contact"></p>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            <div class="bs-component">
+                                                <div style="overflow:hidden;">
+                                                    <form action="" method="post">
+                                                        <p>会員募集 情報登録確認画面</p>
+                                                        <div>
+                                                            <div>
+                                                                <label>【件名】</label>
+                                                                <p>{{membership.organizer}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【フォーマット】</label>
+                                                                <p>会員募集</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【掲載開始日】</label>
+                                                                <p>{{membership.start_date}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【掲載終了日】</label>
+                                                                <p>{{membership.end_date}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【イメージ画像】</label>
+                                                                <div class="form-group files">
+                                                                    <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                        <ul class="form-group">
+                                                                            <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                        </ul>
                                                                     </div>
                                                                 </div>
-                                                            </form>
+                                                            </div>
+                                                            <div>
+                                                                <label>【内容詳細】</label>
+                                                                <p v-html="membership.content"></p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【会費】</label>
+                                                                <p>{{membership.is_payment === "0"? '無' : '有'}}</p>
+                                                            </div>
+                                                            <div v-if="membership.is_payment === '1'   ">
+                                                                <p>{{membership.membership_fee}}円 / {{membership.payment_type}}</p>
+                                                            </div>
+
+                                                            <div>
+                                                                <label>【関連URL】</label>
+                                                                <p>{{membership.linkname}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【問い合わせ先】</label>
+                                                                <p v-html="membership.contact"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
-                                        </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                    <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Progress Modal -->
+                    <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!--Progress Modal -->
-                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                                    aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -260,8 +252,8 @@
                     linkname: "",
                     contact: "",
                     deactivate: false,
-                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0,
-                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
+                    updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
                 },
                 edit: false,
                 dateFormat: "YYYY-MM-DD",
@@ -294,7 +286,7 @@
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
                 width: "0%",
-                categories:[
+                categories: [
                     { id: "100", name: "保健・医療" },
                     { id: "200", name: "高齢者福祉" },
                     { id: "300", name: "障害者福祉" },
@@ -334,7 +326,7 @@
             if (this.$route.params.model)
                 this.fetchMembership(this.$route.params.model);
 
-            if (this.$route.params.requestType === "edit") 
+            if (this.$route.params.requestType === "edit")
                 this.edit = true;
         },
 
@@ -405,12 +397,12 @@
 
             // Edit new, sends model to API
             fillFormWithRecievedModel(membership) {
-                
+
                 this.pullAttachments(membership)
 
                 this.range = [new Date(membership.start_date), new Date(membership.end_date)]
                 this.selectedActivityCategory = this.categories.find(x => x.id === membership.activity_category.toString())
-                
+
                 this.membership.id = membership.id;
                 this.membership.activity_category = membership.activity_category;
                 this.membership.children = membership.children;
@@ -611,7 +603,7 @@
                         //     confirmButtonText: "OK"
                         // });
                     } else {
-                        
+
                         this.membership.start_date = !!this.range
                             ? moment(String(this.range[0])).format("YYYY-MM-DD")
                             : "";
@@ -623,12 +615,12 @@
                 });
             },
             onActivityCategorySelect(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.membership.activity_category = selectedOption.id
                     console.log(selectedOption.id)
                 }
             },
-            onChange(value, srcmembership){
+            onChange(value, srcmembership) {
                 //console.log(value)
                 isDisabled = value
             },

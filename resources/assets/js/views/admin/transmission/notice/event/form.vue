@@ -66,9 +66,7 @@
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments" :hidden="attachments.length > 0 ? true : false">
-                                             <input type="file" id="attachments" style="display: none" @change="uploadFieldChange"  
-                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
-                                            参照
+                                            <input type="file" id="attachments" style="display: none" @change="uploadFieldChange" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed"> 参照
                                         </label>
 
                                         <div class="form-group files">
@@ -115,7 +113,8 @@
                             </div>
                             <div class="col-lg-12 form-group">
                                 <label for="contents">【関連URL】</label>
-                                <input v-model="event.url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url" data-vv-as="関連URL">
+                                <input v-model="event.url" class="form-control" id="linkname" type="text" v-validate="'url:{require_protocol?}'" name="url"
+                                    data-vv-as="関連URL">
                                 <span class="is-danger">{{ errors.first('url') }}</span>
                             </div>
                             <div class="col-lg-12 form-group">
@@ -131,151 +130,150 @@
                                     />
                                 </div>
                             </div>
+                        </fieldset>
+                    </form>
+                    <router-link :to="{ name: 'noticeList' }">
+                        <button class="btn btn-outline-primary">戻る</button>
+                    </router-link>
 
-                            <router-link :to="{ name: 'noticeList' }">
-                                <button class="btn btn-outline-primary">戻る</button>
-                            </router-link>
+                    <button type="button" class="btn btn-primary" @click.prevent="confirm">
+                        確認に進む
+                    </button>
 
-                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
-                                確認に進む
-                            </button>
+                    <!-- Confirmation Modal -->
+                    <div class="modal" id="confirmationModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        <span>
+                                            <i class="fas fa-dove"></i>
+                                        </span>イベント情報 登録確認画面
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                            <!-- Confirmation Modal -->
-                            <div class="modal" id="confirmationModal">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">
-                                                <span>
-                                                    <i class="fas fa-dove"></i>
-                                                </span>イベント情報 登録確認画面
-                                            </h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            <div class="bs-component">
+                                                <div style="overflow:hidden;">
+                                                    <form action="" method="post">
+                                                        <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
+                                                        <div>
+                                                            <div>
+                                                                <label>【件名】</label>
+                                                                <p>{{event.subject}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【フォーマット】</label>
+                                                                <p>イベント</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【活動カテゴリ】</label>
+                                                                <p>{{selectedActivityCategory? selectedActivityCategory.name
+                                                                    : ''}}</p>
 
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <div class="row mt-4">
-                                                <div class="col-lg-12">
-                                                    <div class="bs-component">
-                                                        <div style="overflow:hidden;">
-                                                            <form action="" method="post">
-                                                                <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
-                                                                <div>
-                                                                    <div>
-                                                                        <label>【件名】</label>
-                                                                        <p>{{event.subject}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【フォーマット】</label>
-                                                                        <p>イベント</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【活動カテゴリ】</label>
-                                                                        <p>{{selectedActivityCategory? selectedActivityCategory.name
-                                                                            : ''}}</p>
-
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【子供の参加】</label>
-                                                                        <p>{{!!event.children === true? 'はい' : 'いいえ'}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【開催日】</label>
-                                                                        <p>{{event.event_date}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【掲載開始日】</label>
-                                                                        <p>{{event.start_date}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【掲載終了日】</label>
-                                                                        <p>{{event.end_date}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【主催】</label>
-                                                                        <p>{{event.organizer}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【イメージ画像】</label>
-                                                                        <div class="form-group files">
-                                                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
-                                                                                <ul class="form-group">
-                                                                                    <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
-                                                                                        / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【締切日】</label>
-                                                                        <p>{{event.deadline}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【会場】</label>
-                                                                        <p>{{event.venue}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【定員】</label>
-                                                                        <p>{{event.capacity}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【対象者】</label>
-                                                                        <p>{{event.target}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【申込方法】</label>
-                                                                        <p>{{event.how_to_apply}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【費用】</label>
-                                                                        <p>{{event.cost}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【内容詳細】</label>
-                                                                        <p v-html="event.detail"></p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【関連URL】</label>
-                                                                        <p>{{event.url}}</p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>【問い合わせ先】</label>
-                                                                        <p v-html="event.phone"></p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【子供の参加】</label>
+                                                                <p>{{!!event.children === true? 'はい' : 'いいえ'}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【開催日】</label>
+                                                                <p>{{event.event_date}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【掲載開始日】</label>
+                                                                <p>{{event.start_date}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【掲載終了日】</label>
+                                                                <p>{{event.end_date}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【主催】</label>
+                                                                <p>{{event.organizer}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【イメージ画像】</label>
+                                                                <div class="form-group files">
+                                                                    <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                        <ul class="form-group">
+                                                                            <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                        </ul>
                                                                     </div>
                                                                 </div>
-                                                            </form>
+                                                            </div>
+                                                            <div>
+                                                                <label>【締切日】</label>
+                                                                <p>{{event.deadline}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【会場】</label>
+                                                                <p>{{event.venue}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【定員】</label>
+                                                                <p>{{event.capacity}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【対象者】</label>
+                                                                <p>{{event.target}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【申込方法】</label>
+                                                                <p>{{event.how_to_apply}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【費用】</label>
+                                                                <p>{{event.cost}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【内容詳細】</label>
+                                                                <p v-html="event.detail"></p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【関連URL】</label>
+                                                                <p>{{event.url}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【問い合わせ先】</label>
+                                                                <p v-html="event.phone"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                            <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
-                                        </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                    <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Progress Modal -->
+                    <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!--Progress Modal -->
-                            <div class="modal fade" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                                    aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -685,8 +683,8 @@
                     } else {
                         this.event.event_start_date = !!this.eventDateRange ? this.eventDateRange[0].toISOString().slice(0, 10) : "";
                         this.event.event_end_date = !!this.eventDateRange ? this.eventDateRange[1].toISOString().slice(0, 10) : "";
-                        this.event.start_date = !!this.range ? this.range[0].toISOString().slice(0,10) : "";
-                        this.event.end_date = !!this.range? this.range[1].toISOString().slice(0,10) : "";
+                        this.event.start_date = !!this.range ? this.range[0].toISOString().slice(0, 10) : "";
+                        this.event.end_date = !!this.range ? this.range[1].toISOString().slice(0, 10) : "";
                         $("#confirmationModal").modal("show");
                     }
                 });
