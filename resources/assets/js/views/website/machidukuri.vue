@@ -986,7 +986,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">中央東まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">これからの中央東まちづくりの将来像を明確にして、地域の各種団体が連携や役割分担を行いながら、同じ目標に向かって取り組めるように、また、まちづくりがより効果的、継続的に実施されるように「中央東地域魅力発信プラン」を策定しました。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>橘通東1丁目～5丁目/橘通西1丁目～5丁目/松山1丁目～2丁目/川原町/旭1丁目～2丁目/宮田町/別府町/広島1丁目～2丁目/老松1丁目～2丁目/瀬頭1丁目～2丁目/錦本町/錦町/江平東1丁目～2丁目/江平町1丁目/江平中町/江平東町/高千穂通1丁目～2丁目/丸島町/江平西1丁目～2丁目/権現町/北権現町/柳丸町/青葉町/下原町/大和町/堀川町/吾妻町/瀬頭町/宮崎駅東2丁目～3丁目</dd>
@@ -1001,7 +1001,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/tyuuouhigasi/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1027,7 +1027,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">中央西まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">「子ども達を含む住民の方々が将来もずっと住み続けたいと思えるような街にする」を目標とし、「文化あふれ、生きいき元気なまち　中央西」をスローガンに各種団体と協力し活動を継続的に実施しています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>清水1丁目～3丁目/大橋1丁目～3丁目/和知川原1丁目～3丁目/西池町/原町/花殿町/中津瀬町/丸山1丁目～2丁目/船塚1丁目～3丁目/霧島1丁目～5丁目/祗園1丁目～4丁目</dd>
@@ -1042,7 +1042,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="http://www.chuounishi.miyazaki.jp/index.php" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1068,7 +1068,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">小戸まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">中心市街地に近く、買い物や交通の便にも恵まれた小戸地区。ニシタチなど繁華街と閑静な住宅街の両方を擁し、昔ながらの近所付き合いの残る地域と単身者や転入者の地域とがあります。そこで、地域づくりのカギとなる人材発掘・育成に力を入れています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大工1丁目～3丁目/鶴島1丁目～3丁目/松橋1丁目～2丁目/末広1丁目～2丁目/元宮町/高松町/西高松町/南高松町/北高松町/千草町/中央通/上野町</dd>
@@ -1080,10 +1080,6 @@
 								<dl class="tel">
 									<dt>電話番号 / FAX</dt>
 									<dd>71-4583</dd>
-								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1109,7 +1105,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">大宮地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">大宮の住民、地縁団体と連携し、地域の歴史や文化と豊かな自然を大切にする元気でやさしいまち『大宮』を目指しています。多くの住民の参加をいただき、次世代に大宮のよさをつなげていくまちづくりを進めます。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>池内町/南方町/平和が丘東町/平和が丘西町/平和が丘北町/下北方町/花ケ島町/南花ケ島町/神宮西1丁目～2丁目/矢の先町/神宮1丁目～2丁目/神宮町/神宮東1丁目～3丁目</dd>
@@ -1124,7 +1120,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="http://www.miyazaki-catv.ne.jp/~daiguu-mati/" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1150,7 +1146,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">東大宮地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">子育てに奮闘するママたちを、おじいちゃんおばあちゃん世代がバックアップ。寺子屋や託児事業で知識や経験を活かしています。また、ひとりにならない・させないための、食育給食会や歌声喫茶も定期的に開催。住民の顔がお互いに見えるまちづくりを目指します。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大島町/波島1丁目～2丁目/東大宮1丁目～4丁目/村角町/桜町</dd>
@@ -1165,7 +1161,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="http://www.miyazaki-catv.ne.jp/~toudai-mati/" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1190,7 +1186,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">大淀地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">「光る川　天神の森　人が輝く住みよい　大淀」をテーマに、地域住民による住民のための活動を精力的に行っています。「笑顔が花咲く・やさしいまち」であるように、子どもから高齢者まで地域の人々の心をひとつにできるさまざまな事業に取り組みます。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大淀1丁目～4丁目/東大淀1丁目～2丁目/太田1丁目～4丁目/中村東1丁目～3丁目/中村西1丁目～西3丁目/南町3丁目/淀川1丁目～3丁目/谷川1丁目～3丁目/谷川町3丁目/天満1丁目～3丁目/天満町/京塚1丁目～2丁目/京塚町/大坪東1丁目～3丁目/大坪西1丁目～2丁目/大坪町/花山手東1丁目～3丁目/花山手西1丁目～2丁目/福島町/福島町1丁目～3丁目/古城町/北川内町/源藤町/薫る坂1丁目～2丁目</dd>
@@ -1205,7 +1201,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/%E5%A4%A7%E6%B7%80%E5%9C%B0%E5%9F%9F%E3%81%BE%E3%81%A1%E3%81%A5%E3%81%8F%E3%82%8A%E6%8E%A8%E9%80%B2%E5%A7%94%E5%93%A1%E4%BC%9A_%E4%BA%8B%E5%8B%99%E5%B1%80-171603889990844/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1231,7 +1227,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">大塚地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">中心市街地の大淀川対岸に位置し、病院や商業施設も多く暮らしやすい大塚地区。かつては農村地帯でしたが、現在は新旧混在する住宅地となっています。「次世代も笑顔あふれる幸せな街　大塚」を目指して地域の方々を積極的に巻き込みながら活動しています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大塚町/江南1丁目～4丁目</dd>
@@ -1243,10 +1239,6 @@
 								<dl class="tel">
 									<dt>電話番号 / FAX</dt>
 									<dd>53-4047</dd>
-								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1272,7 +1264,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">檍地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">檍地区は、江田神社を筆頭に歴史も深く自然豊かな里浜の優れた住環境のまちであると共に、陸海空交通の要所にして近年は商業地区としても発展目覚ましいまちでもあり、皆で自慢の住みやすい「夢と希望が育つまち・檍」へ向けて取り組む元気なまちです。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>山埼町/阿波岐原町/新別府町/昭栄町/新栄町/卑原町/吉村町/浮上町/新城町/曽師町/宮脇町/浄土江町/昭和町/永楽町/潮見町/大王町/出来島町/中西町/高須町/一宮町/日ノ出町/田代町/小戸岬/港/港1丁目～3丁目/宮崎駅東1丁目</dd>
@@ -1287,7 +1279,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/%E6%AA%8D%E5%9C%B0%E5%9F%9F%E3%81%BE%E3%81%A1%E3%81%A5%E3%81%8F%E3%82%8A%E6%8E%A8%E9%80%B2%E5%A7%94%E5%93%A1%E4%BC%9A-1517389591827243/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1313,7 +1305,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">大塚台地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">「活気ある 住みよい 誇れる大塚台」をキャッチフレーズに事業を行っています。市内で初めての「ボランティアセンター」の立ち上げや、「医療ボランティア」の設立など、地域ぐるみで支え合う社会を目指すとともに、次代を担う子育て世代の支援にも力を入れています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大塚台東1丁目～2丁目/大塚台西1丁目～3丁目</dd>
@@ -1328,7 +1320,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/otukadai/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1354,7 +1346,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">生目台地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">昭和60年から分譲がはじまった生目台は、戸建と団地で構成される移住者のまち。「住む人に優しいまちづくり」をモットーに活動しており、現役世代の活躍も目立ちます。核家族、単身世帯の増えてきた現在、子どもたちの育成と高齢者の居場所づくりに力を入れています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>生目台東1丁目～5丁目/生目台西1丁目～5丁目</dd>
@@ -1366,10 +1358,6 @@
 								<dl class="tel">
 									<dt>電話番号 / FAX</dt>
 									<dd>71‐0229 / 59-9360</dd>
-								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1395,7 +1383,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">小松台地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">50代、60代が全体の約3割を占めている小松台地域。戸建て住宅が多いこともあり”子育てしやすい地区”として関心の高い地域です。小松台小学校を中心に地域の特徴を活かした見守りや世代交流活動にも力をいれており、ご近所同士の連携によるイベント活動は団地ならではのネットワークです。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>小松台北町/小松台東1丁目～3丁目/小松台西1丁目～西3丁目/小松台南町/桜ケ丘町</dd>
@@ -1410,7 +1398,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="http://www.city.miyazaki.miyazaki.jp/life/activities/komatsudai/772.html" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1436,7 +1424,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">赤江地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">空港のある赤江地区は宮崎の空の玄関口。観光宮崎の要所としても”もてなし”の気質が根強くあります。地域自治区の中でも人口多さは群を抜いており、市内最大級のベッドタウンでもあります。住みよいまちづくりのため住民意見を反映した事業に力を入れています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大字恒久/恒久1丁目～6丁目/恒久南1丁目～4丁目/城ケ崎1丁目～4丁目/宮の元町/大字田吉の一部/大字赤江の一部/月見ケ丘1丁目～7丁目/大字本郷北方の一部/大字本郷南方の一部</dd>
@@ -1448,10 +1436,6 @@
 								<dl class="tel">
 									<dt>電話番号 / FAX</dt>
 									<dd>51-5122</dd>
-								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1477,7 +1461,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">本郷まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">宮崎ブーゲンビリア空港の南西に位置し、北に一ツ葉有料道路南線南は清武川、西は清武町、東は日向灘に囲まれた地域です。第一次産業が盛んで、風光明媚な田園風景が広がっていますが、新しい住宅地も増え宮崎市の新興住宅地になっています。また、JR日南線や宮崎自動車道宮崎IC、地区内を南北に縦断する国道220号線(宮崎南バイパス)があるなど、宮崎の玄関口とも言えます。赤江地域から分割され、「オール本郷」でみなさん活動されています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大字田吉の一部/大字赤江の一部/大字本郷北方の一部/大字本郷南方の一部/希望ケ丘1丁目～4丁目/本郷1丁目～3丁目/大字郡司分/東宮1丁目～2丁目/まなび野1丁目～まなび野3丁目</dd>
@@ -1492,7 +1476,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/hongo0214/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1518,7 +1502,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">木花地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">木花という地名の由来は、古事記に登場する木花咲姫（このはなさくやひめ）から来ています。木花はこのような神話を始め、海、山、川、渓谷と自然にも恵まれ、農業、畜産も盛んな地域です。加えて県総合運動公園、宮崎大学木花キャンパス等もあり、スポーツ・教育施設にも恵まれ6,969世帯13,512名（平成30年7月1日現在）が住む環境豊かな地域です。木花地域まちづくり推進委員会は「笑顔で参加、築こう安心・安全、自然豊かな住みよい木花の里」を活動方針とし、11事業に取り組んでいます。木花は1662年の外所地震（とんところじしん）の震源地であったため、地震、津波等に対する防災意識が高い地域です。2018年12月16日に実施の宮崎市防災訓練において、木花地域が指定地域となり、木花地域まちづくり推進委員会としては、住民の防災意識のさらなる向上に貢献していく所存です。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大字熊野/大字加江田/大字鏡洲/学園木花台西1丁目～2丁目/学園木花台北1丁目～3丁目/学園木花台南1丁目～3丁目/学園木花台桜1丁目～2丁目</dd>
@@ -1533,7 +1517,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/%E6%9C%A8%E8%8A%B1%E5%9C%B0%E5%9F%9F%E3%81%BE%E3%81%A1%E3%81%A5%E3%81%8F%E3%82%8A%E6%8E%A8%E9%80%B2%E5%A7%94%E5%93%A1%E4%BC%9A-2017061995282476/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1559,7 +1543,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">青島地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">青島神社や海水浴場のある青島地域は宮崎を代表する観光地です。そんな土地柄ゆえに、おもてなしと交流の意識が高く、オープンな雰囲気が特徴です。近年では県外や海外からの移住者も多くなっています。子どもからお年寄りまで安心して暮らせるまちづくりを目標に活動しています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>青島1丁目～6丁目/青島西1丁目～2丁目/大字折生迫/大字内海</dd>
@@ -1574,7 +1558,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/%E9%9D%92%E5%B3%B6%E5%9C%B0%E5%9F%9F%E3%81%BE%E3%81%A1%E3%81%A5%E3%81%8F%E3%82%8A%E6%8E%A8%E9%80%B2%E5%A7%94%E5%93%A1%E4%BC%9A-1015149395188895/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1600,7 +1584,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">住吉地域まちづくり推進委員会</p>
-								<p class="copy"></p>
+								<p class="copy">～ずっと　ずうっと　住み続けたいまち　すみよし～ をテーマに、巨大ソーメン流しや夜空を彩る打ち上げ花火など子どもたちから高齢者まで楽しく交流の輪が広がる事業など満載です。これからも、住民皆が参加して“わくわくどきどき”するような事業展開を行っていきます。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大字芳士/大字新名爪/大字島之内/大字広原/大字塩路</dd>
@@ -1615,7 +1599,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/sumiyoshi.mati/" class="fb" target="_blank">Facebook</a><a href="http://www.sumiyoshi-machizukuri.com/" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1641,7 +1625,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">生目地区振興会</p>
-								<p class="copy"></p>
+								<p class="copy">地域内にある10の神社はそれぞれに里神楽が受け継がれる、歴史ある地区です。地域行事には住民が声を掛け合いながら積極的に参加し、地域産業や高齢者の福祉支援、次世代に向けて伝統芸能の保存継承などの活動を5部会16事業の専門部会で取り組んでいます。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大字浮田/大字生目/大字長嶺/大字細江/大字富吉/大字有田/大字柏原/大字跡江/大字小松</dd>
@@ -1656,7 +1640,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/ikimepromotion/" class="fb">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1682,7 +1666,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">北地区振興会</p>
-								<p class="copy"></p>
+								<p class="copy">まちづくり推進委員会の4つの部会を中心に、お年寄りの暮らしやすい環境を創るお手伝いをし、子育て中のお母さん方の力になり子供たちが安心して学校に通い、地元で獲れたおいしい野菜などを地元で販売し、地域を盛り上げるための活動をしています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>大字上北方/大字瓜生野/大字大瀬町/大字糸原/大字金埼/大字吉野/大字提内</dd>
@@ -1694,10 +1678,6 @@
 								<dl class="tel">
 									<dt>電話番号 / FAX</dt>
 									<dd>41-3512</dd>
-								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1723,7 +1703,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">佐土原小学校区地域づくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">佐土原は新名城百選に選ばれた山城の佐土原城址があります。地方にありながら戦国時代や幕末に中央政治と直接関係し、歴史を作ってきました。住民は天守閣の復元を一つの目標にしながら史跡の整備や説明版の設置など歴史の町づくりに努力しています。また、珍しい緑の花が咲くことで有名な宝塔山公園の桜まつりや、血の沸き立つ伝統のダンジリ喧嘩がある夏祭りなどいくつかのイベントが住民の手で行われており、住みたくなる街を目指しています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>佐土原小学校区</dd>
@@ -1736,14 +1716,10 @@
 									<dt>電話番号 / FAX</dt>
 									<dd>74-3471</dd>
 								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
-								</dl>
 							</div>
 							<div class="group">
 								<p class="name">那珂小学校区地域づくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">国道219号沿いに広がるのどかな那珂地域。自然を生かしたまちづくりや、地域の盛り上げにと那珂音頭の普及活動も行っています。また安心・安全なまちづくりのために地域の見守りはもちろん、広範囲な防災訓練を行い防災意識の向上にも力を注いでいます。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>那珂小学校区</dd>
@@ -1756,14 +1732,10 @@
 									<dt>電話番号 / FAX</dt>
 									<dd>74-0178</dd>
 								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
-								</dl>
 							</div>
 							<div class="group">
 								<p class="name">広瀬小学校区地域づくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">少子高齢化、核家族化が進む広瀬小学校区では、「住民参画のまちづくり」がテーマです。地域の中央を流れる石崎川の再生事業や住民のふれあい事業、さらには安心安全の地域づくりなど、地域住民が健康で笑顔あふれる毎日を送れるようなまちづくりを目指し、日々活動しています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>広瀬小学校区</dd>
@@ -1776,14 +1748,10 @@
 									<dt>電話番号 / FAX</dt>
 									<dd>73-1120</dd>
 								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
-								</dl>
 							</div>
 							<div class="group">
 								<p class="name">広瀬北小学校区地域づくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">新興住宅地を抱えながら、まだまだ田園地帯も多く残る広瀬北小学校区。相互の協力と連帯の中で、住民自らが地域住民のために住みよい地域を作ることを願い活動しています。環境パトロール隊による危険箇所の調査により、実際に補修や改良も随分進みました。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>広瀬北小学校区</dd>
@@ -1796,14 +1764,10 @@
 									<dt>電話番号 / FAX</dt>
 									<dd>73-1159</dd>
 								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
-								</dl>
 							</div>
 							<div class="group">
 								<p class="name">広瀬西小学校区地域づくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">小牧台・光陽台などの団地と地元の方たちが住む地域。モットーは「住民のニーズに合わせて必要なことをやっていこう」。各自治会から上がってくる住民の意見を反映するため実行部会を6つの部会で構成し、活発に活動しています。年に1回開催のウォーキングフェスタと芸能文化のまつりは6部会が合同で行う、最も大きなイベントです。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>広瀬西小学校区</dd>
@@ -1818,7 +1782,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="http://hirosenishi-matidukuri.com/" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1844,7 +1808,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">田野まちづくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">鰐塚山と大根やぐらを象徴とする自然に恵まれた田野町。「できること、やれるところから」をモットーに自然と歴史にあふれる人口約1万人の町が元気になるよう、鰐塚登山や里山整備など地域活性化につながるさまざまな事業に取り組んでいます。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>田野町/田野町あけぼの1丁目～4丁目</dd>
@@ -1859,7 +1823,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://www.facebook.com/%E7%94%B0%E9%87%8E-%E3%81%BE%E3%81%A1%E3%81%A5%E3%81%8F%E3%82%8A%E5%8D%94%E8%AD%B0%E4%BC%9A-971927776154979/" class="fb" target="_blank">Facebook</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1885,7 +1849,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">高岡まちづくり委員会</p>
-								<p class="copy"></p>
+								<p class="copy">高木兼寛の出身地で、月知梅や去川の大イチョウなど自然や史跡あふれる高岡町。「ともに支え合い、元気で安全で安心して暮らせるまち」「郷土を誇りに思い、心豊かな人が育つまち」をテーマに20～69代の会員が元気に活動を行っています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>高岡町飯田/高岡町内山/高岡町島之浦/高岡町小山田/高岡町上倉永/高岡町紙屋/高岡町五町/高岡町下倉永/高岡町高浜/高岡町花見</dd>
@@ -1900,7 +1864,7 @@
 								</dl>
 								<dl class="url">
 									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
+									<dd><a href="https://kirari-takaoka.jp" class="hp" target="_blank">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>
@@ -1926,7 +1890,7 @@
 						<div class="body">
 							<div class="group">
 								<p class="name">清武地域まちづくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">宮崎市の中南部に位置し、宮崎学園都市を抱える清武町。「光る個性と交流が織りなす文教田園都市　清武」の創造をめざし活動しています。「温故知新」の”心”をポリシーに、ひとりでも多くの住民の皆さんの参加を願っています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>清武町船引の一部/清武町正手1～3丁目/清武町今泉/清武町木原の一部/清武町新町1～2丁目/清武町西新町/清武町岡1～3丁目</dd>
@@ -1939,14 +1903,10 @@
 									<dt>電話番号 / FAX</dt>
 									<dd>84-5200</dd>
 								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
-								</dl>
 							</div>
 							<div class="group">
 								<p class="name">加納地域まちづくり協議会</p>
-								<p class="copy"></p>
+								<p class="copy">市内のベッドタウンとして発展している加納地域。安井息軒旧宅、船引神社など歴史・文化も数多く残ります。現在80名のボランティアが6つの部会で活躍し、特に青色防犯パトロール隊にはこの夏14名が新隊員として入会するなど活気づいています。</p>
 								<dl class="sub_erea">
 									<dt>活動区域</dt>
 									<dd>清武町加納/清武町池田台/清武町池田台北/清武町加納1～5丁目/清武町あさひ1～2丁目/清武町船引の一部/清武町木原の一部</dd>
@@ -1958,10 +1918,6 @@
 								<dl class="tel">
 									<dt>電話番号 / FAX</dt>
 									<dd>84-0500</dd>
-								</dl>
-								<dl class="url">
-									<dt>Webサイト</dt>
-									<dd><a href="#!" class="fb">Facebook</a><a href="#!" class="hp">ホームページ</a></dd>
 								</dl>
 							</div>
 						</div>

@@ -1297,6 +1297,14 @@ nav.pager ul li.next a::after{
 	font-family: 'Font Awesome 5 Free' , 'Font Awesome 5 Brands' ;
 	margin-right: 5px ;
 }
+.multiselect__option--highlight,
+.multiselect__option--highlight::after{
+	background: #2a91e8;
+}
+.multiselect__option--selected.multiselect__option--highlight,
+.multiselect__option--selected.multiselect__option--highlight::after{
+    background: #e53935;
+}
 .checkbox input[type="checkbox"],
 .checkbox input[type="radio"]{
     display: none ;
