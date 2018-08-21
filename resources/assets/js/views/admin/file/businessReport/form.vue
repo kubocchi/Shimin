@@ -5,172 +5,151 @@
                 <i class="fas fa-file"></i>
             </span>事業報告 登録画面</h4>
         <hr>
-        
+
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="bs-component">
-                    <form @submit.prevent="submitClicked">
+                    <form @submit.prevent="confirm">
                         <fieldset>
                             <div class="row">
                                 <div class="form-group col-sm-12 col-lg-6">
-                                   <label class="col-form-label" for="subject">【年度】（必須）</label>
-                                    <multiselect 
-                                        v-model="selectedYear" 
-                                        :options="years" 
-                                        @select="onSelectYear"  
-                                        track-by="id" 
-                                        label="year" 
-                                        placeholder="選んでください" 
-                                        selectLabel="クリックして選択する" 
-                                        deselectLabel="クリックして選択を解除する" 
-                                        selectedLabel="選ばれた" 
-                                        v-validate="'required'" 
-                                        name="year" 
-                                        data-vv-as="事業名">
+                                    <label class="col-form-label" for="subject">【年度】（必須）</label>
+                                    <multiselect v-model="selectedYear" :options="years" @select="onSelectYear" track-by="id" label="year" placeholder="選んでください"
+                                        selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" v-validate="'required'"
+                                        name="year" data-vv-as="事業名">
                                     </multiselect>
                                     <span class="is-danger">{{ errors.first('year') }}</span>
                                 </div>
-                                
+
                                 <div class="form-group col-sm-12 col-lg-6">
-                                   <label class="col-form-label" for="subject">【事業名】（必須）</label>
-                                    <multiselect 
-                                        v-model="selectedBusiness" 
-                                        :options="businesses" 
-                                        @select="onSelectBusiness"  
-                                        track-by="id" 
-                                        label="name" 
-                                        placeholder="選んでください" 
-                                        selectLabel="クリックして選択する" 
-                                        deselectLabel="クリックして選択を解除する" 
-                                        selectedLabel="選ばれた" 
-                                        v-validate="'required'" 
-                                        name="business" 
-                                        data-vv-as="事業名">
+                                    <label class="col-form-label" for="subject">【事業名】（必須）</label>
+                                    <multiselect v-model="selectedBusiness" :options="businesses" @select="onSelectBusiness" track-by="id" label="name" placeholder="選んでください"
+                                        selectLabel="クリックして選択する" deselectLabel="クリックして選択を解除する" selectedLabel="選ばれた" v-validate="'required'"
+                                        name="business" data-vv-as="事業名">
                                     </multiselect>
                                     <span class="is-danger">{{ errors.first('business') }}</span>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 form-group">
-                               	<label for="contents">【説明】</label>
-                                <wysiwyg v-model="businessReport.detail" type="text"/>
+                                <label for="contents">【説明】</label>
+                                <wysiwyg v-model="businessReport.detail" type="text" />
                             </div>
 
-                             <div class="col-lg-12 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label for="inputFile">【公開ファイル】（必須）</label>
                                 <div class="file-upload">
                                     <div class="form-group">
                                         <label class="btn btn-outline-primary btn-sm" for="attachments">
-                                             <input type="file" id="attachments" multiple="multiple" style="display: none" @change="uploadFieldChange"  
-                                             accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed">
-                                            参照
+                                            <input type="file" id="attachments" multiple="multiple" style="display: none" @change="uploadFieldChange" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.zip,application/zip,application/x-zip,application/x-zip-compressed"> 参照
                                         </label>
 
                                         <div class="row">
                                             <span class="is-danger" :hidden="attachments.length > 0 ? true : false">添付ファイルが指定されていません</span>
                                         </div>
-                                        
+
                                         <div class="form-group files">
-                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
+                                            <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
                                                 <div class="form-group">
                                                     <button class="btn btn-outline-danger btn-sm" @click.prevent="removeAttachment(attachment)">
                                                         <i class="fas fa-times"></i>
                                                     </button>
-                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</span> 
+                                                    <span class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1))
+                                                        + 'MB)'}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </fieldset>
+                    </form>
+                    <router-link :to="{ name: 'businessReportList' }">
+                        <button class="btn btn-outline-primary">戻る</button>
+                    </router-link>
 
-                            <router-link :to="{ name: 'businessReportList' }">
-                                <button class="btn btn-outline-primary">戻る</button>
-                            </router-link> 
 
+                    <button type="button" class="btn btn-primary" @click.prevent="confirm">
+                        確認に進む
+                    </button>
 
-                            <button type="button" class="btn btn-primary" @click.prevent="confirm">
-                                確認に進む
-                            </button>   
-
-                            <!-- Confirmation Modal -->
-                            <div class="modal" id="confirmationModal">
-                                <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
+                    <!-- Confirmation Modal -->
+                    <div class="modal" id="confirmationModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
                                     <h4 class="modal-subject">
                                         <span>
                                             <i class="fas fa-dove"></i>
                                         </span> 事業報告 登録画面
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <div class="row mt-4">
-                                            <div class="col-lg-12">
-                                                <div class="bs-component">
-                                                    <div style="overflow:hidden;">
-                                                        <form action="" method="post">
-                                                            <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
-                                                            <div>
-                                                                <div>
-                                                                    <label>【件名】</label>
-                                                                    <p>{{selectedYear? selectedYear.year: ''}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【説明】</label>
-                                                                    <p>{{selectedBusiness? selectedBusiness.name : ''}}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <label>【説明】</label>
-                                                                    <p v-html="businessReport.detail"></p>
-                                                                </div>
+                                </div>
 
-                                                                <div>
-                                                                    <label>【添付ファイル】</label>
-                                                                    <div class="form-group files">
-                                                                        <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments"> 
-                                                                            <ul class="form-group">
-                                                                                <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size / 1024 / 1024).toFixed(1)) + 'MB)'}}</li> 
-                                                                            </ul>
-                                                                        </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            <div class="bs-component">
+                                                <div style="overflow:hidden;">
+                                                    <form action="" method="post">
+                                                        <p>登録内容を確認し問題がなければ登録ボタンを押してください。</p>
+                                                        <div>
+                                                            <div>
+                                                                <label>【件名】</label>
+                                                                <p>{{selectedYear? selectedYear.year: ''}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【説明】</label>
+                                                                <p>{{selectedBusiness? selectedBusiness.name : ''}}</p>
+                                                            </div>
+                                                            <div>
+                                                                <label>【説明】</label>
+                                                                <p v-html="businessReport.detail"></p>
+                                                            </div>
+
+                                                            <div>
+                                                                <label>【添付ファイル】</label>
+                                                                <div class="form-group files">
+                                                                    <div class="attachment-holder animated fadeIn" v-cloak v-bind:key="attachment.id" v-for="attachment in attachments">
+                                                                        <ul class="form-group">
+                                                                            <li class="label label-primary">{{ attachment.name + ' (' + Number((attachment.size
+                                                                                / 1024 / 1024).toFixed(1)) + 'MB)'}}</li>
+                                                                        </ul>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </form>
-                                                    </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
-                                        <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked" >登録</button>
-                                    </div>
                                 </div>
-                                </div>
-                            </div>
 
-                            <!--Progress Modal -->
-                            <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" 
-                                                aria-valuemin="0" aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
-                                            </div>
-                                        </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">戻る</button>
+                                    <button type="button" class="btn btn-outline-primary" @click.prevent="submitClicked">登録</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Progress Modal -->
+                    <div class="modal" id="progressModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCentersubject" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                            aria-valuemax="100" v-bind:style="{ width: computedWidth }"></div>
                                     </div>
                                 </div>
                             </div>
-                    </fieldset>
-                </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -193,8 +172,8 @@
                     detail: null,
                     file: null,
                     deactivate: false,
-                    updated_by: this.$store.state.user != null? this.$store.state.user.id : 0,
-                    created_by: this.$store.state.user != null? this.$store.state.user.id : 0
+                    updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
+                    created_by: this.$store.state.user != null ? this.$store.state.user.id : 0
                 },
                 id: "",
                 pagination: {},
@@ -226,9 +205,9 @@
                 percentCompleted: 0,
                 tempRemovedFileIds: [],
                 currentAddedFileIs: [],
-                width:'0%',
-                selectedBusiness:null,
-                selectedYear:null,
+                width: '0%',
+                selectedBusiness: null,
+                selectedYear: null,
                 years: [],
                 businesses: []
             };
@@ -243,14 +222,14 @@
             console.log(this.$route.params)
             if (this.$route.params.model)
                 this.fillFormWithRecievedModel(this.$route.params.model)
-            
-            if(this.$route.params.requestType === 'edit')
+
+            if (this.$route.params.requestType === 'edit')
                 this.edit = true
-            else if(this.$route.params.requestType === 'copy')
+            else if (this.$route.params.requestType === 'copy')
                 this.copy = true
 
             this.fetchYear()
-            
+
         },
 
         methods: {
@@ -271,22 +250,22 @@
                             "content-type": "application/json"
                         }
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        NProgress.done()
-                        self.$swal({
-                            title: "登録完了!",
-                            text: "登録が完了しました!",
-                            type: "success",
-                            confirmButtonText : 'OK'
-                        })
-                        .then(function() {
-                            self.$router.push({
-                                name: 'businessReportList'
+                        .then(res => res.json())
+                        .then(data => {
+                            NProgress.done()
+                            self.$swal({
+                                title: "登録完了!",
+                                text: "登録が完了しました!",
+                                type: "success",
+                                confirmButtonText: 'OK'
                             })
-                        });
-                    })
-                    .catch(err => console.log(err))
+                                .then(function () {
+                                    self.$router.push({
+                                        name: 'businessReportList'
+                                    })
+                                });
+                        })
+                        .catch(err => console.log(err))
                 } else {
 
                     // Update
@@ -298,22 +277,22 @@
                             "content-type": "application/json"
                         }
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        NProgress.done()
-                        self.$swal({
-                            title: "成功!",
-                            text: "活動センターが追加されました!",
-                            type: "success",
-                            confirmButtonText : 'OK'
-                        })
-                        .then(function() {
-                            self.$router.push({
-                                name: 'businessReportList'
+                        .then(res => res.json())
+                        .then(data => {
+                            NProgress.done()
+                            self.$swal({
+                                title: "成功!",
+                                text: "活動センターが追加されました!",
+                                type: "success",
+                                confirmButtonText: 'OK'
                             })
-                        });
-                    })
-                    .catch(err => console.log(err))
+                                .then(function () {
+                                    self.$router.push({
+                                        name: 'businessReportList'
+                                    })
+                                });
+                        })
+                        .catch(err => console.log(err))
                 }
             },
 
@@ -327,7 +306,7 @@
                 this.businessReport.business_id = businessReport.business.id
                 this.businessReport.detail = businessReport.detail
                 this.businessReport.file = businessReport.file
-                this.businessReport.deactivate = businessReport.deactivate == 1 ? true:false
+                this.businessReport.deactivate = businessReport.deactivate == 1 ? true : false
                 this.businessReport.created_by = businessReport.created_by
                 this.businessReport.updated_by = businessReport.updated_by
             },
@@ -400,10 +379,10 @@
                             console.log('Successfull upload')
                             this.resetData()
 
-                            if(response.data.data){
-                                if(this.businessReport.file.length)
+                            if (response.data.data) {
+                                if (this.businessReport.file.length)
                                     this.businessReport.file = this.businessReport.file + ',' + response.data.data.join(',')
-                                else{
+                                else {
                                     this.businessReport.file = response.data.data.join(',')
                                 }
                             }
@@ -477,36 +456,36 @@
 
 
             // Final submisison clicked for form data
-            submitClicked(){
+            submitClicked() {
                 $("#confirmationModal").modal('hide')
-                if(this.tempRemovedFileIds.length){
+                if (this.tempRemovedFileIds.length) {
                     this.tempRemovedFileIds.forEach(id => {
                         this.removeServerAttachment(id)
                     })
                 }
 
-                if(this.attachments.length)
+                if (this.attachments.length)
                     this.addAttachment()
                 else
                     this.addbusinessReport()
             },
 
             // Checking for validation and reconfirm opening modal
-            confirm(){
+            confirm() {
                 this.$validator.validate().then(result => {
-                    if(this.attachments.length == 0){
+                    if (this.attachments.length == 0) {
                         return
                     }
                     if (!result) {
                         console.log('true')
                     }
-                    else{
+                    else {
                         $("#confirmationModal").modal('show')
                     }
                 });
             },
             onSelectYear(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.businessReport.year_id = selectedOption.id
                     console.log(selectedOption.id)
                     this.selectedBusiness = null
@@ -514,7 +493,7 @@
                 }
             },
             onSelectBusiness(selectedOption, id) {
-                if(selectedOption){
+                if (selectedOption) {
                     this.businessReport.business_id = selectedOption.id
                     console.log(selectedOption.id)
                 }
@@ -528,7 +507,7 @@
                     .then(res => res.json())
                     .then(res => {
                         this.years = res.data
-                        if(this.edit || this.copy){
+                        if (this.edit || this.copy) {
                             this.selectedYear = this.years.find(x => x.id === this.businessReport.year_id)
                             this.fetchBusiness()
                         }
@@ -546,10 +525,10 @@
                     .then(res => res.json())
                     .then(res => {
                         this.businesses = res.data;
-                        if(this.edit || this.copy){
+                        if (this.edit || this.copy) {
                             this.selectedBusiness = this.businesses.find(x => x.id === this.businessReport.business_id)
                         }
-                        
+
                         console.log(this.businesses);
                         NProgress.done()
                     })
