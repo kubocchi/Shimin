@@ -16,6 +16,8 @@ window.Vue = require('vue');
 
 import Vue from 'vue'
 import App from './components/App'
+import "babel-polyfill";
+import "isomorphic-fetch"
 
 /*************************START FRONTEND**************************/
 

@@ -23,6 +23,9 @@
 		"vuetable-2": "^1.7.5"
 	},
 	"dependencies": {
+		"babel-polyfill": "^6.26.0",
+		"es6-promise": "^4.2.4",
+		"isomorphic-fetch": "^2.2.1",
 		"js-cookie": "^2.2.0",
 		"moment": "^2.22.2",
 		"nprogress": "^0.2.0",
