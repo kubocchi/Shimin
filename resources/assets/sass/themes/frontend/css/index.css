@@ -464,7 +464,8 @@
 	width: 100% ;
 }
 .topic-list .item{
-	width: 33% ;
+	max-width: 33.333% ;
+	flex-basis: 33.333% ;
 	padding: 5px ;
 }
 .topic-list .item a{
@@ -556,7 +557,8 @@
 
 @media (max-width: 991px){
 	.topic-list .item{
-		width: 50% ;
+		max-width: 50% ;
+		flex-basis: 50% ;
 	}
 }
 @media (max-width: 767px){
@@ -618,7 +620,8 @@
 		margin-right: 0 ;
 	}
 	.topic-list .item{
-		width: 100% ;
+		max-width: 100% ;
+		flex-basis: 100% ;
 		height: auto ;
 		padding: 5px 0 ;
 	}
