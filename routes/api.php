@@ -83,10 +83,12 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::put('group-information', 'GroupInformationController@store');
     // Delete group-information
     Route::delete('group-information/{id}', 'GroupInformationController@destroy');
-    // List membership with parameters
+    // List group-information with parameters
     Route::post('group-informations', 'GroupInformationController@getGroupInformationData');
-    // List membership with parameters
+    // List group-information with parameters
     Route::post('uploadCSV', 'GroupInformationController@getCSV');
+    // Download group-information as CSV
+    Route::get('download-file', 'GroupInformationController@getDownlaodData');
 
 });
 

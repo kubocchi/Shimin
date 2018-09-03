@@ -319,4 +319,18 @@ class GroupInformationController extends Controller
          // Return collection of Kawarabis as a resource
          return GroupInformationResource::collection($groupInformations);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getDownlaodData()
+    {
+        // Get GroupInformations
+        $groupInformations = GroupInformation::all();
+
+        // Return collection of GroupInformations as a resource
+        //return GroupInformationResource::collection($groupInformations);
+    }
 }

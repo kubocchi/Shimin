@@ -93,7 +93,7 @@
                 <div class="bs-component">
                     <div class="row">
                         <div class="col-md-2 mt-4">
-                            <a class="btn btn-outline-primary  btn-block" href="#!" role="button">CSV出力</a>
+                            <a class="btn btn-outline-primary  btn-block" @click.prevent="downloadFile()" href="#!" role="button">CSV出力</a>
                         </div>
                     </div>
                     <div class="row">
@@ -412,6 +412,23 @@
             getManagement(id) {
                 return this.managements.find(x => x.id === id) ? this.managements.find(x => x.id === id).label : ''
             },
+            downloadFile(){
+                axios.get(`/api/download-file`,  {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    NProgress.done();
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response)
+                        NProgress.done()
+                        ErrorHandler.handle(error.response.status, this)
+                    }
+                })
+            }
         }
     };
 </script>
