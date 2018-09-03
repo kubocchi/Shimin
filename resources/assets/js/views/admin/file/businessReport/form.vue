@@ -160,6 +160,7 @@
 <script>
     import VueDatepickerLocal from 'vue-datepicker-local'
     import Multiselect from "vue-multiselect"
+    import ErrorHandler from '../../../../external/error-handler'
 
     export default {
         components: { Multiselect, VueDatepickerLocal },
@@ -170,7 +171,7 @@
                     year_id: null,
                     business_id: null,
                     detail: null,
-                    file: null,
+                    file: [],
                     deactivate: false,
                     updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
                     created_by: this.$store.state.user != null ? this.$store.state.user.id : 0
@@ -314,9 +315,9 @@
             // Analyzing attachmet file size
             getAttachmentSize() {
                 this.upload_size = 0; // Reset to beginningƒ
-                this.attachments.map((item) => { this.upload_size += parseInt(item.size); });
-                this.upload_size = Number((this.upload_size).toFixed(1));
-                this.$forceUpdate();
+                this.attachments.map((item) => { this.upload_size += parseInt(item.size); })
+                this.upload_size = Number((this.upload_size).toFixed(1))
+                this.$forceUpdate()
             },
 
             // Preparing files 
@@ -336,9 +337,13 @@
                 if (attachment.id)
                     this.tempRemovedFileIds.push(attachment.id)
 
-                this.attachments.splice(this.attachments.indexOf(attachment), 1);
-                this.getAttachmentSize();
-                this.businessReport.file = this.attachments.map(e => e.id).join(",");
+                this.attachments.splice(this.attachments.indexOf(attachment), 1)
+                this.getAttachmentSize()
+                this.businessReport.file = this.attachments.map(e => e.id).join(",")
+
+                // Reseting uploading state
+                this.uploadedData = new FormData()
+                this.width = '0%'
             },
 
             // This function will be called every time you add a file
@@ -353,7 +358,7 @@
 
                 // Reset the form to avoid copying these files multiple times into this.attachments
                 document.getElementById("attachments").value = []
-                console.log(attachments);
+                console.log(attachments)
             },
 
             // Adding attachment, Sends request to Attachment API
@@ -368,7 +373,7 @@
                         this.width = this.percentCompleted + '%'
                         this.$forceUpdate()
                     }.bind(this)
-                };
+                }
 
                 //Make HTTP request to store announcement
                 $("#progressModal").modal({ backdrop: 'static' }, 'show');
@@ -391,21 +396,31 @@
                             this.addbusinessReport()
                             $("#progressModal").modal('hide')
                         } else {
+                            NProgress.done()
+                            this.$swal({
+                                title: "Error!",
+                                text: "Unsuccessful Upload",
+                                type: "danger",
+                            })
                             console.log('Unsuccessful Upload')
                         }
                     }
                         .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log('Attachment catch', error)
-                    });
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response)
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    })
                 console.log(attachments)
             },
 
             // We want to clear the FormData object on every upload so we can re-calculate new files again.
             // Keep in mind that we can delete files as well so in the future we will need to keep track of that as well
             resetData() {
-                this.uploadedData = new FormData(); // Reset it completely
-                this.attachments = [];
+                this.uploadedData = new FormData() // Reset it completely
+                this.attachments = []
             },
 
             // Removing attachment form database and server, sends file id to attachment remove API
@@ -429,8 +444,8 @@
 
                     }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
                     .catch(function (error) {
-                        console.log(error);
-                    });
+                        console.log(error)
+                    })
             },
 
             // Pull required attachmets
@@ -449,8 +464,8 @@
 
                 }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
                     .catch(function (error) {
-                        console.log(error);
-                    });
+                        console.log(error)
+                    })
 
             },
 
@@ -518,18 +533,18 @@
             },
             fetchBusiness(page_url) {
                 NProgress.start()
-                let vm = this;
-                page_url = page_url || `/api/business/year/${this.businessReport.year_id}`;
+                let vm = this
+                page_url = page_url || `/api/business/year/${this.businessReport.year_id}`
 
                 fetch(page_url)
                     .then(res => res.json())
                     .then(res => {
-                        this.businesses = res.data;
+                        this.businesses = res.data
                         if (this.edit || this.copy) {
                             this.selectedBusiness = this.businesses.find(x => x.id === this.businessReport.business_id)
                         }
 
-                        console.log(this.businesses);
+                        console.log(this.businesses)
                         NProgress.done()
                     })
                     .catch(err => console.log(err))

@@ -1136,7 +1136,7 @@
                             $("#progressModal").modal('hide')
                             ErrorHandler.handle(error.response.status, this)
                         }
-                    });
+                    })
                 console.log(attachments)
             },
 

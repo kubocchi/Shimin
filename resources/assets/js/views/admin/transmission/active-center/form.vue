@@ -171,7 +171,7 @@
                     start_date: "",
                     end_date: "",
                     content: "",
-                    file: "",
+                    file: [],
                     deactivate: false,
                     updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
                     created_by: this.$store.state.user != null ? this.$store.state.user.id : 0
@@ -226,7 +226,7 @@
         methods: {
             // Add new, sends model to API
             addActiveCenter() {
-                this.activeCenter.file = this.currentAddedFileIs.join(',')
+                //this.activeCenter.file = this.currentAddedFileIs.join(',')
 
                 let self = this
                 console.log(this.activeCenter)
@@ -234,30 +234,6 @@
                 if (this.edit === false) {
                     // Add
                     NProgress.start()
-                    // fetch("/api/active-center", {
-                    //     method: "post",
-                    //     body: JSON.stringify(this.activeCenter),
-                    //     headers: {
-                    //         "content-type": "application/json"
-                    //     }
-                    // })
-                    //     .then(res => res.json())
-                    //     .then(data => {
-                    //         NProgress.done()
-                    //         self.$swal({
-                    //             title: "登録完了!",
-                    //             text: "登録が完了しました!",
-                    //             type: "success",
-                    //             confirmButtonText: 'OK'
-                    //         })
-                    //             .then(function () {
-                    //                 self.$router.push({
-                    //                     name: 'activeCenterList'
-                    //                 })
-                    //             });
-                    //     })
-                    //     .catch(err => console.log(err))
-
                     axios.post("/api/active-center", this.activeCenter, {
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -279,13 +255,11 @@
                         })
                         .catch(error => {
                             if (error.response) {
-                                console.log(error.response);
-                                if (error.response.status === 401) {
-                                    window.location.href = '/login'
-                                }
-
+                                console.log(error.response)
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
                             }
-                        });
+                        })
                 } else {
 
                     // Update
@@ -311,13 +285,11 @@
                         })
                         .catch(error => {
                             if (error.response) {
-                                console.log(error.response);
-                                if (error.response.status === 401) {
-                                    window.location.href = '/login'
-                                }
-
+                                console.log(error.response)
+                                $("#progressModal").modal('hide')
+                                ErrorHandler.handle(error.response.status, this)
                             }
-                        });
+                        })
                 }
             },
 
@@ -343,25 +315,23 @@
                     this.currentAddedFileIs = activeCenter.file.split(',')
             },
 
-            // Analyzing attachmet file size
+             // Analyzing attachmet file size
             getAttachmentSize() {
                 this.upload_size = 0; // Reset to beginningƒ
-                this.attachments.map((item) => { this.upload_size += parseInt(item.size); });
-                this.upload_size = Number((this.upload_size).toFixed(1));
-                this.$forceUpdate();
+                this.attachments.map((item) => { this.upload_size += parseInt(item.size); })
+                this.upload_size = Number((this.upload_size).toFixed(1))
+                this.$forceUpdate()
             },
 
             // Preparing files 
             prepareFields() {
-                for (var i = this.attachments.length - 1; i >= 0; i--) {
-                    console.log(this.attachments[i].category_id);
-                    this.uploadedData.append("attachments[][0]", this.attachments[i]);
-                    this.uploadedData.append("attachments[][1]", this.attachments[i].category_id);
-                }
+                this.attachments.forEach(element => {
+                    this.uploadedData.append("attachments[][0]", element)
+                })
 
-                for (var i = this.attachment_labels.length - 1; i >= 0; i--) {
-                    this.uploadedData.append("attachment_labels[]", JSON.stringify(this.attachment_labels[i]));
-                }
+                this.attachments.forEach(element => {
+                    this.uploadedData.append("attachment_labels[]", JSON.stringify(element))
+                })
             },
 
             // Removing attachment on button click
@@ -370,11 +340,13 @@
                 if (attachment.id)
                     this.tempRemovedFileIds.push(attachment.id)
 
-                this.attachments.splice(this.attachments.indexOf(attachment), 1);
-                this.getAttachmentSize();
+                this.attachments.splice(this.attachments.indexOf(attachment), 1)
+                this.getAttachmentSize()
+                this.activeCenter.file = this.attachments.map(e => e.id).join(",")
 
+                // Reseting uploading state
                 this.uploadedData = new FormData()
-                this.prepareFields()
+                this.width = '0%'
             },
 
             // This function will be called every time you add a file
@@ -389,14 +361,12 @@
 
                 // Reset the form to avoid copying these files multiple times into this.attachments
                 document.getElementById("attachments").value = []
-                console.log(attachments);
+                console.log(attachments)
             },
 
             // Adding attachment, Sends request to Attachment API
             addAttachment() {
                 this.prepareFields()
-
-                console.log('upload', this.uploadedData)
 
                 var config = {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -406,7 +376,7 @@
                         this.width = this.percentCompleted + '%'
                         this.$forceUpdate()
                     }.bind(this)
-                };
+                }
 
                 //Make HTTP request to store announcement
                 $("#progressModal").modal({ backdrop: 'static' }, 'show');
@@ -415,32 +385,45 @@
                         console.log(response);
                         if (response.data.success) {
                             console.log('Successfull upload')
-                            this.currentAddedFileIs.push(response.data.data)
                             this.resetData()
+
+                            if (response.data.data) {
+                                if (this.activeCenter.file.length)
+                                    this.activeCenter.file = this.activeCenter.file + ',' + response.data.data.join(',')
+                                else {
+                                    this.activeCenter.file = response.data.data.join(',')
+                                }
+                            }
+
+                            console.log(this.activeCenter.file)
                             this.addActiveCenter()
                             $("#progressModal").modal('hide')
                         } else {
-                            $("#progressModal").modal('hide')
-                            ErrorHandler.handle(100, this)
+                            NProgress.done()
+                            this.$swal({
+                                title: "Error!",
+                                text: "Unsuccessful Upload",
+                                type: "danger",
+                            })
                             console.log('Unsuccessful Upload')
                         }
                     }
                         .bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
                     .catch(error => {
                         if (error.response) {
-                            console.log(error.response);
+                            console.log(error.response)
                             $("#progressModal").modal('hide')
                             ErrorHandler.handle(error.response.status, this)
                         }
-                    });
+                    })
                 console.log(attachments)
             },
 
             // We want to clear the FormData object on every upload so we can re-calculate new files again.
             // Keep in mind that we can delete files as well so in the future we will need to keep track of that as well
             resetData() {
-                this.uploadedData = new FormData(); // Reset it completely
-                this.attachments = [];
+                this.uploadedData = new FormData() // Reset it completely
+                this.attachments = []
             },
 
             // Removing attachment form database and server, sends file id to attachment remove API
@@ -463,38 +446,46 @@
                         }
 
                     }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                   .catch(error => {
+                        if (error.response) {
+                            console.log(error.response)
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    })
             },
 
             // Pull required attachmets
-            pullAttachments(activeCenter) {
+            pullAttachments(object) {
                 // Make HTTP request to store announcement
-                axios.get(`/api/asset/attachments/${activeCenter.file}`).then(function (response) {
+                axios.get(`/api/asset/attachments/${object.file}`).then(function (response) {
                     console.log(response);
                     if (response.data.success) {
                         this.attachments = response.data.data;
                         console.log('Attachments: ', this.attachments)
                         this.getAttachmentSize()
+                        this.activeCenter.file = this.attachments.map(e => e.id).join(",")
                     } else {
                         console.log(response.data.errors)
                     }
 
                 }.bind(this)) // Make sure we bind Vue Component object to this funtion so we get a handle of it in order to call its other methods
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                    .catch(error => {
+                        if (error.response) {
+                            console.log(error.response)
+                            $("#progressModal").modal('hide')
+                            ErrorHandler.handle(error.response.status, this)
+                        }
+                    })
 
             },
 
-            // Final submisison clicked for form data
+             // Final submisison clicked for form data
             submitClicked() {
                 $("#confirmationModal").modal('hide')
                 if (this.tempRemovedFileIds.length) {
                     this.tempRemovedFileIds.forEach(id => {
                         this.removeServerAttachment(id)
-                        this.currentAddedFileIs.filter(item => item !== id)
                     })
                 }
 
@@ -511,12 +502,12 @@
                         console.log('true')
                     }
                     else {
-                        this.activeCenter.start_date = !!this.range ? this.range[0].toISOString().slice(0, 10) : "";
-                        this.activeCenter.end_date = !!this.range ? this.range[1].toISOString().slice(0, 10) : "";
+                        this.activeCenter.start_date = !!this.range ? this.range[0].toISOString().slice(0, 10) : ""
+                        this.activeCenter.end_date = !!this.range ? this.range[1].toISOString().slice(0, 10) : ""
                         $("#confirmationModal").modal('show')
                     }
-                });
+                })
             }
         }
-    };
+    }
 </script>
