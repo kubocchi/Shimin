@@ -328,9 +328,150 @@ class GroupInformationController extends Controller
     public function getDownlaodData()
     {
         // Get GroupInformations
+
+        $headerArray = array(
+            '','センター','社協','佐土原','高岡','田野','清武','番号','種類','公開状況',    // 1-10
+
+            '活動状況','日付','団体名','団体名ふりがな','申請日','登録日','設立年月日','郵便番号','団体住所1','団体住所2',  // 11-20
+            
+            '団体住所
+            情報開示','郵送宛名','敬称','代表者名','代表者名ﾌﾘｶﾞﾅ','代表者名
+            情報開示','代表者ＴＥＬ','代表者TEL
+            情報開示','代表者ＦＡＸ','代表者FAX
+            情報開示',  // 21-30
+
+            '代表者
+            携帯電話','代表者携帯
+            情報開示','事務局長名','事務局長名ﾌﾘｶﾞﾅ','事務局長名
+            情報開示','事務局ＴＥＬ','事務局TEL
+            情報開示','事務局ＦＡＸ','事務局FAX
+            情報開示','携帯電話',   // 31-40
+
+            '事務局携帯電話
+            情報開示','メールアドレス','メール
+            情報開示','団体ＵＲＬ','団体URL
+            情報開示','男','女','合計','会費有無','会費金額',       // 41-50
+
+            '頻度','活動回数','保健・医療','高齢者福祉','障害者福祉','児童福祉','社会教育','まちづくり','観光','農山漁村',      // 51-60
+
+            '文化芸術','環境保全','災害救援','地域安全','人権・平和','国際協力','男女
+            共同','子供育成','情報社会','科学技術',     // 61-70
+
+            '経済活動','職業・雇用','消費者保護','NPO支援','その他区分','区分内容','ロッカー','メール
+            ＢＯＸ','方法','活動内容',      // 71-80
+
+            '備考',     // 81
+        );
+
+
         $groupInformations = GroupInformation::all();
 
+        $dataArray = [];
+            
+        foreach($groupInformations as $groupInfo){
+            $innerArray = [];
+
+            $innerArray[] = $groupInfo['id'];
+            $innerArray[] = $groupInfo['number'];
+            $innerArray[] = $groupInfo['type'];
+            $innerArray[] = $groupInfo['regist_management'];
+            $innerArray[] = $groupInfo['open_situation'];
+            $innerArray[] = $groupInfo['active_status'];
+            $innerArray[] = $groupInfo['pause_date'];
+            $innerArray[] = $groupInfo['application_date'];
+            $innerArray[] = $groupInfo['registration_date'];
+            $innerArray[] = $groupInfo['establishment_date'];
+            $innerArray[] = $groupInfo['name'];
+            $innerArray[] = $groupInfo['name_phonetic'];
+            $innerArray[] = $groupInfo['representative_name'];
+            $innerArray[] = $groupInfo['representative_name_phonetic'];
+            $innerArray[] = $groupInfo['disclosure_name'];
+            $innerArray[] = $groupInfo['representative_phone'];
+            $innerArray[] = $groupInfo['disclosure_representative_phone'];
+            $innerArray[] = $groupInfo['representative_phone_2'];
+            $innerArray[] = $groupInfo['disclosure_representative_phone_2'];
+            $innerArray[] = $groupInfo['representative_fax'];
+            $innerArray[] = $groupInfo['disclosure_representative_fax'];
+            $innerArray[] = $groupInfo['contact_name'];
+            $innerArray[] = $groupInfo['contact_name_phonetic'];
+            $innerArray[] = $groupInfo['disclosure_contact_name'];
+            $innerArray[] = $groupInfo['postal_code'];
+            $innerArray[] = $groupInfo['contact_address'];
+            $innerArray[] = $groupInfo['contact_address_name'];
+            $innerArray[] = $groupInfo['contact_address_title'];
+            $innerArray[] = $groupInfo['disclosure_contact_address'];
+            $innerArray[] = $groupInfo['contact_phone'];
+            $innerArray[] = $groupInfo['disclosure_contact_phone'];
+            $innerArray[] = $groupInfo['contact_phone_2'];
+            $innerArray[] = $groupInfo['disclosure_contact_phone_2'];
+            $innerArray[] = $groupInfo['contact_fax'];
+            $innerArray[] = $groupInfo['disclosure_contact_fax'];
+            $innerArray[] = $groupInfo['contact_mail'];
+            $innerArray[] = $groupInfo['disclosure_contact_mail'];
+            $innerArray[] = $groupInfo['contact_url'];
+            $innerArray[] = $groupInfo['disclosure_contact_url'];
+            $innerArray[] = $groupInfo['activity_category'];
+            $innerArray[] = $groupInfo['active_category_supplement'];
+            $innerArray[] = $groupInfo['membership_male'];
+            $innerArray[] = $groupInfo['membership_female'];
+            $innerArray[] = $groupInfo['all_member'];
+            $innerArray[] = $groupInfo['activity_frequency'];
+            $innerArray[] = $groupInfo['activity_day'];
+            $innerArray[] = $groupInfo['dues'];
+            $innerArray[] = $groupInfo['dues_price'];
+            $innerArray[] = $groupInfo['content'];
+            $innerArray[] = $groupInfo['rocker'];
+            $innerArray[] = $groupInfo['mail_box'];
+            $innerArray[] = $groupInfo['method'];
+            $innerArray[] = $groupInfo['supplement'];
+            $dataArray[] = $innerArray;
+        }
+
+        return $this->download($dataArray,$headerArray,'test.csv');
+        
         // Return collection of GroupInformations as a resource
         //return GroupInformationResource::collection($groupInformations);
+    }
+
+    /**
+     * Generate CSV a file.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function csvGenerate($header, $mainArray) {
+        $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'r+');
+//        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
+        fputcsv($fp, $header, ','); //Heaeder set on CSV
+        foreach ($mainArray as $row) { //$mainArray set on CSV
+            fputcsv($fp, $row, ',');
+        }
+        $filename = 'test.csv';
+        header('Content-Type: application/vnd.ms-excel; charset=SJIS');
+        header('Content-disposition:attachment;filename=' . urlencode($filename));
+        header('Cache-Control: public');
+        header('Pragma: public');
+        rewind($fp);
+        $output = stream_get_contents($fp);
+        $output = mb_convert_encoding($output, 'SJIS', 'UTF-8');
+        return $output;
+    }
+
+    public function download($list, $header, $filename)
+    {
+        if (count($header) > 0) {
+            array_unshift($list, $header);
+        }
+        $stream = fopen('php://temp', 'r+b');
+        foreach ($list as $row) {
+            fputcsv($stream, $row);
+        }
+        rewind($stream);
+        $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
+        $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=$filename",
+        );
+        return \Response::make($csv, 200, $headers);
     }
 }

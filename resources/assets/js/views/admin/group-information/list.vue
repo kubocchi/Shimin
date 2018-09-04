@@ -193,7 +193,8 @@
                     { id: 1, label: '個人' },
                 ],
                 selectedType: { 'id': null, 'label': 'すべて' },
-                uploadedCSV : null
+                uploadedCSV : null,
+                csvdownloading: false,
             };
         },
 
@@ -413,6 +414,7 @@
                 return this.managements.find(x => x.id === id) ? this.managements.find(x => x.id === id).label : ''
             },
             downloadFile(){
+                NProgress.start()
                 axios.get(`/api/download-file`,  {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -420,6 +422,18 @@
                 })
                 .then(response => {
                     NProgress.done();
+                    var filename = 'userlist.csv'
+                    response.headers['content-disposition'].split(/;|\s/).forEach( function( value ) {
+                        if(value.match(/^filename=/i)) filename = value.replace(/^filename=/i,'')
+                    })
+
+                    // Save CSV
+                    const url = window.URL.createObjectURL(new Blob([response.data]))
+                    const link = document.createElement('a')
+                    link.href = url
+                    link.setAttribute('download', filename)
+                    document.body.appendChild(link)
+                    link.click()
                 })
                 .catch(error => {
                     if (error.response) {
@@ -428,7 +442,45 @@
                         ErrorHandler.handle(error.response.status, this)
                     }
                 })
-            }
+            },
+            // csvdownload: function() {
+            //     debugger
+            //     var params = new URLSearchParams()
+            //     var config = {
+            //         responseType: 'blob',
+            //         headers: {
+            //             'Content-Type': 'application/x-www-form-urlencoded',
+            //             Authorization: 'Bearer ' + localStorage.getItem('token')
+            //         },
+            //     }
+            //     this.csvdownloading = true
+            //     axios.post('/download-file', params, config)
+            //         .then( function (response) {
+            //             this.csvdownloading = false
+            //             console.log(response)
+
+            //             // Get FileName
+            //             var filename = 'userlist.csv'
+            //             response.headers['content-disposition'].split(/;|\s/).forEach( function( value ) {
+            //                 if(value.match(/^filename=/i)) filename = value.replace(/^filename=/i,'')
+            //             })
+
+            //             // Save CSV
+            //             const url = window.URL.createObjectURL(new Blob([response.data]))
+            //             const link = document.createElement('a')
+            //             link.href = url
+            //             link.setAttribute('download', filename)
+            //             document.body.appendChild(link)
+            //             link.click()
+            //         }.bind(this))
+
+            //         .catch(function (error) {
+            //             this.csvdownloading = false
+            //             console.log(error.response)
+            //             alert('ダウンロードに失敗しました')
+            //         }.bind(this))
+            // },
+
         }
     };
 </script>
