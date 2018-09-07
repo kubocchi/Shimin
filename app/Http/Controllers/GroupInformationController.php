@@ -265,7 +265,7 @@ class GroupInformationController extends Controller
                     }
 
                     // $groupInformation->activity_day= $column[50]; //   45
-                    $groupInformation->activity_day= ($column[50]=='週')?"1":(($column[50]=='月')?"2":(($column[50]=='年')?"3":"4")); //   45
+                    $groupInformation->activity_day= ($column[50]=='年')?"1":(($column[50]=='月')?"2":(($column[50]=='週')?"3":"4")); //   45
                     // $groupInformation->dues= $column[48]; //   46
                     $groupInformation->dues= ($column[48]=='無')?"0":"1"; //   46
 
@@ -371,59 +371,70 @@ class GroupInformationController extends Controller
         foreach($groupInformations as $groupInfo){
             $innerArray = [];
 
-            $innerArray[] = $groupInfo['id'];
-            $innerArray[] = $groupInfo['number'];
-            $innerArray[] = $groupInfo['type'];
-            $innerArray[] = $groupInfo['regist_management'];
-            $innerArray[] = $groupInfo['open_situation'];
-            $innerArray[] = $groupInfo['active_status'];
-            $innerArray[] = $groupInfo['pause_date'];
-            $innerArray[] = $groupInfo['application_date'];
-            $innerArray[] = $groupInfo['registration_date'];
-            $innerArray[] = $groupInfo['establishment_date'];
-            $innerArray[] = $groupInfo['name'];
-            $innerArray[] = $groupInfo['name_phonetic'];
-            $innerArray[] = $groupInfo['representative_name'];
-            $innerArray[] = $groupInfo['representative_name_phonetic'];
-            $innerArray[] = $groupInfo['disclosure_name'];
-            $innerArray[] = $groupInfo['representative_phone'];
-            $innerArray[] = $groupInfo['disclosure_representative_phone'];
-            $innerArray[] = $groupInfo['representative_phone_2'];
-            $innerArray[] = $groupInfo['disclosure_representative_phone_2'];
-            $innerArray[] = $groupInfo['representative_fax'];
-            $innerArray[] = $groupInfo['disclosure_representative_fax'];
-            $innerArray[] = $groupInfo['contact_name'];
-            $innerArray[] = $groupInfo['contact_name_phonetic'];
-            $innerArray[] = $groupInfo['disclosure_contact_name'];
-            $innerArray[] = $groupInfo['postal_code'];
-            $innerArray[] = $groupInfo['contact_address'];
-            $innerArray[] = $groupInfo['contact_address_name'];
-            $innerArray[] = $groupInfo['contact_address_title'];
-            $innerArray[] = $groupInfo['disclosure_contact_address'];
-            $innerArray[] = $groupInfo['contact_phone'];
-            $innerArray[] = $groupInfo['disclosure_contact_phone'];
-            $innerArray[] = $groupInfo['contact_phone_2'];
-            $innerArray[] = $groupInfo['disclosure_contact_phone_2'];
-            $innerArray[] = $groupInfo['contact_fax'];
-            $innerArray[] = $groupInfo['disclosure_contact_fax'];
-            $innerArray[] = $groupInfo['contact_mail'];
-            $innerArray[] = $groupInfo['disclosure_contact_mail'];
-            $innerArray[] = $groupInfo['contact_url'];
-            $innerArray[] = $groupInfo['disclosure_contact_url'];
-            $innerArray[] = $groupInfo['activity_category'];
-            $innerArray[] = $groupInfo['active_category_supplement'];
-            $innerArray[] = $groupInfo['membership_male'];
-            $innerArray[] = $groupInfo['membership_female'];
-            $innerArray[] = $groupInfo['all_member'];
-            $innerArray[] = $groupInfo['activity_frequency'];
-            $innerArray[] = $groupInfo['activity_day'];
-            $innerArray[] = $groupInfo['dues'];
-            $innerArray[] = $groupInfo['dues_price'];
-            $innerArray[] = $groupInfo['content'];
-            $innerArray[] = $groupInfo['rocker'];
-            $innerArray[] = $groupInfo['mail_box'];
-            $innerArray[] = $groupInfo['method'];
-            $innerArray[] = $groupInfo['supplement'];
+            $innerArray[] = $groupInfo['id'];   // 1
+            
+            for($index=1; $index<7; $index++){   // 2-7
+                $innerArray[] = ( $groupInfo['regist_management']==$index)?"TRUE":"FALSE";
+            }
+            
+            $innerArray[] = $groupInfo['number'];   // 8
+            $innerArray[] = ($groupInfo['type']=="0")?"団体":"個人"; // 9
+            $innerArray[] = ($groupInfo['open_situation']=="0")?"公開":"非公開"; // 10
+            $innerArray[] = ($groupInfo['active_status']=="0")?"活動中":(($groupInfo['active_status']=="1")?"休止":"抹消"); // 11
+            $innerArray[] = $groupInfo['pause_date'];   // 12
+            $innerArray[] = $groupInfo['name']; //13
+            $innerArray[] = $groupInfo['name_phonetic']; //14
+            $innerArray[] = $groupInfo['application_date']; // 15
+            $innerArray[] = $groupInfo['registration_date'];    // 16
+            $innerArray[] = $groupInfo['establishment_date'];   // 17
+            $innerArray[] = $groupInfo['postal_code'];  // 18
+            $innerArray[] = $groupInfo['contact_address'];  // 19
+            $innerArray[] = ""; // 20
+            $innerArray[] = ($groupInfo['disclosure_contact_address']=='1')?"TRUE":"FALSE";   // 21
+            $innerArray[] = $groupInfo['contact_address_name'];     // 22
+            $innerArray[] = $groupInfo['contact_address_title'];    // 23
+            $innerArray[] = $groupInfo['representative_name'];  // 24
+            $innerArray[] = $groupInfo['representative_name_phonetic']; // 25
+            $innerArray[] = ($groupInfo['disclosure_name']=='1')?"TRUE":"FALSE";  // 26
+            $innerArray[] = $groupInfo['representative_phone']; // 27
+            $innerArray[] = ($groupInfo['disclosure_representative_phone']=='1')?"TRUE":"FALSE";  // 28 
+            $innerArray[] = $groupInfo['representative_fax'];   // 29
+            $innerArray[] = ($groupInfo['disclosure_representative_fax']=='1')?"TRUE":"FALSE";    // 30
+            $innerArray[] = $groupInfo['representative_phone_2'];   // 31
+            $innerArray[] = ($groupInfo['disclosure_representative_phone_2']=='1')?"TRUE":"FALSE";    // 32
+            $innerArray[] = $groupInfo['contact_name'];     // 33
+            $innerArray[] = $groupInfo['contact_name_phonetic'];        // 34
+            $innerArray[] = ($groupInfo['disclosure_contact_name']=='1')?"TRUE":"FALSE";      //35
+            $innerArray[] = $groupInfo['contact_phone'];    // 36
+            $innerArray[] = ($groupInfo['disclosure_contact_phone']=='1')?"TRUE":"FALSE";  // 37
+            $innerArray[] = $groupInfo['contact_fax'];      // 38
+            $innerArray[] = ($groupInfo['disclosure_contact_fax']=='1')?"TRUE":"FALSE";       // 39
+
+            $innerArray[] = $groupInfo['contact_phone_2'];      // 40
+            $innerArray[] = ($groupInfo['disclosure_contact_phone_2']=='1')?"TRUE":"FALSE";   // 41
+            $innerArray[] = $groupInfo['contact_mail'];     // 42
+            $innerArray[] = ($groupInfo['disclosure_contact_mail']=='1')?"TRUE":"FALSE";  // 43
+            $innerArray[] = $groupInfo['contact_url'];      // 44
+            $innerArray[] = ($groupInfo['disclosure_contact_url']=='1')?"TRUE":"FALSE";       // 45
+
+            $innerArray[] = $groupInfo['membership_male'];      // 46
+            $innerArray[] = $groupInfo['membership_female'];       // 47
+            $innerArray[] = $groupInfo['all_member'];       // 48
+            $innerArray[] = ($groupInfo['dues']=="0")?"無":"有";     // 49
+            $innerArray[] = $groupInfo['dues_price'];       // 50
+            $innerArray[] = ($groupInfo['activity_day']=='1')?"年":(($groupInfo['activity_day']=='2')?"月":(($groupInfo['activity_day']=='3')?"週":""));;     // 51
+            $innerArray[] = $groupInfo['activity_frequency'];   // 52
+
+            for($index=100; $index<2400; $index+=100){   // 53-75
+                $innerArray[] = ( $groupInfo['activity_category']==$index)?"TRUE":"FALSE";
+            }
+
+            $innerArray[] = $groupInfo['active_category_supplement'];   // 76
+            $innerArray[] = $groupInfo['rocker'];   // 77
+            $innerArray[] = $groupInfo['mail_box']; // 78
+            $innerArray[] = $groupInfo['method'];   // 79
+            $innerArray[] = $groupInfo['content'];  // 80
+            $innerArray[] = $groupInfo['supplement']; // 81
             $dataArray[] = $innerArray;
         }
 
