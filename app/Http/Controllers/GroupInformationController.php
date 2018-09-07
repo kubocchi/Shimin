@@ -180,11 +180,10 @@ class GroupInformationController extends Controller
                 $csv = array_map('str_getcsv', file($path));
                 $file = file($path);
                 $data = file_get_contents($path);
-                // $data = str_replace(PHP_EOL, "\r\n", $data);
                 $data = mb_convert_encoding($data, 'UTF-8','sjis-win');
 
                 $row = 0;
-                foreach( explode( PHP_EOL, $data ) as $line ) 
+                foreach( explode( "\r\n", $data ) as $line ) 
                 {   
                     $row++;
                     //skip header row
