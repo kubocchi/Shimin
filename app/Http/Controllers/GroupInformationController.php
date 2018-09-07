@@ -180,8 +180,9 @@ class GroupInformationController extends Controller
                 $csv = array_map('str_getcsv', file($path));
                 $file = file($path);
                 $data = file_get_contents($path);
+                // $data = str_replace(PHP_EOL, "\r\n", $data);
                 $data = mb_convert_encoding($data, 'UTF-8','sjis-win');
-    
+
                 $row = 0;
                 foreach( explode( PHP_EOL, $data ) as $line ) 
                 {   
@@ -265,7 +266,7 @@ class GroupInformationController extends Controller
                     }
 
                     // $groupInformation->activity_day= $column[50]; //   45
-                    $groupInformation->activity_day= ($column[50]=='週')?"1":(($column[50]=='月')?"2":(($column[50]=='年')?"3":"4")); //   45
+                    $groupInformation->activity_day= ($column[50]=='年')?"1":(($column[50]=='月')?"2":(($column[50]=='週')?"3":"4")); //   45
                     // $groupInformation->dues= $column[48]; //   46
                     $groupInformation->dues= ($column[48]=='無')?"0":"1"; //   46
 
@@ -330,40 +331,23 @@ class GroupInformationController extends Controller
         // Get GroupInformations
 
         $headerArray = array(
-            '','センター','社協','佐土原','高岡','田野','清武','番号','種類','公開状況',    // 1-10
-
-            '活動状況','日付','団体名','団体名ふりがな','申請日','登録日','設立年月日','郵便番号','団体住所1','団体住所2',  // 11-20
             
-            '団体住所
-            情報開示','郵送宛名','敬称','代表者名','代表者名ﾌﾘｶﾞﾅ','代表者名
-            情報開示','代表者ＴＥＬ','代表者TEL
-            情報開示','代表者ＦＡＸ','代表者FAX
-            情報開示',  // 21-30
+            '','センター','社協','佐土原','高岡','田野','清武','番号','種類','公開状況',
 
-            '代表者
-            携帯電話','代表者携帯
-            情報開示','事務局長名','事務局長名ﾌﾘｶﾞﾅ','事務局長名
-            情報開示','事務局ＴＥＬ','事務局TEL
-            情報開示','事務局ＦＡＸ','事務局FAX
-            情報開示','携帯電話',   // 31-40
+            '活動状況','日付','団体名','団体名ふりがな','申請日','登録日','設立年月日','郵便番号','団体住所1','団体住所2',
+            
+            '団体住所 情報開示','郵送宛名','敬称','代表者名','代表者名ﾌﾘｶﾞﾅ','代表者名 情報開示','代表者ＴＥＬ','代表者TEL 情報開示','代表者ＦＡＸ','代表者FAX 情報開示',
 
-            '事務局携帯電話
-            情報開示','メールアドレス','メール
-            情報開示','団体ＵＲＬ','団体URL
-            情報開示','男','女','合計','会費有無','会費金額',       // 41-50
+            '代表者 携帯電話','代表者携帯 情報開示','事務局長名','事務局長名ﾌﾘｶﾞﾅ','事務局長名 情報開示','事務局ＴＥＬ','事務局TEL 情報開示','事務局ＦＡＸ','事務局FAX 情報開示','携帯電話',
 
-            '頻度','活動回数','保健・医療','高齢者福祉','障害者福祉','児童福祉','社会教育','まちづくり','観光','農山漁村',      // 51-60
+            '事務局携帯電話 情報開示','メールアドレス','メール 情報開示','団体ＵＲＬ','団体URL 情報開示','男','女','合計','会費有無','会費金額',
 
-            '文化芸術','環境保全','災害救援','地域安全','人権・平和','国際協力','男女
-            共同','子供育成','情報社会','科学技術',     // 61-70
+            '頻度','活動回数','保健・医療','高齢者福祉','障害者福祉','児童福祉','社会教育','まちづくり','観光','農山漁村',
+       
+            '文化芸術','環境保全','災害救援','地域安全','人権・平和','国際協力','男女 共同','子供育成','情報社会','科学技術',
 
-            '経済活動','職業・雇用','消費者保護','NPO支援','その他区分','区分内容','ロッカー','メール
-            ＢＯＸ','方法','活動内容',      // 71-80
-
-            '備考',     // 81
+            '経済活動','職業・雇用','消費者保護','NPO支援','その他区分','区分内容','ロッカー','メール ＢＯＸ','方法','活動内容','備考'
         );
-
-
         $groupInformations = GroupInformation::all();
 
         $dataArray = [];
@@ -371,63 +355,74 @@ class GroupInformationController extends Controller
         foreach($groupInformations as $groupInfo){
             $innerArray = [];
 
-            $innerArray[] = $groupInfo['id'];
-            $innerArray[] = $groupInfo['number'];
-            $innerArray[] = $groupInfo['type'];
-            $innerArray[] = $groupInfo['regist_management'];
-            $innerArray[] = $groupInfo['open_situation'];
-            $innerArray[] = $groupInfo['active_status'];
-            $innerArray[] = $groupInfo['pause_date'];
-            $innerArray[] = $groupInfo['application_date'];
-            $innerArray[] = $groupInfo['registration_date'];
-            $innerArray[] = $groupInfo['establishment_date'];
-            $innerArray[] = $groupInfo['name'];
-            $innerArray[] = $groupInfo['name_phonetic'];
-            $innerArray[] = $groupInfo['representative_name'];
-            $innerArray[] = $groupInfo['representative_name_phonetic'];
-            $innerArray[] = $groupInfo['disclosure_name'];
-            $innerArray[] = $groupInfo['representative_phone'];
-            $innerArray[] = $groupInfo['disclosure_representative_phone'];
-            $innerArray[] = $groupInfo['representative_phone_2'];
-            $innerArray[] = $groupInfo['disclosure_representative_phone_2'];
-            $innerArray[] = $groupInfo['representative_fax'];
-            $innerArray[] = $groupInfo['disclosure_representative_fax'];
-            $innerArray[] = $groupInfo['contact_name'];
-            $innerArray[] = $groupInfo['contact_name_phonetic'];
-            $innerArray[] = $groupInfo['disclosure_contact_name'];
-            $innerArray[] = $groupInfo['postal_code'];
-            $innerArray[] = $groupInfo['contact_address'];
-            $innerArray[] = $groupInfo['contact_address_name'];
-            $innerArray[] = $groupInfo['contact_address_title'];
-            $innerArray[] = $groupInfo['disclosure_contact_address'];
-            $innerArray[] = $groupInfo['contact_phone'];
-            $innerArray[] = $groupInfo['disclosure_contact_phone'];
-            $innerArray[] = $groupInfo['contact_phone_2'];
-            $innerArray[] = $groupInfo['disclosure_contact_phone_2'];
-            $innerArray[] = $groupInfo['contact_fax'];
-            $innerArray[] = $groupInfo['disclosure_contact_fax'];
-            $innerArray[] = $groupInfo['contact_mail'];
-            $innerArray[] = $groupInfo['disclosure_contact_mail'];
-            $innerArray[] = $groupInfo['contact_url'];
-            $innerArray[] = $groupInfo['disclosure_contact_url'];
-            $innerArray[] = $groupInfo['activity_category'];
-            $innerArray[] = $groupInfo['active_category_supplement'];
-            $innerArray[] = $groupInfo['membership_male'];
-            $innerArray[] = $groupInfo['membership_female'];
-            $innerArray[] = $groupInfo['all_member'];
-            $innerArray[] = $groupInfo['activity_frequency'];
-            $innerArray[] = $groupInfo['activity_day'];
-            $innerArray[] = $groupInfo['dues'];
-            $innerArray[] = $groupInfo['dues_price'];
-            $innerArray[] = $groupInfo['content'];
-            $innerArray[] = $groupInfo['rocker'];
-            $innerArray[] = $groupInfo['mail_box'];
-            $innerArray[] = $groupInfo['method'];
-            $innerArray[] = $groupInfo['supplement'];
+            $innerArray[] = $groupInfo['id'];   // 1
+            
+            for($index=1; $index<7; $index++){   // 2-7
+                $innerArray[] = ( $groupInfo['regist_management']==$index)?"TRUE":"FALSE";
+            }
+            
+            $innerArray[] = $groupInfo['number'];   // 8
+            $innerArray[] = ($groupInfo['type']=="0")?"団体":"個人"; // 9
+            $innerArray[] = ($groupInfo['open_situation']=="0")?"公開":"非公開"; // 10
+            $innerArray[] = ($groupInfo['active_status']=="0")?"活動中":(($groupInfo['active_status']=="1")?"休止":"抹消"); // 11
+            $innerArray[] = $groupInfo['pause_date'];   // 12
+            $innerArray[] = $groupInfo['name']; //13
+            $innerArray[] = $groupInfo['name_phonetic']; //14
+            $innerArray[] = $groupInfo['application_date']; // 15
+            $innerArray[] = $groupInfo['registration_date'];    // 16
+            $innerArray[] = $groupInfo['establishment_date'];   // 17
+            $innerArray[] = $groupInfo['postal_code'];  // 18
+            $innerArray[] = $groupInfo['contact_address'];  // 19
+            $innerArray[] = ""; // 20
+            $innerArray[] = ($groupInfo['disclosure_contact_address']=='1')?"TRUE":"FALSE";   // 21
+            $innerArray[] = $groupInfo['contact_address_name'];     // 22
+            $innerArray[] = $groupInfo['contact_address_title'];    // 23
+            $innerArray[] = $groupInfo['representative_name'];  // 24
+            $innerArray[] = $groupInfo['representative_name_phonetic']; // 25
+            $innerArray[] = ($groupInfo['disclosure_name']=='1')?"TRUE":"FALSE";  // 26
+            $innerArray[] = $groupInfo['representative_phone']; // 27
+            $innerArray[] = ($groupInfo['disclosure_representative_phone']=='1')?"TRUE":"FALSE";  // 28 
+            $innerArray[] = $groupInfo['representative_fax'];   // 29
+            $innerArray[] = ($groupInfo['disclosure_representative_fax']=='1')?"TRUE":"FALSE";    // 30
+            $innerArray[] = $groupInfo['representative_phone_2'];   // 31
+            $innerArray[] = ($groupInfo['disclosure_representative_phone_2']=='1')?"TRUE":"FALSE";    // 32
+            $innerArray[] = $groupInfo['contact_name'];     // 33
+            $innerArray[] = $groupInfo['contact_name_phonetic'];        // 34
+            $innerArray[] = ($groupInfo['disclosure_contact_name']=='1')?"TRUE":"FALSE";      //35
+            $innerArray[] = $groupInfo['contact_phone'];    // 36
+            $innerArray[] = ($groupInfo['disclosure_contact_phone']=='1')?"TRUE":"FALSE";  // 37
+            $innerArray[] = $groupInfo['contact_fax'];      // 38
+            $innerArray[] = ($groupInfo['disclosure_contact_fax']=='1')?"TRUE":"FALSE";       // 39
+
+            $innerArray[] = $groupInfo['contact_phone_2'];      // 40
+            $innerArray[] = ($groupInfo['disclosure_contact_phone_2']=='1')?"TRUE":"FALSE";   // 41
+            $innerArray[] = $groupInfo['contact_mail'];     // 42
+            $innerArray[] = ($groupInfo['disclosure_contact_mail']=='1')?"TRUE":"FALSE";  // 43
+            $innerArray[] = $groupInfo['contact_url'];      // 44
+            $innerArray[] = ($groupInfo['disclosure_contact_url']=='1')?"TRUE":"FALSE";       // 45
+
+            $innerArray[] = $groupInfo['membership_male'];      // 46
+            $innerArray[] = $groupInfo['membership_female'];       // 47
+            $innerArray[] = $groupInfo['all_member'];       // 48
+            $innerArray[] = ($groupInfo['dues']=="0")?"無":"有";     // 49
+            $innerArray[] = $groupInfo['dues_price'];       // 50
+            $innerArray[] = ($groupInfo['activity_day']=='1')?"年":(($groupInfo['activity_day']=='2')?"月":(($groupInfo['activity_day']=='3')?"週":""));;     // 51
+            $innerArray[] = $groupInfo['activity_frequency'];   // 52
+
+            for($index=100; $index<2400; $index+=100){   // 53-75
+                $innerArray[] = ( $groupInfo['activity_category']==$index)?"TRUE":"FALSE";
+            }
+
+            $innerArray[] = $groupInfo['active_category_supplement'];   // 76
+            $innerArray[] = $groupInfo['rocker'];   // 77
+            $innerArray[] = $groupInfo['mail_box']; // 78
+            $innerArray[] = $groupInfo['method'];   // 79
+            $innerArray[] = $groupInfo['content'];  // 80
+            $innerArray[] = $groupInfo['supplement']; // 81
             $dataArray[] = $innerArray;
         }
 
-        return $this->download($dataArray,$headerArray,'test.csv');
+        return $this->csvGenerate($headerArray,$dataArray);
         
         // Return collection of GroupInformations as a resource
         //return GroupInformationResource::collection($groupInformations);
@@ -439,24 +434,38 @@ class GroupInformationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function csvGenerate($header, $mainArray) {
-        $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'r+');
+        $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'w+');
 //        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
-        fputcsv($fp, $header, ','); //Heaeder set on CSV
+        fputcsv($fp, $header); //Heaeder set on CSV
         foreach ($mainArray as $row) { //$mainArray set on CSV
-            fputcsv($fp, $row, ',');
+            fputcsv($fp, $row);
         }
-        $filename = 'test.csv';
+        $filename = 'testcsv.csv';
         header('Content-Type: application/vnd.ms-excel; charset=SJIS');
         header('Content-disposition:attachment;filename=' . urlencode($filename));
         header('Cache-Control: public');
         header('Pragma: public');
         rewind($fp);
         $output = stream_get_contents($fp);
+        $csv = str_replace(PHP_EOL, "\r\n", $output);
         $output = mb_convert_encoding($output, 'SJIS', 'UTF-8');
-        return $output;
+
+        $publicPath = public_path('csv');
+
+        if (!file_exists($publicPath)) {
+            mkdir($publicPath, 0777, true);
+        }
+        $csvfd = fopen ($publicPath . "/csvOutput.csv", "w");
+
+        fputs($csvfd, $output);
+        
+        fclose($csvfd);
+
+        fclose($fd);
+        return null;
     }
 
-    public function download($list, $header, $filename)
+    public function download($header, $list)
     {
         if (count($header) > 0) {
             array_unshift($list, $header);
@@ -466,6 +475,7 @@ class GroupInformationController extends Controller
             fputcsv($stream, $row);
         }
         rewind($stream);
+        $filename = "test.csv";
         $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
         $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
         $headers = array(
