@@ -180,8 +180,9 @@ class GroupInformationController extends Controller
                 $csv = array_map('str_getcsv', file($path));
                 $file = file($path);
                 $data = file_get_contents($path);
+                // $data = str_replace(PHP_EOL, "\r\n", $data);
                 $data = mb_convert_encoding($data, 'UTF-8','sjis-win');
-    
+
                 $row = 0;
                 foreach( explode( PHP_EOL, $data ) as $line ) 
                 {   
@@ -330,40 +331,23 @@ class GroupInformationController extends Controller
         // Get GroupInformations
 
         $headerArray = array(
-            '','センター','社協','佐土原','高岡','田野','清武','番号','種類','公開状況',    // 1-10
-
-            '活動状況','日付','団体名','団体名ふりがな','申請日','登録日','設立年月日','郵便番号','団体住所1','団体住所2',  // 11-20
             
-            '団体住所
-            情報開示','郵送宛名','敬称','代表者名','代表者名ﾌﾘｶﾞﾅ','代表者名
-            情報開示','代表者ＴＥＬ','代表者TEL
-            情報開示','代表者ＦＡＸ','代表者FAX
-            情報開示',  // 21-30
+            '','センター','社協','佐土原','高岡','田野','清武','番号','種類','公開状況',
 
-            '代表者
-            携帯電話','代表者携帯
-            情報開示','事務局長名','事務局長名ﾌﾘｶﾞﾅ','事務局長名
-            情報開示','事務局ＴＥＬ','事務局TEL
-            情報開示','事務局ＦＡＸ','事務局FAX
-            情報開示','携帯電話',   // 31-40
+            '活動状況','日付','団体名','団体名ふりがな','申請日','登録日','設立年月日','郵便番号','団体住所1','団体住所2',
+            
+            '団体住所 情報開示','郵送宛名','敬称','代表者名','代表者名ﾌﾘｶﾞﾅ','代表者名 情報開示','代表者ＴＥＬ','代表者TEL 情報開示','代表者ＦＡＸ','代表者FAX 情報開示',
 
-            '事務局携帯電話
-            情報開示','メールアドレス','メール
-            情報開示','団体ＵＲＬ','団体URL
-            情報開示','男','女','合計','会費有無','会費金額',       // 41-50
+            '代表者 携帯電話','代表者携帯 情報開示','事務局長名','事務局長名ﾌﾘｶﾞﾅ','事務局長名 情報開示','事務局ＴＥＬ','事務局TEL 情報開示','事務局ＦＡＸ','事務局FAX 情報開示','携帯電話',
 
-            '頻度','活動回数','保健・医療','高齢者福祉','障害者福祉','児童福祉','社会教育','まちづくり','観光','農山漁村',      // 51-60
+            '事務局携帯電話 情報開示','メールアドレス','メール 情報開示','団体ＵＲＬ','団体URL 情報開示','男','女','合計','会費有無','会費金額',
 
-            '文化芸術','環境保全','災害救援','地域安全','人権・平和','国際協力','男女
-            共同','子供育成','情報社会','科学技術',     // 61-70
+            '頻度','活動回数','保健・医療','高齢者福祉','障害者福祉','児童福祉','社会教育','まちづくり','観光','農山漁村',
+       
+            '文化芸術','環境保全','災害救援','地域安全','人権・平和','国際協力','男女 共同','子供育成','情報社会','科学技術',
 
-            '経済活動','職業・雇用','消費者保護','NPO支援','その他区分','区分内容','ロッカー','メール
-            ＢＯＸ','方法','活動内容',      // 71-80
-
-            '備考',     // 81
+            '経済活動','職業・雇用','消費者保護','NPO支援','その他区分','区分内容','ロッカー','メール ＢＯＸ','方法','活動内容','備考'
         );
-
-
         $groupInformations = GroupInformation::all();
 
         $dataArray = [];
@@ -438,7 +422,7 @@ class GroupInformationController extends Controller
             $dataArray[] = $innerArray;
         }
 
-        return $this->download($dataArray,$headerArray,'test.csv');
+        return $this->csvGenerate($headerArray,$dataArray);
         
         // Return collection of GroupInformations as a resource
         //return GroupInformationResource::collection($groupInformations);
@@ -450,24 +434,38 @@ class GroupInformationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function csvGenerate($header, $mainArray) {
-        $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'r+');
+        $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'w+');
 //        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
-        fputcsv($fp, $header, ','); //Heaeder set on CSV
+        fputcsv($fp, $header); //Heaeder set on CSV
         foreach ($mainArray as $row) { //$mainArray set on CSV
-            fputcsv($fp, $row, ',');
+            fputcsv($fp, $row);
         }
-        $filename = 'test.csv';
+        $filename = 'testcsv.csv';
         header('Content-Type: application/vnd.ms-excel; charset=SJIS');
         header('Content-disposition:attachment;filename=' . urlencode($filename));
         header('Cache-Control: public');
         header('Pragma: public');
         rewind($fp);
         $output = stream_get_contents($fp);
+        $csv = str_replace(PHP_EOL, "\r\n", $output);
         $output = mb_convert_encoding($output, 'SJIS', 'UTF-8');
-        return $output;
+
+        $publicPath = public_path('csv');
+
+        if (!file_exists($publicPath)) {
+            mkdir($publicPath, 0777, true);
+        }
+        $csvfd = fopen ($publicPath . "/csvOutput.csv", "w");
+
+        fputs($csvfd, $output);
+        
+        fclose($csvfd);
+
+        fclose($fd);
+        return null;
     }
 
-    public function download($list, $header, $filename)
+    public function download($header, $list)
     {
         if (count($header) > 0) {
             array_unshift($list, $header);
@@ -477,6 +475,7 @@ class GroupInformationController extends Controller
             fputcsv($stream, $row);
         }
         rewind($stream);
+        $filename = "test.csv";
         $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
         $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
         $headers = array(
