@@ -201,7 +201,7 @@ class GroupInformationController extends Controller
                     $groupInformation =  new GroupInformation;    
                     
                     $groupInformation->number= $column[7]; //   1
-                    //$groupInformation->type= $column[8]; //   2
+
                     $groupInformation->type= ($column[8]=='団体')?"0":"1"; //   2
     
                     for($index=1; $index<7; $index++){
@@ -209,9 +209,8 @@ class GroupInformationController extends Controller
                     }
                     $groupInformation->regist_management= $index; //   3
 
-                    // $groupInformation->open_situation= $column[9]; //   4
                     $groupInformation->open_situation= ($column[9]=='公開')?"0":"1"; //   4
-                    // $groupInformation->active_status= $column[10]; //   5 
+
                     $groupInformation->active_status= ($column[10]=='活動中')?"0":(($column[10]=='休止')?"1":"2"); //   5 
     
                     // checking date format 
@@ -260,13 +259,9 @@ class GroupInformationController extends Controller
                     $groupInformation->all_member= $column[47]; //   43
                     $groupInformation->activity_frequency= $column[51]; //   44
 
-                    if('50361'==$column[7]){
-                        $check =  strval(($index-51)*100);
-                    }
 
-                    // $groupInformation->activity_day= $column[50]; //   45
                     $groupInformation->activity_day= ($column[50]=='年')?"1":(($column[50]=='月')?"2":(($column[50]=='週')?"3":"4")); //   45
-                    // $groupInformation->dues= $column[48]; //   46
+
                     $groupInformation->dues= ($column[48]=='無')?"0":"1"; //   46
 
                     $groupInformation->dues_price= $column[49]; //   47
@@ -434,20 +429,26 @@ class GroupInformationController extends Controller
      */
     public function csvGenerate($header, $mainArray) {
         $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'w+');
-//        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
-        fputcsv($fp, $header); //Heaeder set on CSV
+
+        $this->myFputcsv($fp, $header); //Heaeder set on CSV
         foreach ($mainArray as $row) { //$mainArray set on CSV
-            fputcsv($fp, $row);
+            $this->myFputcsv($fp, $row);
         }
+
+        // fputcsv($fp, $header); //Heaeder set on CSV
+        // foreach ($mainArray as $row) { //$mainArray set on CSV
+        //     fputcsv($fp, $row);
+        // }
+
         $filename = 'testcsv.csv';
-        header('Content-Type: application/vnd.ms-excel; charset=SJIS');
-        header('Content-disposition:attachment;filename=' . urlencode($filename));
+        header('Content-Type: text/csv; charset=SJIS');
+        header('Content-disposition: attachment;filename=' . urlencode($filename));
         header('Cache-Control: public');
         header('Pragma: public');
         rewind($fp);
         $output = stream_get_contents($fp);
-        $csv = str_replace(PHP_EOL, "\r\n", $output);
-        $output = mb_convert_encoding($output, 'SJIS', 'UTF-8');
+        // $csv = str_replace(PHP_EOL, "\r\n", $output);
+        $output = mb_convert_encoding($output, 'SJIS-win', 'UTF-8');
 
         $publicPath = public_path('csv');
 
@@ -459,11 +460,23 @@ class GroupInformationController extends Controller
         fputs($csvfd, $output);
         
         fclose($csvfd);
-
         fclose($fd);
+
         return null;
     }
 
+    /**
+     * write CSV file with EOL.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function myFputcsv($handle, $fieldsarray, $delimiter = ",", $enclosure ='"'){
+        $glue = $enclosure . $delimiter . $enclosure;
+        return fwrite($handle, $enclosure . implode($glue,$fieldsarray) . $enclosure."\r\n");
+     }
+
+
+    // not using this function 
     public function download($header, $list)
     {
         if (count($header) > 0) {
