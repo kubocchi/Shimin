@@ -347,8 +347,8 @@
                         NProgress.done()
                         this.fetchGroupInformation()
                         this.$swal({
-                            title: "警告!",
-                            text: 'Uploaded!',
+                            title: "アップロード完了",
+                            text: 'Uploaded',
                             type: "success",
                             confirmButtonText: "OK"
                         });

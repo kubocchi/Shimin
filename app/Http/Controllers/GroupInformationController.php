@@ -435,7 +435,8 @@ class GroupInformationController extends Controller
             $this->customFputcsv($tempFile, $row);
         }
 
-        $filename = $this->generateRandomString().'.csv';
+        //$filename = $this->generateRandomString().'.csv';
+        $filename = 'group-information.csv';
         header('Content-Type: text/csv; charset=SJIS');
         header('Content-disposition: attachment;filename=' . urlencode($filename));
         header('Cache-Control: public');
@@ -481,5 +482,13 @@ class GroupInformationController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    private function removeFile($file)
+    {
+        if (file_exists($file)) 
+        {
+            unlink($file);
+        }
     }
 }

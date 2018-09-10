@@ -624,7 +624,7 @@
                                                             </div>
                                                             <div>
                                                                 <label>【活動内容・事業内容】</label>
-                                                                <p>{{groupInformation.content}}</p>
+                                                                <p v-html="groupInformation.content"></p>
                                                             </div>
                                                             <div>
                                                                 <label>【ロッカー】</label>

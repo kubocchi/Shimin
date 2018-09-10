@@ -288,5 +288,5 @@ Route::post('group-informations-frontend', 'GroupInformationController@getGroupI
 Route::get('group-information-frontend/{id}', 'GroupInformationController@show');
 // Download attachments
 Route::get('/csv-download/{file}', function ($file) {
-    return response()->download(public_path('csv/'.$file)); 
+    return response()->download(public_path('csv/'.$file));
 });
