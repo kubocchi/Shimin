@@ -90,6 +90,7 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     // Download group-information as CSV
     Route::get('download-file', 'GroupInformationController@getDownlaodData');
     
+    
 
 });
 

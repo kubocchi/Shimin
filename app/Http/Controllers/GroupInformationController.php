@@ -166,6 +166,9 @@ class GroupInformationController extends Controller
 
     public function getCSV(Request $request)
     {
+        // Remove all data from GroupInformation Table
+        GroupInformation::truncate();
+
         setlocale ( LC_ALL ,  'ja_JP.UTF - 8' );
         if($request->hasFile('file'))
         {
@@ -417,9 +420,6 @@ class GroupInformationController extends Controller
         }
 
         return $this->csvGenerate($headerArray,$dataArray);
-        
-        // Return collection of GroupInformations as a resource
-        //return GroupInformationResource::collection($groupInformations);
     }
 
     /**
@@ -428,41 +428,36 @@ class GroupInformationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function csvGenerate($header, $mainArray) {
-        $fp = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'w+');
+        $tempFile = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'w+');
 
-        $this->myFputcsv($fp, $header); //Heaeder set on CSV
+        $this->customFputcsv($tempFile, $header); //Heaeder set on CSV
         foreach ($mainArray as $row) { //$mainArray set on CSV
-            $this->myFputcsv($fp, $row);
+            $this->customFputcsv($tempFile, $row);
         }
 
-        // fputcsv($fp, $header); //Heaeder set on CSV
-        // foreach ($mainArray as $row) { //$mainArray set on CSV
-        //     fputcsv($fp, $row);
-        // }
-
-        $filename = 'testcsv.csv';
+        $filename = $this->generateRandomString().'.csv';
         header('Content-Type: text/csv; charset=SJIS');
         header('Content-disposition: attachment;filename=' . urlencode($filename));
         header('Cache-Control: public');
         header('Pragma: public');
-        rewind($fp);
-        $output = stream_get_contents($fp);
-        // $csv = str_replace(PHP_EOL, "\r\n", $output);
-        $output = mb_convert_encoding($output, 'SJIS-win', 'UTF-8');
+        rewind($tempFile);
+        $csvData = stream_get_contents($tempFile);
+        // $csv = str_replace(PHP_EOL, "\r\n", $csvData);
+        $csvData = mb_convert_encoding($csvData, 'SJIS-win', 'UTF-8');
 
         $publicPath = public_path('csv');
 
         if (!file_exists($publicPath)) {
             mkdir($publicPath, 0777, true);
         }
-        $csvfd = fopen ($publicPath . "/csvOutput.csv", "w");
+        $csvFile = fopen ($publicPath . "/". $filename, "w");
 
-        fputs($csvfd, $output);
+        fputs($csvFile, $csvData);
         
-        fclose($csvfd);
-        fclose($fd);
+        fclose($csvFile);
+        fclose($tempFile);
 
-        return null;
+        return $publicPath . '/' . $filename;
     }
 
     /**
@@ -470,30 +465,21 @@ class GroupInformationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function myFputcsv($handle, $fieldsarray, $delimiter = ",", $enclosure ='"'){
+    public function customFputcsv($handle, $fieldsarray, $delimiter = ",", $enclosure ='"'){
         $glue = $enclosure . $delimiter . $enclosure;
-        return fwrite($handle, $enclosure . implode($glue,$fieldsarray) . $enclosure."\r\n");
-     }
+        return fwrite($handle, $enclosure . implode($glue, $fieldsarray) . $enclosure."\r\n");
+    }
 
 
-    // not using this function 
-    public function download($header, $list)
+    private function generateRandomString($length = 10) 
     {
-        if (count($header) > 0) {
-            array_unshift($list, $header);
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) 
+        {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        $stream = fopen('php://temp', 'r+b');
-        foreach ($list as $row) {
-            fputcsv($stream, $row);
-        }
-        rewind($stream);
-        $filename = "test.csv";
-        $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($stream));
-        $csv = mb_convert_encoding($csv, 'SJIS-win', 'UTF-8');
-        $headers = array(
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => "attachment; filename=$filename",
-        );
-        return \Response::make($csv, 200, $headers);
+        return $randomString;
     }
 }
