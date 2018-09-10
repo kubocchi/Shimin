@@ -421,19 +421,8 @@
                     }
                 })
                 .then(response => {
-                    NProgress.done();
-                    var filename = 'userlist.csv'
-                    response.headers['content-disposition'].split(/;|\s/).forEach( function( value ) {
-                        if(value.match(/^filename=/i)) filename = value.replace(/^filename=/i,'')
-                    })
-
-                    // Save CSV
-                    const url = window.URL.createObjectURL(new Blob([response.data]))
-                    const link = document.createElement('a')
-                    link.href = url
-                    link.setAttribute('download', filename)
-                    document.body.appendChild(link)
-                    link.click()
+                    NProgress.done()
+                    window.location.href = `/api/csv-download/${response.data.file}`
                 })
                 .catch(error => {
                     if (error.response) {
@@ -443,44 +432,6 @@
                     }
                 })
             },
-            // csvdownload: function() {
-            //     debugger
-            //     var params = new URLSearchParams()
-            //     var config = {
-            //         responseType: 'blob',
-            //         headers: {
-            //             'Content-Type': 'application/x-www-form-urlencoded',
-            //             Authorization: 'Bearer ' + localStorage.getItem('token')
-            //         },
-            //     }
-            //     this.csvdownloading = true
-            //     axios.post('/download-file', params, config)
-            //         .then( function (response) {
-            //             this.csvdownloading = false
-            //             console.log(response)
-
-            //             // Get FileName
-            //             var filename = 'userlist.csv'
-            //             response.headers['content-disposition'].split(/;|\s/).forEach( function( value ) {
-            //                 if(value.match(/^filename=/i)) filename = value.replace(/^filename=/i,'')
-            //             })
-
-            //             // Save CSV
-            //             const url = window.URL.createObjectURL(new Blob([response.data]))
-            //             const link = document.createElement('a')
-            //             link.href = url
-            //             link.setAttribute('download', filename)
-            //             document.body.appendChild(link)
-            //             link.click()
-            //         }.bind(this))
-
-            //         .catch(function (error) {
-            //             this.csvdownloading = false
-            //             console.log(error.response)
-            //             alert('ダウンロードに失敗しました')
-            //         }.bind(this))
-            // },
-
         }
     };
 </script>

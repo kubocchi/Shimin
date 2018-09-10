@@ -457,7 +457,7 @@ class GroupInformationController extends Controller
         fclose($csvFile);
         fclose($tempFile);
 
-        return $publicPath . '/' . $filename;
+        return ['file' => $filename];
     }
 
     /**
