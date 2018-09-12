@@ -414,23 +414,25 @@
                 return this.managements.find(x => x.id === id) ? this.managements.find(x => x.id === id).label : ''
             },
             downloadFile(){
-                NProgress.start()
-                axios.get(`/api/download-file`,  {
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('token')
-                    }
-                })
-                .then(response => {
-                    NProgress.done()
-                    window.location.href = `/api/csv-download/${response.data.file}`
-                })
-                .catch(error => {
-                    if (error.response) {
-                        console.log(error.response)
-                        NProgress.done()
-                        ErrorHandler.handle(error.response.status, this)
-                    }
-                })
+                //NProgress.start()
+                window.location.href = `/api/download-file`
+                // axios.get(`/api/download-file`,  {
+                //     headers: {
+                //         Authorization: 'Bearer ' + localStorage.getItem('token')
+                //     }
+                // })
+                // .then(response => {
+                //     NProgress.done()
+                //     if(response.data.file)
+                //         window.location.href = `/api/csv-download/${response.data.file}`
+                // })
+                // .catch(error => {
+                //     if (error.response) {
+                //         console.log(error.response)
+                //         NProgress.done()
+                //         ErrorHandler.handle(error.response.status, this)
+                //     }
+                // })
             },
         }
     };

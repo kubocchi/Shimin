@@ -88,7 +88,7 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     // List group-information with parameters
     Route::post('uploadCSV', 'GroupInformationController@getCSV');
     // Download group-information as CSV
-    Route::get('download-file', 'GroupInformationController@getDownlaodData');
+    //Route::get('download-file', 'GroupInformationController@getDownlaodData');
     
 });
 
@@ -290,3 +290,5 @@ Route::get('group-information-frontend/{id}', 'GroupInformationController@show')
 Route::get('/csv-download/{file}', function ($file) {
     return response()->download(public_path('csv/'.$file));
 });
+
+Route::get('download-file', 'GroupInformationController@getDownlaodData');
