@@ -109,6 +109,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-2 mt-4">
+                            <a class="btn btn-outline-primary  btn-block" @click.prevent="getFileInfo()" href="#!" role="button">Excel Restore</a>
+                        </div>
+                    </div>
                 </div>
                 <ul class="pagination justify-content-end">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
@@ -238,9 +243,9 @@
                     last_page: meta.last_page,
                     next_page_url: links.next,
                     prev_page_url: links.prev
-                };
+                }
 
-                this.pagination = pagination;
+                this.pagination = pagination
             },
 
             // Deleting the selected data
@@ -290,14 +295,14 @@
 
             // Loads table data on changing
             onTypeChanged: function (e) {
-                this.params.type = event.srcElement.value;
-                this.fetchGroupInformation();
+                this.params.type = event.srcElement.value
+                this.fetchGroupInformation()
             },
 
             // Clearing the user typed search term
             clearSearch() {
                 this.params.search = "";
-                this.fetchGroupInformation();
+                this.fetchGroupInformation()
             },
             /*
                 Submits the file to the server
@@ -310,12 +315,12 @@
                         text: 'No file selected!',
                         type: "warning",
                         confirmButtonText: "OK"
-                    });
+                    })
                     return
                 }
 
-                console.log(this.uploadedFile.type)
-                if(this.uploadedFile.type != 'application/vnd.ms-excel' && this.uploadedFile.type != 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                console.log(this.uploadedFile.name.split('.').pop())
+                if(this.uploadedFile.name.split('.').pop() != 'xls' && this.uploadedFile.name.split('.').pop() != 'xlsx')
                 {
                     this.$swal({
                         title: "警告",
@@ -326,8 +331,8 @@
                     return
                 }
 
-                let formData = new FormData();
-                formData.append('file', this.uploadedFile);
+                let formData = new FormData()
+                formData.append('file', this.uploadedFile)
 
                 // Display the key/value pairs
                 let count = 0
@@ -420,7 +425,6 @@
             },
             downloadFile(){
                 NProgress.start()
-                //window.location.href = `/api/download-file`
                 axios.get(`/api/download-file`,  {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -439,6 +443,67 @@
                     }
                 })
             },
+            restoreFile(createdDate){
+                this.$swal({
+                    title: `${createdDate} に保存したExcelファイルで、全データを上書きしようとしています。`,
+                    text: "本当にデータを上書きしますか？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "OK",
+                    cancelButtonText: "キャンセル"
+                }).then(result => {
+                    if (result.value) {
+                        NProgress.start()
+                        axios.get(`/api/restore-file`,  {
+                            headers: {
+                                Authorization: 'Bearer ' + localStorage.getItem('token')
+                            }
+                        })
+                        .then(response => {
+                            this.fetchGroupInformation()
+                            NProgress.done()
+                        })
+                        .catch(error => {
+                            if (error.response) {
+                                console.log(error.response)
+                                NProgress.done()
+                                ErrorHandler.handle(error.response.status, this)
+                            }
+                        })
+                    } else {
+                        this.$swal(
+                            "キャンセルしました",
+                            "データは削除されていません",
+                            "error"
+                        )
+                    }
+                })
+                
+            },
+            getFileInfo(){
+                let res = null
+                NProgress.start()
+                axios.get(`/api/file-info`,  {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    NProgress.done()
+                    console.log(response.data.createdDate)
+                    this.restoreFile(response.data.createdDate)
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response)
+                        NProgress.done()
+                        ErrorHandler.handle(error.response.status, this)
+                    }
+                })
+                return res
+            }
         }
     };
 </script>

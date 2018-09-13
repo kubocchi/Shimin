@@ -89,6 +89,10 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::post('upload-file', 'GroupInformationController@storeUploadData');
     // Download group-information as CSV
     Route::get('download-file', 'GroupInformationController@getDownlaodData');
+    // Restore group-information as CSV
+    Route::get('restore-file', 'GroupInformationController@restoreData');
+    // Get Fileinfo
+    Route::get('file-info', 'GroupInformationController@getFileInfo');
     
 });
 

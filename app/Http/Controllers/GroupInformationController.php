@@ -167,6 +167,7 @@ class GroupInformationController extends Controller
 
     public function storeUploadData(Request $request)
     {
+        $this->getDownlaodData();
         GroupInformation::truncate();
         // Remove all data from GroupInformation Table
     
@@ -328,6 +329,9 @@ class GroupInformationController extends Controller
         }
         
         $groupInformations = GroupInformation::all();
+
+        if(!count($groupInformations))
+            return null;
 
         $japaneseHeaderArray = array(
             
@@ -499,6 +503,134 @@ class GroupInformationController extends Controller
         if (file_exists($file)) 
         {
             unlink($file);
+        }
+    }
+
+    public function restoreData()
+    {
+        $this->getDownlaodData();
+        GroupInformation::truncate();
+        // Remove all data from GroupInformation Table
+    
+        try {
+
+            $path = public_path('csv/Group-information.xls');
+            $data = Excel::load($path, function($reader) {},'UTF-8')->get();
+            // $data = Excel::load($path)->get();
+            // var_dump($data);
+
+            $row=0;
+            // return 0;
+            if(!empty($data) && $data->count()){
+                
+                foreach ($data->toArray() as $key => $column) {
+
+                    $row++;
+                    //skip header row
+                    if($row==1)continue;
+
+                    // convert to array
+                    
+                    // checking if empty then exit 
+                    if(empty($column[7])){
+                        break;
+                    }
+
+                    $groupInformation =  new GroupInformation;    
+                    
+                    $groupInformation->number= $column[7]; //   1
+
+                    $groupInformation->type= ($column[8]=='団体')?"0":"1"; //   2
+    
+                    for($index=1; $index<7; $index++){
+                        if($column[$index]=='TRUE')break;
+                    }
+                    $groupInformation->regist_management= $index; //   3
+
+                    $groupInformation->open_situation= ($column[9]=='公開')?"0":"1"; //   4
+
+                    $groupInformation->active_status= ($column[10]=='活動中')?"0":(($column[10]=='休止')?"1":"2"); //   5 
+    
+                    // checking date format 
+                    $groupInformation->pause_date= (empty($column[11]))?NULL:date('Y-m-d', strtotime($column[11])); //   6
+                    $groupInformation->application_date=(empty($column[14]))?NULL:date('Y-m-d', strtotime($column[14])); //   7
+                    $groupInformation->registration_date= (empty($column[15]))?NULL:date('Y-m-d', strtotime($column[15])); //   8
+                    $groupInformation->establishment_date= (empty($column[16]))?NULL:date('Y-m-d', strtotime($column[16])); //   9
+    
+                    $groupInformation->name= $column[12]; //   10
+                    $groupInformation->name_phonetic= $column[13]; //   11
+                    $groupInformation->representative_name= $column[23]; //   12
+                    $groupInformation->representative_name_phonetic= $column[24]; //   13
+                    $groupInformation->disclosure_name= ($column[25]=='TRUE')?"1":"0"; //   14
+                    $groupInformation->representative_phone= $column[26]; //   15
+                    $groupInformation->disclosure_representative_phone= ($column[27]=='TRUE')?"1":"0"; //   16
+                    $groupInformation->representative_phone_2= $column[30]; //   17
+                    $groupInformation->disclosure_representative_phone_2= ($column[31]=='TRUE')?"1":"0"; //   18
+                    $groupInformation->representative_fax= $column[28]; //   19
+                    $groupInformation->disclosure_representative_fax= ($column[29]=='TRUE')?"1":"0"; //   20
+                    $groupInformation->contact_name= $column[32]; //   21
+                    $groupInformation->contact_name_phonetic= $column[33]; //   22
+                    $groupInformation->disclosure_contact_name= ($column[34]=='TRUE')?"1":"0"; //   23
+                    $groupInformation->postal_code= $column[17]; //   24
+                    $groupInformation->contact_address= $column[18] . $column[19]; //   25
+                    $groupInformation->contact_address_name= $column[21]; //   26
+                    $groupInformation->contact_address_title= $column[22]; //   27
+                    $groupInformation->disclosure_contact_address= ($column[20]=='TRUE')?"1":"0"; //   28
+                    $groupInformation->contact_phone= $column[35]; //   29
+                    $groupInformation->disclosure_contact_phone= ($column[36]=='TRUE')?"1":"0"; //   30
+                    $groupInformation->contact_phone_2= $column[39]; //   31
+                    $groupInformation->disclosure_contact_phone_2= ($column[40]=='TRUE')?"1":"0"; //   32
+                    $groupInformation->contact_fax= $column[37]; //   33
+                    $groupInformation->disclosure_contact_fax= ($column[38]=='TRUE')?"1":"0"; //   34
+                    $groupInformation->contact_mail= $column[41]; //   35
+                    $groupInformation->disclosure_contact_mail= ($column[42]=='TRUE')?"1":"0"; //   36
+                    $groupInformation->contact_url= $column[43]; //   37
+                    $groupInformation->disclosure_contact_url= ($column[44]=='TRUE')?"1":"0"; //   38
+                    
+                    for($index=52; $index<74; $index++){
+                        if($column[$index]=='TRUE')break;
+                    }
+                    $groupInformation->activity_category= strval(($index-51)*100); //   39
+                    $groupInformation->active_category_supplement = $column[75]; //   40
+                    $groupInformation->membership_male = $column[45]; //   41
+                    $groupInformation->membership_female= $column[46]; //   42
+                    $groupInformation->all_member= $column[47]; //   43
+                    $groupInformation->activity_frequency= $column[51]; //   44
+
+
+                    $groupInformation->activity_day= ($column[50]=='年')?"1":(($column[50]=='月')?"2":(($column[50]=='週')?"3":"4")); //   45
+
+                    $groupInformation->dues= ($column[48]=='無')?"0":"1"; //   46
+
+                    $groupInformation->dues_price= $column[49]; //   47
+                    $groupInformation->content= $column[79]; //   48
+                    $groupInformation->rocker= $column[76]; //   49
+                    $groupInformation->mail_box= $column[77]; //   50
+                    $groupInformation->method= $column[78]; //   51
+                    $groupInformation->supplement= $column[80]; //   52
+    
+                    $groupInformation->deactivate= 1;
+                    $groupInformation->created_by= 1; 
+                    $groupInformation->updated_by= 1;
+    
+                    if($groupInformation->save()) {
+                        continue;
+                    }
+                }
+            }
+        }
+        catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function getFileInfo()
+    {
+        $filename = public_path('csv/Group-information.xls');
+
+        if (file_exists($filename)) 
+        {
+            return ['createdDate' => date ("Y.m.d H:i", filemtime($filename))];
         }
     }
 }
