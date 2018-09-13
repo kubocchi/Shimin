@@ -86,7 +86,7 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     // List group-information with parameters
     Route::post('group-informations', 'GroupInformationController@getGroupInformationData');
     // List group-information with parameters
-    Route::post('uploadCSV', 'GroupInformationController@getCSV');
+    Route::post('upload-file', 'GroupInformationController@storeUploadData');
     // Download group-information as CSV
     Route::get('download-file', 'GroupInformationController@getDownlaodData');
     

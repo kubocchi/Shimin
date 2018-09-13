@@ -103,7 +103,8 @@
                         <div class="form-group">
                             <div class="form-inline">
                                 <div class="form-group mt-4">
-                                    <input aria-describedby="fileHelp" class=" btn form-control-file" id="file" ref="file" v-on:change="handleFileUpload()" type="file">
+                                    <input aria-describedby="fileHelp"  class=" btn form-control-file" id="file" ref="file" v-on:change="handleFileUpload()" type="file"
+                                    accept=".xls, .xlsx">
                                 </div>
                             </div>
                         </div>
@@ -193,7 +194,7 @@
                     { id: 1, label: '個人' },
                 ],
                 selectedType: { 'id': null, 'label': 'すべて' },
-                uploadedCSV : null,
+                uploadedFile : null,
                 csvdownloading: false,
             };
         },
@@ -282,9 +283,9 @@
                             "キャンセルしました",
                             "データは削除されていません",
                             "error"
-                        );
+                        )
                     }
-                });
+                })
             },
 
             // Loads table data on changing
@@ -302,7 +303,7 @@
                 Submits the file to the server
             */
             submitFile() {
-                if(!this.uploadedCSV)
+                if(!this.uploadedFile)
                 {
                     this.$swal({
                         title: "警告!",
@@ -312,14 +313,21 @@
                     });
                     return
                 }
-                /*
-                    Initialize the form data
-                */
+
+                console.log(this.uploadedFile.type)
+                if(this.uploadedFile.type != 'application/vnd.ms-excel' && this.uploadedFile.type != 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+                {
+                    this.$swal({
+                        title: "警告",
+                        text: 'Wrong file type',
+                        type: "warning",
+                        confirmButtonText: "OK"
+                    })
+                    return
+                }
+
                 let formData = new FormData();
-                /*
-                    Add the form data we need to submit
-                */
-                formData.append('file', this.uploadedCSV);
+                formData.append('file', this.uploadedFile);
 
                 // Display the key/value pairs
                 let count = 0
@@ -330,11 +338,8 @@
 
                 console.log(count)
 
-                /*
-                Make the request to the POST /single-file URL
-                */
                 NProgress.start()
-                axios.post('/api/uploadCSV',
+                axios.post('/api/upload-file',
                     formData,
                     {
                         headers: {
@@ -351,9 +356,9 @@
                             text: 'Uploaded',
                             type: "success",
                             confirmButtonText: "OK"
-                        });
+                        })
 
-                        this.uploadedCSV = null
+                        this.uploadedFile = null
                         const input = this.$refs.file;
                         input.type = 'text';
                         input.type = 'file';
@@ -364,14 +369,14 @@
                             NProgress.done()
                             ErrorHandler.handle(error.response.status, this)
                         }
-                    });
+                    })
             },
 
             /*
                 Handles a change on the file upload
             */
             handleFileUpload() {
-                this.uploadedCSV = this.$refs.file.files[0];
+                this.uploadedFile = this.$refs.file.files[0];
             },
             onSelectManagement(selectedOption, id) {
                 if (selectedOption) {

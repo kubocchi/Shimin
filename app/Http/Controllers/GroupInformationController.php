@@ -165,7 +165,7 @@ class GroupInformationController extends Controller
          return GroupInformationResource::collection($groupInformations);
     }
 
-    public function getCSV(Request $request)
+    public function storeUploadData(Request $request)
     {
         GroupInformation::truncate();
         // Remove all data from GroupInformation Table
@@ -275,7 +275,6 @@ class GroupInformationController extends Controller
         
                         if($groupInformation->save()) {
                             continue;
-                            
                         }
                     }
                 }

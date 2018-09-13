@@ -13,6 +13,9 @@ class ErrorHandler {
             case 100:
                 message = 'Unsuccessful Upload'
                 break;
+            case 500:
+                message = 'Internal server error, please try again'
+                break;
             
         }
 
