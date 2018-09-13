@@ -423,13 +423,14 @@ class GroupInformationController extends Controller
             $dataArray[] = $innerArray;
         }
 
-        Excel::create('GroupInformation', function($excel) use($dataArray) {
-            $excel->sheet('mySheet', function($sheet) use($dataArray) {
+        $filename = 'Group-information';
+        Excel::create($filename, function($excel) use($dataArray) {
+            $excel->sheet('group-information', function($sheet) use($dataArray) {
                 $sheet->fromArray($dataArray);
             });
-        })->download('xls');
+        })->save('xls', public_path('csv'));
 
-        return null;
+        return ['file' => $filename . '.xls'];
     }
 
     /**

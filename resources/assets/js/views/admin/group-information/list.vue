@@ -93,12 +93,12 @@
                 <div class="bs-component">
                     <div class="row">
                         <div class="col-md-2 mt-4">
-                            <a class="btn btn-outline-primary  btn-block" @click.prevent="downloadFile()" href="#!" role="button">CSV出力</a>
+                            <a class="btn btn-outline-primary  btn-block" @click.prevent="downloadFile()" href="#!" role="button">Excel出力</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-2 mt-4 mb-4">
-                            <a class="btn btn-outline-primary  btn-block" @click.prevent="submitFile()" href="#!" role="button">CSV入力</a>
+                            <a class="btn btn-outline-primary  btn-block" @click.prevent="submitFile()" href="#!" role="button">Excel入力</a>
                         </div>
                         <div class="form-group">
                             <div class="form-inline">
@@ -414,25 +414,25 @@
                 return this.managements.find(x => x.id === id) ? this.managements.find(x => x.id === id).label : ''
             },
             downloadFile(){
-                //NProgress.start()
-                window.location.href = `/api/download-file`
-                // axios.get(`/api/download-file`,  {
-                //     headers: {
-                //         Authorization: 'Bearer ' + localStorage.getItem('token')
-                //     }
-                // })
-                // .then(response => {
-                //     NProgress.done()
-                //     if(response.data.file)
-                //         window.location.href = `/api/csv-download/${response.data.file}`
-                // })
-                // .catch(error => {
-                //     if (error.response) {
-                //         console.log(error.response)
-                //         NProgress.done()
-                //         ErrorHandler.handle(error.response.status, this)
-                //     }
-                // })
+                NProgress.start()
+                //window.location.href = `/api/download-file`
+                axios.get(`/api/download-file`,  {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then(response => {
+                    NProgress.done()
+                    if(response.data.file)
+                        window.location.href = `/api/csv-download/${response.data.file}`
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response)
+                        NProgress.done()
+                        ErrorHandler.handle(error.response.status, this)
+                    }
+                })
             },
         }
     };
