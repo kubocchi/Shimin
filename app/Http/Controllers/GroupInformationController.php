@@ -176,7 +176,7 @@ class GroupInformationController extends Controller
             try {
 
                 $path = $request->file('file')->getRealPath();
-                 $data = Excel::load($path, function($reader) {},'UTF-8')->get();
+                $data = Excel::load($path, function($reader) {},'UTF-8')->get();
                 // $data = Excel::load($path)->get();
                 // var_dump($data);
 
@@ -508,7 +508,6 @@ class GroupInformationController extends Controller
 
     public function restoreData()
     {
-        $this->getDownlaodData();
         GroupInformation::truncate();
         // Remove all data from GroupInformation Table
     
