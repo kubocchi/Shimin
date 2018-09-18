@@ -171,7 +171,7 @@
                     start_date: "",
                     end_date: "",
                     content: "",
-                    file: [],
+                    file: "",
                     deactivate: false,
                     updated_by: this.$store.state.user != null ? this.$store.state.user.id : 0,
                     created_by: this.$store.state.user != null ? this.$store.state.user.id : 0
